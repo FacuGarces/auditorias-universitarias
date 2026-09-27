@@ -1,0 +1,592 @@
+[
+  {
+    "id": "alto_uruguay",
+    "nombre": "Universidad Nacional del Alto Uruguay",
+    "sigla": "UNAU",
+    "ciudad": "El Dorado",
+    "provincia": "Misiones",
+    "lat": -26.405,
+    "lng": -54.643,
+    "tieneFicha": false
+  },
+  {
+    "id": "artes",
+    "nombre": "Universidad Nacional de las Artes",
+    "sigla": "UNA",
+    "ciudad": "CABA",
+    "provincia": "Ciudad Autónoma de Buenos Aires",
+    "lat": -34.603,
+    "lng": -58.4,
+    "tieneFicha": false
+  },
+  {
+    "id": "jauretche",
+    "nombre": "Universidad Nacional Arturo Jauretche",
+    "sigla": "UNAJ",
+    "ciudad": "Florencio Varela",
+    "provincia": "Buenos Aires",
+    "lat": -34.8206,
+    "lng": -58.2751,
+    "tieneFicha": true
+  },
+  {
+    "id": "undav",
+    "nombre": "Universidad Nacional de Avellaneda",
+    "sigla": "UNDAV",
+    "ciudad": "Avellaneda",
+    "provincia": "Buenos Aires",
+    "lat": -34.6626,
+    "lng": -58.3654,
+    "tieneFicha": true
+  },
+  {
+    "id": "uba",
+    "nombre": "Universidad de Buenos Aires",
+    "sigla": "UBA",
+    "ciudad": "CABA",
+    "provincia": "Ciudad Autónoma de Buenos Aires",
+    "lat": -34.6037,
+    "lng": -58.3816,
+    "tieneFicha": true
+  },
+  {
+    "id": "catamarca",
+    "nombre": "Universidad Nacional de Catamarca",
+    "sigla": "UNCA",
+    "ciudad": "San Fernando del Valle de Catamarca",
+    "provincia": "Catamarca",
+    "lat": -28.4696,
+    "lng": -65.7852,
+    "tieneFicha": false
+  },
+  {
+    "id": "unicen",
+    "nombre": "Universidad Nacional del Centro de la Pcia. de Bs. As.",
+    "sigla": "UNICEN",
+    "ciudad": "Tandil",
+    "provincia": "Buenos Aires",
+    "lat": -37.3217,
+    "lng": -59.1332,
+    "tieneFicha": false
+  },
+  {
+    "id": "chaco_austral",
+    "nombre": "Universidad Nacional del Chaco Austral",
+    "sigla": "UNCAus",
+    "ciudad": "Pcia. Roque Sáenz Peña",
+    "provincia": "Chaco",
+    "lat": -26.7852,
+    "lng": -60.4408,
+    "tieneFicha": false
+  },
+  {
+    "id": "chilecito",
+    "nombre": "Universidad Nacional de Chilecito",
+    "sigla": "UNdeC",
+    "ciudad": "Chilecito",
+    "provincia": "La Rioja",
+    "lat": -29.1671,
+    "lng": -67.4923,
+    "tieneFicha": false
+  },
+  {
+    "id": "comahue",
+    "nombre": "Universidad Nacional del Comahue",
+    "sigla": "UNCo",
+    "ciudad": "Neuquén",
+    "provincia": "Neuquén",
+    "lat": -38.9516,
+    "lng": -68.0591,
+    "tieneFicha": false
+  },
+  {
+    "id": "comechingones",
+    "nombre": "Universidad Nacional de Comechingones",
+    "sigla": "UNC.Comech.",
+    "ciudad": "Alta Gracia",
+    "provincia": "Córdoba",
+    "lat": -31.6539,
+    "lng": -64.4295,
+    "tieneFicha": false
+  },
+  {
+    "id": "cordoba",
+    "nombre": "Universidad Nacional de Córdoba",
+    "sigla": "UNC",
+    "ciudad": "Córdoba",
+    "provincia": "Córdoba",
+    "lat": -31.4201,
+    "lng": -64.1888,
+    "tieneFicha": false
+  },
+  {
+    "id": "cuyo",
+    "nombre": "Universidad Nacional de Cuyo",
+    "sigla": "UNCuyo",
+    "ciudad": "Mendoza",
+    "provincia": "Mendoza",
+    "lat": -32.8908,
+    "lng": -68.8272,
+    "tieneFicha": false
+  },
+  {
+    "id": "defensa",
+    "nombre": "Universidad de la Defensa Nacional",
+    "sigla": "UNDEF",
+    "ciudad": "CABA",
+    "provincia": "Ciudad Autónoma de Buenos Aires",
+    "lat": -34.58,
+    "lng": -58.55,
+    "tieneFicha": false
+  },
+  {
+    "id": "entre_rios",
+    "nombre": "Universidad Nacional de Entre Ríos",
+    "sigla": "UNER",
+    "ciudad": "Paraná",
+    "provincia": "Entre Ríos",
+    "lat": -31.7333,
+    "lng": -60.5238,
+    "tieneFicha": false
+  },
+  {
+    "id": "formosa",
+    "nombre": "Universidad Nacional de Formosa",
+    "sigla": "UNaF",
+    "ciudad": "Formosa",
+    "provincia": "Formosa",
+    "lat": -26.1775,
+    "lng": -58.1781,
+    "tieneFicha": false
+  },
+  {
+    "id": "ungs",
+    "nombre": "Universidad Nacional de General Sarmiento",
+    "sigla": "UNGS",
+    "ciudad": "Los Polvorines",
+    "provincia": "Buenos Aires",
+    "lat": -34.4707,
+    "lng": -58.7167,
+    "tieneFicha": true
+  },
+  {
+    "id": "guillermo_brown",
+    "nombre": "Universidad Nacional Guillermo Brown",
+    "sigla": "UNGB",
+    "ciudad": "Adrogué",
+    "provincia": "Buenos Aires",
+    "lat": -34.7997,
+    "lng": -58.391,
+    "tieneFicha": false
+  },
+  {
+    "id": "hurlingham",
+    "nombre": "Universidad Nacional de Hurlingham",
+    "sigla": "UNAHUR",
+    "ciudad": "Hurlingham",
+    "provincia": "Buenos Aires",
+    "lat": -34.5911,
+    "lng": -58.6372,
+    "tieneFicha": false
+  },
+  {
+    "id": "unpaz",
+    "nombre": "Universidad Nacional de José C. Paz",
+    "sigla": "UNPAZ",
+    "ciudad": "José C. Paz",
+    "provincia": "Buenos Aires",
+    "lat": -34.5108,
+    "lng": -58.7444,
+    "tieneFicha": true
+  },
+  {
+    "id": "jujuy",
+    "nombre": "Universidad Nacional de Jujuy",
+    "sigla": "UNJu",
+    "ciudad": "San Salvador de Jujuy",
+    "provincia": "Jujuy",
+    "lat": -24.1858,
+    "lng": -65.2995,
+    "tieneFicha": false
+  },
+  {
+    "id": "unlam",
+    "nombre": "Universidad Nacional de La Matanza",
+    "sigla": "UNLaM",
+    "ciudad": "San Justo",
+    "provincia": "Buenos Aires",
+    "lat": -34.6672,
+    "lng": -58.5678,
+    "tieneFicha": true
+  },
+  {
+    "id": "la_pampa",
+    "nombre": "Universidad Nacional de La Pampa",
+    "sigla": "UNLPam",
+    "ciudad": "Santa Rosa",
+    "provincia": "La Pampa",
+    "lat": -36.6167,
+    "lng": -64.2833,
+    "tieneFicha": false
+  },
+  {
+    "id": "unlp",
+    "nombre": "Universidad Nacional de La Plata",
+    "sigla": "UNLP",
+    "ciudad": "La Plata",
+    "provincia": "Buenos Aires",
+    "lat": -34.9214,
+    "lng": -57.9544,
+    "tieneFicha": true
+  },
+  {
+    "id": "la_rioja",
+    "nombre": "Universidad Nacional de La Rioja",
+    "sigla": "UNLaR",
+    "ciudad": "La Rioja",
+    "provincia": "La Rioja",
+    "lat": -29.4131,
+    "lng": -66.8558,
+    "tieneFicha": false
+  },
+  {
+    "id": "lanus",
+    "nombre": "Universidad Nacional de Lanús",
+    "sigla": "UNLa",
+    "ciudad": "Lanús",
+    "provincia": "Buenos Aires",
+    "lat": -34.7061,
+    "lng": -58.3925,
+    "tieneFicha": false
+  },
+  {
+    "id": "litoral",
+    "nombre": "Universidad Nacional del Litoral",
+    "sigla": "UNL",
+    "ciudad": "Santa Fe",
+    "provincia": "Santa Fe",
+    "lat": -31.6333,
+    "lng": -60.7,
+    "tieneFicha": false
+  },
+  {
+    "id": "lomas",
+    "nombre": "Universidad Nacional de Lomas de Zamora",
+    "sigla": "UNLZ",
+    "ciudad": "Lomas de Zamora",
+    "provincia": "Buenos Aires",
+    "lat": -34.7614,
+    "lng": -58.4022,
+    "tieneFicha": false
+  },
+  {
+    "id": "lujan",
+    "nombre": "Universidad Nacional de Luján",
+    "sigla": "UNLu",
+    "ciudad": "Luján",
+    "provincia": "Buenos Aires",
+    "lat": -34.5703,
+    "lng": -59.1051,
+    "tieneFicha": false
+  },
+  {
+    "id": "mar_del_plata",
+    "nombre": "Universidad Nacional de Mar del Plata",
+    "sigla": "UNMdP",
+    "ciudad": "Mar del Plata",
+    "provincia": "Buenos Aires",
+    "lat": -38.0055,
+    "lng": -57.5426,
+    "tieneFicha": false
+  },
+  {
+    "id": "misiones",
+    "nombre": "Universidad Nacional de Misiones",
+    "sigla": "UNaM",
+    "ciudad": "Posadas",
+    "provincia": "Misiones",
+    "lat": -27.3671,
+    "lng": -55.8961,
+    "tieneFicha": false
+  },
+  {
+    "id": "moreno",
+    "nombre": "Universidad Nacional de Moreno",
+    "sigla": "UNM",
+    "ciudad": "Moreno",
+    "provincia": "Buenos Aires",
+    "lat": -34.6534,
+    "lng": -58.7889,
+    "tieneFicha": false
+  },
+  {
+    "id": "nordeste",
+    "nombre": "Universidad Nacional del Nordeste",
+    "sigla": "UNNE",
+    "ciudad": "Corrientes",
+    "provincia": "Corrientes",
+    "lat": -27.4692,
+    "lng": -58.8306,
+    "tieneFicha": false
+  },
+  {
+    "id": "unnoba",
+    "nombre": "Universidad Nacional del Noroeste de la Pcia. de Bs. As.",
+    "sigla": "UNNOBA",
+    "ciudad": "Junín",
+    "provincia": "Buenos Aires",
+    "lat": -34.5847,
+    "lng": -60.9433,
+    "tieneFicha": false
+  },
+  {
+    "id": "oeste",
+    "nombre": "Universidad Nacional del Oeste",
+    "sigla": "UNO",
+    "ciudad": "Merlo",
+    "provincia": "Buenos Aires",
+    "lat": -34.6647,
+    "lng": -58.7276,
+    "tieneFicha": false
+  },
+  {
+    "id": "patagonia_austral",
+    "nombre": "Universidad Nacional de la Patagonia Austral",
+    "sigla": "UNPA",
+    "ciudad": "Río Gallegos",
+    "provincia": "Santa Cruz",
+    "lat": -51.623,
+    "lng": -69.2168,
+    "tieneFicha": false
+  },
+  {
+    "id": "patagonia_sjb",
+    "nombre": "Universidad Nacional de la Patagonia San Juan Bosco",
+    "sigla": "UNPSJB",
+    "ciudad": "Comodoro Rivadavia",
+    "provincia": "Chubut",
+    "lat": -45.8641,
+    "lng": -67.4966,
+    "tieneFicha": false
+  },
+  {
+    "id": "pedagogica",
+    "nombre": "Universidad Pedagógica Nacional",
+    "sigla": "UNIPE",
+    "ciudad": "CABA",
+    "provincia": "Ciudad Autónoma de Buenos Aires",
+    "lat": -34.61,
+    "lng": -58.42,
+    "tieneFicha": false
+  },
+  {
+    "id": "quilmes",
+    "nombre": "Universidad Nacional de Quilmes",
+    "sigla": "UNQ",
+    "ciudad": "Bernal",
+    "provincia": "Buenos Aires",
+    "lat": -34.7181,
+    "lng": -58.2884,
+    "tieneFicha": false
+  },
+  {
+    "id": "rafaela",
+    "nombre": "Universidad Nacional de Rafaela",
+    "sigla": "UNRaf",
+    "ciudad": "Rafaela",
+    "provincia": "Santa Fe",
+    "lat": -31.2503,
+    "lng": -61.4867,
+    "tieneFicha": false
+  },
+  {
+    "id": "rio_cuarto",
+    "nombre": "Universidad Nacional de Río Cuarto",
+    "sigla": "UNRC",
+    "ciudad": "Río Cuarto",
+    "provincia": "Córdoba",
+    "lat": -33.1232,
+    "lng": -64.3499,
+    "tieneFicha": false
+  },
+  {
+    "id": "rio_negro",
+    "nombre": "Universidad Nacional de Río Negro",
+    "sigla": "UNRN",
+    "ciudad": "General Roca",
+    "provincia": "Río Negro",
+    "lat": -39.0333,
+    "lng": -67.5833,
+    "tieneFicha": false
+  },
+  {
+    "id": "rosario",
+    "nombre": "Universidad Nacional de Rosario",
+    "sigla": "UNR",
+    "ciudad": "Rosario",
+    "provincia": "Santa Fe",
+    "lat": -32.9468,
+    "lng": -60.6393,
+    "tieneFicha": false
+  },
+  {
+    "id": "salta",
+    "nombre": "Universidad Nacional de Salta",
+    "sigla": "UNSa",
+    "ciudad": "Salta",
+    "provincia": "Salta",
+    "lat": -24.7859,
+    "lng": -65.4117,
+    "tieneFicha": false
+  },
+  {
+    "id": "san_antonio_areco",
+    "nombre": "Universidad Nacional de San Antonio de Areco",
+    "sigla": "UNSAdA",
+    "ciudad": "San Antonio de Areco",
+    "provincia": "Buenos Aires",
+    "lat": -34.2646,
+    "lng": -59.4759,
+    "tieneFicha": false
+  },
+  {
+    "id": "san_juan",
+    "nombre": "Universidad Nacional de San Juan",
+    "sigla": "UNSJ",
+    "ciudad": "San Juan",
+    "provincia": "San Juan",
+    "lat": -31.5375,
+    "lng": -68.5364,
+    "tieneFicha": false
+  },
+  {
+    "id": "san_luis",
+    "nombre": "Universidad Nacional de San Luis",
+    "sigla": "UNSL",
+    "ciudad": "San Luis",
+    "provincia": "San Luis",
+    "lat": -33.295,
+    "lng": -66.3356,
+    "tieneFicha": false
+  },
+  {
+    "id": "san_martin",
+    "nombre": "Universidad Nacional de San Martín",
+    "sigla": "UNSAM",
+    "ciudad": "San Martín",
+    "provincia": "Buenos Aires",
+    "lat": -34.5719,
+    "lng": -58.5477,
+    "tieneFicha": false
+  },
+  {
+    "id": "santiago",
+    "nombre": "Universidad Nacional de Santiago del Estero",
+    "sigla": "UNSE",
+    "ciudad": "Santiago del Estero",
+    "provincia": "Santiago del Estero",
+    "lat": -27.7834,
+    "lng": -64.2642,
+    "tieneFicha": false
+  },
+  {
+    "id": "unso",
+    "nombre": "Universidad Nacional Scalabrini Ortiz",
+    "sigla": "UNSO",
+    "ciudad": "San Isidro",
+    "provincia": "Buenos Aires",
+    "lat": -34.4708,
+    "lng": -58.5411,
+    "tieneFicha": true
+  },
+  {
+    "id": "sur",
+    "nombre": "Universidad Nacional del Sur",
+    "sigla": "UNS",
+    "ciudad": "Bahía Blanca",
+    "provincia": "Buenos Aires",
+    "lat": -38.7183,
+    "lng": -62.2661,
+    "tieneFicha": false
+  },
+  {
+    "id": "utn",
+    "nombre": "Universidad Tecnológica Nacional",
+    "sigla": "UTN",
+    "ciudad": "CABA",
+    "provincia": "Ciudad Autónoma de Buenos Aires",
+    "lat": -34.6158,
+    "lng": -58.3728,
+    "tieneFicha": false
+  },
+  {
+    "id": "tierra_del_fuego",
+    "nombre": "Universidad Nacional de Tierra del Fuego",
+    "sigla": "UNTDF",
+    "ciudad": "Ushuaia",
+    "provincia": "Tierra del Fuego",
+    "lat": -54.8019,
+    "lng": -68.303,
+    "tieneFicha": false
+  },
+  {
+    "id": "tres_de_febrero",
+    "nombre": "Universidad Nacional de Tres de Febrero",
+    "sigla": "UNTREF",
+    "ciudad": "Caseros",
+    "provincia": "Buenos Aires",
+    "lat": -34.6011,
+    "lng": -58.5628,
+    "tieneFicha": false
+  },
+  {
+    "id": "tucuman",
+    "nombre": "Universidad Nacional de Tucumán",
+    "sigla": "UNT",
+    "ciudad": "San Miguel de Tucumán",
+    "provincia": "Tucumán",
+    "lat": -26.8241,
+    "lng": -65.2226,
+    "tieneFicha": false
+  },
+  {
+    "id": "villa_maria",
+    "nombre": "Universidad Nacional de Villa María",
+    "sigla": "UNVM",
+    "ciudad": "Villa María",
+    "provincia": "Córdoba",
+    "lat": -32.4076,
+    "lng": -63.2426,
+    "tieneFicha": false
+  },
+  {
+    "id": "villa_mercedes",
+    "nombre": "Universidad Nacional de Villa Mercedes",
+    "sigla": "UNViMe",
+    "ciudad": "Villa Mercedes",
+    "provincia": "San Luis",
+    "lat": -33.6807,
+    "lng": -65.4487,
+    "tieneFicha": false
+  },
+  {
+    "id": "undelta",
+    "nombre": "Universidad Nacional del Delta",
+    "sigla": "UNDELTA",
+    "ciudad": "Campana",
+    "provincia": "Buenos Aires",
+    "lat": -34.1691,
+    "lng": -58.9599,
+    "tieneFicha": true
+  },
+  {
+    "id": "unpilar",
+    "nombre": "Universidad Nacional de Pilar",
+    "sigla": "UNPILAR",
+    "ciudad": "Pilar",
+    "provincia": "Buenos Aires",
+    "lat": -34.4586,
+    "lng": -58.9145,
+    "tieneFicha": true
+  }
+]
