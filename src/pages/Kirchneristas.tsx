@@ -1,9 +1,10 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { universidadesArray } from '../data/universidades'
 import { UniversidadBadge } from '../components/UniversidadBadge'
-import { formatMoneda, formatNumero, formatPorcentaje, ubicacion } from '../lib/format'
+import { formatMoneda, formatNumero, ubicacion } from '../lib/format'
+import { METRICAS, esPeor, promedio, type MetricaId } from '../lib/metricas'
 
 const listVariants = {
   hidden: {},
@@ -30,13 +31,38 @@ function periodoDe(fundacion: number): string {
 }
 
 export function Kirchneristas() {
-  const universidades = useMemo(
-    () =>
-      universidadesArray
-        .filter((u) => u.esKirchnerista)
-        .sort((a, b) => a.fundacion - b.fundacion),
-    [],
-  )
+  const [metrica, setMetrica] = useState<MetricaId>('cohorte')
+  const [invertido, setInvertido] = useState(false)
+  const cfg = METRICAS[metrica]
+  const ascendente = invertido ? !cfg.ordenAsc : cfg.ordenAsc
+
+  const universidades = useMemo(() => {
+    const kirchneristas = universidadesArray.filter((u) => u.esKirchnerista)
+    return kirchneristas.slice().sort((a, b) => {
+      const va = cfg.valor(a)
+      const vb = cfg.valor(b)
+      if (va == null && vb == null) return a.fundacion - b.fundacion
+      if (va == null) return 1
+      if (vb == null) return -1
+      return ascendente ? va - vb : vb - va
+    })
+  }, [cfg, ascendente])
+
+  const comparativa = useMemo(() => {
+    const kUnis = universidadesArray.filter((u) => u.esKirchnerista && u.tieneDatos)
+    const restoUnis = universidadesArray.filter((u) => !u.esKirchnerista && u.tieneDatos)
+    return (Object.keys(METRICAS) as MetricaId[]).map((key) => {
+      const m = METRICAS[key]
+      return {
+        key,
+        label: m.label,
+        formato: m.formato,
+        ordenAsc: m.ordenAsc,
+        k: promedio(kUnis, m.valor),
+        resto: promedio(restoUnis, m.valor),
+      }
+    })
+  }, [])
 
   return (
     <div className="relative min-h-screen">
@@ -79,12 +105,94 @@ export function Kirchneristas() {
           </p>
         </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.15 }}
+          className="mb-6"
+        >
+          <h2 className="font-display font-700 text-sm text-upl-crema/70 mb-2">
+            Promedio universidades K vs. resto del sistema
+          </h2>
+          <div className="rounded-2xl overflow-hidden flex flex-wrap gap-px border border-upl-crema/12 bg-upl-crema/15 [backdrop-filter:blur(18px)] shadow-[0_8px_30px_rgba(10,8,30,0.35)]">
+            {comparativa.map((c) => {
+              const kPeor = esPeor(c.k, c.resto, c.ordenAsc)
+              const restoPeor = esPeor(c.resto, c.k, c.ordenAsc)
+              return (
+                <div key={c.key} className="flex-1 min-w-[220px] px-5 py-4 bg-upl-principal-light/40">
+                  <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">{c.label}</div>
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <div className="text-[11px] text-upl-crema/50">Universidades K</div>
+                      <div
+                        className={`font-display font-800 text-xl ${kPeor ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}
+                      >
+                        {c.formato(c.k)}
+                      </div>
+                    </div>
+                    <div className="text-upl-crema/20 text-sm shrink-0">vs</div>
+                    <div className="text-right">
+                      <div className="text-[11px] text-upl-crema/50">Resto del sistema</div>
+                      <div
+                        className={`font-display font-800 text-xl ${restoPeor ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}
+                      >
+                        {c.formato(c.resto)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </motion.div>
+
+        <div className="flex flex-wrap gap-2 mb-4">
+          {(Object.keys(METRICAS) as MetricaId[]).map((key) => (
+            <button
+              key={key}
+              onClick={() => setMetrica(key)}
+              className={`relative rounded-full px-4 py-2 font-display font-600 text-sm transition-colors ${
+                metrica === key ? 'text-upl-principal' : 'glass-chip text-upl-crema hover:bg-upl-crema/15'
+              }`}
+            >
+              {metrica === key && (
+                <motion.span
+                  layoutId="kirch-metrica-pill"
+                  className="absolute inset-0 rounded-full bg-upl-amarillo -z-10"
+                  transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                />
+              )}
+              {METRICAS[key].label}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-between gap-3 mb-4">
+          <p className="text-sm text-upl-crema/50">{cfg.subtitulo}</p>
+          <motion.button
+            onClick={() => setInvertido((v) => !v)}
+            whileTap={{ scale: 0.94 }}
+            className="shrink-0 rounded-full glass-chip text-upl-crema text-xs font-semibold px-3 py-1.5 hover:bg-upl-crema/15 transition-colors whitespace-nowrap"
+          >
+            <motion.span
+              key={ascendente ? 'asc' : 'desc'}
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              transition={{ duration: 0.25 }}
+              className="inline-block"
+            >
+              {ascendente ? '↑' : '↓'}
+            </motion.span>{' '}
+            {ascendente ? 'Menor a mayor' : 'Mayor a menor'}
+          </motion.button>
+        </div>
+
         <motion.ol className="flex flex-col gap-3" variants={listVariants} initial="hidden" animate="visible">
           {universidades.map((u) => (
             <motion.li key={u.id} variants={itemVariants}>
               <Link
                 to={`/universidad/${u.id}`}
-                className="group block rounded-xl glass hover:bg-[#e2574c]/10 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 px-4 py-3 transition-all duration-200"
+                className="group block rounded-xl glass-flat hover:bg-[#e2574c]/10 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 px-4 py-3 transition-all duration-200"
               >
                 <div className="flex items-center gap-4">
                   <UniversidadBadge sigla={u.sigla} />
@@ -97,10 +205,8 @@ export function Kirchneristas() {
                   </div>
                   {u.tieneDatos ? (
                     <div className="text-right shrink-0">
-                      <div className="font-display font-700 text-upl-amarillo">
-                        {u.tasaCohorte != null ? formatPorcentaje(u.tasaCohorte) : 'S/D'}
-                      </div>
-                      <div className="text-[11px] text-upl-crema/40">tasa de egreso</div>
+                      <div className="font-display font-700 text-upl-amarillo">{cfg.formato(cfg.valor(u))}</div>
+                      <div className="text-[11px] text-upl-crema/40">{cfg.label}</div>
                     </div>
                   ) : (
                     <div className="text-right shrink-0 text-xs text-upl-crema/40 italic">Sin datos</div>

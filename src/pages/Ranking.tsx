@@ -3,43 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
 import { universidadesArray } from '../data/universidades'
 import { UniversidadBadge } from '../components/UniversidadBadge'
-import { formatMoneda, formatPorcentaje, ubicacion } from '../lib/format'
-
-type MetricaId = 'cohorte' | 'docentes' | 'costo'
-
-const METRICAS: Record<
-  MetricaId,
-  {
-    label: string
-    subtitulo: string
-    valor: (u: (typeof universidadesArray)[number]) => number | null | undefined
-    formato: (v: number | null | undefined) => string
-    ordenAsc: boolean
-  }
-> = {
-  cohorte: {
-    label: 'Tasa de cohorte (egreso)',
-    subtitulo: 'Egresados 2024 sobre nuevos inscriptos 2018 (ventana de 6 años). Mayor = mejor.',
-    valor: (u) => u.tasaCohorte,
-    formato: (v) => formatPorcentaje(v),
-    ordenAsc: false,
-  },
-  docentes: {
-    label: 'Estudiantes activos por docente',
-    subtitulo:
-      'Estudiantes regulares (2+ materias aprobadas) por cada docente universitario — se excluyen del padrón quienes no son regulares. Menor = mejor.',
-    valor: (u) => u.estudiantesActivosPorDocente,
-    formato: (v) => (v == null ? 'S/D' : `${v.toString().replace('.', ',')} x 1`),
-    ordenAsc: true,
-  },
-  costo: {
-    label: 'Costo por graduado',
-    subtitulo: 'Presupuesto ejecutado 2024 dividido egresados 2024, en pesos constantes de agosto 2026. Menor = mejor.',
-    valor: (u) => u.costoPorGraduado,
-    formato: (v) => formatMoneda(v),
-    ordenAsc: true,
-  },
-}
+import { ubicacion } from '../lib/format'
+import { METRICAS, type MetricaId } from '../lib/metricas'
 
 export function Ranking() {
   const [metrica, setMetrica] = useState<MetricaId>('cohorte')
@@ -143,7 +108,7 @@ export function Ranking() {
                   onClick={() => navigate(`/universidad/${u.id}`)}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
-                  className="w-full flex items-center gap-4 rounded-xl glass hover:bg-upl-amarillo/10 px-4 py-3 text-left transition-colors"
+                  className="w-full flex items-center gap-4 rounded-xl glass-flat hover:bg-upl-amarillo/10 px-4 py-3 text-left transition-colors"
                 >
                   <span className="font-display font-800 text-xl text-upl-crema/25 w-7 shrink-0">{i + 1}</span>
                   <UniversidadBadge sigla={u.sigla} />

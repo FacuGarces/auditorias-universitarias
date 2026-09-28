@@ -73,6 +73,16 @@ h1, h2, h3, h4, .font-display {
   box-shadow: 0 8px 30px rgba(10, 8, 30, 0.35);
 }
 
+/* Misma apariencia que .glass pero sin backdrop-filter: usar en listas largas (rankings, tarjetas
+   repetidas). backdrop-filter obliga al navegador a recalcular el desenfoque del fondo en cada
+   frame de scroll por cada elemento — con 20-40 tarjetas en pantalla eso es lo que traba el scroll.
+   Acá subimos un poco la opacidad del fondo para compensar la falta de desenfoque. */
+.glass-flat {
+  background: rgba(255, 255, 249, 0.08);
+  border: 1px solid rgba(255, 255, 249, 0.12);
+  box-shadow: 0 8px 30px rgba(10, 8, 30, 0.35);
+}
+
 .glass-strong {
   background: rgba(23, 27, 50, 0.72);
   border: 1px solid rgba(255, 255, 249, 0.14);
