@@ -40,9 +40,7 @@ export function Navbar() {
     >
       <div className="mx-auto max-w-6xl flex flex-wrap items-center justify-between px-3 sm:px-4 py-3 gap-x-3 gap-y-2">
         <NavLink to="/" className="flex items-center gap-2 sm:gap-3 min-w-0 group">
-          <motion.img
-            whileHover={{ rotate: -8, scale: 1.08 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+          <img
             src={`${import.meta.env.BASE_URL}logo.jpg`}
             alt="UPL"
             className="h-9 w-9 sm:h-10 sm:w-10 rounded-md object-cover shrink-0"
