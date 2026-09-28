@@ -964,6 +964,30 @@
       "tieneFicha": true,
       "x": 499.33,
       "y": 311.45
+    },
+    {
+      "id": "madres_plaza_mayo",
+      "nombre": "Universidad Nacional Madres de Plaza de Mayo",
+      "sigla": "UNMPM",
+      "ciudad": "Ciudad Autónoma de Buenos Aires",
+      "provincia": "Ciudad Autónoma de Buenos Aires",
+      "lat": -34.6083,
+      "lng": -58.3702,
+      "tieneFicha": true,
+      "x": 502.58,
+      "y": 306.36
+    },
+    {
+      "id": "rio_tercero",
+      "nombre": "Universidad Nacional de Río Tercero",
+      "sigla": "UNRT",
+      "ciudad": "Río Tercero",
+      "provincia": "Córdoba",
+      "lat": -32.1691,
+      "lng": -64.1147,
+      "tieneFicha": true,
+      "x": 390.02,
+      "y": 249.3
     }
   ]
 }

@@ -7083,5 +7083,81 @@
     "costoPorGraduado": 35755599,
     "estudiantesPorDocente": 10.5,
     "tieneDatos": true
+  },
+  "madres_plaza_mayo": {
+    "nombre": "Universidad Nacional Madres de Plaza de Mayo",
+    "sigla": "UNMPM",
+    "ciudad": "Ciudad Autónoma de Buenos Aires",
+    "provincia": "Ciudad Autónoma de Buenos Aires",
+    "lat": -34.6083,
+    "lng": -58.3702,
+    "fundacion": 2023,
+    "fundacionLey": "Ley 27.731, sancionada el 28/9/2023 y promulgada en octubre de 2023, en las últimas semanas del gobierno de Alberto Fernández — la misma tanda que UNDELTA, UNPILAR, UNE (Ezeiza) y la Universidad Nacional de Río Tercero",
+    "sitio": "https://www.madres.unmdp.edu.ar",
+    "esKirchnerista": true,
+    "notas": [
+      "Nace en 2010 como \"Universidad Popular Madres de Plaza de Mayo\", pasa a ser Instituto Universitario Nacional de Derechos Humanos en 2014, y recién se convierte en Universidad Nacional por Ley 27.731 (2023).",
+      "En 2024 no tuvo un solo egresado (0 sobre 915 nuevos inscriptos) y, como el resto del paquete de 2023, todavía no reporta presupuesto ni personal docente/no docente al Anuario de la SPU."
+    ],
+    "tieneDatos": true,
+    "estudiantes2024": 1791,
+    "estudiantes2023": 1597,
+    "nuevosInscriptos2018": null,
+    "nuevosInscriptos2017": 399,
+    "egresados2024": 0,
+    "egresados2023": 16,
+    "reinscriptosTotal": 876,
+    "reinscriptos0Materias": 714,
+    "reinscriptosRegulares2mas": 82,
+    "tasaCohorte": null,
+    "serieEstudiantes": {
+      "2015": 691,
+      "2016": 691,
+      "2017": 691,
+      "2020": 0,
+      "2021": 1279,
+      "2022": 1375,
+      "2023": 1597,
+      "2024": 1791
+    },
+    "serieNuevosInscriptos": {
+      "2015": 399,
+      "2016": 399,
+      "2017": 399,
+      "2020": 0,
+      "2021": 1174,
+      "2022": 787,
+      "2023": 876,
+      "2024": 915
+    },
+    "serieEgresados": {
+      "2020": 0,
+      "2021": 12,
+      "2022": 4,
+      "2023": 16,
+      "2024": 0
+    },
+    "serieTasaCohorte": {
+      "2021": 3.0,
+      "2022": 1.0,
+      "2023": 4.0
+    }
+  },
+  "rio_tercero": {
+    "nombre": "Universidad Nacional de Río Tercero",
+    "sigla": "UNRT",
+    "ciudad": "Río Tercero",
+    "provincia": "Córdoba",
+    "lat": -32.1691,
+    "lng": -64.1147,
+    "fundacion": 2023,
+    "fundacionLey": "Ley 27.730, sancionada el 28/9/2023 y promulgada en octubre de 2023, en las últimas semanas del gobierno de Alberto Fernández — la misma tanda que UNDELTA, UNPILAR, UNE (Ezeiza) y la Universidad Nacional Madres de Plaza de Mayo",
+    "sitio": "https://www.unrt.edu.ar",
+    "esKirchnerista": true,
+    "notas": [
+      "Creada por Ley 27.730 (2023), a dos meses y medio de terminar el mandato de Alberto Fernández.",
+      "El gobierno de Javier Milei frenó administrativamente la puesta en marcha de las cinco universidades sancionadas ese mismo día (Delta, Pilar, Ezeiza, Río Tercero y Madres de Plaza de Mayo); la Justicia declaró inconstitucional el freno en al menos un caso (UNPILAR), pero Río Tercero todavía no informa datos de estudiantes, egresados, docentes ni presupuesto al Anuario de la SPU."
+    ],
+    "tieneDatos": false
   }
 }
