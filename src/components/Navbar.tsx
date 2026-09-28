@@ -19,6 +19,7 @@ export function Navbar() {
         <nav className="flex gap-2">
           <NavLink to="/" end className={linkClass}>Mapa</NavLink>
           <NavLink to="/ranking" className={linkClass}>Rankings</NavLink>
+          <NavLink to="/kirchneristas" className={linkClass}>Universidades K</NavLink>
         </nav>
       </div>
     </header>

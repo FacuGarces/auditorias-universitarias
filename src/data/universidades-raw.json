@@ -18,7 +18,7 @@
     "personalTotal": 39653,
     "nuevosInscriptos2017": 66378,
     "egresados2023": 18591,
-    "presupuesto2023": 255839758121,
+    "presupuesto2023": 255839758121.38,
     "reinscriptosTotal": 240654,
     "reinscriptosRegulares2mas": 139770,
     "reinscriptos0Materias": 57784,
@@ -26,6 +26,12 @@
     "estudiantesPorDocente": 12.6,
     "costoPorGraduado": 29560917,
     "serieEstudiantes": {
+      "2007": 306871,
+      "2008": 301599,
+      "2009": 294837,
+      "2010": 305066,
+      "2011": 351200,
+      "2012": 328361,
       "2013": 320049,
       "2014": 315754,
       "2015": 291744,
@@ -40,6 +46,12 @@
       "2024": 304567
     },
     "serieEgresados": {
+      "2007": 16364,
+      "2008": 16815,
+      "2009": 16420,
+      "2010": 17232,
+      "2011": 18124,
+      "2012": 16676,
       "2013": 17129,
       "2014": 17308,
       "2015": 18192,
@@ -54,6 +66,12 @@
       "2024": 22440
     },
     "serieNuevosInscriptos": {
+      "2007": 51236,
+      "2008": 47566,
+      "2009": 53315,
+      "2010": 59763,
+      "2011": 56908,
+      "2012": 54682,
       "2013": 51462,
       "2014": 55538,
       "2015": 56334,
@@ -71,15 +89,49 @@
     "estudiantes2024": 304567,
     "nuevosInscriptos2018": 73274,
     "egresados2024": 22440,
-    "presupuesto2024": 663346986992,
+    "presupuesto2024": 663346986992.28,
     "serieTasaCohorte": {
+      "2013": 33.4,
+      "2014": 36.4,
+      "2015": 34.1,
+      "2016": 29.6,
+      "2017": 32.0,
+      "2018": 30.2,
       "2019": 33.7,
       "2020": 13.9,
       "2021": 33.6,
       "2022": 41.5,
       "2023": 28.0,
       "2024": 30.6
-    }
+    },
+    "personalNoDocente": 13585,
+    "serieDocentesUniversitario": {
+      "2017": 22876,
+      "2019": 22815,
+      "2023": 24158,
+      "2024": 24136
+    },
+    "serieNoDocentes": {
+      "2017": 13442,
+      "2019": 13628,
+      "2023": 13644,
+      "2024": 13585
+    },
+    "presupuesto2017": 17756743152.41,
+    "presupuesto2019": 31588886370.73,
+    "serieCostoPorGraduadoReal": {
+      "2017": 60004403,
+      "2019": 49412274,
+      "2023": 29972513,
+      "2024": 29560917
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 974414,
+      "2019": 1821315,
+      "2023": 13761484,
+      "2024": 29560917
+    },
+    "esKirchnerista": false
   },
   "unlp": {
     "nombre": "Universidad Nacional de La Plata",
@@ -100,7 +152,7 @@
     "personalTotal": 18492,
     "nuevosInscriptos2017": 23270,
     "egresados2023": 6499,
-    "presupuesto2023": 92868382428,
+    "presupuesto2023": 92868382428.47,
     "reinscriptosTotal": 90055,
     "reinscriptosRegulares2mas": 50030,
     "reinscriptos0Materias": 22054,
@@ -108,6 +160,12 @@
     "estudiantesPorDocente": 9.4,
     "costoPorGraduado": 34083964,
     "serieEstudiantes": {
+      "2007": 90323,
+      "2008": 91899,
+      "2009": 99197,
+      "2010": 107090,
+      "2011": 108934,
+      "2012": 111577,
       "2013": 109803,
       "2014": 107910,
       "2015": 105517,
@@ -122,6 +180,12 @@
       "2024": 123134
     },
     "serieEgresados": {
+      "2007": 4178,
+      "2008": 4005,
+      "2009": 4734,
+      "2010": 5569,
+      "2011": 5870,
+      "2012": 6007,
       "2013": 6094,
       "2014": 6676,
       "2015": 6958,
@@ -136,6 +200,12 @@
       "2024": 6738
     },
     "serieNuevosInscriptos": {
+      "2007": 20623,
+      "2008": 18732,
+      "2009": 19177,
+      "2010": 23151,
+      "2011": 19393,
+      "2012": 21672,
       "2013": 21374,
       "2014": 21535,
       "2015": 21627,
@@ -153,15 +223,49 @@
     "estudiantes2024": 123134,
     "nuevosInscriptos2018": 25908,
     "egresados2024": 6738,
-    "presupuesto2024": 229657751781,
+    "presupuesto2024": 229657751780.86,
     "serieTasaCohorte": {
+      "2013": 29.5,
+      "2014": 35.6,
+      "2015": 36.3,
+      "2016": 29.8,
+      "2017": 36.3,
+      "2018": 30.2,
       "2019": 29.9,
       "2020": 26.4,
       "2021": 36.2,
       "2022": 26.6,
       "2023": 27.9,
       "2024": 26.0
-    }
+    },
+    "personalNoDocente": 3429,
+    "serieDocentesUniversitario": {
+      "2017": 11937,
+      "2019": 12197,
+      "2023": 13071,
+      "2024": 13162
+    },
+    "serieNoDocentes": {
+      "2017": 3000,
+      "2019": 3045,
+      "2023": 3424,
+      "2024": 3429
+    },
+    "presupuesto2017": 6188531935.55,
+    "presupuesto2019": 10773190262.33,
+    "serieCostoPorGraduadoReal": {
+      "2017": 54139764,
+      "2019": 45789856,
+      "2023": 31122840,
+      "2024": 34083964
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 879178,
+      "2019": 1687794,
+      "2023": 14289642,
+      "2024": 34083964
+    },
+    "esKirchnerista": false
   },
   "unlam": {
     "nombre": "Universidad Nacional de La Matanza",
@@ -182,7 +286,7 @@
     "personalTotal": 4392,
     "nuevosInscriptos2017": 7926,
     "egresados2023": 2932,
-    "presupuesto2023": 30119945597,
+    "presupuesto2023": 30119945597.17,
     "reinscriptosTotal": 38800,
     "reinscriptosRegulares2mas": 22949,
     "reinscriptos0Materias": 11374,
@@ -190,6 +294,12 @@
     "estudiantesPorDocente": 12.5,
     "costoPorGraduado": 21111858,
     "serieEstudiantes": {
+      "2007": 30276,
+      "2008": 32378,
+      "2009": 33348,
+      "2010": 33607,
+      "2011": 34634,
+      "2012": 34662,
       "2013": 36338,
       "2014": 38545,
       "2015": 38777,
@@ -204,6 +314,12 @@
       "2024": 47380
     },
     "serieEgresados": {
+      "2007": 777,
+      "2008": 813,
+      "2009": 801,
+      "2010": 1501,
+      "2011": 1838,
+      "2012": 2160,
       "2013": 1983,
       "2014": 2234,
       "2015": 3095,
@@ -218,6 +334,12 @@
       "2024": 3375
     },
     "serieNuevosInscriptos": {
+      "2007": 5291,
+      "2008": 11341,
+      "2009": 8057,
+      "2010": 6336,
+      "2011": 5668,
+      "2012": 5463,
       "2013": 6237,
       "2014": 6048,
       "2015": 6972,
@@ -235,15 +357,49 @@
     "estudiantes2024": 47380,
     "nuevosInscriptos2018": 7343,
     "egresados2024": 3375,
-    "presupuesto2024": 71252519279,
+    "presupuesto2024": 71252519279.05,
     "serieTasaCohorte": {
+      "2013": 37.5,
+      "2014": 19.7,
+      "2015": 38.4,
+      "2016": 41.0,
+      "2017": 46.7,
+      "2018": 47.7,
       "2019": 42.0,
       "2020": 48.9,
       "2021": 30.6,
       "2022": 34.0,
       "2023": 37.0,
       "2024": 46.0
-    }
+    },
+    "personalNoDocente": 584,
+    "serieDocentesUniversitario": {
+      "2017": 3468,
+      "2019": 3649,
+      "2023": 3812,
+      "2024": 3777
+    },
+    "serieNoDocentes": {
+      "2017": 551,
+      "2019": 560,
+      "2023": 565,
+      "2024": 584
+    },
+    "presupuesto2017": 1989700123.13,
+    "presupuesto2019": 3077453890.37,
+    "serieCostoPorGraduadoReal": {
+      "2017": 46253580,
+      "2019": 31866918,
+      "2023": 22374230,
+      "2024": 21111858
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 751114,
+      "2019": 1174601,
+      "2023": 10272833,
+      "2024": 21111858
+    },
+    "esKirchnerista": false
   },
   "unpaz": {
     "nombre": "Universidad Nacional de José C. Paz",
@@ -264,7 +420,7 @@
     "personalTotal": 1939,
     "nuevosInscriptos2017": 3855,
     "egresados2023": 825,
-    "presupuesto2023": 9677372061,
+    "presupuesto2023": 9677372061.08,
     "reinscriptosTotal": 22148,
     "reinscriptosRegulares2mas": 11989,
     "reinscriptos0Materias": 7442,
@@ -272,6 +428,7 @@
     "estudiantesPorDocente": 20.6,
     "costoPorGraduado": 18475317,
     "serieEstudiantes": {
+      "2012": 3090,
       "2013": 3090,
       "2014": 3163,
       "2015": 12237,
@@ -286,7 +443,8 @@
       "2024": 29941
     },
     "serieEgresados": {
-      "2013": "-",
+      "2012": 0,
+      "2013": 0,
       "2014": 1,
       "2015": 49,
       "2016": 147,
@@ -300,6 +458,7 @@
       "2024": 1151
     },
     "serieNuevosInscriptos": {
+      "2012": 3090,
       "2013": 3090,
       "2014": 1219,
       "2015": 3822,
@@ -317,15 +476,45 @@
     "estudiantes2024": 29941,
     "nuevosInscriptos2018": 3940,
     "egresados2024": 1151,
-    "presupuesto2024": 21265089817,
+    "presupuesto2024": 21265089817.45,
     "serieTasaCohorte": {
+      "2018": 14.2,
       "2019": 17.8,
       "2020": 26.4,
       "2021": 15.2,
       "2022": 16.9,
       "2023": 21.4,
       "2024": 29.2
-    }
+    },
+    "personalNoDocente": 451,
+    "serieDocentesUniversitario": {
+      "2017": 699,
+      "2019": 814,
+      "2023": 1415,
+      "2024": 1450
+    },
+    "serieNoDocentes": {
+      "2017": 177,
+      "2019": 293,
+      "2023": 482,
+      "2024": 451
+    },
+    "presupuesto2017": 335031817.04,
+    "presupuesto2019": 689032997.75,
+    "serieCostoPorGraduadoReal": {
+      "2017": 57629216,
+      "2019": 34050028,
+      "2023": 25548262,
+      "2024": 18475317
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 935843,
+      "2019": 1255069,
+      "2023": 11730148,
+      "2024": 18475317
+    },
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 26.577 (2009, bajo la presidencia de Cristina Fernández de Kirchner)"
   },
   "jauretche": {
     "nombre": "Universidad Nacional Arturo Jauretche",
@@ -346,7 +535,7 @@
     "personalTotal": 2020,
     "nuevosInscriptos2017": 7646,
     "egresados2023": 873,
-    "presupuesto2023": 11296779564,
+    "presupuesto2023": 11296779563.58,
     "reinscriptosTotal": 22321,
     "reinscriptosRegulares2mas": 10469,
     "reinscriptos0Materias": 7774,
@@ -354,6 +543,8 @@
     "estudiantesPorDocente": 21.7,
     "costoPorGraduado": 26675779,
     "serieEstudiantes": {
+      "2011": 3049,
+      "2012": 5392,
       "2013": 7824,
       "2014": 10825,
       "2015": 18192,
@@ -368,6 +559,8 @@
       "2024": 35231
     },
     "serieEgresados": {
+      "2011": 0,
+      "2012": 0,
       "2013": 0,
       "2014": 14,
       "2015": 21,
@@ -382,6 +575,8 @@
       "2024": 1049
     },
     "serieNuevosInscriptos": {
+      "2011": 3049,
+      "2012": 3882,
       "2013": 3982,
       "2014": 5190,
       "2015": 4702,
@@ -399,15 +594,46 @@
     "estudiantes2024": 35231,
     "nuevosInscriptos2018": 7185,
     "egresados2024": 1049,
-    "presupuesto2024": 27982891860,
+    "presupuesto2024": 27982891860.43,
     "serieTasaCohorte": {
+      "2017": 2.4,
+      "2018": 3.4,
       "2019": 12.3,
       "2020": 5.1,
       "2021": 13.4,
       "2022": 13.4,
       "2023": 11.4,
       "2024": 14.6
-    }
+    },
+    "personalNoDocente": 380,
+    "serieDocentesUniversitario": {
+      "2017": 1126,
+      "2019": 1273,
+      "2023": 1586,
+      "2024": 1623
+    },
+    "serieNoDocentes": {
+      "2017": 297,
+      "2019": 315,
+      "2023": 363,
+      "2024": 380
+    },
+    "presupuesto2017": 505753026.48,
+    "presupuesto2019": 939430894.06,
+    "serieCostoPorGraduadoReal": {
+      "2017": 420868532,
+      "2019": 52120164,
+      "2023": 28183718,
+      "2024": 26675779
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 6834500,
+      "2019": 1921127,
+      "2023": 12940183,
+      "2024": 26675779
+    },
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 26.576 (2009, bajo la presidencia de Cristina Fernández de Kirchner)"
   },
   "ungs": {
     "nombre": "Universidad Nacional de General Sarmiento",
@@ -428,7 +654,7 @@
     "personalTotal": 1335,
     "nuevosInscriptos2017": 3448,
     "egresados2023": 123,
-    "presupuesto2023": 9975396694,
+    "presupuesto2023": 9975396693.64,
     "reinscriptosTotal": 14660,
     "reinscriptosRegulares2mas": 4906,
     "reinscriptos0Materias": 6974,
@@ -436,6 +662,12 @@
     "estudiantesPorDocente": 27.6,
     "costoPorGraduado": 69193383,
     "serieEstudiantes": {
+      "2007": 4001,
+      "2008": 4265,
+      "2009": 4874,
+      "2010": 5315,
+      "2011": 5978,
+      "2012": 7042,
       "2013": 7125,
       "2014": 8021,
       "2015": 10399,
@@ -450,6 +682,12 @@
       "2024": 23325
     },
     "serieEgresados": {
+      "2007": 80,
+      "2008": 94,
+      "2009": 280,
+      "2010": 322,
+      "2011": 274,
+      "2012": 227,
       "2013": 210,
       "2014": 179,
       "2015": 148,
@@ -464,6 +702,12 @@
       "2024": 317
     },
     "serieNuevosInscriptos": {
+      "2007": 640,
+      "2008": 872,
+      "2009": 786,
+      "2010": 1153,
+      "2011": 1258,
+      "2012": 1348,
       "2013": 1746,
       "2014": 1969,
       "2015": 3265,
@@ -481,15 +725,49 @@
     "estudiantes2024": 23325,
     "nuevosInscriptos2018": 3172,
     "egresados2024": 317,
-    "presupuesto2024": 21934302474,
+    "presupuesto2024": 21934302473.99,
     "serieTasaCohorte": {
+      "2013": 32.8,
+      "2014": 20.5,
+      "2015": 18.8,
+      "2016": 18.8,
+      "2017": 16.0,
+      "2018": 18.9,
       "2019": 9.5,
       "2020": 9.3,
       "2021": 8.8,
       "2022": 8.0,
       "2023": 3.6,
       "2024": 10.0
-    }
+    },
+    "personalNoDocente": 385,
+    "serieDocentesUniversitario": {
+      "2017": 793,
+      "2019": 875,
+      "2023": 926,
+      "2024": 844
+    },
+    "serieNoDocentes": {
+      "2017": 380,
+      "2019": 389,
+      "2023": 392,
+      "2024": 385
+    },
+    "presupuesto2017": 617263224.21,
+    "presupuesto2019": 1117964702.44,
+    "serieCostoPorGraduadoReal": {
+      "2017": 189109798,
+      "2019": 182713147,
+      "2023": 176637512,
+      "2024": 69193383
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 3070961,
+      "2019": 6734727,
+      "2023": 81100786,
+      "2024": 69193383
+    },
+    "esKirchnerista": false
   },
   "undav": {
     "nombre": "Universidad Nacional de Avellaneda",
@@ -510,7 +788,7 @@
     "personalTotal": 1579,
     "nuevosInscriptos2017": 6128,
     "egresados2023": 347,
-    "presupuesto2023": 8243268776,
+    "presupuesto2023": 8243268775.97,
     "reinscriptosTotal": 12873,
     "reinscriptosRegulares2mas": 6348,
     "reinscriptos0Materias": 4617,
@@ -518,6 +796,8 @@
     "estudiantesPorDocente": 17.4,
     "costoPorGraduado": 29647468,
     "serieEstudiantes": {
+      "2011": 641,
+      "2012": 3807,
       "2013": 4523,
       "2014": 5617,
       "2015": 8090,
@@ -532,13 +812,14 @@
       "2024": 19766
     },
     "serieEgresados": {
+      "2011": 0,
+      "2012": 0,
       "2013": 54,
       "2014": 55,
       "2015": 92,
       "2016": 78,
       "2017": 46,
       "2018": 49,
-      "2019": "-",
       "2020": 0,
       "2021": 37,
       "2022": 119,
@@ -546,6 +827,8 @@
       "2024": 634
     },
     "serieNuevosInscriptos": {
+      "2011": 641,
+      "2012": 3367,
       "2013": 1957,
       "2014": 3180,
       "2015": 4602,
@@ -563,14 +846,43 @@
     "estudiantes2024": 19766,
     "nuevosInscriptos2018": 8357,
     "egresados2024": 634,
-    "presupuesto2024": 18796495023,
+    "presupuesto2024": 18796495022.85,
     "serieTasaCohorte": {
+      "2017": 7.2,
+      "2018": 1.5,
       "2020": 0.0,
       "2021": 0.8,
       "2022": 2.8,
       "2023": 5.7,
       "2024": 7.6
-    }
+    },
+    "personalNoDocente": 331,
+    "serieDocentesUniversitario": {
+      "2017": 821,
+      "2019": 966,
+      "2023": 1111,
+      "2024": 1133
+    },
+    "serieNoDocentes": {
+      "2017": 274,
+      "2019": 303,
+      "2023": 340,
+      "2024": 331
+    },
+    "presupuesto2017": 419791332.0,
+    "presupuesto2019": 745134592.99,
+    "serieCostoPorGraduadoReal": {
+      "2017": 561972831,
+      "2023": 51740171,
+      "2024": 29647468
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 9125899,
+      "2023": 23755818,
+      "2024": 29647468
+    },
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 26.543 (2009, bajo la presidencia de Cristina Fernández de Kirchner)"
   },
   "unso": {
     "nombre": "Universidad Nacional Scalabrini Ortiz",
@@ -583,7 +895,7 @@
     "sitio": "https://unso.edu.ar",
     "inscriptos_ref_year": null,
     "notas": [
-      "Creada por Ley 27.163 (2015); recién empezó a reportar estudiantes al Anuario de la SPU en 2019, seis años después de sancionada la ley de creación.",
+      "Creada por Ley 27.212 (2015); recién empezó a reportar estudiantes al Anuario de la SPU en 2019, seis años después de sancionada la ley de creación.",
       "Todavía no completa una cohorte medible de 6 años, pero ya sostiene una planta de 388 docentes para apenas 198 egresados en 2024."
     ],
     "estudiantes2023": 2831,
@@ -591,7 +903,7 @@
     "personalTotal": 336,
     "nuevosInscriptos2017": null,
     "egresados2023": 198,
-    "presupuesto2023": 1906491201,
+    "presupuesto2023": 1906491200.73,
     "reinscriptosTotal": 2041,
     "reinscriptosRegulares2mas": 1478,
     "reinscriptos0Materias": 390,
@@ -625,8 +937,32 @@
     "estudiantes2024": 3554,
     "nuevosInscriptos2018": null,
     "egresados2024": 307,
-    "presupuesto2024": 3177797833,
-    "serieTasaCohorte": {}
+    "presupuesto2024": 3177797832.94,
+    "serieTasaCohorte": {},
+    "personalNoDocente": 36,
+    "serieDocentesUniversitario": {
+      "2017": 0,
+      "2019": 1085,
+      "2023": 388,
+      "2024": 286
+    },
+    "serieNoDocentes": {
+      "2017": 0,
+      "2019": 418,
+      "2023": 30,
+      "2024": 36
+    },
+    "presupuesto2019": 40005865.62,
+    "serieCostoPorGraduadoReal": {
+      "2023": 20971403,
+      "2024": 10351133
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2023": 9628743,
+      "2024": 10351133
+    },
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 27.212 (2015, bajo la presidencia de Cristina Fernández de Kirchner)"
   },
   "undelta": {
     "nombre": "Universidad Nacional del Delta",
@@ -635,13 +971,15 @@
     "provincia": "Buenos Aires",
     "lat": -34.1691,
     "lng": -58.9599,
-    "fundacion": 2021,
+    "fundacion": 2023,
     "sitio": "https://www.undelta.edu.ar",
     "notas": [
-      "Creada por Ley 27.671 (2021). Todavía no reporta datos de estudiantes, egresados, docentes ni presupuesto en el Anuario de Estadísticas Universitarias de la SPU.",
+      "Creada por Ley 27.727, sancionada el 28/9/2023 y promulgada en octubre de 2023, en las últimas semanas del gobierno de Alberto Fernández (el proyecto lo había presentado Sergio Massa en 2020, pero recién se convirtió en ley en 2023). Todavía no reporta datos de estudiantes, egresados, docentes ni presupuesto en el Anuario de Estadísticas Universitarias de la SPU.",
       "Señalada por la existencia de una placa/reconocimiento institucional a Malena Galmarini (esposa del entonces ministro Sergio Massa) en sus instalaciones — un caso citado como ejemplo de uso político-partidario de una universidad pública."
     ],
-    "tieneDatos": false
+    "tieneDatos": false,
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 27.727 (2023, bajo la presidencia de Alberto Fernández)"
   },
   "unpilar": {
     "nombre": "Universidad Nacional de Pilar",
@@ -650,11 +988,1168 @@
     "provincia": "Buenos Aires",
     "lat": -34.4586,
     "lng": -58.9145,
-    "fundacion": 2021,
+    "fundacion": 2023,
     "sitio": "https://www.unpilar.edu.ar",
     "notas": [
-      "Creada por Ley 27.602 (2021). Todavía no reporta datos de estudiantes, egresados, docentes ni presupuesto en el Anuario de Estadísticas Universitarias de la SPU."
+      "Creada por Ley 27.728, sancionada el 28/9/2023 y promulgada en octubre de 2023, en las últimas semanas del gobierno de Alberto Fernández. Todavía no reporta datos de estudiantes, egresados, docentes ni presupuesto en el Anuario de Estadísticas Universitarias de la SPU."
     ],
-    "tieneDatos": false
+    "tieneDatos": false,
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 27.728 (2023, bajo la presidencia de Alberto Fernández)"
+  },
+  "moreno": {
+    "nombre": "Universidad Nacional de Moreno",
+    "sigla": "UNM",
+    "ciudad": "Moreno",
+    "provincia": "Buenos Aires",
+    "lat": -34.6534,
+    "lng": -58.7889,
+    "fundacion": 2009,
+    "sitio": "https://www.unm.edu.ar",
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 26.575 (sancionada el 2/12/2009, bajo la presidencia de Cristina Fernández de Kirchner)",
+    "notas": [
+      "Creada por Ley 26.575 (2009), en la misma tanda de universidades del conurbano bonaerense que UNPAZ, UNAJ y UNDAV.",
+      "Un tercio de quienes siguen cursando (33,5%) no aprobó ni una sola materia en el último año informado, y apenas 1 de cada 7 inscriptos llega a graduarse en el plazo de referencia."
+    ],
+    "serieEstudiantes": {
+      "2011": 1007,
+      "2012": 2212,
+      "2013": 3668,
+      "2014": 5389,
+      "2015": 7660,
+      "2016": 5975,
+      "2017": 6929,
+      "2018": 8068,
+      "2019": 9722,
+      "2020": 10429,
+      "2021": 10224,
+      "2022": 10613,
+      "2023": 12369,
+      "2024": 13476
+    },
+    "serieNuevosInscriptos": {
+      "2011": 1007,
+      "2012": 1206,
+      "2013": 1474,
+      "2014": 1840,
+      "2015": 2284,
+      "2016": 2647,
+      "2017": 2650,
+      "2018": 2653,
+      "2019": 3341,
+      "2020": 2845,
+      "2021": 2219,
+      "2022": 2542,
+      "2023": 4105,
+      "2024": 3809
+    },
+    "serieEgresados": {
+      "2011": 0,
+      "2012": 0,
+      "2013": 5,
+      "2014": 11,
+      "2015": 75,
+      "2016": 94,
+      "2017": 134,
+      "2018": 159,
+      "2019": 204,
+      "2020": 225,
+      "2021": 327,
+      "2022": 289,
+      "2023": 358,
+      "2024": 393
+    },
+    "estudiantes2024": 13476,
+    "estudiantes2023": 12369,
+    "nuevosInscriptos2018": 2653,
+    "nuevosInscriptos2017": 2650,
+    "egresados2024": 393,
+    "egresados2023": 358,
+    "serieTasaCohorte": {
+      "2017": 13.3,
+      "2018": 13.2,
+      "2019": 13.8,
+      "2020": 12.2,
+      "2021": 14.3,
+      "2022": 10.9,
+      "2023": 13.5,
+      "2024": 14.8
+    },
+    "tasaCohorte": 14.8,
+    "docentesUniversitario": 637,
+    "personalNoDocente": 208,
+    "personalTotal": 917,
+    "serieDocentesUniversitario": {
+      "2017": 543,
+      "2019": 563,
+      "2023": 648,
+      "2024": 637
+    },
+    "serieNoDocentes": {
+      "2017": 162,
+      "2019": 191,
+      "2023": 218,
+      "2024": 208
+    },
+    "reinscriptosTotal": 9667,
+    "reinscriptos0Materias": 3238,
+    "reinscriptosRegulares2mas": 4868,
+    "presupuesto2017": 276392362.08,
+    "presupuesto2019": 536910959.79,
+    "presupuesto2023": 6120323318.44,
+    "presupuesto2024": 13735089876.57,
+    "serieCostoPorGraduadoReal": {
+      "2017": 127016729,
+      "2019": 71403894,
+      "2023": 37234816,
+      "2024": 34949338
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 2062630,
+      "2019": 2631916,
+      "2023": 17095875,
+      "2024": 34949338
+    },
+    "costoPorGraduado": 34949338,
+    "estudiantesPorDocente": 21.2,
+    "tieneDatos": true
+  },
+  "oeste": {
+    "nombre": "Universidad Nacional del Oeste",
+    "sigla": "UNO",
+    "ciudad": "Merlo",
+    "provincia": "Buenos Aires",
+    "lat": -34.6647,
+    "lng": -58.7276,
+    "fundacion": 2009,
+    "sitio": "https://www.uno.edu.ar",
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 26.544 (2009, bajo la presidencia de Cristina Fernández de Kirchner)",
+    "notas": [
+      "Creada por Ley 26.544 (2009) en Merlo. Señalada públicamente (Infobae, La Nación) porque su rector durante años, Martín Othacehé, es hijo del intendente peronista de Merlo, Raúl Othacehé — citado como caso de manual de universidad del conurbano usada como extensión del poder municipal.",
+      "La mitad de quienes siguen cursando (50,2%) no aprobó ni una materia en el último año informado, y solo 4,2% de los inscriptos se gradúa dentro del plazo de referencia — una de las tasas de egreso más bajas de todo el sistema."
+    ],
+    "serieEstudiantes": {
+      "2012": 1433,
+      "2013": 1657,
+      "2014": 1687,
+      "2015": 2069,
+      "2016": 2150,
+      "2017": 2527,
+      "2018": 4011,
+      "2019": 6556,
+      "2020": 8184,
+      "2021": 11920,
+      "2022": 11663,
+      "2023": 14379,
+      "2024": 16112
+    },
+    "serieNuevosInscriptos": {
+      "2012": 1078,
+      "2013": 738,
+      "2014": 580,
+      "2015": 791,
+      "2016": 734,
+      "2017": 878,
+      "2018": 1904,
+      "2019": 3056,
+      "2020": 2994,
+      "2021": 5850,
+      "2022": 3648,
+      "2023": 5899,
+      "2024": 5156
+    },
+    "serieEgresados": {
+      "2012": 0,
+      "2013": 21,
+      "2014": 24,
+      "2015": 36,
+      "2016": 21,
+      "2017": 83,
+      "2018": 49,
+      "2019": 19,
+      "2020": 0,
+      "2021": 42,
+      "2022": 30,
+      "2023": 71,
+      "2024": 80
+    },
+    "estudiantes2024": 16112,
+    "estudiantes2023": 14379,
+    "nuevosInscriptos2018": 1904,
+    "nuevosInscriptos2017": 878,
+    "egresados2024": 80,
+    "egresados2023": 71,
+    "serieTasaCohorte": {
+      "2018": 4.5,
+      "2019": 2.6,
+      "2020": 0.0,
+      "2021": 5.3,
+      "2022": 4.1,
+      "2023": 8.1,
+      "2024": 4.2
+    },
+    "tasaCohorte": 4.2,
+    "docentesUniversitario": 504,
+    "personalNoDocente": 132,
+    "personalTotal": 665,
+    "serieDocentesUniversitario": {
+      "2017": 356,
+      "2019": 314,
+      "2023": 490,
+      "2024": 504
+    },
+    "serieNoDocentes": {
+      "2017": 147,
+      "2019": 121,
+      "2023": 134,
+      "2024": 132
+    },
+    "reinscriptosTotal": 10956,
+    "reinscriptos0Materias": 5500,
+    "reinscriptosRegulares2mas": 4206,
+    "presupuesto2017": 185528119.47,
+    "presupuesto2019": 299049273.37,
+    "presupuesto2023": 4666922483.97,
+    "presupuesto2024": 9166914388.07,
+    "serieCostoPorGraduadoReal": {
+      "2017": 137648453,
+      "2019": 427010884,
+      "2023": 143162777,
+      "2024": 114586430
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 2235279,
+      "2019": 15739435,
+      "2023": 65731303,
+      "2024": 114586430
+    },
+    "costoPorGraduado": 114586430,
+    "estudiantesPorDocente": 32.0,
+    "tieneDatos": true
+  },
+  "chaco_austral": {
+    "nombre": "Universidad Nacional del Chaco Austral",
+    "sigla": "UNCAUS",
+    "ciudad": "Presidencia Roque Sáenz Peña",
+    "provincia": "Chaco",
+    "lat": -26.7852,
+    "lng": -60.4408,
+    "fundacion": 2007,
+    "sitio": "https://www.uncaus.edu.ar",
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 26.335, sancionada el 4/12/2007 (última semana de Néstor Kirchner) y promulgada el 28/12/2007, ya bajo Cristina Fernández de Kirchner",
+    "notas": [
+      "Creada en la transición entre los gobiernos de Néstor y Cristina Kirchner, a fines de 2007.",
+      "Más de la mitad de sus reinscriptos (53,6%) no aprobó ni una materia en el último año informado, y solo 5,2% de los inscriptos se gradúa dentro del plazo de referencia de 6 años."
+    ],
+    "serieEstudiantes": {
+      "2009": 1949,
+      "2010": 2693,
+      "2011": 2639,
+      "2012": 2995,
+      "2013": 3161,
+      "2014": 4129,
+      "2015": 4402,
+      "2016": 6176,
+      "2017": 10045,
+      "2018": 14893,
+      "2019": 19051,
+      "2020": 23327,
+      "2021": 19306,
+      "2022": 19598,
+      "2023": 17386,
+      "2024": 17458
+    },
+    "serieNuevosInscriptos": {
+      "2009": 1949,
+      "2010": 1672,
+      "2011": 1110,
+      "2012": 1226,
+      "2013": 1098,
+      "2014": 1894,
+      "2015": 1991,
+      "2016": 2849,
+      "2017": 5628,
+      "2018": 7430,
+      "2019": 8655,
+      "2020": 11116,
+      "2021": 4831,
+      "2022": 6804,
+      "2023": 5848,
+      "2024": 5195
+    },
+    "serieEgresados": {
+      "2009": 0,
+      "2010": 0,
+      "2011": 7,
+      "2012": 5,
+      "2013": 25,
+      "2014": 73,
+      "2015": 98,
+      "2016": 125,
+      "2017": 170,
+      "2018": 311,
+      "2019": 197,
+      "2020": 235,
+      "2021": 339,
+      "2022": 404,
+      "2023": 393,
+      "2024": 388
+    },
+    "estudiantes2024": 17458,
+    "estudiantes2023": 17386,
+    "nuevosInscriptos2018": 7430,
+    "nuevosInscriptos2017": 5628,
+    "egresados2024": 388,
+    "egresados2023": 393,
+    "serieTasaCohorte": {
+      "2015": 5.0,
+      "2016": 7.5,
+      "2017": 15.3,
+      "2018": 25.4,
+      "2019": 17.9,
+      "2020": 12.4,
+      "2021": 17.0,
+      "2022": 14.2,
+      "2023": 7.0,
+      "2024": 5.2
+    },
+    "tasaCohorte": 5.2,
+    "docentesUniversitario": 796,
+    "personalNoDocente": 241,
+    "personalTotal": 1050,
+    "serieDocentesUniversitario": {
+      "2017": 431,
+      "2019": 531,
+      "2023": 773,
+      "2024": 796
+    },
+    "serieNoDocentes": {
+      "2017": 189,
+      "2019": 225,
+      "2023": 234,
+      "2024": 241
+    },
+    "reinscriptosTotal": 12263,
+    "reinscriptos0Materias": 6578,
+    "reinscriptosRegulares2mas": 4330,
+    "presupuesto2017": 319857818.49,
+    "presupuesto2019": 521776923.53,
+    "presupuesto2023": 6348801114.97,
+    "presupuesto2024": 14269930074.64,
+    "serieCostoPorGraduadoReal": {
+      "2017": 115863791,
+      "2019": 71856893,
+      "2023": 35184959,
+      "2024": 36778170
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 1881517,
+      "2019": 2648614,
+      "2023": 16154710,
+      "2024": 36778170
+    },
+    "costoPorGraduado": 36778170,
+    "estudiantesPorDocente": 21.9,
+    "tieneDatos": true
+  },
+  "rio_negro": {
+    "nombre": "Universidad Nacional de Río Negro",
+    "sigla": "UNRN",
+    "ciudad": "General Roca",
+    "provincia": "Río Negro",
+    "lat": -39.0333,
+    "lng": -67.5833,
+    "fundacion": 2007,
+    "sitio": "https://www.unrn.edu.ar",
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 26.330 (sancionada y promulgada el 19/12/2007, primera ley de creación universitaria de Cristina Fernández de Kirchner)",
+    "notas": [
+      "Primera universidad creada por ley durante la presidencia de Cristina Fernández de Kirchner, con sedes distribuidas en Viedma, Bariloche y General Roca.",
+      "Poco más de un tercio de sus reinscriptos (35,8%) no aprobó ni una materia en el último año informado, y solo 14,7% de los inscriptos se gradúa dentro del plazo de referencia."
+    ],
+    "serieEstudiantes": {
+      "2009": 1622,
+      "2010": 2948,
+      "2011": 4602,
+      "2012": 5987,
+      "2013": 6988,
+      "2014": 8034,
+      "2015": 8241,
+      "2016": 8127,
+      "2017": 8677,
+      "2018": 9051,
+      "2019": 9970,
+      "2020": 12230,
+      "2021": 12912,
+      "2022": 13274,
+      "2023": 13395,
+      "2024": 13495
+    },
+    "serieNuevosInscriptos": {
+      "2009": 1622,
+      "2010": 1982,
+      "2011": 2652,
+      "2012": 3257,
+      "2013": 3343,
+      "2014": 3636,
+      "2015": 3213,
+      "2016": 2847,
+      "2017": 3160,
+      "2018": 3231,
+      "2019": 3559,
+      "2020": 4472,
+      "2021": 3982,
+      "2022": 4697,
+      "2023": 4204,
+      "2024": 3856
+    },
+    "serieEgresados": {
+      "2009": 0,
+      "2010": 0,
+      "2011": 21,
+      "2012": 72,
+      "2013": 132,
+      "2014": 180,
+      "2015": 278,
+      "2016": 250,
+      "2017": 216,
+      "2018": 283,
+      "2019": 290,
+      "2020": 263,
+      "2021": 500,
+      "2022": 507,
+      "2023": 569,
+      "2024": 476
+    },
+    "estudiantes2024": 13495,
+    "estudiantes2023": 13395,
+    "nuevosInscriptos2018": 3231,
+    "nuevosInscriptos2017": 3160,
+    "egresados2024": 476,
+    "egresados2023": 569,
+    "serieTasaCohorte": {
+      "2015": 17.1,
+      "2016": 12.6,
+      "2017": 8.1,
+      "2018": 8.7,
+      "2019": 8.7,
+      "2020": 7.2,
+      "2021": 15.6,
+      "2022": 17.8,
+      "2023": 18.0,
+      "2024": 14.7
+    },
+    "tasaCohorte": 14.7,
+    "docentesUniversitario": 1176,
+    "personalNoDocente": 421,
+    "personalTotal": 1616,
+    "serieDocentesUniversitario": {
+      "2017": 930,
+      "2019": 1034,
+      "2023": 1181,
+      "2024": 1176
+    },
+    "serieNoDocentes": {
+      "2017": 295,
+      "2019": 392,
+      "2023": 416,
+      "2024": 421
+    },
+    "reinscriptosTotal": 9639,
+    "reinscriptos0Materias": 3450,
+    "reinscriptosRegulares2mas": 4824,
+    "presupuesto2017": 684548782.7,
+    "presupuesto2019": 1533439696.9,
+    "presupuesto2023": 11719819245.84,
+    "presupuesto2024": 26225635392.74,
+    "serieCostoPorGraduadoReal": {
+      "2017": 195159787,
+      "2019": 143455928,
+      "2023": 44860749,
+      "2024": 55095873
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 3169207,
+      "2019": 5287723,
+      "2023": 20597222,
+      "2024": 55095873
+    },
+    "costoPorGraduado": 55095873,
+    "estudiantesPorDocente": 11.5,
+    "tieneDatos": true
+  },
+  "villa_mercedes": {
+    "nombre": "Universidad Nacional de Villa Mercedes",
+    "sigla": "UNViMe",
+    "ciudad": "Villa Mercedes",
+    "provincia": "San Luis",
+    "lat": -33.6807,
+    "lng": -65.4487,
+    "fundacion": 2009,
+    "sitio": "https://www.unvime.edu.ar",
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 26.542 (sancionada el 11/11/2009, bajo la presidencia de Cristina Fernández de Kirchner)",
+    "notas": [
+      "Creada por Ley 26.542 (2009) en San Luis, en la misma tanda legislativa que Villa Mercedes, Tierra del Fuego y las universidades del conurbano bonaerense.",
+      "Solo 13% de sus inscriptos se gradúa dentro del plazo de referencia de 6 años, y 4 de cada 10 reinscriptos no aprobó ninguna materia en el último año informado."
+    ],
+    "serieEstudiantes": {
+      "2013": 879,
+      "2014": 879,
+      "2015": 2409,
+      "2016": 1315,
+      "2017": 1657,
+      "2018": 2178,
+      "2019": 2496,
+      "2020": 2584,
+      "2021": 3287,
+      "2022": 3793,
+      "2023": 3775,
+      "2024": 3902
+    },
+    "serieNuevosInscriptos": {
+      "2013": 879,
+      "2014": 879,
+      "2015": 933,
+      "2016": 390,
+      "2017": 700,
+      "2018": 958,
+      "2019": 829,
+      "2020": 807,
+      "2021": 1358,
+      "2022": 1460,
+      "2023": 1200,
+      "2024": 1530
+    },
+    "serieEgresados": {
+      "2016": 32,
+      "2017": 31,
+      "2018": 37,
+      "2019": 62,
+      "2020": 34,
+      "2021": 69,
+      "2022": 104,
+      "2023": 117,
+      "2024": 125
+    },
+    "estudiantes2024": 3902,
+    "estudiantes2023": 3775,
+    "nuevosInscriptos2018": 958,
+    "nuevosInscriptos2017": 700,
+    "egresados2024": 125,
+    "egresados2023": 117,
+    "serieTasaCohorte": {
+      "2019": 7.1,
+      "2020": 3.9,
+      "2021": 7.4,
+      "2022": 26.7,
+      "2023": 16.7,
+      "2024": 13.0
+    },
+    "tasaCohorte": 13.0,
+    "docentesUniversitario": 424,
+    "personalNoDocente": 109,
+    "personalTotal": 543,
+    "serieDocentesUniversitario": {
+      "2017": 286,
+      "2019": 350,
+      "2023": 431,
+      "2024": 424
+    },
+    "serieNoDocentes": {
+      "2017": 62,
+      "2019": 75,
+      "2023": 109,
+      "2024": 109
+    },
+    "reinscriptosTotal": 2372,
+    "reinscriptos0Materias": 935,
+    "reinscriptosRegulares2mas": 1128,
+    "presupuesto2017": 151173201.14,
+    "presupuesto2019": 312986604.7,
+    "presupuesto2023": 2042305157.75,
+    "presupuesto2024": 6597600309.14,
+    "serieCostoPorGraduadoReal": {
+      "2017": 300298249,
+      "2019": 136956880,
+      "2023": 38018296,
+      "2024": 52780802
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 4876555,
+      "2019": 5048171,
+      "2023": 17455600,
+      "2024": 52780802
+    },
+    "costoPorGraduado": 52780802,
+    "estudiantesPorDocente": 9.2,
+    "tieneDatos": true
+  },
+  "tierra_del_fuego": {
+    "nombre": "Universidad Nacional de Tierra del Fuego",
+    "sigla": "UNTDF",
+    "ciudad": "Ushuaia",
+    "provincia": "Tierra del Fuego",
+    "lat": -54.8019,
+    "lng": -68.303,
+    "fundacion": 2009,
+    "sitio": "https://www.untdf.edu.ar",
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 26.559 (sancionada el 18/11/2009, bajo la presidencia de Cristina Fernández de Kirchner)",
+    "notas": [
+      "Creada por Ley 26.559 (2009). Su planta no docente equivale a casi la mitad de su planta docente universitaria (205 no docentes contra 457 docentes en 2024), una de las proporciones más altas del sistema.",
+      "Solo 5,4% de los inscriptos se gradúa dentro del plazo de referencia de 6 años."
+    ],
+    "serieEstudiantes": {
+      "2013": 571,
+      "2014": 1071,
+      "2015": 1952,
+      "2016": 2234,
+      "2017": 4473,
+      "2018": 3310,
+      "2019": 3946,
+      "2020": 4660,
+      "2021": 3665,
+      "2022": 3935,
+      "2023": 3991,
+      "2024": 4699
+    },
+    "serieNuevosInscriptos": {
+      "2013": 571,
+      "2014": 522,
+      "2015": 884,
+      "2016": 1304,
+      "2017": 1590,
+      "2018": 1531,
+      "2019": 1742,
+      "2020": 1925,
+      "2021": 990,
+      "2022": 1376,
+      "2023": 1434,
+      "2024": 1754
+    },
+    "serieEgresados": {
+      "2017": 3,
+      "2018": 17,
+      "2019": 18,
+      "2020": 30,
+      "2021": 37,
+      "2022": 39,
+      "2023": 67,
+      "2024": 82
+    },
+    "estudiantes2024": 4699,
+    "estudiantes2023": 3991,
+    "nuevosInscriptos2018": 1531,
+    "nuevosInscriptos2017": 1590,
+    "egresados2024": 82,
+    "egresados2023": 67,
+    "serieTasaCohorte": {
+      "2019": 3.2,
+      "2020": 5.7,
+      "2021": 4.2,
+      "2022": 3.0,
+      "2023": 4.2,
+      "2024": 5.4
+    },
+    "tasaCohorte": 5.4,
+    "docentesUniversitario": 457,
+    "personalNoDocente": 205,
+    "personalTotal": 677,
+    "serieDocentesUniversitario": {
+      "2017": 371,
+      "2019": 420,
+      "2023": 448,
+      "2024": 457
+    },
+    "serieNoDocentes": {
+      "2017": 160,
+      "2019": 181,
+      "2023": 204,
+      "2024": 205
+    },
+    "reinscriptosTotal": 2945,
+    "reinscriptos0Materias": 1337,
+    "reinscriptosRegulares2mas": 1134,
+    "presupuesto2017": 347500534.51,
+    "presupuesto2019": 702075438.61,
+    "presupuesto2023": 5925830563.39,
+    "presupuesto2024": 14471918422.72,
+    "serieCostoPorGraduadoReal": {
+      "2019": 1058183703,
+      "2023": 192633716,
+      "2024": 176486810
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2019": 39004191,
+      "2023": 88445232,
+      "2024": 176486810
+    },
+    "costoPorGraduado": 176486810,
+    "estudiantesPorDocente": 10.3,
+    "tieneDatos": true
+  },
+  "hurlingham": {
+    "nombre": "Universidad Nacional de Hurlingham",
+    "sigla": "UNAHUR",
+    "ciudad": "Hurlingham",
+    "provincia": "Buenos Aires",
+    "lat": -34.5911,
+    "lng": -58.6372,
+    "fundacion": 2014,
+    "sitio": "https://www.unahur.edu.ar",
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 27.016 (sancionada el 19/11/2014, bajo la presidencia de Cristina Fernández de Kirchner); recién abrió en 2016",
+    "notas": [
+      "Creada por Ley 27.016 (2014); reportado públicamente que el impulso fundacional estuvo ligado a un funcionario cercano al entonces vicepresidente Amado Boudou — señalada en las mismas críticas de \"universidad del conurbano\" que UNO.",
+      "Su matrícula se multiplicó por más de 20 en menos de una década (1.749 estudiantes en 2016 a 40.219 en 2024), con solo 1.450 docentes universitarios para sostenerla — casi 28 estudiantes por cada docente, muy por encima del resto del sistema."
+    ],
+    "serieEstudiantes": {
+      "2016": 1749,
+      "2017": 4717,
+      "2018": 8402,
+      "2019": 12406,
+      "2020": 18137,
+      "2021": 32942,
+      "2022": 37433,
+      "2023": 37988,
+      "2024": 40219
+    },
+    "serieNuevosInscriptos": {
+      "2016": 1749,
+      "2017": 3365,
+      "2018": 5211,
+      "2019": 6756,
+      "2020": 9529,
+      "2021": 16563,
+      "2022": 16473,
+      "2023": 13660,
+      "2024": 13063
+    },
+    "serieEgresados": {
+      "2016": 0,
+      "2017": 20,
+      "2018": 96,
+      "2019": 219,
+      "2020": 309,
+      "2021": 512,
+      "2022": 960,
+      "2023": 1156,
+      "2024": 1130
+    },
+    "estudiantes2024": 40219,
+    "estudiantes2023": 37988,
+    "nuevosInscriptos2018": 5211,
+    "nuevosInscriptos2017": 3365,
+    "egresados2024": 1130,
+    "egresados2023": 1156,
+    "serieTasaCohorte": {
+      "2022": 54.9,
+      "2023": 34.4,
+      "2024": 21.7
+    },
+    "tasaCohorte": 21.7,
+    "docentesUniversitario": 1450,
+    "personalNoDocente": 426,
+    "personalTotal": 1910,
+    "serieDocentesUniversitario": {
+      "2017": 338,
+      "2019": 607,
+      "2023": 1319,
+      "2024": 1450
+    },
+    "serieNoDocentes": {
+      "2017": 145,
+      "2019": 212,
+      "2023": 306,
+      "2024": 426
+    },
+    "reinscriptosTotal": 27156,
+    "reinscriptos0Materias": 8651,
+    "reinscriptosRegulares2mas": 13429,
+    "presupuesto2017": 173268347.19,
+    "presupuesto2019": 593512974.09,
+    "presupuesto2023": 12075979150.46,
+    "presupuesto2024": 20998690780.56,
+    "serieCostoPorGraduadoReal": {
+      "2017": 533493241,
+      "2019": 73525146,
+      "2023": 22752148,
+      "2024": 18582912
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2017": 8663417,
+      "2019": 2710105,
+      "2023": 10446349,
+      "2024": 18582912
+    },
+    "costoPorGraduado": 18582912,
+    "estudiantesPorDocente": 27.7,
+    "tieneDatos": true
+  },
+  "rafaela": {
+    "nombre": "Universidad Nacional de Rafaela",
+    "sigla": "UNRaf",
+    "ciudad": "Rafaela",
+    "provincia": "Santa Fe",
+    "lat": -31.2503,
+    "lng": -61.4867,
+    "fundacion": 2014,
+    "sitio": "https://www.unraf.edu.ar",
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 27.062 (sancionada el 3/12/2014, bajo la presidencia de Cristina Fernández de Kirchner)",
+    "notas": [
+      "Creada por Ley 27.062 (2014) en Santa Fe.",
+      "Institución todavía muy chica (3.263 estudiantes en 2024): sus indicadores de egreso son volátiles año a año por el bajo número de casos, más que por una tendencia consolidada."
+    ],
+    "serieEstudiantes": {
+      "2016": 192,
+      "2017": 767,
+      "2018": 538,
+      "2019": 1018,
+      "2020": 1770,
+      "2021": 2114,
+      "2022": 2704,
+      "2023": 2683,
+      "2024": 3263
+    },
+    "serieNuevosInscriptos": {
+      "2016": 192,
+      "2017": 576,
+      "2018": 318,
+      "2019": 622,
+      "2020": 1023,
+      "2021": 916,
+      "2022": 1302,
+      "2023": 1052,
+      "2024": 1486
+    },
+    "serieEgresados": {
+      "2016": 0,
+      "2017": 0,
+      "2020": 6,
+      "2021": 63,
+      "2022": 139,
+      "2023": 163,
+      "2024": 251
+    },
+    "estudiantes2024": 3263,
+    "estudiantes2023": 2683,
+    "nuevosInscriptos2018": 318,
+    "nuevosInscriptos2017": 576,
+    "egresados2024": 251,
+    "egresados2023": 163,
+    "serieTasaCohorte": {
+      "2022": 72.4,
+      "2023": 28.3,
+      "2024": 78.9
+    },
+    "tasaCohorte": 78.9,
+    "docentesUniversitario": 399,
+    "personalNoDocente": 41,
+    "personalTotal": 448,
+    "serieDocentesUniversitario": {
+      "2017": 105,
+      "2019": 202,
+      "2023": 423,
+      "2024": 399
+    },
+    "serieNoDocentes": {
+      "2017": 25,
+      "2019": 27,
+      "2023": 44,
+      "2024": 41
+    },
+    "reinscriptosTotal": 1777,
+    "reinscriptos0Materias": 392,
+    "reinscriptosRegulares2mas": 1169,
+    "presupuesto2017": 58193484.46,
+    "presupuesto2019": 191015737.16,
+    "presupuesto2023": 3531177945.58,
+    "presupuesto2024": 6624938172.18,
+    "serieCostoPorGraduadoReal": {
+      "2023": 47183470,
+      "2024": 26394176
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2023": 21663668,
+      "2024": 26394176
+    },
+    "costoPorGraduado": 26394176,
+    "estudiantesPorDocente": 8.2,
+    "tieneDatos": true
+  },
+  "alto_uruguay": {
+    "nombre": "Universidad Nacional del Alto Uruguay",
+    "sigla": "UNAU",
+    "ciudad": "El Dorado",
+    "provincia": "Misiones",
+    "lat": -26.405,
+    "lng": -54.643,
+    "fundacion": 2014,
+    "sitio": "https://www.unau.edu.ar",
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 27.074 (sancionada el 10/12/2014, bajo la presidencia de Cristina Fernández de Kirchner)",
+    "notas": [
+      "Creada por Ley 27.074 (2014-2015), pero tardó cuatro años en abrir: el Ministerio de Educación recién autorizó su puesta en marcha por Resolución 145/2019 — un caso testigo de la distancia entre la ley de creación y el funcionamiento real.",
+      "38,3% de sus reinscriptos no aprobó ni una materia en el último año informado."
+    ],
+    "serieEstudiantes": {
+      "2019": 435,
+      "2020": 807,
+      "2021": 1343,
+      "2022": 2212,
+      "2023": 1285,
+      "2024": 1349
+    },
+    "serieNuevosInscriptos": {
+      "2019": 435,
+      "2020": 481,
+      "2021": 795,
+      "2022": 1494,
+      "2023": 359,
+      "2024": 358
+    },
+    "serieEgresados": {
+      "2020": 0,
+      "2021": 4,
+      "2022": 8,
+      "2023": 26,
+      "2024": 21
+    },
+    "estudiantes2024": 1349,
+    "estudiantes2023": 1285,
+    "egresados2024": 21,
+    "egresados2023": 26,
+    "docentesUniversitario": 98,
+    "personalNoDocente": 42,
+    "personalTotal": 157,
+    "serieDocentesUniversitario": {
+      "2017": 0,
+      "2019": 26,
+      "2023": 141,
+      "2024": 98
+    },
+    "serieNoDocentes": {
+      "2017": 29,
+      "2019": 78,
+      "2023": 54,
+      "2024": 42
+    },
+    "reinscriptosTotal": 991,
+    "reinscriptos0Materias": 380,
+    "reinscriptosRegulares2mas": 497,
+    "presupuesto2017": 11769531.94,
+    "presupuesto2019": 60231624.11,
+    "presupuesto2023": 743400992.01,
+    "presupuesto2024": 1946051705.44,
+    "serieCostoPorGraduadoReal": {
+      "2023": 62274129,
+      "2024": 92669129
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2023": 28592346,
+      "2024": 92669129
+    },
+    "costoPorGraduado": 92669129,
+    "estudiantesPorDocente": 13.8,
+    "tieneDatos": true
+  },
+  "comechingones": {
+    "nombre": "Universidad Nacional de los Comechingones",
+    "sigla": "UNLC",
+    "ciudad": "Villa de Merlo",
+    "provincia": "San Luis",
+    "lat": -32.3333,
+    "lng": -65.0167,
+    "fundacion": 2014,
+    "sitio": "https://www.unlc.edu.ar",
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 26.998 (sancionada el 22/10/2014, bajo la presidencia de Cristina Fernández de Kirchner)",
+    "notas": [
+      "Creada por Ley 26.998 (2014) en Villa de Merlo, San Luis (no debe confundirse con la Universidad Nacional del Oeste, en Merlo, Buenos Aires).",
+      "Casi 2 de cada 3 reinscriptos (62,7%) no aprobó ni una sola materia en el último año informado — la peor proporción de todo el relevamiento hasta ahora."
+    ],
+    "serieEstudiantes": {
+      "2024": 1816
+    },
+    "serieNuevosInscriptos": {
+      "2024": 969
+    },
+    "serieEgresados": {
+      "2020": 0,
+      "2021": 0,
+      "2022": 0,
+      "2024": 22
+    },
+    "estudiantes2024": 1816,
+    "egresados2024": 22,
+    "docentesUniversitario": 131,
+    "personalNoDocente": 71,
+    "personalTotal": 211,
+    "serieDocentesUniversitario": {
+      "2017": 0,
+      "2019": 60,
+      "2023": 130,
+      "2024": 131
+    },
+    "serieNoDocentes": {
+      "2017": 8,
+      "2019": 40,
+      "2023": 70,
+      "2024": 71
+    },
+    "reinscriptosTotal": 847,
+    "reinscriptos0Materias": 531,
+    "reinscriptosRegulares2mas": 241,
+    "presupuesto2017": 33651955.33,
+    "presupuesto2019": 119891469.7,
+    "presupuesto2023": 1706774278.12,
+    "presupuesto2024": 3225169367.96,
+    "serieCostoPorGraduadoReal": {
+      "2024": 146598608
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2024": 146598608
+    },
+    "costoPorGraduado": 146598608,
+    "estudiantesPorDocente": 13.9,
+    "tieneDatos": true
+  },
+  "guillermo_brown": {
+    "nombre": "Universidad Nacional Guillermo Brown",
+    "sigla": "UNaB",
+    "ciudad": "Adrogué",
+    "provincia": "Buenos Aires",
+    "lat": -34.7997,
+    "lng": -58.391,
+    "fundacion": 2015,
+    "sitio": "https://www.unab.edu.ar",
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 27.193 (sancionada el 7/10/2015, bajo la presidencia de Cristina Fernández de Kirchner); recién abrió en agosto de 2019",
+    "notas": [
+      "Creada por Ley 27.193 (2015) en Almirante Brown, pero no empezó a dictar clases hasta agosto de 2019 — casi cuatro años después de sancionada la ley.",
+      "3 de cada 10 reinscriptos no aprobó ninguna materia en el último año informado."
+    ],
+    "serieEstudiantes": {
+      "2019": 267,
+      "2020": 1981,
+      "2021": 2670,
+      "2022": 4251,
+      "2023": 4715,
+      "2024": 4830
+    },
+    "serieNuevosInscriptos": {
+      "2019": 267,
+      "2020": 1875,
+      "2021": 1643,
+      "2022": 2863,
+      "2023": 2685,
+      "2024": 2156
+    },
+    "serieEgresados": {
+      "2020": 0,
+      "2021": 0,
+      "2022": 9,
+      "2023": 15,
+      "2024": 140
+    },
+    "estudiantes2024": 4830,
+    "estudiantes2023": 4715,
+    "egresados2024": 140,
+    "egresados2023": 15,
+    "docentesUniversitario": 375,
+    "personalNoDocente": 59,
+    "personalTotal": 447,
+    "serieDocentesUniversitario": {
+      "2017": 1,
+      "2019": 34,
+      "2023": 409,
+      "2024": 375
+    },
+    "serieNoDocentes": {
+      "2017": 0,
+      "2019": 29,
+      "2023": 54,
+      "2024": 59
+    },
+    "reinscriptosTotal": 2674,
+    "reinscriptos0Materias": 811,
+    "reinscriptosRegulares2mas": 1496,
+    "presupuesto2017": 29846503.41,
+    "presupuesto2019": 74332849.14,
+    "presupuesto2023": 3022727143.64,
+    "presupuesto2024": 4879946555.96,
+    "serieCostoPorGraduadoReal": {
+      "2023": 438899981,
+      "2024": 34856761
+    },
+    "serieCostoPorGraduadoNominal": {
+      "2023": 201515143,
+      "2024": 34856761
+    },
+    "costoPorGraduado": 34856761,
+    "estudiantesPorDocente": 12.9,
+    "tieneDatos": true
+  },
+  "ezeiza": {
+    "nombre": "Universidad Nacional de Ezeiza",
+    "sigla": "UNE",
+    "ciudad": "Ezeiza",
+    "provincia": "Buenos Aires",
+    "lat": -34.8222,
+    "lng": -58.5358,
+    "fundacion": 2023,
+    "sitio": "https://www.une.edu.ar",
+    "esKirchnerista": true,
+    "fundacionLey": "Ley 27.729, sancionada el 28/9/2023 y promulgada en octubre de 2023, en las últimas semanas del gobierno de Alberto Fernández",
+    "notas": [
+      "Creada por Ley 27.729 (2023), absorbiendo la preexistente Universidad Provincial de Ezeiza, en el mismo paquete legislativo que UNDELTA, UNPILAR, la Universidad Nacional de Río Tercero y la Universidad Nacional Madres de Plaza de Mayo — las cinco sancionadas el mismo día, a dos meses y medio de terminar el mandato de Alberto Fernández.",
+      "A diferencia de UNDELTA y UNPILAR, ya informa estudiantes al Anuario de la SPU (7.510 en 2024) pero todavía no reporta datos de presupuesto ni de personal docente/no docente — no hay forma de calcular su costo por graduado ni su relación estudiantes por docente."
+    ],
+    "serieEstudiantes": {
+      "2017": 751,
+      "2018": 2608,
+      "2019": 3559,
+      "2020": 4923,
+      "2021": 5622,
+      "2022": 5983,
+      "2023": 6803,
+      "2024": 7510
+    },
+    "serieNuevosInscriptos": {
+      "2017": 751,
+      "2018": 961,
+      "2019": 1804,
+      "2020": 2552,
+      "2021": 2379,
+      "2022": 2188,
+      "2023": 2706,
+      "2024": 2721
+    },
+    "serieEgresados": {
+      "2018": 66,
+      "2019": 39,
+      "2020": 16,
+      "2021": 73,
+      "2022": 102,
+      "2023": 140,
+      "2024": 194
+    },
+    "estudiantes2024": 7510,
+    "estudiantes2023": 6803,
+    "nuevosInscriptos2018": 961,
+    "nuevosInscriptos2017": 751,
+    "egresados2024": 194,
+    "egresados2023": 140,
+    "serieTasaCohorte": {
+      "2023": 18.6,
+      "2024": 20.2
+    },
+    "tasaCohorte": 20.2,
+    "tieneDatos": true
   }
 }

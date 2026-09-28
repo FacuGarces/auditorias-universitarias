@@ -74,9 +74,10 @@ export function EvolutionChart({ data, color = '#facf3b', height = 150, formatVa
       ))}
 
       {puntos.map((p, i) => {
-        const paso = puntos.length > 8 ? 2 : 1
+        const paso = puntos.length > 16 ? 3 : puntos.length > 8 ? 2 : 1
         const esUltimo = i === puntos.length - 1
-        if (i % paso !== 0 && !esUltimo) return null
+        const chocaConUltimo = !esUltimo && puntos.length - 1 - i < paso
+        if ((i % paso !== 0 && !esUltimo) || chocaConUltimo) return null
         return (
           <text
             key={`label-${p.label}`}

@@ -538,6 +538,12 @@ export function Home() {
             <p className="text-xs text-upl-resaltador truncate">Universitarios por la Libertad</p>
           </div>
           <Link
+            to="/kirchneristas"
+            className="shrink-0 rounded-full glass-chip text-upl-crema font-display font-600 text-sm px-4 py-2 hover:bg-upl-crema/15 transition-colors hidden sm:block"
+          >
+            Universidades K
+          </Link>
+          <Link
             to="/ranking"
             className="shrink-0 rounded-full bg-upl-amarillo text-upl-principal font-display font-600 text-sm px-4 py-2 hover:bg-upl-resaltador transition-colors"
           >

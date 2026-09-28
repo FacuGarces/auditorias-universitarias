@@ -57,6 +57,8 @@ export function Universidad() {
         .map(([label, value]) => ({ label, value }))
         .sort((a, b) => Number(a.label) - Number(b.label))
     : []
+  const serieCostoReal = toSerie(u.serieCostoPorGraduadoReal)
+  const serieCostoNominal = toSerie(u.serieCostoPorGraduadoNominal)
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
@@ -74,6 +76,14 @@ export function Universidad() {
               sitio oficial
             </a>
           </p>
+          {u.esKirchnerista && (
+            <Link
+              to="/kirchneristas"
+              className="mt-1 inline-block rounded-full bg-[#e2574c]/15 border border-[#e2574c]/40 text-[#ff8a7a] text-xs font-semibold px-3 py-1"
+            >
+              Universidad creada durante un gobierno kirchnerista →
+            </Link>
+          )}
         </div>
       </div>
 
@@ -111,13 +121,25 @@ export function Universidad() {
             <StatCard
               label="Costo por graduado"
               value={formatMoneda(u.costoPorGraduado)}
-              hint="Presupuesto ejecutado 2024 / egresados 2024 — pesos corrientes"
+              hint="Presupuesto ejecutado 2024 / egresados 2024 — pesos constantes de 2024"
               alerta={!!u.costoPorGraduado && u.costoPorGraduado > 15_000_000}
             />
             <StatCard
               label="Matrícula 2024"
               value={formatNumero(u.estudiantes2024)}
               hint={`${formatNumero(u.docentesUniversitario)} docentes · ${formatNumero(u.reinscriptosRegulares2mas)} regulares (2+ materias aprobadas)`}
+            />
+          </div>
+
+          <div className="mt-3 grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <StatCard
+              label="Planta no docente"
+              value={formatNumero(u.personalNoDocente)}
+              hint={
+                u.docentesUniversitario && u.personalNoDocente
+                  ? `1 no docente cada ${(u.docentesUniversitario / u.personalNoDocente).toFixed(1)} docentes universitarios`
+                  : 'Sin dato de personal no docente'
+              }
             />
           </div>
 
@@ -144,11 +166,22 @@ export function Universidad() {
                 </div>
                 <EvolutionChart data={serieEgresados} color="#e4b862" formatValue={(v) => formatNumero(v)} />
               </div>
+              {serieCostoReal.length >= 2 && (
+                <div className="glass rounded-2xl px-5 py-4 sm:col-span-2">
+                  <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
+                    Costo por graduado — pesos constantes de 2024
+                  </div>
+                  <EvolutionChart data={serieCostoReal} color="#ff8a7a" formatValue={(v) => formatMoneda(v)} />
+                  <p className="text-xs text-upl-crema/40 mt-2">
+                    En pesos corrientes de cada año (sin ajustar por inflación) hubiera mostrado{' '}
+                    {serieCostoNominal.length >= 2 &&
+                      `${formatMoneda(serieCostoNominal[0].value)} → ${formatMoneda(serieCostoNominal[serieCostoNominal.length - 1].value)}`}
+                    , una comparación sin sentido dada la inflación acumulada del período — por eso esta ficha usa
+                    siempre pesos constantes de 2024 (deflactados por IPC).
+                  </p>
+                </div>
+              )}
             </div>
-            <p className="text-xs text-upl-crema/40 mt-2">
-              Los montos de presupuesto están expresados en pesos corrientes del año informado (sin ajuste por
-              inflación).
-            </p>
           </div>
         </>
       )}

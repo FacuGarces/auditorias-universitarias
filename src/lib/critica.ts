@@ -40,5 +40,14 @@ export function notasCriticas(u: UniversidadDetalle): string[] {
     )
   }
 
+  if (u.personalNoDocente != null && u.docentesUniversitario) {
+    const ratio = u.personalNoDocente / u.docentesUniversitario
+    if (ratio > 0.4) {
+      notas.push(
+        `Tiene ${formatNumero(u.personalNoDocente)} no docentes cada ${formatNumero(u.docentesUniversitario)} docentes universitarios (1 cada ${(1 / ratio).toFixed(1)}) — una planta administrativa proporcionalmente grande frente a la planta académica.`,
+      )
+    }
+  }
+
   return notas
 }
