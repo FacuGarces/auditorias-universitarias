@@ -43,6 +43,10 @@ const { viewBox, width, height, provincias, pines } = mapaEstatico as {
 }
 
 const BASE_FILL = '#4a5580'
+// El viewBox completo (800 de ancho) reserva mucho mar vacío al este que ningún territorio usa
+// (la costa llega como máximo a ~595). En la vista nacional recortamos ese margen para que el
+// mapa quede pegado al anexo de Capital Federal, sin tocar el sistema de coordenadas compartido.
+const NATIONAL_VIEWBOX = '0 0 620 900'
 const CAPITAL = provincias.find((p) => p.nombre === 'Capital Federal') ?? null
 
 const PIN_R_NACIONAL = 3.4
@@ -293,6 +297,17 @@ function MapaNacional({
   onSelectPin: (u: UniversidadMapa) => void
 }) {
   const [hover, setHover] = useState<UniversidadMapa | null>(null)
+  const [deptoCapital, setDeptoCapital] = useState<string[]>([])
+
+  useEffect(() => {
+    let vigente = true
+    cargarDepartamentos('Capital Federal').then((paths) => {
+      if (vigente) setDeptoCapital(paths)
+    })
+    return () => {
+      vigente = false
+    }
+  }, [])
 
   const capitalVb = useMemo(() => {
     if (!CAPITAL) return null
@@ -305,9 +320,9 @@ function MapaNacional({
 
   return (
     <>
-      <div className="absolute inset-0 flex items-stretch justify-center px-3 pt-24 pb-6 gap-2">
-        <div className="flex-1 flex items-center justify-center min-w-0">
-          <svg viewBox={viewBox} className="w-full h-full max-w-4xl" style={{ overflow: 'visible' }}>
+      <div className="absolute inset-0 flex items-stretch justify-center px-3 pt-24 pb-6 gap-1">
+        <div className="flex-1 flex items-center justify-end min-w-0">
+          <svg viewBox={NATIONAL_VIEWBOX} className="w-full h-full max-w-3xl" style={{ overflow: 'visible' }}>
             {provincias.map((p) => {
               const esCapital = p.nombre === 'Capital Federal'
               return (
@@ -347,7 +362,7 @@ function MapaNacional({
 
         {/* Anexo de Capital Federal: mismo fondo, sin panel ni borde — es una continuación del mapa, no un modal aparte. */}
         {CAPITAL && capitalVb && (
-          <div className="hidden sm:flex flex-col items-stretch w-[24%] max-w-[260px] min-w-[150px] relative pt-1">
+          <div className="hidden sm:flex flex-col items-stretch w-[32%] max-w-[380px] min-w-[190px] relative pt-1">
             <span className="text-upl-crema/60 text-xs font-display font-600 mb-1 text-center">Capital Federal</span>
             <button
               onClick={() => onSelectProvincia(CAPITAL)}
@@ -367,12 +382,15 @@ function MapaNacional({
                   onMouseEnter={(e) => (e.currentTarget as SVGPathElement).setAttribute('fill', '#6a76a8')}
                   onMouseLeave={(e) => (e.currentTarget as SVGPathElement).setAttribute('fill', BASE_FILL)}
                 />
+                {deptoCapital.map((d, i) => (
+                  <path key={i} d={d} fill="none" stroke="rgba(255,255,249,0.3)" strokeWidth={capitalVb.w / 700} style={{ pointerEvents: 'none' }} />
+                ))}
                 {pinesCapital.map((u) => (
                   <circle
                     key={u.id}
                     cx={u.x}
                     cy={u.y}
-                    r={capitalVb.w / 40}
+                    r={capitalVb.w / 90}
                     className={`pin ${!u.tieneFicha ? 'pin-no-data' : ''}`}
                     onClick={(e) => {
                       e.stopPropagation()
