@@ -159,7 +159,9 @@ function VistaProvincia({
   }, [])
 
   function handlePointerDown(e: React.PointerEvent<SVGSVGElement>) {
-    svgRef.current?.setPointerCapture?.(e.pointerId)
+    // Ojo: NO capturamos el puntero acá todavía. Si lo hiciéramos en todo mousedown, en algunos
+    // navegadores el click posterior puede no resolverse igual sobre el path que está debajo del
+    // cursor. Solo capturamos una vez que confirmamos que es un arrastre real (ver handlePointerMove).
     arrastre.current = { x: e.clientX, y: e.clientY, vx: vista.x, vy: vista.y, movido: false }
   }
   function handlePointerMove(e: React.PointerEvent<SVGSVGElement>) {
@@ -170,6 +172,7 @@ function VistaProvincia({
     if (!a.movido) {
       a.movido = true
       setAnimar(false)
+      svg.setPointerCapture?.(e.pointerId)
     }
     const ctm = svg.getScreenCTM()
     if (!ctm) return
@@ -197,6 +200,10 @@ function VistaProvincia({
   // vista.k nunca puede bajar de minK.current, tampoco puede encogerse por debajo del punto de partida.
   const radioPin = radioCreciente(vista.k, minK.current)
   const clipId = `clip-${slug(provincia.nombre)}`
+  // CABA se muestra siempre aislada: ni Buenos Aires ni ninguna otra provincia se dibuja alrededor.
+  // No es "una vecina más" con zoom — es una vista aparte, como pidió el usuario explícitamente.
+  const esAislada = provincia.nombre === 'Capital Federal'
+  const provinciasDeContexto = esAislada ? [provincia] : provincias
 
   return (
     <>
@@ -223,13 +230,14 @@ function VistaProvincia({
               transition: animar ? 'transform 0.7s cubic-bezier(0.16,1,0.3,1)' : 'none',
             }}
           >
-            {provincias.map((p) => (
+            {provinciasDeContexto.map((p) => (
               <path key={`base-${p.nombre}`} d={p.d} fill={BASE_FILL} stroke={BASE_FILL} strokeWidth={3} strokeLinejoin="round" />
             ))}
-            {provincias.map((p) => {
+            {provinciasDeContexto.map((p) => {
               const esActiva = p.nombre === provincia.nombre
               // CABA también es "saltable" como cualquier vecina: un click ahí te lleva directo a su
-              // propia vista de zoom, igual que cualquier otra provincia.
+              // propia vista de zoom, igual que cualquier otra provincia. Si la vista actual es la de
+              // CABA (aislada), acá solo está ella misma, sin vecinas a las que saltar.
               const esSaltable = !esActiva
               return (
                 <path
