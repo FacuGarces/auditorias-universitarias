@@ -65,7 +65,7 @@ function StatCard({
         {label}
       </div>
       <div className={`font-display font-800 text-2xl sm:text-3xl ${alerta ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}>{value}</div>
-      {hint && <div className="text-xs text-upl-crema/55 mt-1">{hint}</div>}
+      {hint && <div className="text-xs text-upl-crema/55 mt-1 line-clamp-3">{hint}</div>}
     </StatCell>
   )
 }
@@ -125,7 +125,7 @@ function StatCardRadial({
           <div className={`font-display font-800 text-2xl sm:text-3xl ${alerta ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}>
             {pct != null ? `${pct}%` : 'S/D'}
           </div>
-          {hint && <div className="text-xs text-upl-crema/55 mt-1">{hint}</div>}
+          {hint && <div className="text-xs text-upl-crema/55 mt-1 line-clamp-3">{hint}</div>}
         </div>
       </div>
     </StatCell>
