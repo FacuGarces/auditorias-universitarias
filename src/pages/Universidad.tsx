@@ -60,6 +60,59 @@ function BarraProgreso({ pct, color, delay = 0 }: { pct: number; color: string; 
   )
 }
 
+function StatCardRadial({
+  label,
+  pct,
+  hint,
+  alerta,
+}: {
+  label: string
+  pct: number | null
+  hint?: string
+  alerta?: boolean
+}) {
+  const r = 26
+  const circ = 2 * Math.PI * r
+  const color = alerta ? '#ff8a7a' : '#facf3b'
+  return (
+    <motion.div
+      variants={statCardVariants}
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+      className={`glass rounded-2xl px-5 py-4 flex items-center gap-4 ${alerta ? 'border-[#e2574c]/50 bg-[#e2574c]/10' : ''}`}
+    >
+      <svg viewBox="0 0 64 64" className="w-16 h-16 shrink-0 -rotate-90">
+        <circle cx="32" cy="32" r={r} fill="none" stroke="currentColor" strokeOpacity={0.15} strokeWidth={7} />
+        {pct != null && (
+          <motion.circle
+            cx="32"
+            cy="32"
+            r={r}
+            fill="none"
+            stroke={color}
+            strokeWidth={7}
+            strokeLinecap="round"
+            strokeDasharray={circ}
+            initial={{ strokeDashoffset: circ }}
+            whileInView={{ strokeDashoffset: circ * (1 - pct / 100) }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          />
+        )}
+      </svg>
+      <div className="min-w-0">
+        <div className={`text-xs uppercase tracking-wide font-semibold mb-1 ${alerta ? 'text-[#ff8a7a]' : 'text-upl-resaltador'}`}>
+          {label}
+        </div>
+        <div className={`font-display font-800 text-2xl sm:text-3xl ${alerta ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}>
+          {pct != null ? `${pct}%` : 'S/D'}
+        </div>
+        {hint && <div className="text-xs text-upl-crema/55 mt-1">{hint}</div>}
+      </div>
+    </motion.div>
+  )
+}
+
 function toSerie(obj: Record<string, number | string> | undefined) {
   if (!obj) return []
   return Object.entries(obj)
@@ -139,11 +192,11 @@ export function Universidad() {
             variants={statGridVariants}
             initial="hidden"
             animate="visible"
-            className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3"
+            className="mt-8 grid gap-3 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]"
           >
-            <StatCard
+            <StatCardRadial
               label="No llega a graduarse"
-              value={u.tasaCohorte != null ? `${Math.round(100 - u.tasaCohorte)}%` : 'S/D'}
+              pct={u.tasaCohorte != null ? Math.round(100 - u.tasaCohorte) : null}
               hint={
                 u.nuevosInscriptos2018
                   ? `Sobre ${formatNumero(u.nuevosInscriptos2018)} inscriptos en 2018, solo ${formatNumero(u.egresados2024)} se graduaron en 2024 (${formatPorcentaje(u.tasaCohorte)})`
@@ -151,12 +204,12 @@ export function Universidad() {
               }
               alerta
             />
-            <StatCard
+            <StatCardRadial
               label="No aprobó ninguna materia"
-              value={
+              pct={
                 u.reinscriptos0Materias != null && u.reinscriptosTotal
-                  ? `${Math.round((u.reinscriptos0Materias / u.reinscriptosTotal) * 100)}%`
-                  : 'S/D'
+                  ? Math.round((u.reinscriptos0Materias / u.reinscriptosTotal) * 100)
+                  : null
               }
               hint={`${formatNumero(u.reinscriptos0Materias)} de ${formatNumero(u.reinscriptosTotal)} reinscriptos, en el último año informado`}
               alerta
@@ -176,14 +229,6 @@ export function Universidad() {
                   : `${formatNumero(u.docentesUniversitario)} docentes · ${formatNumero(u.reinscriptosRegulares2mas)} regulares (2+ materias aprobadas)`
               }
             />
-          </motion.div>
-
-          <motion.div
-            variants={statGridVariants}
-            initial="hidden"
-            animate="visible"
-            className="mt-3 grid grid-cols-2 lg:grid-cols-4 gap-3"
-          >
             <StatCard
               label="Planta no docente"
               value={formatNumero(u.personalNoDocente)}

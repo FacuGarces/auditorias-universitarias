@@ -25,9 +25,10 @@ const METRICAS: Record<
     ordenAsc: false,
   },
   docentes: {
-    label: 'Estudiantes por docente',
-    subtitulo: 'Cantidad de estudiantes 2024 por cada docente universitario. Menor = mejor.',
-    valor: (u) => u.estudiantesPorDocente,
+    label: 'Estudiantes activos por docente',
+    subtitulo:
+      'Estudiantes regulares (2+ materias aprobadas) por cada docente universitario — se excluyen del padrón quienes no son regulares. Menor = mejor.',
+    valor: (u) => u.estudiantesActivosPorDocente,
     formato: (v) => (v == null ? 'S/D' : `${v.toString().replace('.', ',')} x 1`),
     ordenAsc: true,
   },

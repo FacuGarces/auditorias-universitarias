@@ -426,7 +426,17 @@
       "2024": 21111858
     },
     "esKirchnerista": false,
-    "estudiantesActivosPorDocente": 6.1
+    "estudiantesActivosPorDocente": 6.1,
+    "dedicacionDocente": {
+      "excl2017": 663,
+      "excl2023": 717,
+      "semi2017": 1537,
+      "semi2023": 1797,
+      "simple2017": 1209,
+      "simple2023": 1279,
+      "fte2017": 1733.8,
+      "fte2023": 1935.2
+    }
   },
   "unpaz": {
     "nombre": "Universidad Nacional de José C. Paz",
@@ -662,7 +672,17 @@
     },
     "esKirchnerista": true,
     "fundacionLey": "Ley 26.576 (2009, bajo la presidencia de Cristina Fernández de Kirchner)",
-    "estudiantesActivosPorDocente": 6.5
+    "estudiantesActivosPorDocente": 6.5,
+    "dedicacionDocente": {
+      "excl2017": 120,
+      "excl2023": 159,
+      "semi2017": 278,
+      "semi2023": 946,
+      "simple2017": 81,
+      "simple2023": 584,
+      "fte2017": 279.2,
+      "fte2023": 778.0
+    }
   },
   "ungs": {
     "nombre": "Universidad Nacional de General Sarmiento",
@@ -797,7 +817,17 @@
       "2024": 69193383
     },
     "esKirchnerista": false,
-    "estudiantesActivosPorDocente": 5.8
+    "estudiantesActivosPorDocente": 5.8,
+    "dedicacionDocente": {
+      "excl2017": 317,
+      "excl2023": 405,
+      "semi2017": 141,
+      "semi2023": 159,
+      "simple2017": 85,
+      "simple2023": 666,
+      "fte2017": 408.8,
+      "fte2023": 651.0
+    }
   },
   "undav": {
     "nombre": "Universidad Nacional de Avellaneda",
@@ -913,7 +943,17 @@
     },
     "esKirchnerista": true,
     "fundacionLey": "Ley 26.543 (2009, bajo la presidencia de Cristina Fernández de Kirchner)",
-    "estudiantesActivosPorDocente": 5.6
+    "estudiantesActivosPorDocente": 5.6,
+    "dedicacionDocente": {
+      "excl2017": 23,
+      "excl2023": 47,
+      "semi2017": 28,
+      "semi2023": 112,
+      "simple2017": 193,
+      "simple2023": 935,
+      "fte2017": 85.2,
+      "fte2023": 336.8
+    }
   },
   "unso": {
     "nombre": "Universidad Nacional Scalabrini Ortiz",
@@ -1146,7 +1186,17 @@
     "costoPorGraduado": 55747514,
     "estudiantesPorDocente": 21.2,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 7.6
+    "estudiantesActivosPorDocente": 7.6,
+    "dedicacionDocente": {
+      "excl2017": 12,
+      "excl2023": 34,
+      "semi2017": 137,
+      "semi2023": 90,
+      "simple2017": 516,
+      "simple2023": 860,
+      "fte2017": 209.5,
+      "fte2023": 294.0
+    }
   },
   "oeste": {
     "nombre": "Universidad Nacional del Oeste",
@@ -1261,7 +1311,17 @@
     "costoPorGraduado": 182776241,
     "estudiantesPorDocente": 32.0,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 8.3
+    "estudiantesActivosPorDocente": 8.3,
+    "dedicacionDocente": {
+      "excl2017": 10,
+      "excl2023": 47,
+      "semi2017": 49,
+      "semi2023": 128,
+      "simple2017": 329,
+      "simple2023": 399,
+      "fte2017": 116.8,
+      "fte2023": 210.8
+    }
   },
   "chaco_austral": {
     "nombre": "Universidad Nacional del Chaco Austral",
@@ -1388,7 +1448,17 @@
     "costoPorGraduado": 58664676,
     "estudiantesPorDocente": 21.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 5.4
+    "estudiantesActivosPorDocente": 5.4,
+    "dedicacionDocente": {
+      "excl2017": 58,
+      "excl2023": 60,
+      "semi2017": 9,
+      "semi2023": 48,
+      "simple2017": 626,
+      "simple2023": 1121,
+      "fte2017": 219.0,
+      "fte2023": 364.2
+    }
   },
   "rio_negro": {
     "nombre": "Universidad Nacional de Río Negro",
@@ -1635,7 +1705,17 @@
     "costoPorGraduado": 84190394,
     "estudiantesPorDocente": 9.2,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 2.7
+    "estudiantesActivosPorDocente": 2.7,
+    "dedicacionDocente": {
+      "excl2017": 44,
+      "excl2023": 59,
+      "semi2017": 104,
+      "semi2023": 118,
+      "simple2017": 141,
+      "simple2023": 403,
+      "fte2017": 131.2,
+      "fte2023": 218.8
+    }
   },
   "tierra_del_fuego": {
     "nombre": "Universidad Nacional de Tierra del Fuego",
@@ -1740,7 +1820,17 @@
     "costoPorGraduado": 281513228,
     "estudiantesPorDocente": 10.3,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 2.5
+    "estudiantesActivosPorDocente": 2.5,
+    "dedicacionDocente": {
+      "excl2017": 97,
+      "excl2023": 160,
+      "semi2017": 87,
+      "semi2023": 142,
+      "simple2017": 238,
+      "simple2023": 312,
+      "fte2017": 200.0,
+      "fte2023": 309.0
+    }
   },
   "hurlingham": {
     "nombre": "Universidad Nacional de Hurlingham",
@@ -1839,7 +1929,17 @@
     "costoPorGraduado": 29641510,
     "estudiantesPorDocente": 27.7,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 9.3
+    "estudiantesActivosPorDocente": 9.3,
+    "dedicacionDocente": {
+      "excl2017": 7,
+      "excl2023": 49,
+      "semi2017": 28,
+      "semi2023": 49,
+      "simple2017": 337,
+      "simple2023": 1736,
+      "fte2017": 105.2,
+      "fte2023": 507.5
+    }
   },
   "rafaela": {
     "nombre": "Universidad Nacional de Rafaela",
@@ -1932,7 +2032,17 @@
     "costoPorGraduado": 42101218,
     "estudiantesPorDocente": 8.2,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 2.9
+    "estudiantesActivosPorDocente": 2.9,
+    "dedicacionDocente": {
+      "excl2017": 3,
+      "excl2023": 7,
+      "semi2017": 30,
+      "semi2023": 76,
+      "simple2017": 78,
+      "simple2023": 524,
+      "fte2017": 37.5,
+      "fte2023": 176.0
+    }
   },
   "alto_uruguay": {
     "nombre": "Universidad Nacional del Alto Uruguay",
@@ -2148,7 +2258,17 @@
     "costoPorGraduado": 55599845,
     "estudiantesPorDocente": 12.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 4.0
+    "estudiantesActivosPorDocente": 4.0,
+    "dedicacionDocente": {
+      "excl2017": 1,
+      "excl2023": 22,
+      "semi2017": 0,
+      "semi2023": 82,
+      "simple2017": 0,
+      "simple2023": 291,
+      "fte2017": 1.0,
+      "fte2023": 135.8
+    }
   },
   "ezeiza": {
     "nombre": "Universidad Nacional de Ezeiza",
@@ -2340,7 +2460,7 @@
       "simple2017": 3034,
       "simple2023": 3668,
       "fte2017": 905.5,
-      "fte2023": 1029
+      "fte2023": 1029.0
     },
     "estudiantesActivosPorDocente": 4.1
   },
@@ -2780,7 +2900,7 @@
       "semi2023": 163,
       "simple2017": 234,
       "simple2023": 271,
-      "fte2017": 240,
+      "fte2017": 240.0,
       "fte2023": 265.2
     },
     "estudiantesActivosPorDocente": 2.3
@@ -2918,7 +3038,17 @@
     "costoPorGraduado": 91840265,
     "estudiantesPorDocente": 12.2,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 2.9
+    "estudiantesActivosPorDocente": 2.9,
+    "dedicacionDocente": {
+      "excl2017": 566,
+      "excl2023": 602,
+      "semi2017": 896,
+      "semi2023": 1014,
+      "simple2017": 2272,
+      "simple2023": 2959,
+      "fte2017": 1582.0,
+      "fte2023": 1848.8
+    }
   },
   "cordoba": {
     "nombre": "Universidad Nacional de Córdoba",
@@ -3209,8 +3339,8 @@
       "semi2023": 2111,
       "simple2017": 3192,
       "simple2023": 3854,
-      "fte2017": 2640,
-      "fte2023": 2718
+      "fte2017": 2640.0,
+      "fte2023": 2718.0
     },
     "estudiantesActivosPorDocente": 3.1
   },
@@ -3478,7 +3608,17 @@
     "costoPorGraduado": 45025542,
     "estudiantesPorDocente": 11.2,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.4
+    "estudiantesActivosPorDocente": 3.4,
+    "dedicacionDocente": {
+      "excl2017": 194,
+      "excl2023": 159,
+      "semi2017": 931,
+      "semi2023": 995,
+      "simple2017": 2204,
+      "simple2023": 2912,
+      "fte2017": 1210.5,
+      "fte2023": 1384.5
+    }
   },
   "formosa": {
     "nombre": "Universidad Nacional de Formosa",
@@ -3613,7 +3753,17 @@
     "costoPorGraduado": 107339887,
     "estudiantesPorDocente": 12.3,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 2.9
+    "estudiantesActivosPorDocente": 2.9,
+    "dedicacionDocente": {
+      "excl2017": 103,
+      "excl2023": 87,
+      "semi2017": 309,
+      "semi2023": 283,
+      "simple2017": 983,
+      "simple2023": 1027,
+      "fte2017": 503.2,
+      "fte2023": 485.2
+    }
   },
   "jujuy": {
     "nombre": "Universidad Nacional de Jujuy",
@@ -3754,7 +3904,7 @@
       "semi2023": 626,
       "simple2017": 946,
       "simple2023": 1831,
-      "fte2017": 776,
+      "fte2017": 776.0,
       "fte2023": 1045.8
     },
     "estudiantesActivosPorDocente": 3.0
@@ -3892,7 +4042,17 @@
     "costoPorGraduado": 120440036,
     "estudiantesPorDocente": 10.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.1
+    "estudiantesActivosPorDocente": 3.1,
+    "dedicacionDocente": {
+      "excl2017": 269,
+      "excl2023": 278,
+      "semi2017": 361,
+      "semi2023": 359,
+      "simple2017": 1482,
+      "simple2023": 1921,
+      "fte2017": 820.0,
+      "fte2023": 937.8
+    }
   },
   "la_rioja": {
     "nombre": "Universidad Nacional de La Rioja",
@@ -4037,7 +4197,7 @@
       "simple2017": 1489,
       "simple2023": 1500,
       "fte2017": 1123.2,
-      "fte2023": 1081
+      "fte2023": 1081.0
     },
     "estudiantesActivosPorDocente": 4.1
   },
@@ -4174,7 +4334,17 @@
     "costoPorGraduado": 31302344,
     "estudiantesPorDocente": 15.7,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 6.5
+    "estudiantesActivosPorDocente": 6.5,
+    "dedicacionDocente": {
+      "excl2017": 181,
+      "excl2023": 186,
+      "semi2017": 303,
+      "semi2023": 317,
+      "simple2017": 370,
+      "simple2023": 443,
+      "fte2017": 425.0,
+      "fte2023": 455.2
+    }
   },
   "litoral": {
     "nombre": "Universidad Nacional del Litoral",
@@ -4309,7 +4479,17 @@
     "costoPorGraduado": 52820938,
     "estudiantesPorDocente": 13.4,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 4.1
+    "estudiantesActivosPorDocente": 4.1,
+    "dedicacionDocente": {
+      "excl2017": 628,
+      "excl2023": 590,
+      "semi2017": 1059,
+      "semi2023": 1114,
+      "simple2017": 2523,
+      "simple2023": 2959,
+      "fte2017": 1788.2,
+      "fte2023": 1886.8
+    }
   },
   "lomas": {
     "nombre": "Universidad Nacional de Lomas de Zamora",
@@ -4444,7 +4624,17 @@
     "costoPorGraduado": 26194281,
     "estudiantesPorDocente": 12.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 4.3
+    "estudiantesActivosPorDocente": 4.3,
+    "dedicacionDocente": {
+      "excl2017": 126,
+      "excl2023": 129,
+      "semi2017": 140,
+      "semi2023": 214,
+      "simple2017": 3666,
+      "simple2023": 4219,
+      "fte2017": 1112.5,
+      "fte2023": 1290.8
+    }
   },
   "lujan": {
     "nombre": "Universidad Nacional de Luján",
@@ -4714,7 +4904,17 @@
     "costoPorGraduado": 77576680,
     "estudiantesPorDocente": 10.1,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.2
+    "estudiantesActivosPorDocente": 3.2,
+    "dedicacionDocente": {
+      "excl2017": 647,
+      "excl2023": 660,
+      "semi2017": 733,
+      "semi2023": 1004,
+      "simple2017": 3605,
+      "simple2023": 4908,
+      "fte2017": 1914.8,
+      "fte2023": 2389.0
+    }
   },
   "misiones": {
     "nombre": "Universidad Nacional de Misiones",
@@ -4849,7 +5049,17 @@
     "costoPorGraduado": 66772410,
     "estudiantesPorDocente": 16.8,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 4.8
+    "estudiantesActivosPorDocente": 4.8,
+    "dedicacionDocente": {
+      "excl2017": 340,
+      "excl2023": 329,
+      "semi2017": 533,
+      "semi2023": 618,
+      "simple2017": 1188,
+      "simple2023": 1501,
+      "fte2017": 903.5,
+      "fte2023": 1013.2
+    }
   },
   "nordeste": {
     "nombre": "Universidad Nacional del Nordeste",
@@ -4984,7 +5194,17 @@
     "costoPorGraduado": 35706755,
     "estudiantesPorDocente": 17.5,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 5.9
+    "estudiantesActivosPorDocente": 5.9,
+    "dedicacionDocente": {
+      "excl2017": 574,
+      "excl2023": 573,
+      "semi2017": 223,
+      "semi2023": 228,
+      "simple2017": 4200,
+      "simple2023": 4716,
+      "fte2017": 1735.5,
+      "fte2023": 1866.0
+    }
   },
   "unnoba": {
     "nombre": "Universidad Nacional del Noroeste de la Pcia. de Bs. As.",
@@ -5254,7 +5474,17 @@
     "costoPorGraduado": 161921854,
     "estudiantesPorDocente": 14.2,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.1
+    "estudiantesActivosPorDocente": 3.1,
+    "dedicacionDocente": {
+      "excl2017": 223,
+      "excl2023": 229,
+      "semi2017": 305,
+      "semi2023": 348,
+      "simple2017": 753,
+      "simple2023": 991,
+      "fte2017": 563.8,
+      "fte2023": 650.8
+    }
   },
   "patagonia_sjb": {
     "nombre": "Universidad Nacional de la Patagonia San Juan Bosco",
@@ -5581,7 +5811,17 @@
     "costoPorGraduado": 63678161,
     "estudiantesPorDocente": 25.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 7.4
+    "estudiantesActivosPorDocente": 7.4,
+    "dedicacionDocente": {
+      "excl2017": 327,
+      "excl2023": 386,
+      "semi2017": 268,
+      "semi2023": 301,
+      "simple2017": 548,
+      "simple2023": 615,
+      "fte2017": 598.0,
+      "fte2023": 690.2
+    }
   },
   "rio_cuarto": {
     "nombre": "Universidad Nacional de Río Cuarto",
@@ -6007,7 +6247,17 @@
     "costoPorGraduado": 100565675,
     "estudiantesPorDocente": 21.8,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 5.3
+    "estudiantesActivosPorDocente": 5.3,
+    "dedicacionDocente": {
+      "excl2017": 395,
+      "excl2023": 397,
+      "semi2017": 892,
+      "semi2023": 941,
+      "simple2017": 1148,
+      "simple2023": 1214,
+      "fte2017": 1128.0,
+      "fte2023": 1171.0
+    }
   },
   "san_antonio_areco": {
     "nombre": "Universidad Nacional de San Antonio de Areco",
@@ -6095,7 +6345,17 @@
     "costoPorGraduado": 33161036,
     "estudiantesPorDocente": 13.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.5
+    "estudiantesActivosPorDocente": 3.5,
+    "dedicacionDocente": {
+      "excl2017": 2,
+      "excl2023": 15,
+      "semi2017": 6,
+      "semi2023": 18,
+      "simple2017": 80,
+      "simple2023": 162,
+      "fte2017": 25.0,
+      "fte2023": 64.5
+    }
   },
   "san_juan": {
     "nombre": "Universidad Nacional de San Juan",
@@ -6240,7 +6500,7 @@
       "simple2017": 1891,
       "simple2023": 2312,
       "fte2017": 1921.2,
-      "fte2023": 1990
+      "fte2023": 1990.0
     },
     "estudiantesActivosPorDocente": 2.9
   },
@@ -6377,7 +6637,17 @@
     "costoPorGraduado": 127054774,
     "estudiantesPorDocente": 9.6,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.1
+    "estudiantesActivosPorDocente": 3.1,
+    "dedicacionDocente": {
+      "excl2017": 956,
+      "excl2023": 1179,
+      "semi2017": 577,
+      "semi2023": 599,
+      "simple2017": 380,
+      "simple2023": 405,
+      "fte2017": 1339.5,
+      "fte2023": 1579.8
+    }
   },
   "san_martin": {
     "nombre": "Universidad Nacional de San Martín",
@@ -6512,7 +6782,17 @@
     "costoPorGraduado": 50655109,
     "estudiantesPorDocente": 9.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.8
+    "estudiantesActivosPorDocente": 3.8,
+    "dedicacionDocente": {
+      "excl2017": 122,
+      "excl2023": 141,
+      "semi2017": 277,
+      "semi2023": 276,
+      "simple2017": 1591,
+      "simple2023": 2257,
+      "fte2017": 658.2,
+      "fte2023": 843.2
+    }
   },
   "santiago": {
     "nombre": "Universidad Nacional de Santiago del Estero",
@@ -6647,7 +6927,17 @@
     "costoPorGraduado": 43417144,
     "estudiantesPorDocente": 17.7,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 5.5
+    "estudiantesActivosPorDocente": 5.5,
+    "dedicacionDocente": {
+      "excl2017": 352,
+      "excl2023": 361,
+      "semi2017": 303,
+      "semi2023": 407,
+      "simple2017": 570,
+      "simple2023": 866,
+      "fte2017": 646.0,
+      "fte2023": 781.0
+    }
   },
   "sur": {
     "nombre": "Universidad Nacional del Sur",
@@ -6782,7 +7072,17 @@
     "costoPorGraduado": 87127870,
     "estudiantesPorDocente": 9.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.3
+    "estudiantesActivosPorDocente": 3.3,
+    "dedicacionDocente": {
+      "excl2017": 633,
+      "excl2023": 605,
+      "semi2017": 316,
+      "semi2023": 361,
+      "simple2017": 2180,
+      "simple2023": 2612,
+      "fte2017": 1336.0,
+      "fte2023": 1438.5
+    }
   },
   "utn": {
     "nombre": "Universidad Tecnológica Nacional",
@@ -7035,7 +7335,17 @@
     "costoPorGraduado": 24600911,
     "estudiantesPorDocente": 14.3,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 6.4
+    "estudiantesActivosPorDocente": 6.4,
+    "dedicacionDocente": {
+      "excl2017": 227,
+      "excl2023": 284,
+      "semi2017": 316,
+      "semi2023": 386,
+      "simple2017": 396,
+      "simple2023": 430,
+      "fte2017": 484.0,
+      "fte2023": 584.5
+    }
   },
   "tucuman": {
     "nombre": "Universidad Nacional de Tucumán",
@@ -7180,7 +7490,7 @@
       "simple2017": 1765,
       "simple2023": 2048,
       "fte2017": 2944.8,
-      "fte2023": 3127
+      "fte2023": 3127.0
     },
     "estudiantesActivosPorDocente": 5.4
   },
