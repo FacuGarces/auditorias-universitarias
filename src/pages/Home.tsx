@@ -228,9 +228,9 @@ function VistaProvincia({
             ))}
             {provincias.map((p) => {
               const esActiva = p.nombre === provincia.nombre
-              // Cava se ve como vecina de Buenos Aires pero se abre siempre desde su propio anexo,
-              // nunca "saltando" directamente entre provincias — evita confundirla con una más.
-              const esSaltable = !esActiva && p.nombre !== 'Capital Federal'
+              // CABA también es "saltable" como cualquier vecina: un click ahí te lleva directo a su
+              // propia vista de zoom, igual que cualquier otra provincia.
+              const esSaltable = !esActiva
               return (
                 <path
                   key={p.nombre}
@@ -381,27 +381,21 @@ function MapaNacional({
             {provincias.map((p) => (
               <path key={`base-${p.nombre}`} d={p.d} fill={BASE_FILL} stroke={BASE_FILL} strokeWidth={3} strokeLinejoin="round" />
             ))}
-            {provincias.map((p) => {
-              const esCapital = p.nombre === 'Capital Federal'
-              return (
-                <path
-                  key={p.nombre}
-                  d={p.d}
-                  className={esCapital ? '' : 'province-shape'}
-                  fill={BASE_FILL}
-                  stroke="rgba(255,255,249,0.65)"
-                  strokeWidth={0.8}
-                  style={{ pointerEvents: esCapital ? 'none' : 'auto' }}
-                  onClick={() => onSelectProvincia(p)}
-                  onMouseEnter={(e) => {
-                    if (!esCapital) (e.currentTarget as SVGPathElement).setAttribute('fill', '#6a76a8')
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!esCapital) (e.currentTarget as SVGPathElement).setAttribute('fill', BASE_FILL)
-                  }}
-                />
-              )
-            })}
+            {/* CABA también es clickeable acá como cualquier otra provincia: te manda directo a su
+                propia vista de zoom (además del acceso rápido desde el anexo de al lado). */}
+            {provincias.map((p) => (
+              <path
+                key={p.nombre}
+                d={p.d}
+                className="province-shape"
+                fill={BASE_FILL}
+                stroke="rgba(255,255,249,0.65)"
+                strokeWidth={0.8}
+                onClick={() => onSelectProvincia(p)}
+                onMouseEnter={(e) => (e.currentTarget as SVGPathElement).setAttribute('fill', '#6a76a8')}
+                onMouseLeave={(e) => (e.currentTarget as SVGPathElement).setAttribute('fill', BASE_FILL)}
+              />
+            ))}
 
             {pines.map((u) => (
               <circle
@@ -421,8 +415,7 @@ function MapaNacional({
 
         {/* Anexo de Capital Federal: mismo fondo, sin panel ni borde — es una continuación del mapa, no un modal aparte. */}
         {CAPITAL && capitalVb && (
-          <div className="hidden sm:flex flex-col items-stretch w-[32%] max-w-[380px] min-w-[190px] relative pt-1">
-            <span className="text-upl-crema/60 text-xs font-display font-600 mb-1 text-center">Capital Federal</span>
+          <div className="hidden sm:flex flex-col items-stretch w-[32%] max-w-[380px] min-w-[190px] relative">
             <button
               onClick={() => onSelectProvincia(CAPITAL)}
               className="flex-1 cursor-pointer bg-transparent border-0 p-0"
