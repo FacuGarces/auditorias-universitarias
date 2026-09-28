@@ -5,7 +5,6 @@ import { UniversidadBadge } from '../components/UniversidadBadge'
 import { EvolutionChart } from '../components/EvolutionChart'
 import { notasCriticas } from '../lib/critica'
 import { formatMoneda, formatNumero, formatPorcentaje, ubicacion } from '../lib/format'
-import { desgloseMatricula } from '../lib/matricula'
 
 const statGridVariants = {
   hidden: {},
@@ -159,7 +158,6 @@ export function Universidad() {
   const serieEstudiantes = toSerie(u.serieEstudiantes)
   const serieEgresados = toSerie(u.serieEgresados)
   const serieIngresantes = toSerie(u.serieNuevosInscriptos)
-  const desglose = desgloseMatricula(u)
   const serieCohorte = u.serieTasaCohorte
     ? Object.entries(u.serieTasaCohorte)
         .map(([label, value]) => ({ label, value }))
@@ -228,12 +226,12 @@ export function Universidad() {
             />
             <StatCardRadial
               label="No aprobó ninguna materia"
-              pct={desglose ? Math.round((desglose.cero / desglose.total) * 100) : null}
-              hint={
-                desglose
-                  ? `${formatNumero(desglose.cero)} de ${formatNumero(desglose.total)} estudiantes matriculados — incluye ${formatNumero(u.reinscriptos0Materias)} reinscriptos que cursaron y no aprobaron nada, más ${formatNumero(desglose.ingresantesNuevos)} ingresantes nuevos que recién empiezan`
-                  : undefined
+              pct={
+                u.reinscriptos0Materias != null && u.reinscriptosTotal
+                  ? Math.round((u.reinscriptos0Materias / u.reinscriptosTotal) * 100)
+                  : null
               }
+              hint={`${formatNumero(u.reinscriptos0Materias)} de ${formatNumero(u.reinscriptosTotal)} reinscriptos, en el último año informado`}
               alerta
             />
             <StatCard
@@ -262,18 +260,21 @@ export function Universidad() {
             />
           </motion.div>
 
-          {desglose && (
+          {u.reinscriptosTotal != null && u.reinscriptosRegulares2mas != null && u.reinscriptos0Materias != null && (
             <motion.div {...revealProps} className="mt-3 glass rounded-2xl px-5 py-4">
               <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1">
-                Quiénes aprobaron materias sobre el total de la matrícula
+                Quiénes son "activos" sobre el total de la matrícula
               </div>
               <p className="text-xs text-upl-crema/50 mb-3">
-                De {formatNumero(desglose.total)} estudiantes totales en 2024, {formatNumero(desglose.ingresantesNuevos)}{' '}
-                son ingresantes nuevos de ese año — por recién haber empezado, cuentan igual que quien cursó todo el
-                año y no aprobó nada: ambos suman al bucket de "0 materias".
+                De {formatNumero(u.estudiantes2024)} estudiantes totales en 2024, {formatNumero(u.reinscriptosTotal)}{' '}
+                ya venían cursando (reinscriptos) — el resto son ingresantes nuevos de ese año, todavía sin
+                materias que evaluar.
               </p>
               {(() => {
-                const { total, regulares, unaMateria, cero } = desglose
+                const total = u.reinscriptosTotal!
+                const regulares = u.reinscriptosRegulares2mas!
+                const cero = u.reinscriptos0Materias!
+                const unaMateria = Math.max(total - regulares - cero, 0)
                 const pct = (n: number) => Math.round((n / total) * 100)
                 return (
                   <>

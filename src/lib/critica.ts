@@ -1,6 +1,5 @@
 import type { UniversidadDetalle } from '../types'
 import { formatMoneda, formatNumero } from './format'
-import { desgloseMatricula } from './matricula'
 
 /**
  * Notas generadas automáticamente a partir de los datos crudos, con foco en las
@@ -26,12 +25,11 @@ export function notasCriticas(u: UniversidadDetalle): string[] {
     )
   }
 
-  const desglose = desgloseMatricula(u)
-  if (desglose) {
-    const pct = Math.round((desglose.cero / desglose.total) * 100)
+  if (u.reinscriptos0Materias != null && u.reinscriptosTotal) {
+    const pct = Math.round((u.reinscriptos0Materias / u.reinscriptosTotal) * 100)
     if (pct >= 20) {
       notas.push(
-        `${pct}% de la matrícula total (${formatNumero(desglose.cero)} personas) no aprobó ni una sola materia en el último año informado — entre reinscriptos que cursaron sin aprobar nada e ingresantes nuevos que recién empiezan.`,
+        `${pct}% de quienes siguen cursando (${formatNumero(u.reinscriptos0Materias)} personas) no aprobó ni una sola materia en el último año informado.`,
       )
     }
   }
