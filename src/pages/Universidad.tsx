@@ -127,7 +127,11 @@ export function Universidad() {
             <StatCard
               label="Matrícula 2024"
               value={formatNumero(u.estudiantes2024)}
-              hint={`${formatNumero(u.docentesUniversitario)} docentes · ${formatNumero(u.reinscriptosRegulares2mas)} regulares (2+ materias aprobadas)`}
+              hint={
+                u.estudiantesActivosPorDocente != null
+                  ? `${formatNumero(u.docentesUniversitario)} docentes · ${u.estudiantesActivosPorDocente} activos por docente (vs. ${u.estudiantesPorDocente} sobre el total)`
+                  : `${formatNumero(u.docentesUniversitario)} docentes · ${formatNumero(u.reinscriptosRegulares2mas)} regulares (2+ materias aprobadas)`
+              }
             />
           </div>
 
@@ -178,6 +182,61 @@ export function Universidad() {
                       <span className="flex items-center gap-1.5">
                         <span className="w-2.5 h-2.5 rounded-full bg-[#e2574c] shrink-0" />
                         0 materias: {pct(cero)}% ({formatNumero(cero)})
+                      </span>
+                    </div>
+                  </>
+                )
+              })()}
+            </div>
+          )}
+
+          {u.dedicacionDocente && (
+            <div className="mt-3 glass rounded-2xl px-5 py-4">
+              <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1">
+                Cargos docentes por dedicación — 2017 vs. 2023
+              </div>
+              {(() => {
+                const d = u.dedicacionDocente!
+                const total2017 = d.excl2017 + d.semi2017 + d.simple2017
+                const total2023 = d.excl2023 + d.semi2023 + d.simple2023
+                const varCargos = ((total2023 - total2017) / total2017) * 100
+                const varFte = ((d.fte2023 - d.fte2017) / d.fte2017) * 100
+                const bar = (excl: number, semi: number, simple: number, total: number) => (
+                  <div className="flex h-3 rounded-full overflow-hidden bg-upl-principal/40">
+                    <div style={{ width: `${(excl / total) * 100}%` }} className="bg-[#8fd19e]" title="Exclusiva" />
+                    <div style={{ width: `${(semi / total) * 100}%` }} className="bg-upl-resaltador" title="Semiexclusiva" />
+                    <div style={{ width: `${(simple / total) * 100}%` }} className="bg-[#e2574c]" title="Simple" />
+                  </div>
+                )
+                return (
+                  <>
+                    <p className="text-xs text-upl-crema/50 mb-3">
+                      Los cargos "Simple" (menor carga horaria) crecieron de {formatNumero(d.simple2017)} a{' '}
+                      {formatNumero(d.simple2023)}; los "Exclusiva" (dedicación completa), de{' '}
+                      {formatNumero(d.excl2017)} a {formatNumero(d.excl2023)}. Los cargos totales crecieron{' '}
+                      {varCargos >= 0 ? '+' : ''}
+                      {varCargos.toFixed(1)}%, pero el equivalente a tiempo completo (FTE, pondera por dedicación)
+                      solo {varFte >= 0 ? '+' : ''}
+                      {varFte.toFixed(1)}%.
+                    </p>
+                    <div className="grid grid-cols-[3rem_1fr] items-center gap-x-3 gap-y-2">
+                      <span className="text-xs text-upl-crema/50">2017</span>
+                      {bar(d.excl2017, d.semi2017, d.simple2017, total2017)}
+                      <span className="text-xs text-upl-crema/50">2023</span>
+                      {bar(d.excl2023, d.semi2023, d.simple2023, total2023)}
+                    </div>
+                    <div className="flex flex-wrap gap-x-5 gap-y-1 mt-2.5 text-xs text-upl-crema/70">
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#8fd19e] shrink-0" />
+                        Exclusiva
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-upl-resaltador shrink-0" />
+                        Semiexclusiva
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#e2574c] shrink-0" />
+                        Simple
                       </span>
                     </div>
                   </>

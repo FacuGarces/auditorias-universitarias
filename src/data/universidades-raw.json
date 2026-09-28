@@ -11,7 +11,9 @@
     "inscriptos_ref_year": 2017,
     "notas": [
       "El Ciclo Básico Común (CBC) funciona como un embudo antes de pisar la facultad: buena parte de la deserción temprana queda invisibilizada ahí, antes de sumarse a las estadísticas de abandono de cada carrera.",
-      "Sostiene una planta de 24.158 docentes universitarios —la más grande del sistema— para un resultado de egreso que ronda 1 de cada 3 inscriptos."
+      "Sostiene una planta de 24.158 docentes universitarios —la más grande del sistema— para un resultado de egreso que ronda 1 de cada 3 inscriptos.",
+      "Los cargos de dedicación Exclusiva y Semiexclusiva CAYERON en términos absolutos (-8% y -9%) mientras Simple creció +12%.",
+      "El crecimiento de planta docente que muestra el número bruto de cargos (+9%) es principalmente de baja dedicación horaria; el FTE ponderado creció solo +5%."
     ],
     "estudiantes2023": 326421,
     "docentesUniversitario": 24136,
@@ -131,7 +133,18 @@
       "2023": 13761484,
       "2024": 29560917
     },
-    "esKirchnerista": false
+    "esKirchnerista": false,
+    "dedicacionDocente": {
+      "excl2017": 2152,
+      "excl2023": 1974,
+      "semi2017": 2619,
+      "semi2023": 2389,
+      "simple2017": 26081,
+      "simple2023": 29128,
+      "fte2017": 9981.8,
+      "fte2023": 10450.5
+    },
+    "estudiantesActivosPorDocente": 5.8
   },
   "unlp": {
     "nombre": "Universidad Nacional de La Plata",
@@ -145,7 +158,9 @@
     "inscriptos_ref_year": 2017,
     "notas": [
       "Segunda universidad nacional en tamaño: ejecutó más de $92.800 millones en 2024 sin que la tasa de egreso logre despegar del 26-28% en los últimos cinco años.",
-      "El formato de sedes distribuidas por todo el partido de La Plata dificulta un seguimiento centralizado del rendimiento académico."
+      "El formato de sedes distribuidas por todo el partido de La Plata dificulta un seguimiento centralizado del rendimiento académico.",
+      "Patrón de caída de egresados repartido en cinco ramas distintas (entre -8% y -55%): sugiere un problema institucional general, no de una sola facultad.",
+      "Cargos docentes crecieron +14% (FTE ponderado +11%) mientras los egresados totales cayeron -8%."
     ],
     "estudiantes2023": 116182,
     "docentesUniversitario": 13162,
@@ -265,7 +280,18 @@
       "2023": 14289642,
       "2024": 34083964
     },
-    "esKirchnerista": false
+    "esKirchnerista": false,
+    "dedicacionDocente": {
+      "excl2017": 1700,
+      "excl2023": 1740,
+      "semi2017": 2863,
+      "semi2023": 3062,
+      "simple2017": 12815,
+      "simple2023": 15075,
+      "fte2017": 6335.2,
+      "fte2023": 7039.8
+    },
+    "estudiantesActivosPorDocente": 3.8
   },
   "unlam": {
     "nombre": "Universidad Nacional de La Matanza",
@@ -399,7 +425,8 @@
       "2023": 10272833,
       "2024": 21111858
     },
-    "esKirchnerista": false
+    "esKirchnerista": false,
+    "estudiantesActivosPorDocente": 6.1
   },
   "unpaz": {
     "nombre": "Universidad Nacional de José C. Paz",
@@ -514,7 +541,8 @@
       "2024": 18475317
     },
     "esKirchnerista": true,
-    "fundacionLey": "Ley 26.577 (2009, bajo la presidencia de Cristina Fernández de Kirchner)"
+    "fundacionLey": "Ley 26.577 (2009, bajo la presidencia de Cristina Fernández de Kirchner)",
+    "estudiantesActivosPorDocente": 8.3
   },
   "jauretche": {
     "nombre": "Universidad Nacional Arturo Jauretche",
@@ -633,7 +661,8 @@
       "2024": 26675779
     },
     "esKirchnerista": true,
-    "fundacionLey": "Ley 26.576 (2009, bajo la presidencia de Cristina Fernández de Kirchner)"
+    "fundacionLey": "Ley 26.576 (2009, bajo la presidencia de Cristina Fernández de Kirchner)",
+    "estudiantesActivosPorDocente": 6.5
   },
   "ungs": {
     "nombre": "Universidad Nacional de General Sarmiento",
@@ -767,7 +796,8 @@
       "2023": 81100786,
       "2024": 69193383
     },
-    "esKirchnerista": false
+    "esKirchnerista": false,
+    "estudiantesActivosPorDocente": 5.8
   },
   "undav": {
     "nombre": "Universidad Nacional de Avellaneda",
@@ -882,7 +912,8 @@
       "2024": 29647468
     },
     "esKirchnerista": true,
-    "fundacionLey": "Ley 26.543 (2009, bajo la presidencia de Cristina Fernández de Kirchner)"
+    "fundacionLey": "Ley 26.543 (2009, bajo la presidencia de Cristina Fernández de Kirchner)",
+    "estudiantesActivosPorDocente": 5.6
   },
   "unso": {
     "nombre": "Universidad Nacional Scalabrini Ortiz",
@@ -962,7 +993,8 @@
       "2024": 10351133
     },
     "esKirchnerista": true,
-    "fundacionLey": "Ley 27.212 (2015, bajo la presidencia de Cristina Fernández de Kirchner)"
+    "fundacionLey": "Ley 27.212 (2015, bajo la presidencia de Cristina Fernández de Kirchner)",
+    "estudiantesActivosPorDocente": 5.2
   },
   "undelta": {
     "nombre": "Universidad Nacional del Delta",
@@ -1113,7 +1145,8 @@
     },
     "costoPorGraduado": 55747514,
     "estudiantesPorDocente": 21.2,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 7.6
   },
   "oeste": {
     "nombre": "Universidad Nacional del Oeste",
@@ -1227,7 +1260,8 @@
     },
     "costoPorGraduado": 182776241,
     "estudiantesPorDocente": 32.0,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 8.3
   },
   "chaco_austral": {
     "nombre": "Universidad Nacional del Chaco Austral",
@@ -1353,7 +1387,8 @@
     },
     "costoPorGraduado": 58664676,
     "estudiantesPorDocente": 21.9,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 5.4
   },
   "rio_negro": {
     "nombre": "Universidad Nacional de Río Negro",
@@ -1368,7 +1403,9 @@
     "fundacionLey": "Ley 26.330 (sancionada y promulgada el 19/12/2007, primera ley de creación universitaria de Cristina Fernández de Kirchner)",
     "notas": [
       "Primera universidad creada por ley durante la presidencia de Cristina Fernández de Kirchner, con sedes distribuidas en Viedma, Bariloche y General Roca.",
-      "Poco más de un tercio de sus reinscriptos (35,8%) no aprobó ni una materia en el último año informado, y solo 14,7% de los inscriptos se gradúa dentro del plazo de referencia."
+      "Poco más de un tercio de sus reinscriptos (35,8%) no aprobó ni una materia en el último año informado, y solo 14,7% de los inscriptos se gradúa dentro del plazo de referencia.",
+      "Seleccionada por fragmentación académica: 53 carreras reales (42 de grado + 11 tecnicaturas de ciclo corto) con tasas de egreso por disciplina muy bajas (1% a 4%) en Arquitectura y Diseño, Ingeniería, Informática y Economía y Administración, pese a matrícula creciente.",
+      "Cargos docentes crecieron +37,9% en términos absolutos, pero el FTE ponderado por dedicación solo +24,3%: buena parte del crecimiento es en cargos Simple (914 a 1.406, +54%), no Exclusiva (+0,7%)."
     ],
     "serieEstudiantes": {
       "2009": 1622,
@@ -1479,7 +1516,18 @@
     },
     "costoPorGraduado": 87883151,
     "estudiantesPorDocente": 11.5,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 141,
+      "excl2023": 142,
+      "semi2017": 184,
+      "semi2023": 160,
+      "simple2017": 914,
+      "simple2023": 1406,
+      "fte2017": 461.5,
+      "fte2023": 573.5
+    },
+    "estudiantesActivosPorDocente": 4.1
   },
   "villa_mercedes": {
     "nombre": "Universidad Nacional de Villa Mercedes",
@@ -1586,7 +1634,8 @@
     },
     "costoPorGraduado": 84190394,
     "estudiantesPorDocente": 9.2,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 2.7
   },
   "tierra_del_fuego": {
     "nombre": "Universidad Nacional de Tierra del Fuego",
@@ -1690,7 +1739,8 @@
     },
     "costoPorGraduado": 281513228,
     "estudiantesPorDocente": 10.3,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 2.5
   },
   "hurlingham": {
     "nombre": "Universidad Nacional de Hurlingham",
@@ -1788,7 +1838,8 @@
     },
     "costoPorGraduado": 29641510,
     "estudiantesPorDocente": 27.7,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 9.3
   },
   "rafaela": {
     "nombre": "Universidad Nacional de Rafaela",
@@ -1880,7 +1931,8 @@
     },
     "costoPorGraduado": 42101218,
     "estudiantesPorDocente": 8.2,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 2.9
   },
   "alto_uruguay": {
     "nombre": "Universidad Nacional del Alto Uruguay",
@@ -1956,7 +2008,8 @@
     },
     "costoPorGraduado": 147816064,
     "estudiantesPorDocente": 13.8,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 5.1
   },
   "comechingones": {
     "nombre": "Universidad Nacional de los Comechingones",
@@ -2017,7 +2070,8 @@
     },
     "costoPorGraduado": 233838706,
     "estudiantesPorDocente": 13.9,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 1.8
   },
   "guillermo_brown": {
     "nombre": "Universidad Nacional Guillermo Brown",
@@ -2093,7 +2147,8 @@
     },
     "costoPorGraduado": 55599845,
     "estudiantesPorDocente": 12.9,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 4.0
   },
   "ezeiza": {
     "nombre": "Universidad Nacional de Ezeiza",
@@ -2165,7 +2220,9 @@
     "esKirchnerista": true,
     "notas": [
       "Creada por Ley 26.997 (2014, bajo la presidencia de Cristina Fernández de Kirchner), transformando el preexistente Instituto Universitario Nacional del Arte (IUNA, 1996).",
-      "De cada 100 personas que se inscribieron, 99 no llegaron a graduarse dentro del plazo de referencia de 6 años (1.4% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 99 no llegaron a graduarse dentro del plazo de referencia de 6 años (1.4% de tasa de egreso).",
+      "Ciencias Humanas (única rama) pasó de 744 a 96 egresados (-87%) con matrícula creciendo +14% y cargos docentes +17%.",
+      "Educación tiene 0 egresados en 2017 y en 2023 pese a tener estudiantes activos reportados en ambas mediciones."
     ],
     "serieEstudiantes": {
       "2007": 16867,
@@ -2274,7 +2331,18 @@
     },
     "costoPorGraduado": 667316992,
     "estudiantesPorDocente": 10.5,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 32,
+      "excl2023": 29,
+      "semi2017": 230,
+      "semi2023": 166,
+      "simple2017": 3034,
+      "simple2023": 3668,
+      "fte2017": 905.5,
+      "fte2023": 1029
+    },
+    "estudiantesActivosPorDocente": 4.1
   },
   "catamarca": {
     "nombre": "Universidad Nacional de Catamarca",
@@ -2289,7 +2357,9 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 19.832 (1972), parte del \"Plan Taquini\" de expansión universitaria del gobierno de facto.",
-      "De cada 100 personas que se inscribieron, 82 no llegaron a graduarse dentro del plazo de referencia de 6 años (18.3% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 82 no llegaron a graduarse dentro del plazo de referencia de 6 años (18.3% de tasa de egreso).",
+      "La universidad más fragmentada del grupo: unas 80 carreras reales en 7 facultades (incluye una Escuela de Arqueología con 3 licenciaturas propias), con 12 disciplinas anómalas detectadas, la mayor cantidad de las 5 seleccionadas.",
+      "Derecho y Economía y Administración muestran matrícula creciente (1.416 a 1.718 y 1.509 a 2.243 estudiantes) con tasas de egreso de apenas 1% a 3%. Ciencias del Suelo cae -93% en egresados (43 a 3)."
     ],
     "serieEstudiantes": {
       "2007": 11608,
@@ -2408,7 +2478,18 @@
     },
     "costoPorGraduado": 97014091,
     "estudiantesPorDocente": 12.5,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 309,
+      "excl2023": 304,
+      "semi2017": 452,
+      "semi2023": 454,
+      "simple2017": 543,
+      "simple2023": 745,
+      "fte2017": 670.8,
+      "fte2023": 717.2
+    },
+    "estudiantesActivosPorDocente": 3.4
   },
   "unicen": {
     "nombre": "Universidad Nacional del Centro de la Pcia. de Bs. As.",
@@ -2423,7 +2504,9 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 20.753 (1974), sobre la base de la Universidad de Tandil, el Instituto Universitario de Olavarría y el Departamento de Agronomía de Azul.",
-      "34% de quienes siguen cursando no aprobó ni una sola materia en el último año informado."
+      "34% de quienes siguen cursando no aprobó ni una sola materia en el último año informado.",
+      "Oferta muy fragmentada por sede (Tandil, Olavarría, Azul, Quequén): cerca de 70 carreras reales distintas en el listado oficial, con 10 disciplinas anómalas detectadas, dos con 0 egresados en 2023 (Física y Otras Ciencias Aplicadas).",
+      "Cargos docentes crecieron +24,8% en términos absolutos, con un FTE ponderado algo menor (+19,3%): la brecha es más chica que en otras universidades del grupo."
     ],
     "serieEstudiantes": {
       "2007": 10937,
@@ -2542,7 +2625,18 @@
     },
     "costoPorGraduado": 71223875,
     "estudiantesPorDocente": 8.3,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 559,
+      "excl2023": 612,
+      "semi2017": 415,
+      "semi2023": 517,
+      "simple2017": 1638,
+      "simple2023": 2130,
+      "fte2017": 1176,
+      "fte2023": 1403
+    },
+    "estudiantesActivosPorDocente": 3.2
   },
   "chilecito": {
     "nombre": "Universidad Nacional de Chilecito",
@@ -2557,7 +2651,9 @@
     "esKirchnerista": true,
     "notas": [
       "Creada por Ley 25.813 (2003, bajo la presidencia de Néstor Kirchner), sobre la base de la sede de Chilecito de la UNLaR.",
-      "De cada 100 personas que se inscribieron, 90 no llegaron a graduarse dentro del plazo de referencia de 6 años (9.9% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 90 no llegaron a graduarse dentro del plazo de referencia de 6 años (9.9% de tasa de egreso).",
+      "Segunda universidad estatal de la provincia de La Rioja (junto a UNLaR), con 25 carreras reales en 4 escuelas. Educación pasa de 61 a 7 egresados (-88,5%) pese a crecer de 710 a 873 estudiantes.",
+      "A nivel institución, los Nuevos Inscriptos crecieron +71,6% (659 a 1.131) mientras los Egresados totales cayeron -40,2% (112 a 67): una divergencia fuerte entre entrada y salida del sistema."
     ],
     "serieEstudiantes": {
       "2007": 1337,
@@ -2676,7 +2772,18 @@
     },
     "costoPorGraduado": 214995183,
     "estudiantesPorDocente": 8.2,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 92,
+      "excl2023": 116,
+      "semi2017": 179,
+      "semi2023": 163,
+      "simple2017": 234,
+      "simple2023": 271,
+      "fte2017": 240,
+      "fte2023": 265.2
+    },
+    "estudiantesActivosPorDocente": 2.3
   },
   "comahue": {
     "nombre": "Universidad Nacional del Comahue",
@@ -2810,7 +2917,8 @@
     },
     "costoPorGraduado": 91840265,
     "estudiantesPorDocente": 12.2,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 2.9
   },
   "cordoba": {
     "nombre": "Universidad Nacional de Córdoba",
@@ -2825,7 +2933,9 @@
     "esKirchnerista": false,
     "notas": [
       "Fundada en 1613 como Colegio Máximo jesuita (la más antigua del país), nacionalizada en 1854.",
-      "De cada 100 personas que se inscribieron, 79 no llegaron a graduarse dentro del plazo de referencia de 6 años (21.0% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 79 no llegaron a graduarse dentro del plazo de referencia de 6 años (21.0% de tasa de egreso).",
+      "Caída real en Ciencias Sociales: 668 egresados menos (-29,8%), con Economía y Administración como la disciplina más afectada (-52,7%).",
+      "El colapso a cero de la categoría Sin Rama en Nuevos Inscriptos es probablemente reclasificación editorial del anuario, no una caída real."
     ],
     "serieEstudiantes": {
       "2007": 105162,
@@ -2944,7 +3054,18 @@
     },
     "costoPorGraduado": 60316712,
     "estudiantesPorDocente": 19.4,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 1292,
+      "excl2023": 1391,
+      "semi2017": 3694,
+      "semi2023": 4045,
+      "simple2017": 5866,
+      "simple2023": 7249,
+      "fte2017": 4605.5,
+      "fte2023": 5225.8
+    },
+    "estudiantesActivosPorDocente": 6.1
   },
   "cuyo": {
     "nombre": "Universidad Nacional de Cuyo",
@@ -2959,7 +3080,9 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Decreto 26.971 (1939, creada por decreto del Poder Ejecutivo, no por ley).",
-      "32% de quienes siguen cursando no aprobó ni una sola materia en el último año informado."
+      "32% de quienes siguen cursando no aprobó ni una sola materia en el último año informado.",
+      "Cargos Exclusiva cayeron -10% pese a que el total de cargos creció +9%: la misma sustitución de dedicaciones altas por bajas que en otras universidades.",
+      "Economía y Administración perdió 274 egresados (-52,7%), una de las caídas más grandes en una carrera históricamente masiva."
     ],
     "serieEstudiantes": {
       "2007": 31681,
@@ -3078,7 +3201,18 @@
     },
     "costoPorGraduado": 84155416,
     "estudiantesPorDocente": 7.4,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 780,
+      "excl2023": 699,
+      "semi2017": 2124,
+      "semi2023": 2111,
+      "simple2017": 3192,
+      "simple2023": 3854,
+      "fte2017": 2640,
+      "fte2023": 2718
+    },
+    "estudiantesActivosPorDocente": 3.1
   },
   "defensa": {
     "nombre": "Universidad de la Defensa Nacional",
@@ -3208,7 +3342,8 @@
     },
     "costoPorGraduado": 6685618,
     "estudiantesPorDocente": 249.8,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 105.8
   },
   "entre_rios": {
     "nombre": "Universidad Nacional de Entre Ríos",
@@ -3342,7 +3477,8 @@
     },
     "costoPorGraduado": 45025542,
     "estudiantesPorDocente": 11.2,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 3.4
   },
   "formosa": {
     "nombre": "Universidad Nacional de Formosa",
@@ -3476,7 +3612,8 @@
     },
     "costoPorGraduado": 107339887,
     "estudiantesPorDocente": 12.3,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 2.9
   },
   "jujuy": {
     "nombre": "Universidad Nacional de Jujuy",
@@ -3491,7 +3628,9 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 20.579 (1973), Plan Taquini.",
-      "De cada 100 personas que se inscribieron, 94 no llegaron a graduarse dentro del plazo de referencia de 6 años (6.4% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 94 no llegaron a graduarse dentro del plazo de referencia de 6 años (6.4% de tasa de egreso).",
+      "Mayor cantidad de disciplinas con egreso nulo o casi nulo (15), varias sin ningún egresado en 2023 pese a inscripción sostenida en 2017.",
+      "Cargos totales crecieron +55%, pero el FTE ponderado por dedicación solo +35%: gran parte del crecimiento es en cargos Simple (+94%), no Exclusiva (+6%)."
     ],
     "serieEstudiantes": {
       "2007": 11339,
@@ -3607,7 +3746,18 @@
     },
     "costoPorGraduado": 160469995,
     "estudiantesPorDocente": 20.1,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 260,
+      "excl2023": 275,
+      "semi2017": 559,
+      "semi2023": 626,
+      "simple2017": 946,
+      "simple2023": 1831,
+      "fte2017": 776,
+      "fte2023": 1045.8
+    },
+    "estudiantesActivosPorDocente": 3.0
   },
   "la_pampa": {
     "nombre": "Universidad Nacional de La Pampa",
@@ -3741,7 +3891,8 @@
     },
     "costoPorGraduado": 120440036,
     "estudiantesPorDocente": 10.9,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 3.1
   },
   "la_rioja": {
     "nombre": "Universidad Nacional de La Rioja",
@@ -3756,7 +3907,9 @@
     "esKirchnerista": false,
     "notas": [
       "Creada como universidad provincial en 1972, elevada a nacional por Ley 24.299 (1993).",
-      "De cada 100 personas que se inscribieron, 86 no llegaron a graduarse dentro del plazo de referencia de 6 años (14.3% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 86 no llegaron a graduarse dentro del plazo de referencia de 6 años (14.3% de tasa de egreso).",
+      "ÚNICA universidad estatal del país (de 68 analizadas) que ofrece la carrera de Teología, en 2017 y en 2023 por igual. Ninguna otra institución del sistema reporta estudiantes en esa disciplina.",
+      "Teología tiene matrícula estable (38 a 39 estudiantes) pero los egresados caen a la mitad (4 a 2). Medicina pierde 78,9% de Nuevos Inscriptos y los Cargos Totales de personal docente caen -2,7% (uno de los pocos casos de baja real, no solo de FTE)."
     ],
     "serieEstudiantes": {
       "2007": 21030,
@@ -3875,7 +4028,18 @@
     },
     "costoPorGraduado": 63150116,
     "estudiantesPorDocente": 15.4,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 44,
+      "excl2023": 46,
+      "semi2017": 1414,
+      "semi2023": 1320,
+      "simple2017": 1489,
+      "simple2023": 1500,
+      "fte2017": 1123.2,
+      "fte2023": 1081
+    },
+    "estudiantesActivosPorDocente": 4.1
   },
   "lanus": {
     "nombre": "Universidad Nacional de Lanús",
@@ -4009,7 +4173,8 @@
     },
     "costoPorGraduado": 31302344,
     "estudiantesPorDocente": 15.7,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 6.5
   },
   "litoral": {
     "nombre": "Universidad Nacional del Litoral",
@@ -4143,7 +4308,8 @@
     },
     "costoPorGraduado": 52820938,
     "estudiantesPorDocente": 13.4,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 4.1
   },
   "lomas": {
     "nombre": "Universidad Nacional de Lomas de Zamora",
@@ -4277,7 +4443,8 @@
     },
     "costoPorGraduado": 26194281,
     "estudiantesPorDocente": 12.9,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 4.3
   },
   "lujan": {
     "nombre": "Universidad Nacional de Luján",
@@ -4411,7 +4578,8 @@
     },
     "costoPorGraduado": 74850776,
     "estudiantesPorDocente": 13.1,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 3.2
   },
   "mar_del_plata": {
     "nombre": "Universidad Nacional de Mar del Plata",
@@ -4545,7 +4713,8 @@
     },
     "costoPorGraduado": 77576680,
     "estudiantesPorDocente": 10.1,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 3.2
   },
   "misiones": {
     "nombre": "Universidad Nacional de Misiones",
@@ -4679,7 +4848,8 @@
     },
     "costoPorGraduado": 66772410,
     "estudiantesPorDocente": 16.8,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 4.8
   },
   "nordeste": {
     "nombre": "Universidad Nacional del Nordeste",
@@ -4813,7 +4983,8 @@
     },
     "costoPorGraduado": 35706755,
     "estudiantesPorDocente": 17.5,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 5.9
   },
   "unnoba": {
     "nombre": "Universidad Nacional del Noroeste de la Pcia. de Bs. As.",
@@ -4947,7 +5118,8 @@
     },
     "costoPorGraduado": 48281907,
     "estudiantesPorDocente": 12.7,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 4.0
   },
   "patagonia_austral": {
     "nombre": "Universidad Nacional de la Patagonia Austral",
@@ -5081,7 +5253,8 @@
     },
     "costoPorGraduado": 161921854,
     "estudiantesPorDocente": 14.2,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 3.1
   },
   "patagonia_sjb": {
     "nombre": "Universidad Nacional de la Patagonia San Juan Bosco",
@@ -5272,7 +5445,8 @@
     },
     "costoPorGraduado": 39979918,
     "estudiantesPorDocente": 12.9,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 3.3
   },
   "quilmes": {
     "nombre": "Universidad Nacional de Quilmes",
@@ -5406,7 +5580,8 @@
     },
     "costoPorGraduado": 63678161,
     "estudiantesPorDocente": 25.9,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 7.4
   },
   "rio_cuarto": {
     "nombre": "Universidad Nacional de Río Cuarto",
@@ -5421,7 +5596,9 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Decreto-Ley 19.020 (1971), Plan Taquini.",
-      "De cada 100 personas que se inscribieron, 80 no llegaron a graduarse dentro del plazo de referencia de 6 años (20.2% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 80 no llegaron a graduarse dentro del plazo de referencia de 6 años (20.2% de tasa de egreso).",
+      "Seleccionada por fragmentación académica: 50 carreras reales en 5 facultades, con la menor variación relativa de planta docente de las 5 universidades del grupo: cargos totales +3,4%, FTE ponderado +2,7%.",
+      "Veterinaria y Ciencias Agropecuarias, las dos disciplinas más grandes, muestran caída de egresados (-22,3% y -34,6%) pese a matrícula estable o creciente."
     ],
     "serieEstudiantes": {
       "2007": 17533,
@@ -5537,7 +5714,18 @@
     },
     "costoPorGraduado": 88808108,
     "estudiantesPorDocente": 10.1,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 803,
+      "excl2023": 809,
+      "semi2017": 682,
+      "semi2023": 733,
+      "simple2017": 542,
+      "simple2023": 553,
+      "fte2017": 1279.5,
+      "fte2023": 1313.8
+    },
+    "estudiantesActivosPorDocente": 3.7
   },
   "rosario": {
     "nombre": "Universidad Nacional de Rosario",
@@ -5552,7 +5740,9 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 17.987 (1968), por separación de las facultades rosarinas de la Universidad Nacional del Litoral.",
-      "De cada 100 personas que se inscribieron, 75 no llegaron a graduarse dentro del plazo de referencia de 6 años (24.7% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 75 no llegaron a graduarse dentro del plazo de referencia de 6 años (24.7% de tasa de egreso).",
+      "Arquitectura y Diseño (-86%) y Derecho (-85,9%) colapsaron en egresados de forma casi idéntica, pese a que estudiantes (+17%) y cargos docentes (+13%) crecieron.",
+      "La coincidencia entre dos carreras sin relación sugiere posible cambio de metodología de conteo entre 2017 y 2023, además de o en lugar de una caída real."
     ],
     "serieEstudiantes": {
       "2007": 72121,
@@ -5671,7 +5861,18 @@
     },
     "costoPorGraduado": 61546057,
     "estudiantesPorDocente": 13.2,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 1134,
+      "excl2023": 1180,
+      "semi2017": 2405,
+      "semi2023": 2784,
+      "simple2017": 6648,
+      "simple2023": 7539,
+      "fte2017": 3998.5,
+      "fte2023": 4456.8
+    },
+    "estudiantesActivosPorDocente": 3.6
   },
   "salta": {
     "nombre": "Universidad Nacional de Salta",
@@ -5805,7 +6006,8 @@
     },
     "costoPorGraduado": 100565675,
     "estudiantesPorDocente": 21.8,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 5.3
   },
   "san_antonio_areco": {
     "nombre": "Universidad Nacional de San Antonio de Areco",
@@ -5892,7 +6094,8 @@
     },
     "costoPorGraduado": 33161036,
     "estudiantesPorDocente": 13.9,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 3.5
   },
   "san_juan": {
     "nombre": "Universidad Nacional de San Juan",
@@ -5907,7 +6110,9 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 20.367 (1973), Plan Taquini.",
-      "De cada 100 personas que se inscribieron, 80 no llegaron a graduarse dentro del plazo de referencia de 6 años (20.4% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 80 no llegaron a graduarse dentro del plazo de referencia de 6 años (20.4% de tasa de egreso).",
+      "Mayor cantidad total de anomalías detectadas (37). Caída de egresados repetida en las cuatro ramas grandes de la universidad.",
+      "Cargos Exclusiva cayeron -14% mientras Simple creció +22%: sustitución de dedicaciones altas por dedicaciones bajas."
     ],
     "serieEstudiantes": {
       "2007": 19866,
@@ -6026,7 +6231,18 @@
     },
     "costoPorGraduado": 159722419,
     "estudiantesPorDocente": 9.8,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 894,
+      "excl2023": 766,
+      "semi2017": 1109,
+      "semi2023": 1292,
+      "simple2017": 1891,
+      "simple2023": 2312,
+      "fte2017": 1921.2,
+      "fte2023": 1990
+    },
+    "estudiantesActivosPorDocente": 2.9
   },
   "san_luis": {
     "nombre": "Universidad Nacional de San Luis",
@@ -6160,7 +6376,8 @@
     },
     "costoPorGraduado": 127054774,
     "estudiantesPorDocente": 9.6,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 3.1
   },
   "san_martin": {
     "nombre": "Universidad Nacional de San Martín",
@@ -6294,7 +6511,8 @@
     },
     "costoPorGraduado": 50655109,
     "estudiantesPorDocente": 9.9,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 3.8
   },
   "santiago": {
     "nombre": "Universidad Nacional de Santiago del Estero",
@@ -6428,7 +6646,8 @@
     },
     "costoPorGraduado": 43417144,
     "estudiantesPorDocente": 17.7,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 5.5
   },
   "sur": {
     "nombre": "Universidad Nacional del Sur",
@@ -6562,7 +6781,8 @@
     },
     "costoPorGraduado": 87127870,
     "estudiantesPorDocente": 9.9,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 3.3
   },
   "utn": {
     "nombre": "Universidad Tecnológica Nacional",
@@ -6814,7 +7034,8 @@
     },
     "costoPorGraduado": 24600911,
     "estudiantesPorDocente": 14.3,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "estudiantesActivosPorDocente": 6.4
   },
   "tucuman": {
     "nombre": "Universidad Nacional de Tucumán",
@@ -6829,7 +7050,9 @@
     "esKirchnerista": false,
     "notas": [
       "Fundada como universidad provincial en 1912, nacionalizada por Ley 11.027 (1921).",
-      "De cada 100 personas que se inscribieron, 83 no llegaron a graduarse dentro del plazo de referencia de 6 años (16.9% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 83 no llegaron a graduarse dentro del plazo de referencia de 6 años (16.9% de tasa de egreso).",
+      "Derecho cae 70% en egresados (726 a 218, pierde 508), la segunda caída más grande de Derecho de todo el análisis después de Rosario.",
+      "A nivel rama, Ciencias Sociales pierde 546 egresados (-48,5%)."
     ],
     "serieEstudiantes": {
       "2007": 59653,
@@ -6948,7 +7171,18 @@
     },
     "costoPorGraduado": 102737891,
     "estudiantesPorDocente": 17.2,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 1385,
+      "excl2023": 1383,
+      "semi2017": 2237,
+      "semi2023": 2464,
+      "simple2017": 1765,
+      "simple2023": 2048,
+      "fte2017": 2944.8,
+      "fte2023": 3127
+    },
+    "estudiantesActivosPorDocente": 5.4
   },
   "villa_maria": {
     "nombre": "Universidad Nacional de Villa María",
@@ -6963,7 +7197,9 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 24.484 (1995).",
-      "De cada 100 personas que se inscribieron, 82 no llegaron a graduarse dentro del plazo de referencia de 6 años (18.2% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 82 no llegaron a graduarse dentro del plazo de referencia de 6 años (18.2% de tasa de egreso).",
+      "Seleccionada por fragmentación académica: unas 39 carreras reales repartidas en 3 institutos. Bioquímica y Farmacia pasó de 4 a 0 egresados (-100%) pese a triplicar su matrícula (36 a 95 estudiantes).",
+      "Ciencias Agropecuarias también cae fuerte en egresados (21 a 5, -76,2%). Cargos docentes crecieron +28,2% en términos absolutos y +17,6% en FTE ponderado: la brecha más chica de las 5 universidades del grupo."
     ],
     "serieEstudiantes": {
       "2007": 2846,
@@ -7082,7 +7318,18 @@
     },
     "costoPorGraduado": 57033578,
     "estudiantesPorDocente": 10.5,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "dedicacionDocente": {
+      "excl2017": 119,
+      "excl2023": 123,
+      "semi2017": 401,
+      "semi2023": 423,
+      "simple2017": 411,
+      "simple2023": 648,
+      "fte2017": 422.2,
+      "fte2023": 496.5
+    },
+    "estudiantesActivosPorDocente": 4.1
   },
   "madres_plaza_mayo": {
     "nombre": "Universidad Nacional Madres de Plaza de Mayo",

@@ -32,6 +32,21 @@ export interface UniversidadDetalle {
   reinscriptos0Materias?: number
   tasaCohorte?: number | null
   estudiantesPorDocente?: number
+  // Regulares (2+ materias aprobadas) por docente universitario — versión "solo activos" de
+  // estudiantesPorDocente, que en cambio divide por la matrícula total (incluye inactivos).
+  estudiantesActivosPorDocente?: number
+  // Cargos docentes por dedicación horaria (2017 vs 2023) y su equivalente a tiempo completo (FTE) —
+  // solo disponible para universidades cruzadas manualmente contra RHUN por dedicación.
+  dedicacionDocente?: {
+    excl2017: number
+    excl2023: number
+    semi2017: number
+    semi2023: number
+    simple2017: number
+    simple2023: number
+    fte2017: number
+    fte2023: number
+  }
   // Costo por graduado en pesos constantes de agosto 2026 (deflactado por IPC) — la métrica que se
   // muestra en rankings y fichas. costoPorGraduado === serieCostoPorGraduadoReal['2024'].
   costoPorGraduado?: number
