@@ -157,6 +157,7 @@ export function Universidad() {
 
   const serieEstudiantes = toSerie(u.serieEstudiantes)
   const serieEgresados = toSerie(u.serieEgresados)
+  const serieIngresantes = toSerie(u.serieNuevosInscriptos)
   const serieCohorte = u.serieTasaCohorte
     ? Object.entries(u.serieTasaCohorte)
         .map(([label, value]) => ({ label, value }))
@@ -373,6 +374,12 @@ export function Universidad() {
                   Estudiantes totales
                 </div>
                 <EvolutionChart data={serieEstudiantes} color="#8fb7ff" formatValue={(v) => formatNumero(v)} />
+              </motion.div>
+              <motion.div {...revealProps} className="glass rounded-2xl px-5 py-4">
+                <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
+                  Ingresantes nuevos
+                </div>
+                <EvolutionChart data={serieIngresantes} color="#8fb7ff" formatValue={(v) => formatNumero(v)} />
               </motion.div>
               <motion.div {...revealProps} className="glass rounded-2xl px-5 py-4">
                 <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">

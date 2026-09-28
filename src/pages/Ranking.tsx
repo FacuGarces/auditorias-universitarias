@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
 import { universidadesArray } from '../data/universidades'
 import { UniversidadBadge } from '../components/UniversidadBadge'
-import { ubicacion } from '../lib/format'
+import { EvolutionChart } from '../components/EvolutionChart'
+import { formatNumero, ubicacion } from '../lib/format'
 import { METRICAS, type MetricaId } from '../lib/metricas'
 
 export function Ranking() {
@@ -25,6 +26,27 @@ export function Ranking() {
         return ascendente ? va - vb : vb - va
       })
   }, [cfg, ascendente])
+
+  // Suma, año por año, los ingresantes nuevos y los egresados de TODAS las universidades relevadas.
+  // Los egresados arrancan a tener volumen recién ~6 años después que los ingresantes porque una
+  // cohorte recién nueva tarda esa ventana en empezar a graduarse — no es un dato faltante.
+  const evolucionSistema = useMemo(() => {
+    const ingresantesPorAnio: Record<string, number> = {}
+    const egresadosPorAnio: Record<string, number> = {}
+    for (const u of universidadesArray) {
+      for (const [anio, v] of Object.entries(u.serieNuevosInscriptos ?? {})) {
+        if (typeof v === 'number') ingresantesPorAnio[anio] = (ingresantesPorAnio[anio] ?? 0) + v
+      }
+      for (const [anio, v] of Object.entries(u.serieEgresados ?? {})) {
+        if (typeof v === 'number') egresadosPorAnio[anio] = (egresadosPorAnio[anio] ?? 0) + v
+      }
+    }
+    const toPuntos = (obj: Record<string, number>) =>
+      Object.entries(obj)
+        .map(([label, value]) => ({ label, value }))
+        .sort((a, b) => Number(a.label) - Number(b.label))
+    return { ingresantes: toPuntos(ingresantesPorAnio), egresados: toPuntos(egresadosPorAnio) }
+  }, [])
 
   return (
     <div className="relative min-h-screen">
@@ -51,6 +73,29 @@ export function Ranking() {
           Comparativa de las universidades nacionales relevadas hasta el momento (
           {universidadesArray.filter((u) => u.tieneDatos).length}). El resto del mapa se irá completando.
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="mb-6"
+        >
+          <h2 className="font-display font-700 text-upl-crema mb-1">Ingresantes y egresados por año — todo el sistema</h2>
+          <p className="text-xs text-upl-crema/50 mb-3">
+            Suma de todas las universidades relevadas. Cada gráfico usa su propia escala porque los egresados son un
+            volumen mucho menor al de ingresantes — en una sola escala compartida, no se les notaría la variación.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="glass rounded-2xl px-5 py-4">
+              <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">Ingresantes nuevos</div>
+              <EvolutionChart data={evolucionSistema.ingresantes} color="#8fb7ff" formatValue={(v) => formatNumero(v)} />
+            </div>
+            <div className="glass rounded-2xl px-5 py-4">
+              <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">Egresados</div>
+              <EvolutionChart data={evolucionSistema.egresados} color="#e4b862" formatValue={(v) => formatNumero(v)} />
+            </div>
+          </div>
+        </motion.div>
 
         <div className="flex flex-wrap gap-2 mb-4">
           {(Object.keys(METRICAS) as MetricaId[]).map((key) => (
