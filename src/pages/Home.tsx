@@ -61,10 +61,11 @@ const ZOOM_MAX = 400
  * Radio "de mapa" (unidades crudas) que representa un tamaño en pantalla CRECIENTE a medida que
  * se hace zoom (k crece respecto del encuadre inicial kMin), con un techo para que no se dispare.
  * Al encuadre inicial (k===kMin) el punto se ve igual que en el mapa nacional (PIN_R_NACIONAL).
+ * Crecimiento lineal (no logarítmico) para que se note de verdad al acercar.
  */
 function radioCreciente(k: number, kMin: number) {
   const zoomRelativo = k / kMin
-  const pantalla = Math.min(9, PIN_R_NACIONAL * Math.sqrt(zoomRelativo))
+  const pantalla = Math.min(16, PIN_R_NACIONAL * zoomRelativo)
   return pantalla / k
 }
 
@@ -101,10 +102,12 @@ function VistaProvincia({
   provincia,
   onVolver,
   onSelectPin,
+  onCambiarProvincia,
 }: {
   provincia: Provincia
   onVolver: () => void
   onSelectPin: (u: UniversidadMapa) => void
+  onCambiarProvincia: (p: Provincia) => void
 }) {
   const fitInicial = useMemo(() => calcularFit(provincia), [provincia])
   const [vista, setVista] = useState<Vista>(fitInicial)
@@ -225,6 +228,9 @@ function VistaProvincia({
             ))}
             {provincias.map((p) => {
               const esActiva = p.nombre === provincia.nombre
+              // Cava se ve como vecina de Buenos Aires pero se abre siempre desde su propio anexo,
+              // nunca "saltando" directamente entre provincias — evita confundirla con una más.
+              const esSaltable = !esActiva && p.nombre !== 'Capital Federal'
               return (
                 <path
                   key={p.nombre}
@@ -232,7 +238,12 @@ function VistaProvincia({
                   fill={esActiva ? '#5b6796' : BASE_FILL}
                   stroke={esActiva ? '#facf3b' : 'rgba(255,255,249,0.65)'}
                   strokeWidth={(esActiva ? 1.6 : 0.8) / vista.k}
-                  style={{ pointerEvents: 'none' }}
+                  style={{ pointerEvents: esSaltable ? 'auto' : 'none', cursor: esSaltable ? 'pointer' : 'default' }}
+                  onClick={esSaltable ? () => onCambiarProvincia(p) : undefined}
+                  onMouseEnter={
+                    esSaltable ? (e) => (e.currentTarget as SVGPathElement).setAttribute('fill', '#6a76a8') : undefined
+                  }
+                  onMouseLeave={esSaltable ? (e) => (e.currentTarget as SVGPathElement).setAttribute('fill', BASE_FILL) : undefined}
                 />
               )
             })}
@@ -268,7 +279,10 @@ function VistaProvincia({
       </div>
 
       <div className="fixed left-3 bottom-3 z-20 glass rounded-xl px-4 py-3 text-xs text-upl-crema/80 max-w-[220px]">
-        <p className="mb-2">Arrastrá para mover el mapa y girá la rueda para acercar. No podés alejarte más que esta vista.</p>
+        <p className="mb-2">
+          Arrastrá para mover el mapa y girá la rueda para acercar. Tocá una provincia vecina para saltar directo a
+          ella.
+        </p>
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center gap-1.5">
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-upl-amarillo border border-upl-principal" /> Con ficha de datos
@@ -361,6 +375,12 @@ function MapaNacional({
       <div className="absolute inset-0 flex items-stretch justify-center px-3 pt-24 pb-6 gap-1">
         <div className="flex-1 flex items-center justify-end min-w-0">
           <svg viewBox={NATIONAL_VIEWBOX} className="w-full h-full max-w-3xl" style={{ overflow: 'visible' }}>
+            {/* Capa base: mismo color y borde, sin fisuras entre provincias vecinas (los datasets no
+                comparten vértices exactos en los límites, y sin esto queda un hueco visible, p. ej.
+                entre Santiago del Estero, Chaco y Santa Fe). */}
+            {provincias.map((p) => (
+              <path key={`base-${p.nombre}`} d={p.d} fill={BASE_FILL} stroke={BASE_FILL} strokeWidth={3} strokeLinejoin="round" />
+            ))}
             {provincias.map((p) => {
               const esCapital = p.nombre === 'Capital Federal'
               return (
@@ -484,7 +504,12 @@ export function Home() {
         <div className="blob w-[30rem] h-[30rem] bg-upl-resaltador/20 bottom-0 right-0" style={{ animationDelay: '4s' }} />
 
         {activa ? (
-          <VistaProvincia provincia={activa} onVolver={() => setActiva(null)} onSelectPin={handleSelectPin} />
+          <VistaProvincia
+            provincia={activa}
+            onVolver={() => setActiva(null)}
+            onSelectPin={handleSelectPin}
+            onCambiarProvincia={setActiva}
+          />
         ) : (
           <MapaNacional onSelectProvincia={setActiva} onSelectPin={handleSelectPin} />
         )}
