@@ -230,9 +230,14 @@ function VistaProvincia({
               transition: animar ? 'transform 0.7s cubic-bezier(0.16,1,0.3,1)' : 'none',
             }}
           >
-            {provinciasDeContexto.map((p) => (
-              <path key={`base-${p.nombre}`} d={p.d} fill={BASE_FILL} stroke={BASE_FILL} strokeWidth={3} strokeLinejoin="round" />
-            ))}
+            {/* Esta capa "base" solo existe para tapar fisuras contra provincias VECINAS (su borde
+                grueso se disimula porque el vecino comparte el mismo color de relleno). CABA aislada
+                no tiene vecinas en esta vista, así que ese borde quedaría flotando como una mancha
+                — se omite acá. */}
+            {!esAislada &&
+              provinciasDeContexto.map((p) => (
+                <path key={`base-${p.nombre}`} d={p.d} fill={BASE_FILL} stroke={BASE_FILL} strokeWidth={3} strokeLinejoin="round" />
+              ))}
             {provinciasDeContexto.map((p) => {
               const esActiva = p.nombre === provincia.nombre
               // CABA también es "saltable" como cualquier vecina: un click ahí te lleva directo a su
@@ -498,11 +503,19 @@ export function Home() {
     if (u.tieneFicha) navigate(`/universidad/${u.id}`)
   }
 
+  // CABA se muestra sola, sin nada más alrededor — los blobs decorativos de fondo quedaban pegados
+  // a su silueta como si fueran una extensión del mismo color, así que ahí van afuera.
+  const esCabaAislada = activa?.nombre === 'Capital Federal'
+
   return (
     <div className="relative">
       <div className="fixed inset-0 overflow-hidden">
-        <div className="blob w-[38rem] h-[38rem] bg-upl-secundario/50 -top-40 -left-40" />
-        <div className="blob w-[30rem] h-[30rem] bg-upl-resaltador/20 bottom-0 right-0" style={{ animationDelay: '4s' }} />
+        {!esCabaAislada && (
+          <>
+            <div className="blob w-[38rem] h-[38rem] bg-upl-secundario/50 -top-40 -left-40" />
+            <div className="blob w-[30rem] h-[30rem] bg-upl-resaltador/20 bottom-0 right-0" style={{ animationDelay: '4s' }} />
+          </>
+        )}
 
         {activa ? (
           <VistaProvincia
