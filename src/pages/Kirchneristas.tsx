@@ -1,8 +1,18 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'motion/react'
 import { universidadesArray } from '../data/universidades'
 import { UniversidadBadge } from '../components/UniversidadBadge'
 import { formatMoneda, formatNumero, formatPorcentaje, ubicacion } from '../lib/format'
+
+const listVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.04 } },
+}
+const itemVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
+} as const
 
 const PERIODOS: Record<string, string> = {
   '2007': 'Néstor Kirchner / transición a CFK',
@@ -36,13 +46,30 @@ export function Kirchneristas() {
       </div>
 
       <div className="mx-auto max-w-4xl px-4 py-8">
-        <h1 className="font-display font-800 text-3xl text-upl-crema mb-1">Universidades kirchneristas</h1>
-        <p className="text-upl-crema/60 mb-4">
+        <motion.h1
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="font-display font-800 text-3xl text-upl-crema mb-1"
+        >
+          Universidades kirchneristas
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.05 }}
+          className="text-upl-crema/60 mb-4"
+        >
           {universidades.length} universidades nacionales creadas por ley durante los gobiernos de Néstor Kirchner,
           Cristina Fernández de Kirchner o Alberto Fernández — la mayoría, sancionadas para responder a pedidos de
           intendentes del conurbano bonaerense o de legisladores propios, más que a un plan de oferta académica.
-        </p>
-        <div className="rounded-2xl border border-[#e2574c]/40 bg-[#e2574c]/10 px-5 py-4 mb-6">
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="rounded-2xl border border-[#e2574c]/40 bg-[#e2574c]/10 px-5 py-4 mb-6"
+        >
           <p className="text-sm text-upl-crema/90">
             Varias de estas universidades tardaron años en abrir sus puertas después de sancionada la ley, varias
             fueron señaladas públicamente por vínculos entre sus autoridades y el poder político local que las
@@ -50,14 +77,14 @@ export function Kirchneristas() {
             de Plaza de Mayo) fue sancionado a dos meses y medio de terminar el mandato de Alberto Fernández —
             luego frenado administrativamente por el gobierno de Javier Milei y judicializado.
           </p>
-        </div>
+        </motion.div>
 
-        <ol className="flex flex-col gap-3">
+        <motion.ol className="flex flex-col gap-3" variants={listVariants} initial="hidden" animate="visible">
           {universidades.map((u) => (
-            <li key={u.id}>
+            <motion.li key={u.id} variants={itemVariants}>
               <Link
                 to={`/universidad/${u.id}`}
-                className="block rounded-xl glass hover:bg-[#e2574c]/10 px-4 py-3 transition-colors"
+                className="group block rounded-xl glass hover:bg-[#e2574c]/10 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 px-4 py-3 transition-all duration-200"
               >
                 <div className="flex items-center gap-4">
                   <UniversidadBadge sigla={u.sigla} />
@@ -87,9 +114,9 @@ export function Kirchneristas() {
                   </div>
                 )}
               </Link>
-            </li>
+            </motion.li>
           ))}
-        </ol>
+        </motion.ol>
 
         <p className="mt-6 mb-8 text-xs text-upl-crema/40">
           Fuente: Anuarios de Estadísticas Universitarias (SPU) y leyes de creación publicadas en el Boletín

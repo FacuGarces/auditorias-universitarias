@@ -1,9 +1,25 @@
 import { Link, useParams } from 'react-router-dom'
+import { motion } from 'motion/react'
 import { getUniversidad } from '../data/universidades'
 import { UniversidadBadge } from '../components/UniversidadBadge'
 import { EvolutionChart } from '../components/EvolutionChart'
 import { notasCriticas } from '../lib/critica'
 import { formatMoneda, formatNumero, formatPorcentaje, ubicacion } from '../lib/format'
+
+const statGridVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.06 } },
+}
+const statCardVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
+} as const
+const revealProps = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.25 },
+  transition: { duration: 0.45, ease: 'easeOut' },
+} as const
 
 function StatCard({
   label,
@@ -17,13 +33,30 @@ function StatCard({
   alerta?: boolean
 }) {
   return (
-    <div className={`glass rounded-2xl px-5 py-4 ${alerta ? 'border-[#e2574c]/50 bg-[#e2574c]/10' : ''}`}>
+    <motion.div
+      variants={statCardVariants}
+      whileHover={{ y: -3 }}
+      transition={{ duration: 0.2 }}
+      className={`glass rounded-2xl px-5 py-4 ${alerta ? 'border-[#e2574c]/50 bg-[#e2574c]/10' : ''}`}
+    >
       <div className={`text-xs uppercase tracking-wide font-semibold mb-1 ${alerta ? 'text-[#ff8a7a]' : 'text-upl-resaltador'}`}>
         {label}
       </div>
       <div className={`font-display font-800 text-2xl sm:text-3xl ${alerta ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}>{value}</div>
       {hint && <div className="text-xs text-upl-crema/55 mt-1">{hint}</div>}
-    </div>
+    </motion.div>
+  )
+}
+
+function BarraProgreso({ pct, color, delay = 0 }: { pct: number; color: string; delay?: number }) {
+  return (
+    <motion.div
+      initial={{ width: 0 }}
+      whileInView={{ width: `${pct}%` }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, ease: 'easeOut', delay }}
+      className={color}
+    />
   )
 }
 
@@ -66,7 +99,12 @@ export function Universidad() {
         ← Volver al ranking
       </Link>
 
-      <div className="mt-3 flex items-center gap-4">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="mt-3 flex items-center gap-4"
+      >
         <UniversidadBadge sigla={u.sigla} size="lg" />
         <div>
           <h1 className="font-display font-800 text-2xl sm:text-3xl text-upl-crema leading-tight">{u.nombre}</h1>
@@ -79,13 +117,13 @@ export function Universidad() {
           {u.esKirchnerista && (
             <Link
               to="/kirchneristas"
-              className="mt-1 inline-block rounded-full bg-[#e2574c]/15 border border-[#e2574c]/40 text-[#ff8a7a] text-xs font-semibold px-3 py-1"
+              className="mt-1 inline-block rounded-full bg-[#e2574c]/15 border border-[#e2574c]/40 text-[#ff8a7a] text-xs font-semibold px-3 py-1 transition-colors hover:bg-[#e2574c]/25"
             >
               Universidad creada durante un gobierno kirchnerista →
             </Link>
           )}
         </div>
-      </div>
+      </motion.div>
 
       {!u.tieneDatos ? (
         <div className="mt-8 rounded-2xl border-2 border-dashed border-upl-amarillo/60 glass px-5 py-6">
@@ -97,7 +135,12 @@ export function Universidad() {
         </div>
       ) : (
         <>
-          <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <motion.div
+            variants={statGridVariants}
+            initial="hidden"
+            animate="visible"
+            className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3"
+          >
             <StatCard
               label="No llega a graduarse"
               value={u.tasaCohorte != null ? `${Math.round(100 - u.tasaCohorte)}%` : 'S/D'}
@@ -133,9 +176,14 @@ export function Universidad() {
                   : `${formatNumero(u.docentesUniversitario)} docentes · ${formatNumero(u.reinscriptosRegulares2mas)} regulares (2+ materias aprobadas)`
               }
             />
-          </div>
+          </motion.div>
 
-          <div className="mt-3 grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <motion.div
+            variants={statGridVariants}
+            initial="hidden"
+            animate="visible"
+            className="mt-3 grid grid-cols-2 lg:grid-cols-4 gap-3"
+          >
             <StatCard
               label="Planta no docente"
               value={formatNumero(u.personalNoDocente)}
@@ -145,10 +193,10 @@ export function Universidad() {
                   : 'Sin dato de personal no docente'
               }
             />
-          </div>
+          </motion.div>
 
           {u.reinscriptosTotal != null && u.reinscriptosRegulares2mas != null && u.reinscriptos0Materias != null && (
-            <div className="mt-3 glass rounded-2xl px-5 py-4">
+            <motion.div {...revealProps} className="mt-3 glass rounded-2xl px-5 py-4">
               <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1">
                 Quiénes son "activos" sobre el total de la matrícula
               </div>
@@ -166,9 +214,9 @@ export function Universidad() {
                 return (
                   <>
                     <div className="flex h-3 rounded-full overflow-hidden bg-upl-principal/40">
-                      <div style={{ width: `${pct(regulares)}%` }} className="bg-[#8fd19e]" title="Regulares (2+ materias)" />
-                      <div style={{ width: `${pct(unaMateria)}%` }} className="bg-upl-resaltador" title="1 materia aprobada" />
-                      <div style={{ width: `${pct(cero)}%` }} className="bg-[#e2574c]" title="0 materias aprobadas" />
+                      <BarraProgreso pct={pct(regulares)} color="bg-[#8fd19e]" />
+                      <BarraProgreso pct={pct(unaMateria)} color="bg-upl-resaltador" delay={0.1} />
+                      <BarraProgreso pct={pct(cero)} color="bg-[#e2574c]" delay={0.2} />
                     </div>
                     <div className="flex flex-wrap gap-x-5 gap-y-1 mt-2.5 text-xs text-upl-crema/70">
                       <span className="flex items-center gap-1.5">
@@ -187,11 +235,11 @@ export function Universidad() {
                   </>
                 )
               })()}
-            </div>
+            </motion.div>
           )}
 
           {u.dedicacionDocente && (
-            <div className="mt-3 glass rounded-2xl px-5 py-4">
+            <motion.div {...revealProps} className="mt-3 glass rounded-2xl px-5 py-4">
               <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1">
                 Cargos docentes por dedicación — 2017 vs. 2023
               </div>
@@ -201,11 +249,11 @@ export function Universidad() {
                 const total2023 = d.excl2023 + d.semi2023 + d.simple2023
                 const varCargos = ((total2023 - total2017) / total2017) * 100
                 const varFte = ((d.fte2023 - d.fte2017) / d.fte2017) * 100
-                const bar = (excl: number, semi: number, simple: number, total: number) => (
+                const bar = (excl: number, semi: number, simple: number, total: number, delayBase: number) => (
                   <div className="flex h-3 rounded-full overflow-hidden bg-upl-principal/40">
-                    <div style={{ width: `${(excl / total) * 100}%` }} className="bg-[#8fd19e]" title="Exclusiva" />
-                    <div style={{ width: `${(semi / total) * 100}%` }} className="bg-upl-resaltador" title="Semiexclusiva" />
-                    <div style={{ width: `${(simple / total) * 100}%` }} className="bg-[#e2574c]" title="Simple" />
+                    <BarraProgreso pct={(excl / total) * 100} color="bg-[#8fd19e]" delay={delayBase} />
+                    <BarraProgreso pct={(semi / total) * 100} color="bg-upl-resaltador" delay={delayBase + 0.1} />
+                    <BarraProgreso pct={(simple / total) * 100} color="bg-[#e2574c]" delay={delayBase + 0.2} />
                   </div>
                 )
                 return (
@@ -221,9 +269,9 @@ export function Universidad() {
                     </p>
                     <div className="grid grid-cols-[3rem_1fr] items-center gap-x-3 gap-y-2">
                       <span className="text-xs text-upl-crema/50">2017</span>
-                      {bar(d.excl2017, d.semi2017, d.simple2017, total2017)}
+                      {bar(d.excl2017, d.semi2017, d.simple2017, total2017, 0)}
                       <span className="text-xs text-upl-crema/50">2023</span>
-                      {bar(d.excl2023, d.semi2023, d.simple2023, total2023)}
+                      {bar(d.excl2023, d.semi2023, d.simple2023, total2023, 0.35)}
                     </div>
                     <div className="flex flex-wrap gap-x-5 gap-y-1 mt-2.5 text-xs text-upl-crema/70">
                       <span className="flex items-center gap-1.5">
@@ -242,34 +290,34 @@ export function Universidad() {
                   </>
                 )
               })()}
-            </div>
+            </motion.div>
           )}
 
           <div className="mt-8">
             <h2 className="font-display font-700 text-lg text-upl-crema mb-3">Evolución histórica</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {serieCohorte.length >= 2 && (
-                <div className="glass rounded-2xl px-5 py-4 sm:col-span-2">
+                <motion.div {...revealProps} className="glass rounded-2xl px-5 py-4 sm:col-span-2">
                   <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
                     Tasa de cohorte por año de egreso
                   </div>
                   <EvolutionChart data={serieCohorte} color="#facf3b" formatValue={(v) => `${v}%`} height={140} />
-                </div>
+                </motion.div>
               )}
-              <div className="glass rounded-2xl px-5 py-4">
+              <motion.div {...revealProps} className="glass rounded-2xl px-5 py-4">
                 <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
                   Estudiantes totales
                 </div>
                 <EvolutionChart data={serieEstudiantes} color="#8fb7ff" formatValue={(v) => formatNumero(v)} />
-              </div>
-              <div className="glass rounded-2xl px-5 py-4">
+              </motion.div>
+              <motion.div {...revealProps} className="glass rounded-2xl px-5 py-4">
                 <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
                   Egresados por año
                 </div>
                 <EvolutionChart data={serieEgresados} color="#e4b862" formatValue={(v) => formatNumero(v)} />
-              </div>
+              </motion.div>
               {serieCostoReal.length >= 2 && (
-                <div className="glass rounded-2xl px-5 py-4 sm:col-span-2">
+                <motion.div {...revealProps} className="glass rounded-2xl px-5 py-4 sm:col-span-2">
                   <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
                     Costo por graduado — pesos constantes de agosto 2026
                   </div>
@@ -281,7 +329,7 @@ export function Universidad() {
                     , una comparación sin sentido dada la inflación acumulada del período — por eso esta ficha usa
                     siempre pesos constantes de agosto 2026 (deflactados por IPC).
                   </p>
-                </div>
+                </motion.div>
               )}
             </div>
           </div>
@@ -291,27 +339,43 @@ export function Universidad() {
       {u.tieneDatos && notasCriticas(u).length > 0 && (
         <div className="mt-8">
           <h2 className="font-display font-700 text-lg text-[#ff8a7a] mb-3">Lo que exponen los números</h2>
-          <ul className="flex flex-col gap-2">
+          <motion.ul
+            className="flex flex-col gap-2"
+            variants={statGridVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.15 }}
+          >
             {notasCriticas(u).map((nota, i) => (
-              <li key={i} className="flex gap-3 rounded-xl border border-[#e2574c]/40 bg-[#e2574c]/10 px-4 py-3">
+              <motion.li
+                key={i}
+                variants={statCardVariants}
+                className="flex gap-3 rounded-xl border border-[#e2574c]/40 bg-[#e2574c]/10 px-4 py-3"
+              >
                 <span className="text-[#ff8a7a] font-display font-800">⚠</span>
                 <span className="text-sm text-upl-crema/90">{nota}</span>
-              </li>
+              </motion.li>
             ))}
-          </ul>
+          </motion.ul>
         </div>
       )}
 
       <div className="mt-8">
         <h2 className="font-display font-700 text-lg text-upl-crema mb-3">Antecedentes</h2>
-        <ul className="flex flex-col gap-2">
+        <motion.ul
+          className="flex flex-col gap-2"
+          variants={statGridVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+        >
           {u.notas.map((nota, i) => (
-            <li key={i} className="flex gap-3 rounded-xl glass px-4 py-3">
+            <motion.li key={i} variants={statCardVariants} className="flex gap-3 rounded-xl glass px-4 py-3">
               <span className="text-upl-resaltador font-display font-800">·</span>
               <span className="text-sm text-upl-crema/85">{nota}</span>
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
       </div>
 
       <p className="mt-8 mb-8 text-xs text-upl-crema/40">

@@ -1,3 +1,5 @@
+import { motion } from 'motion/react'
+
 interface Punto {
   label: string
   value: number
@@ -48,7 +50,13 @@ export function EvolutionChart({ data, color = '#facf3b', height = 150, formatVa
   const gridValues = Array.from({ length: gridTicks + 1 }, (_, i) => min + (range * i) / gridTicks)
 
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} style={{ width: '100%', height: 'auto', display: 'block' }}>
+    <motion.svg
+      viewBox={`0 0 ${width} ${height}`}
+      style={{ width: '100%', height: 'auto', display: 'block' }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.4 }}
+    >
       <defs>
         <linearGradient id={`grad-${color.replace('#', '')}`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={color} stopOpacity="0.35" />
@@ -66,11 +74,33 @@ export function EvolutionChart({ data, color = '#facf3b', height = 150, formatVa
         </g>
       ))}
 
-      <path d={areaPath} fill={`url(#grad-${color.replace('#', '')})`} stroke="none" />
-      <path d={linePath} fill="none" stroke={color} strokeWidth={2.5} strokeLinejoin="round" strokeLinecap="round" />
+      <motion.path
+        d={areaPath}
+        fill={`url(#grad-${color.replace('#', '')})`}
+        stroke="none"
+        variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.6, delay: 0.5 } } }}
+      />
+      <motion.path
+        d={linePath}
+        fill="none"
+        stroke={color}
+        strokeWidth={2.5}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        variants={{ hidden: { pathLength: 0 }, visible: { pathLength: 1, transition: { duration: 0.9, ease: 'easeInOut' } } }}
+      />
 
       {puntos.map((p, i) => (
-        <circle key={p.label} cx={x(i)} cy={y(p.value)} r={i === puntos.length - 1 ? 4 : 2.5} fill={color} />
+        <motion.circle
+          key={p.label}
+          cx={x(i)}
+          cy={y(p.value)}
+          r={i === puntos.length - 1 ? 4 : 2.5}
+          fill={color}
+          variants={{ hidden: { opacity: 0, scale: 0 }, visible: { opacity: 1, scale: 1 } }}
+          transition={{ delay: 0.15 + (i / puntos.length) * 0.75, duration: 0.25 }}
+          style={{ originX: `${x(i)}px`, originY: `${y(p.value)}px` }}
+        />
       ))}
 
       {puntos.map((p, i) => {
@@ -93,16 +123,17 @@ export function EvolutionChart({ data, color = '#facf3b', height = 150, formatVa
         )
       })}
 
-      <text
+      <motion.text
         x={x(puntos.length - 1)}
         y={y(last.value) - 10 >= padTop + 8 ? y(last.value) - 10 : y(last.value) + 18}
         fontSize={12}
         fontWeight={700}
         textAnchor="end"
         fill={suba ? '#8fd19e' : '#facf3b'}
+        variants={{ hidden: { opacity: 0, y: 6 }, visible: { opacity: 1, y: 0, transition: { delay: 1, duration: 0.3 } } }}
       >
         {fmt(last.value)}
-      </text>
-    </svg>
+      </motion.text>
+    </motion.svg>
   )
 }
