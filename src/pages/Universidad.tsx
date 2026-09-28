@@ -21,6 +21,33 @@ const revealProps = {
   transition: { duration: 0.45, ease: 'easeOut' },
 } as const
 
+/**
+ * Celda de una sola pieza dentro del panel de estadísticas: usa flexbox (no grid) para que cada
+ * fila reparta el ancho sobrante entre sus propias celdas. Así, si el número de items es impar y
+ * la última fila queda con menos celdas, esas celdas crecen para ocupar toda la línea en vez de
+ * dejar un hueco vacío — el grid clásico con columnas fijas no puede hacer esto porque las columnas
+ * se comparten entre todas las filas.
+ */
+function StatCell({
+  alerta,
+  children,
+}: {
+  alerta?: boolean
+  children: React.ReactNode
+}) {
+  return (
+    <motion.div
+      variants={statCardVariants}
+      transition={{ duration: 0.2 }}
+      className={`flex-1 min-w-[210px] px-5 py-4 transition-colors duration-200 ease-out ${
+        alerta ? 'bg-[#e2574c]/[0.12] hover:bg-[#e2574c]/20' : 'bg-upl-principal-light/40 hover:bg-upl-principal-light/55'
+      }`}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 function StatCard({
   label,
   value,
@@ -33,18 +60,13 @@ function StatCard({
   alerta?: boolean
 }) {
   return (
-    <motion.div
-      variants={statCardVariants}
-      whileHover={{ y: -3 }}
-      transition={{ duration: 0.2 }}
-      className={`glass rounded-2xl px-5 py-4 ${alerta ? 'border-[#e2574c]/50 bg-[#e2574c]/10' : ''}`}
-    >
+    <StatCell alerta={alerta}>
       <div className={`text-xs uppercase tracking-wide font-semibold mb-1 ${alerta ? 'text-[#ff8a7a]' : 'text-upl-resaltador'}`}>
         {label}
       </div>
       <div className={`font-display font-800 text-2xl sm:text-3xl ${alerta ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}>{value}</div>
       {hint && <div className="text-xs text-upl-crema/55 mt-1">{hint}</div>}
-    </motion.div>
+    </StatCell>
   )
 }
 
@@ -75,41 +97,38 @@ function StatCardRadial({
   const circ = 2 * Math.PI * r
   const color = alerta ? '#ff8a7a' : '#facf3b'
   return (
-    <motion.div
-      variants={statCardVariants}
-      whileHover={{ y: -3 }}
-      transition={{ duration: 0.2 }}
-      className={`glass rounded-2xl px-5 py-4 flex items-center gap-4 ${alerta ? 'border-[#e2574c]/50 bg-[#e2574c]/10' : ''}`}
-    >
-      <svg viewBox="0 0 64 64" className="w-16 h-16 shrink-0 -rotate-90">
-        <circle cx="32" cy="32" r={r} fill="none" stroke="currentColor" strokeOpacity={0.15} strokeWidth={7} />
-        {pct != null && (
-          <motion.circle
-            cx="32"
-            cy="32"
-            r={r}
-            fill="none"
-            stroke={color}
-            strokeWidth={7}
-            strokeLinecap="round"
-            strokeDasharray={circ}
-            initial={{ strokeDashoffset: circ }}
-            whileInView={{ strokeDashoffset: circ * (1 - pct / 100) }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          />
-        )}
-      </svg>
-      <div className="min-w-0">
-        <div className={`text-xs uppercase tracking-wide font-semibold mb-1 ${alerta ? 'text-[#ff8a7a]' : 'text-upl-resaltador'}`}>
-          {label}
+    <StatCell alerta={alerta}>
+      <div className="flex items-center gap-4">
+        <svg viewBox="0 0 64 64" className="w-16 h-16 shrink-0 -rotate-90">
+          <circle cx="32" cy="32" r={r} fill="none" stroke="currentColor" strokeOpacity={0.15} strokeWidth={7} />
+          {pct != null && (
+            <motion.circle
+              cx="32"
+              cy="32"
+              r={r}
+              fill="none"
+              stroke={color}
+              strokeWidth={7}
+              strokeLinecap="round"
+              strokeDasharray={circ}
+              initial={{ strokeDashoffset: circ }}
+              whileInView={{ strokeDashoffset: circ * (1 - pct / 100) }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+            />
+          )}
+        </svg>
+        <div className="min-w-0">
+          <div className={`text-xs uppercase tracking-wide font-semibold mb-1 ${alerta ? 'text-[#ff8a7a]' : 'text-upl-resaltador'}`}>
+            {label}
+          </div>
+          <div className={`font-display font-800 text-2xl sm:text-3xl ${alerta ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}>
+            {pct != null ? `${pct}%` : 'S/D'}
+          </div>
+          {hint && <div className="text-xs text-upl-crema/55 mt-1">{hint}</div>}
         </div>
-        <div className={`font-display font-800 text-2xl sm:text-3xl ${alerta ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}>
-          {pct != null ? `${pct}%` : 'S/D'}
-        </div>
-        {hint && <div className="text-xs text-upl-crema/55 mt-1">{hint}</div>}
       </div>
-    </motion.div>
+    </StatCell>
   )
 }
 
@@ -192,7 +211,7 @@ export function Universidad() {
             variants={statGridVariants}
             initial="hidden"
             animate="visible"
-            className="mt-8 grid gap-3 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]"
+            className="mt-8 rounded-2xl overflow-hidden flex flex-wrap gap-px border border-upl-crema/12 bg-upl-crema/15 [backdrop-filter:blur(18px)] shadow-[0_8px_30px_rgba(10,8,30,0.35)]"
           >
             <StatCardRadial
               label="No llega a graduarse"

@@ -251,12 +251,9 @@ function VistaProvincia({
                   fill={esActiva ? '#5b6796' : BASE_FILL}
                   stroke={esActiva ? '#facf3b' : 'rgba(255,255,249,0.65)'}
                   strokeWidth={(esActiva ? 1.6 : 0.8) / vista.k}
+                  className={esSaltable ? 'transition-colors duration-200 ease-out hover:fill-[#6a76a8]' : undefined}
                   style={{ pointerEvents: esSaltable ? 'auto' : 'none', cursor: esSaltable ? 'pointer' : 'default' }}
                   onClick={esSaltable ? () => onCambiarProvincia(p) : undefined}
-                  onMouseEnter={
-                    esSaltable ? (e) => (e.currentTarget as SVGPathElement).setAttribute('fill', '#6a76a8') : undefined
-                  }
-                  onMouseLeave={esSaltable ? (e) => (e.currentTarget as SVGPathElement).setAttribute('fill', BASE_FILL) : undefined}
                 />
               )
             })}
@@ -280,7 +277,7 @@ function VistaProvincia({
                   r={radioPin}
                   className="pin"
                   {...pinVisual(u.tieneFicha, radioPin)}
-                  style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? 'auto' : 'none', transition: 'opacity 0.4s ease' }}
+                  style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? 'auto' : 'none', transition: 'opacity 0.35s ease-out' }}
                   onClick={() => onSelectPin(u)}
                   onMouseEnter={() => setHover(u)}
                   onMouseLeave={() => setHover(null)}
@@ -400,13 +397,11 @@ function MapaNacional({
               <path
                 key={p.nombre}
                 d={p.d}
-                className="province-shape"
+                className="cursor-pointer transition-colors duration-200 ease-out hover:fill-[#6a76a8]"
                 fill={BASE_FILL}
                 stroke="rgba(255,255,249,0.65)"
                 strokeWidth={0.8}
                 onClick={() => onSelectProvincia(p)}
-                onMouseEnter={(e) => (e.currentTarget as SVGPathElement).setAttribute('fill', '#6a76a8')}
-                onMouseLeave={(e) => (e.currentTarget as SVGPathElement).setAttribute('fill', BASE_FILL)}
               />
             ))}
 
@@ -441,11 +436,10 @@ function MapaNacional({
               >
                 <path
                   d={CAPITAL.d}
+                  className="transition-colors duration-200 ease-out hover:fill-[#6a76a8]"
                   fill={BASE_FILL}
                   stroke="rgba(255,255,249,0.65)"
                   strokeWidth={capitalVb.w / 350}
-                  onMouseEnter={(e) => (e.currentTarget as SVGPathElement).setAttribute('fill', '#6a76a8')}
-                  onMouseLeave={(e) => (e.currentTarget as SVGPathElement).setAttribute('fill', BASE_FILL)}
                 />
                 {pinesCapital.map((u) => (
                   <circle
