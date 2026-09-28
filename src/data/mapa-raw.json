@@ -15,8 +15,8 @@
     "sigla": "UNA",
     "ciudad": "CABA",
     "provincia": "Ciudad Autónoma de Buenos Aires",
-    "lat": -34.603,
-    "lng": -58.4,
+    "lat": -34.6058,
+    "lng": -58.3925,
     "tieneFicha": false
   },
   {
@@ -45,8 +45,8 @@
     "sigla": "UBA",
     "ciudad": "CABA",
     "provincia": "Ciudad Autónoma de Buenos Aires",
-    "lat": -34.6037,
-    "lng": -58.3816,
+    "lat": -34.5989,
+    "lng": -58.3778,
     "tieneFicha": true
   },
   {
@@ -135,8 +135,8 @@
     "sigla": "UNDEF",
     "ciudad": "CABA",
     "provincia": "Ciudad Autónoma de Buenos Aires",
-    "lat": -34.58,
-    "lng": -58.55,
+    "lat": -34.5977,
+    "lng": -58.3745,
     "tieneFicha": false
   },
   {
@@ -375,8 +375,8 @@
     "sigla": "UNIPE",
     "ciudad": "CABA",
     "provincia": "Ciudad Autónoma de Buenos Aires",
-    "lat": -34.61,
-    "lng": -58.42,
+    "lat": -34.6175,
+    "lng": -58.3799,
     "tieneFicha": false
   },
   {
@@ -515,8 +515,8 @@
     "sigla": "UTN",
     "ciudad": "CABA",
     "provincia": "Ciudad Autónoma de Buenos Aires",
-    "lat": -34.6158,
-    "lng": -58.3728,
+    "lat": -34.6084,
+    "lng": -58.3733,
     "tieneFicha": false
   },
   {

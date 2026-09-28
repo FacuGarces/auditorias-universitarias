@@ -294,45 +294,101 @@ function MapaNacional({
 }) {
   const [hover, setHover] = useState<UniversidadMapa | null>(null)
 
+  const capitalVb = useMemo(() => {
+    if (!CAPITAL) return null
+    const [x0, y0, x1, y1] = CAPITAL.bbox
+    const pad = Math.max(x1 - x0, y1 - y0) * 0.4
+    return { x0: x0 - pad, y0: y0 - pad, w: x1 - x0 + pad * 2, h: y1 - y0 + pad * 2 }
+  }, [])
+
+  const pinesCapital = useMemo(() => pines.filter((u) => normalizar(u.provincia) === 'capital federal'), [])
+
   return (
     <>
-      <div className="absolute inset-0 flex items-center justify-center px-3 pt-24 pb-6">
-        <svg viewBox={viewBox} className="w-full h-full max-w-5xl" style={{ overflow: 'visible' }}>
-          {provincias.map((p) => {
-            const esCapital = p.nombre === 'Capital Federal'
-            return (
-              <path
-                key={p.nombre}
-                d={p.d}
-                className={esCapital ? '' : 'province-shape'}
-                fill={BASE_FILL}
-                stroke="rgba(255,255,249,0.65)"
-                strokeWidth={0.8}
-                style={{ pointerEvents: esCapital ? 'none' : 'auto' }}
-                onClick={() => onSelectProvincia(p)}
-                onMouseEnter={(e) => {
-                  if (!esCapital) (e.currentTarget as SVGPathElement).setAttribute('fill', '#6a76a8')
-                }}
-                onMouseLeave={(e) => {
-                  if (!esCapital) (e.currentTarget as SVGPathElement).setAttribute('fill', BASE_FILL)
-                }}
-              />
-            )
-          })}
+      <div className="absolute inset-0 flex items-stretch justify-center px-3 pt-24 pb-6 gap-2">
+        <div className="flex-1 flex items-center justify-center min-w-0">
+          <svg viewBox={viewBox} className="w-full h-full max-w-4xl" style={{ overflow: 'visible' }}>
+            {provincias.map((p) => {
+              const esCapital = p.nombre === 'Capital Federal'
+              return (
+                <path
+                  key={p.nombre}
+                  d={p.d}
+                  className={esCapital ? '' : 'province-shape'}
+                  fill={BASE_FILL}
+                  stroke="rgba(255,255,249,0.65)"
+                  strokeWidth={0.8}
+                  style={{ pointerEvents: esCapital ? 'none' : 'auto' }}
+                  onClick={() => onSelectProvincia(p)}
+                  onMouseEnter={(e) => {
+                    if (!esCapital) (e.currentTarget as SVGPathElement).setAttribute('fill', '#6a76a8')
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!esCapital) (e.currentTarget as SVGPathElement).setAttribute('fill', BASE_FILL)
+                  }}
+                />
+              )
+            })}
 
-          {pines.map((u) => (
-            <circle
-              key={u.id}
-              cx={u.x}
-              cy={u.y}
-              r={PIN_R_NACIONAL}
-              className={`pin ${!u.tieneFicha ? 'pin-no-data' : ''}`}
-              onClick={() => onSelectPin(u)}
-              onMouseEnter={() => setHover(u)}
-              onMouseLeave={() => setHover(null)}
-            />
-          ))}
-        </svg>
+            {pines.map((u) => (
+              <circle
+                key={u.id}
+                cx={u.x}
+                cy={u.y}
+                r={PIN_R_NACIONAL}
+                className={`pin ${!u.tieneFicha ? 'pin-no-data' : ''}`}
+                onClick={() => onSelectPin(u)}
+                onMouseEnter={() => setHover(u)}
+                onMouseLeave={() => setHover(null)}
+              />
+            ))}
+          </svg>
+        </div>
+
+        {/* Anexo de Capital Federal: mismo fondo, sin panel ni borde — es una continuación del mapa, no un modal aparte. */}
+        {CAPITAL && capitalVb && (
+          <div className="hidden sm:flex flex-col items-stretch w-[24%] max-w-[260px] min-w-[150px] relative pt-1">
+            <span className="text-upl-crema/60 text-xs font-display font-600 mb-1 text-center">Capital Federal</span>
+            <button
+              onClick={() => onSelectProvincia(CAPITAL)}
+              className="flex-1 cursor-pointer bg-transparent border-0 p-0"
+              aria-label="Ver Capital Federal en detalle"
+            >
+              <svg
+                viewBox={`${capitalVb.x0} ${capitalVb.y0} ${capitalVb.w} ${capitalVb.h}`}
+                className="w-full h-full"
+                style={{ overflow: 'visible' }}
+              >
+                <path
+                  d={CAPITAL.d}
+                  fill={BASE_FILL}
+                  stroke="rgba(255,255,249,0.65)"
+                  strokeWidth={capitalVb.w / 350}
+                  onMouseEnter={(e) => (e.currentTarget as SVGPathElement).setAttribute('fill', '#6a76a8')}
+                  onMouseLeave={(e) => (e.currentTarget as SVGPathElement).setAttribute('fill', BASE_FILL)}
+                />
+                {pinesCapital.map((u) => (
+                  <circle
+                    key={u.id}
+                    cx={u.x}
+                    cy={u.y}
+                    r={capitalVb.w / 40}
+                    className={`pin ${!u.tieneFicha ? 'pin-no-data' : ''}`}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onSelectPin(u)
+                    }}
+                    onMouseEnter={(e) => {
+                      e.stopPropagation()
+                      setHover(u)
+                    }}
+                    onMouseLeave={() => setHover(null)}
+                  />
+                ))}
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="fixed left-3 bottom-3 z-20 glass rounded-xl px-4 py-3 text-xs text-upl-crema/80 max-w-[220px]">
@@ -395,66 +451,6 @@ export function Home() {
           </Link>
         </div>
       </header>
-
-      {/* Inset de CABA: mapa completo del país + Capital Federal en grande al lado, siempre visible en la vista nacional. */}
-      {!activa && CAPITAL && (
-        <InsetCapital onSelect={() => setActiva(CAPITAL)} onSelectPin={handleSelectPin} />
-      )}
-    </div>
-  )
-}
-
-function InsetCapital({ onSelect, onSelectPin }: { onSelect: () => void; onSelectPin: (u: UniversidadMapa) => void }) {
-  const [hover, setHover] = useState<UniversidadMapa | null>(null)
-  if (!CAPITAL) return null
-
-  const [x0, y0, x1, y1] = CAPITAL.bbox
-  const pad = Math.max(x1 - x0, y1 - y0) * 0.35
-  const vb = `${x0 - pad} ${y0 - pad} ${x1 - x0 + pad * 2} ${y1 - y0 + pad * 2}`
-  const radioPin = (x1 - x0 + pad * 2) / 45
-
-  const pinesCapital = pines.filter((u) => normalizar(u.provincia) === 'capital federal')
-
-  return (
-    <div className="fixed top-24 bottom-3 right-3 z-20 w-[26vw] min-w-[190px] max-w-[280px] hidden sm:flex flex-col glass-strong rounded-2xl overflow-hidden">
-      <div className="px-4 py-3 border-b border-upl-crema/10 flex items-center justify-between gap-2">
-        <span className="font-display font-700 text-upl-crema text-sm">Capital Federal</span>
-        <button
-          onClick={onSelect}
-          className="shrink-0 rounded-full glass-chip text-upl-crema text-[11px] font-semibold px-2.5 py-1 hover:bg-upl-crema/15 transition-colors"
-        >
-          Acercar
-        </button>
-      </div>
-      <button onClick={onSelect} className="flex-1 p-3 cursor-pointer">
-        <svg viewBox={vb} className="w-full h-full" style={{ overflow: 'visible' }}>
-          <path d={CAPITAL.d} fill="#5b6796" stroke="#facf3b" strokeWidth={(x1 - x0 + pad * 2) / 400} />
-          {pinesCapital.map((u) => (
-            <circle
-              key={u.id}
-              cx={u.x}
-              cy={u.y}
-              r={radioPin}
-              className={`pin ${!u.tieneFicha ? 'pin-no-data' : ''}`}
-              onClick={(e) => {
-                e.stopPropagation()
-                onSelectPin(u)
-              }}
-              onMouseEnter={(e) => {
-                e.stopPropagation()
-                setHover(u)
-              }}
-              onMouseLeave={() => setHover(null)}
-            />
-          ))}
-        </svg>
-      </button>
-      {hover && (
-        <div className="px-4 py-2 border-t border-upl-crema/10 text-xs">
-          <div className="font-semibold text-upl-crema">{hover.sigla}</div>
-          {!hover.tieneFicha && <div className="text-upl-amarillo">Sin ficha de datos aún</div>}
-        </div>
-      )}
     </div>
   )
 }
