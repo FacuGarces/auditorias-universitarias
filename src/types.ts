@@ -32,7 +32,7 @@ export interface UniversidadDetalle {
   reinscriptos0Materias?: number
   tasaCohorte?: number | null
   estudiantesPorDocente?: number
-  // Costo por graduado en pesos constantes de 2024 (deflactado por IPC) — la métrica que se
+  // Costo por graduado en pesos constantes de agosto 2026 (deflactado por IPC) — la métrica que se
   // muestra en rankings y fichas. costoPorGraduado === serieCostoPorGraduadoReal['2024'].
   costoPorGraduado?: number
   serieEstudiantes?: Record<string, number | string>
@@ -41,7 +41,7 @@ export interface UniversidadDetalle {
   serieTasaCohorte?: Record<string, number>
   serieDocentesUniversitario?: Record<string, number>
   serieNoDocentes?: Record<string, number>
-  // Costo por graduado por año, en pesos constantes de 2024 vs. pesos corrientes de cada año.
+  // Costo por graduado por año, en pesos constantes de agosto 2026 vs. pesos corrientes de cada año.
   serieCostoPorGraduadoReal?: Record<string, number>
   serieCostoPorGraduadoNominal?: Record<string, number>
 }

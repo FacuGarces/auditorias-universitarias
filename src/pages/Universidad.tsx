@@ -121,7 +121,7 @@ export function Universidad() {
             <StatCard
               label="Costo por graduado"
               value={formatMoneda(u.costoPorGraduado)}
-              hint="Presupuesto ejecutado 2024 / egresados 2024 — pesos constantes de 2024"
+              hint="Presupuesto ejecutado 2024 / egresados 2024 — pesos constantes de agosto 2026"
               alerta={!!u.costoPorGraduado && u.costoPorGraduado > 15_000_000}
             />
             <StatCard
@@ -142,6 +142,49 @@ export function Universidad() {
               }
             />
           </div>
+
+          {u.reinscriptosTotal != null && u.reinscriptosRegulares2mas != null && u.reinscriptos0Materias != null && (
+            <div className="mt-3 glass rounded-2xl px-5 py-4">
+              <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1">
+                Quiénes son "activos" sobre el total de la matrícula
+              </div>
+              <p className="text-xs text-upl-crema/50 mb-3">
+                De {formatNumero(u.estudiantes2024)} estudiantes totales en 2024, {formatNumero(u.reinscriptosTotal)}{' '}
+                ya venían cursando (reinscriptos) — el resto son ingresantes nuevos de ese año, todavía sin
+                materias que evaluar.
+              </p>
+              {(() => {
+                const total = u.reinscriptosTotal!
+                const regulares = u.reinscriptosRegulares2mas!
+                const cero = u.reinscriptos0Materias!
+                const unaMateria = Math.max(total - regulares - cero, 0)
+                const pct = (n: number) => Math.round((n / total) * 100)
+                return (
+                  <>
+                    <div className="flex h-3 rounded-full overflow-hidden bg-upl-principal/40">
+                      <div style={{ width: `${pct(regulares)}%` }} className="bg-[#8fd19e]" title="Regulares (2+ materias)" />
+                      <div style={{ width: `${pct(unaMateria)}%` }} className="bg-upl-resaltador" title="1 materia aprobada" />
+                      <div style={{ width: `${pct(cero)}%` }} className="bg-[#e2574c]" title="0 materias aprobadas" />
+                    </div>
+                    <div className="flex flex-wrap gap-x-5 gap-y-1 mt-2.5 text-xs text-upl-crema/70">
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#8fd19e] shrink-0" />
+                        Regulares (2+ materias): {pct(regulares)}% ({formatNumero(regulares)})
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-upl-resaltador shrink-0" />
+                        1 materia: {pct(unaMateria)}% ({formatNumero(unaMateria)})
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#e2574c] shrink-0" />
+                        0 materias: {pct(cero)}% ({formatNumero(cero)})
+                      </span>
+                    </div>
+                  </>
+                )
+              })()}
+            </div>
+          )}
 
           <div className="mt-8">
             <h2 className="font-display font-700 text-lg text-upl-crema mb-3">Evolución histórica</h2>
@@ -169,7 +212,7 @@ export function Universidad() {
               {serieCostoReal.length >= 2 && (
                 <div className="glass rounded-2xl px-5 py-4 sm:col-span-2">
                   <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
-                    Costo por graduado — pesos constantes de 2024
+                    Costo por graduado — pesos constantes de agosto 2026
                   </div>
                   <EvolutionChart data={serieCostoReal} color="#ff8a7a" formatValue={(v) => formatMoneda(v)} />
                   <p className="text-xs text-upl-crema/40 mt-2">
@@ -177,7 +220,7 @@ export function Universidad() {
                     {serieCostoNominal.length >= 2 &&
                       `${formatMoneda(serieCostoNominal[0].value)} → ${formatMoneda(serieCostoNominal[serieCostoNominal.length - 1].value)}`}
                     , una comparación sin sentido dada la inflación acumulada del período — por eso esta ficha usa
-                    siempre pesos constantes de 2024 (deflactados por IPC).
+                    siempre pesos constantes de agosto 2026 (deflactados por IPC).
                   </p>
                 </div>
               )}

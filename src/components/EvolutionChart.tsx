@@ -95,7 +95,7 @@ export function EvolutionChart({ data, color = '#facf3b', height = 150, formatVa
 
       <text
         x={x(puntos.length - 1)}
-        y={Math.max(y(last.value) - 10, padTop + 8)}
+        y={y(last.value) - 10 >= padTop + 8 ? y(last.value) - 10 : y(last.value) + 18}
         fontSize={12}
         fontWeight={700}
         textAnchor="end"

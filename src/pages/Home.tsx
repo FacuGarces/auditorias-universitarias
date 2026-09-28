@@ -530,22 +530,23 @@ export function Home() {
       </div>
 
       {/* Header flotante */}
-      <header className="fixed top-0 inset-x-0 z-20 flex justify-center pt-4 px-3">
-        <div className="glass-strong rounded-2xl px-5 py-3 max-w-2xl w-full flex items-center gap-3">
-          <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="UPL" className="h-10 w-10 rounded-lg object-cover shrink-0" />
+      <header className="fixed top-0 inset-x-0 z-20 flex justify-center pt-3 sm:pt-4 px-3">
+        <div className="glass-strong rounded-2xl px-3 sm:px-5 py-2.5 sm:py-3 max-w-2xl w-full flex items-center gap-2 sm:gap-3">
+          <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="UPL" className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg object-cover shrink-0" />
           <div className="min-w-0 flex-1">
-            <h1 className="font-display font-800 text-lg text-upl-crema leading-tight">Auditorías Universitarias</h1>
-            <p className="text-xs text-upl-resaltador truncate">Universitarios por la Libertad</p>
+            <h1 className="font-display font-800 text-sm sm:text-lg text-upl-crema leading-tight truncate">Auditorías Universitarias</h1>
+            <p className="hidden sm:block text-xs text-upl-resaltador truncate">Universitarios por la Libertad</p>
           </div>
           <Link
             to="/kirchneristas"
-            className="shrink-0 rounded-full glass-chip text-upl-crema font-display font-600 text-sm px-4 py-2 hover:bg-upl-crema/15 transition-colors hidden sm:block"
+            className="shrink-0 rounded-full glass-chip text-upl-crema font-display font-600 text-xs sm:text-sm px-2.5 sm:px-4 py-1.5 sm:py-2 hover:bg-upl-crema/15 transition-colors whitespace-nowrap"
           >
-            Universidades K
+            <span className="sm:hidden">K</span>
+            <span className="hidden sm:inline">Universidades K</span>
           </Link>
           <Link
             to="/ranking"
-            className="shrink-0 rounded-full bg-upl-amarillo text-upl-principal font-display font-600 text-sm px-4 py-2 hover:bg-upl-resaltador transition-colors"
+            className="shrink-0 rounded-full bg-upl-amarillo text-upl-principal font-display font-600 text-xs sm:text-sm px-2.5 sm:px-4 py-1.5 sm:py-2 hover:bg-upl-resaltador transition-colors whitespace-nowrap"
           >
             Rankings
           </Link>

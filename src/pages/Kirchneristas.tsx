@@ -93,7 +93,7 @@ export function Kirchneristas() {
 
         <p className="mt-6 mb-8 text-xs text-upl-crema/40">
           Fuente: Anuarios de Estadísticas Universitarias (SPU) y leyes de creación publicadas en el Boletín
-          Oficial. Costo por graduado en pesos constantes de 2024.
+          Oficial. Costo por graduado en pesos constantes de agosto 2026.
         </p>
       </div>
     </div>

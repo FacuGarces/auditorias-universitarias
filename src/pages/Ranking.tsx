@@ -32,7 +32,7 @@ const METRICAS: Record<
   },
   costo: {
     label: 'Costo por graduado',
-    subtitulo: 'Presupuesto ejecutado 2024 dividido egresados 2024 (pesos corrientes). Menor = mejor.',
+    subtitulo: 'Presupuesto ejecutado 2024 dividido egresados 2024, en pesos constantes de agosto 2026. Menor = mejor.',
     valor: (u) => u.costoPorGraduado,
     formato: (v) => formatMoneda(v),
     ordenAsc: true,
