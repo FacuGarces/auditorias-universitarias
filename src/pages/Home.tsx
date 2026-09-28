@@ -50,7 +50,39 @@ const NATIONAL_VIEWBOX = '0 0 620 900'
 const CAPITAL = provincias.find((p) => p.nombre === 'Capital Federal') ?? null
 
 const PIN_R_NACIONAL = 3.4
+const PIN_STROKE_W_BASE = 0.6
+const PIN_DASH_BASE: [number, number] = [1.2, 1]
+const PIN_FILL = '#facf3b'
+const PIN_STROKE_DATA = '#242c50'
+const PIN_STROKE_NODATA = '#facf3b'
 const ZOOM_MAX = 400
+
+/**
+ * Radio "de mapa" (unidades crudas) que representa un tamaño en pantalla CRECIENTE a medida que
+ * se hace zoom (k crece respecto del encuadre inicial kMin), con un techo para que no se dispare.
+ * Al encuadre inicial (k===kMin) el punto se ve igual que en el mapa nacional (PIN_R_NACIONAL).
+ */
+function radioCreciente(k: number, kMin: number) {
+  const zoomRelativo = k / kMin
+  const pantalla = Math.min(9, PIN_R_NACIONAL * Math.sqrt(zoomRelativo))
+  return pantalla / k
+}
+
+/**
+ * Borde y punteado siempre proporcionales al radio actual — así un pin "sin datos" es SIEMPRE
+ * un círculo punteado sin relleno, y uno "con datos" SIEMPRE un círculo amarillo sólido, sin
+ * importar el nivel de zoom (antes el borde/punteado tenían un grosor fijo en CSS que se
+ * escalaba con el <g> transformado y terminaba tapando o deformando el círculo).
+ */
+function pinVisual(tieneFicha: boolean, r: number) {
+  const ratio = r / PIN_R_NACIONAL
+  return {
+    fill: tieneFicha ? PIN_FILL : 'transparent',
+    stroke: tieneFicha ? PIN_STROKE_DATA : PIN_STROKE_NODATA,
+    strokeWidth: PIN_STROKE_W_BASE * ratio,
+    strokeDasharray: tieneFicha ? undefined : `${PIN_DASH_BASE[0] * ratio} ${PIN_DASH_BASE[1] * ratio}`,
+  }
+}
 
 type Vista = { k: number; x: number; y: number }
 
@@ -158,10 +190,10 @@ function VistaProvincia({
     [provincia],
   )
 
-  // Radio constante en pantalla: se expresa en unidades "de mapa" dividiendo por el zoom actual.
-  // Como vista.k nunca puede bajar de minK.current, el radio crudo nunca puede dispararse.
-  const radioPantalla = Math.max(2.2, Math.min(6.5, 40 / Math.sqrt(vista.k)))
-  const radioPin = radioPantalla / vista.k
+  // Crece con el zoom (más acercás, más grande y representativo el punto), con techo — y como
+  // vista.k nunca puede bajar de minK.current, tampoco puede encogerse por debajo del punto de partida.
+  const radioPin = radioCreciente(vista.k, minK.current)
+  const clipId = `clip-${slug(provincia.nombre)}`
 
   return (
     <>
@@ -177,6 +209,11 @@ function VistaProvincia({
           onPointerCancel={handlePointerUp}
           onClickCapture={handleClickCapture}
         >
+          <defs>
+            <clipPath id={clipId}>
+              <path d={provincia.d} />
+            </clipPath>
+          </defs>
           <g
             style={{
               transform: `matrix(${vista.k},0,0,${vista.k},${vista.x},${vista.y})`,
@@ -200,9 +237,14 @@ function VistaProvincia({
               )
             })}
 
-            {deptoPaths.map((d, i) => (
-              <path key={i} d={d} fill="none" stroke="rgba(255,255,249,0.3)" strokeWidth={0.6 / vista.k} style={{ pointerEvents: 'none' }} />
-            ))}
+            {/* Recortadas exactamente al contorno de la provincia: los datasets de departamentos y de
+                provincias vienen de fuentes distintas y no calzan vértice a vértice — sin este clip,
+                el límite de algunas comunas se pasa unos pixeles de la línea dorada. */}
+            <g clipPath={`url(#${clipId})`}>
+              {deptoPaths.map((d, i) => (
+                <path key={i} d={d} fill="none" stroke="rgba(255,255,249,0.3)" strokeWidth={0.6 / vista.k} style={{ pointerEvents: 'none' }} />
+              ))}
+            </g>
 
             {pines.map((u) => {
               const visible = normalizar(u.provincia) === normalizar(provincia.nombre)
@@ -212,7 +254,8 @@ function VistaProvincia({
                   cx={u.x}
                   cy={u.y}
                   r={radioPin}
-                  className={`pin ${!u.tieneFicha ? 'pin-no-data' : ''}`}
+                  className="pin"
+                  {...pinVisual(u.tieneFicha, radioPin)}
                   style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? 'auto' : 'none', transition: 'opacity 0.4s ease' }}
                   onClick={() => onSelectPin(u)}
                   onMouseEnter={() => setHover(u)}
@@ -297,17 +340,6 @@ function MapaNacional({
   onSelectPin: (u: UniversidadMapa) => void
 }) {
   const [hover, setHover] = useState<UniversidadMapa | null>(null)
-  const [deptoCapital, setDeptoCapital] = useState<string[]>([])
-
-  useEffect(() => {
-    let vigente = true
-    cargarDepartamentos('Capital Federal').then((paths) => {
-      if (vigente) setDeptoCapital(paths)
-    })
-    return () => {
-      vigente = false
-    }
-  }, [])
 
   const capitalVb = useMemo(() => {
     if (!CAPITAL) return null
@@ -315,6 +347,12 @@ function MapaNacional({
     const pad = Math.max(x1 - x0, y1 - y0) * 0.4
     return { x0: x0 - pad, y0: y0 - pad, w: x1 - x0 + pad * 2, h: y1 - y0 + pad * 2 }
   }, [])
+
+  // El anexo se comporta como una "cámara" fija equivalente a vista.k = 800/capitalVb.w, así el
+  // radio de los pines sale de la MISMA fórmula que en el resto del mapa — nunca un ajuste manual aparte.
+  // Tamaño fijo elegido a ojo para que, en el recorte chico del anexo, las 5 sedes se distingan
+  // bien sin transformarse en un blob (la fórmula "proporcional" del zoom daba puntos ilegibles acá).
+  const radioPinCapital = capitalVb ? capitalVb.w / 55 : PIN_R_NACIONAL
 
   const pinesCapital = useMemo(() => pines.filter((u) => normalizar(u.provincia) === 'capital federal'), [])
 
@@ -351,7 +389,8 @@ function MapaNacional({
                 cx={u.x}
                 cy={u.y}
                 r={PIN_R_NACIONAL}
-                className={`pin ${!u.tieneFicha ? 'pin-no-data' : ''}`}
+                className="pin"
+                {...pinVisual(u.tieneFicha, PIN_R_NACIONAL)}
                 onClick={() => onSelectPin(u)}
                 onMouseEnter={() => setHover(u)}
                 onMouseLeave={() => setHover(null)}
@@ -382,16 +421,14 @@ function MapaNacional({
                   onMouseEnter={(e) => (e.currentTarget as SVGPathElement).setAttribute('fill', '#6a76a8')}
                   onMouseLeave={(e) => (e.currentTarget as SVGPathElement).setAttribute('fill', BASE_FILL)}
                 />
-                {deptoCapital.map((d, i) => (
-                  <path key={i} d={d} fill="none" stroke="rgba(255,255,249,0.3)" strokeWidth={capitalVb.w / 700} style={{ pointerEvents: 'none' }} />
-                ))}
                 {pinesCapital.map((u) => (
                   <circle
                     key={u.id}
                     cx={u.x}
                     cy={u.y}
-                    r={capitalVb.w / 90}
-                    className={`pin ${!u.tieneFicha ? 'pin-no-data' : ''}`}
+                    r={radioPinCapital}
+                    className="pin"
+                    {...pinVisual(u.tieneFicha, radioPinCapital)}
                     onClick={(e) => {
                       e.stopPropagation()
                       onSelectPin(u)
