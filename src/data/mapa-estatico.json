@@ -265,7 +265,7 @@
       "provincia": "Ciudad Autónoma de Buenos Aires",
       "lat": -34.6058,
       "lng": -58.3925,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 502.14,
       "y": 306.3
     },
@@ -313,7 +313,7 @@
       "provincia": "Catamarca",
       "lat": -28.4696,
       "lng": -65.7852,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 357.29,
       "y": 165.11
     },
@@ -325,7 +325,7 @@
       "provincia": "Buenos Aires",
       "lat": -37.3217,
       "lng": -59.1332,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 487.63,
       "y": 372.06
     },
@@ -349,7 +349,7 @@
       "provincia": "La Rioja",
       "lat": -29.1671,
       "lng": -67.4923,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 323.84,
       "y": 180.71
     },
@@ -361,7 +361,7 @@
       "provincia": "Neuquén",
       "lat": -38.9516,
       "lng": -68.0591,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 312.73,
       "y": 412.67
     },
@@ -385,7 +385,7 @@
       "provincia": "Córdoba",
       "lat": -31.4201,
       "lng": -64.1888,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 388.57,
       "y": 231.84
     },
@@ -397,7 +397,7 @@
       "provincia": "Mendoza",
       "lat": -32.8908,
       "lng": -68.8272,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 297.68,
       "y": 265.88
     },
@@ -409,7 +409,7 @@
       "provincia": "Ciudad Autónoma de Buenos Aires",
       "lat": -34.5977,
       "lng": -58.3745,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 502.49,
       "y": 306.11
     },
@@ -421,7 +421,7 @@
       "provincia": "Entre Ríos",
       "lat": -31.7333,
       "lng": -60.5238,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 460.38,
       "y": 239.05
     },
@@ -433,7 +433,7 @@
       "provincia": "Formosa",
       "lat": -26.1775,
       "lng": -58.1781,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 506.34,
       "y": 114.55
     },
@@ -493,7 +493,7 @@
       "provincia": "Jujuy",
       "lat": -24.1858,
       "lng": -65.2995,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 366.8,
       "y": 71.43
     },
@@ -517,7 +517,7 @@
       "provincia": "La Pampa",
       "lat": -36.6167,
       "lng": -64.2833,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 386.72,
       "y": 354.77
     },
@@ -541,7 +541,7 @@
       "provincia": "La Rioja",
       "lat": -29.4131,
       "lng": -66.8558,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 336.31,
       "y": 186.24
     },
@@ -553,7 +553,7 @@
       "provincia": "Buenos Aires",
       "lat": -34.7061,
       "lng": -58.3925,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 502.14,
       "y": 308.69
     },
@@ -565,7 +565,7 @@
       "provincia": "Santa Fe",
       "lat": -31.6333,
       "lng": -60.7,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 456.93,
       "y": 236.74
     },
@@ -577,7 +577,7 @@
       "provincia": "Buenos Aires",
       "lat": -34.7614,
       "lng": -58.4022,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 501.95,
       "y": 310.01
     },
@@ -589,7 +589,7 @@
       "provincia": "Buenos Aires",
       "lat": -34.5703,
       "lng": -59.1051,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 488.18,
       "y": 305.46
     },
@@ -601,7 +601,7 @@
       "provincia": "Buenos Aires",
       "lat": -38.0055,
       "lng": -57.5426,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 518.8,
       "y": 388.99
     },
@@ -613,7 +613,7 @@
       "provincia": "Misiones",
       "lat": -27.3671,
       "lng": -55.8961,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 551.06,
       "y": 140.66
     },
@@ -637,7 +637,7 @@
       "provincia": "Corrientes",
       "lat": -27.4692,
       "lng": -58.8306,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 493.56,
       "y": 142.92
     },
@@ -649,7 +649,7 @@
       "provincia": "Buenos Aires",
       "lat": -34.5847,
       "lng": -60.9433,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 452.16,
       "y": 305.8
     },
@@ -673,7 +673,7 @@
       "provincia": "Santa Cruz",
       "lat": -51.623,
       "lng": -69.2168,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 290.05,
       "y": 767.79
     },
@@ -685,7 +685,7 @@
       "provincia": "Chubut",
       "lat": -45.8641,
       "lng": -67.4966,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 323.75,
       "y": 596.41
     },
@@ -697,7 +697,7 @@
       "provincia": "Ciudad Autónoma de Buenos Aires",
       "lat": -34.6175,
       "lng": -58.3799,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 502.39,
       "y": 306.58
     },
@@ -709,7 +709,7 @@
       "provincia": "Buenos Aires",
       "lat": -34.7181,
       "lng": -58.2884,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 504.18,
       "y": 308.98
     },
@@ -733,7 +733,7 @@
       "provincia": "Córdoba",
       "lat": -33.1232,
       "lng": -64.3499,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 385.41,
       "y": 271.31
     },
@@ -757,7 +757,7 @@
       "provincia": "Santa Fe",
       "lat": -32.9468,
       "lng": -60.6393,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 458.12,
       "y": 267.19
     },
@@ -769,7 +769,7 @@
       "provincia": "Salta",
       "lat": -24.7859,
       "lng": -65.4117,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 364.61,
       "y": 84.35
     },
@@ -781,7 +781,7 @@
       "provincia": "Buenos Aires",
       "lat": -34.2646,
       "lng": -59.4759,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 480.91,
       "y": 298.2
     },
@@ -793,7 +793,7 @@
       "provincia": "San Juan",
       "lat": -31.5375,
       "lng": -68.5364,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 303.38,
       "y": 234.54
     },
@@ -805,7 +805,7 @@
       "provincia": "San Luis",
       "lat": -33.295,
       "lng": -66.3356,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 346.5,
       "y": 275.34
     },
@@ -817,7 +817,7 @@
       "provincia": "Buenos Aires",
       "lat": -34.5719,
       "lng": -58.5477,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 499.1,
       "y": 305.49
     },
@@ -829,7 +829,7 @@
       "provincia": "Santiago del Estero",
       "lat": -27.7834,
       "lng": -64.2642,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 387.09,
       "y": 149.87
     },
@@ -853,7 +853,7 @@
       "provincia": "Buenos Aires",
       "lat": -38.7183,
       "lng": -62.2661,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 426.24,
       "y": 406.8
     },
@@ -865,7 +865,7 @@
       "provincia": "Ciudad Autónoma de Buenos Aires",
       "lat": -34.6084,
       "lng": -58.3733,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 502.52,
       "y": 306.36
     },
@@ -889,7 +889,7 @@
       "provincia": "Buenos Aires",
       "lat": -34.6011,
       "lng": -58.5628,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 498.81,
       "y": 306.19
     },
@@ -901,7 +901,7 @@
       "provincia": "Tucumán",
       "lat": -26.8241,
       "lng": -65.2226,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 368.31,
       "y": 128.71
     },
@@ -913,7 +913,7 @@
       "provincia": "Córdoba",
       "lat": -32.4076,
       "lng": -63.2426,
-      "tieneFicha": false,
+      "tieneFicha": true,
       "x": 407.11,
       "y": 254.64
     },
