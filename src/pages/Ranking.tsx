@@ -41,8 +41,10 @@ const METRICAS: Record<
 
 export function Ranking() {
   const [metrica, setMetrica] = useState<MetricaId>('cohorte')
+  const [invertido, setInvertido] = useState(false)
   const navigate = useNavigate()
   const cfg = METRICAS[metrica]
+  const ascendente = invertido ? !cfg.ordenAsc : cfg.ordenAsc
 
   const filas = useMemo(() => {
     const conDatos = universidadesArray.filter((u) => u.tieneDatos)
@@ -53,9 +55,9 @@ export function Ranking() {
         const vb = cfg.valor(b)
         if (va == null) return 1
         if (vb == null) return -1
-        return cfg.ordenAsc ? va - vb : vb - va
+        return ascendente ? va - vb : vb - va
       })
-  }, [cfg])
+  }, [cfg, ascendente])
 
   return (
     <div className="relative min-h-screen">
@@ -85,7 +87,15 @@ export function Ranking() {
           ))}
         </div>
 
-        <p className="text-sm text-upl-crema/50 mb-4">{cfg.subtitulo}</p>
+        <div className="flex items-center justify-between gap-3 mb-4">
+          <p className="text-sm text-upl-crema/50">{cfg.subtitulo}</p>
+          <button
+            onClick={() => setInvertido((v) => !v)}
+            className="shrink-0 rounded-full glass-chip text-upl-crema text-xs font-semibold px-3 py-1.5 hover:bg-upl-crema/15 transition-colors whitespace-nowrap"
+          >
+            {ascendente ? '↑ Menor a mayor' : '↓ Mayor a menor'}
+          </button>
+        </div>
 
         <ol className="flex flex-col gap-2">
           {filas.map((u, i) => (

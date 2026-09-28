@@ -53,13 +53,16 @@ export function Home() {
   const [hover, setHover] = useState<UniversidadMapa | null>(null)
   const [deptoPaths, setDeptoPaths] = useState<string[]>([])
   const [vista, setVista] = useState<Vista>(VISTA_PAIS)
+  const [animar, setAnimar] = useState(false)
   const navigate = useNavigate()
   const svgRef = useRef<SVGSVGElement>(null)
   const arrastre = useRef<{ x: number; y: number; vx: number; vy: number; movido: boolean } | null>(null)
   const justArrastre = useRef(false)
+  const UMBRAL_ARRASTRE = 8 // px de tolerancia antes de considerar que es un arrastre y no un click (trackpads tiemblan)
 
-  // Al elegir una provincia, encuadrarla; al volver al país, vista fija de origen.
+  // Al elegir una provincia, encuadrarla (con animación); al volver al país, vista fija de origen.
   useEffect(() => {
+    setAnimar(true)
     if (!activa) {
       setVista(VISTA_PAIS)
       setDeptoPaths([])
@@ -89,6 +92,7 @@ export function Home() {
     function onWheel(e: WheelEvent) {
       if (!svg) return
       e.preventDefault()
+      setAnimar(false)
       const pt = svg.createSVGPoint()
       pt.x = e.clientX
       pt.y = e.clientY
@@ -117,10 +121,14 @@ export function Home() {
     if (!a || !svg) return
     const ctm = svg.getScreenCTM()
     if (!ctm) return
+    if (!a.movido && Math.abs(e.clientX - a.x) < UMBRAL_ARRASTRE && Math.abs(e.clientY - a.y) < UMBRAL_ARRASTRE) return
+    if (!a.movido) {
+      a.movido = true
+      setAnimar(false)
+    }
     const dx = (e.clientX - a.x) / ctm.a
     const dy = (e.clientY - a.y) / ctm.d
-    if (Math.abs(e.clientX - a.x) > 3 || Math.abs(e.clientY - a.y) > 3) a.movido = true
-    if (a.movido) setVista((v) => ({ ...v, x: a.vx + dx, y: a.vy + dy }))
+    setVista((v) => ({ ...v, x: a.vx + dx, y: a.vy + dy }))
   }
 
   function handlePointerUp() {
@@ -137,11 +145,6 @@ export function Home() {
     }
   }
 
-  const pinesPosicionados = useMemo(
-    () => pines.map((u) => ({ ...u, sx: vista.k * u.x + vista.x, sy: vista.k * u.y + vista.y })),
-    [vista],
-  )
-
   const pinesDeLaProvincia = useMemo(() => {
     if (!activa) return pines
     return pines.filter((u) => normalizar(u.provincia) === normalizar(activa.nombre))
@@ -156,8 +159,10 @@ export function Home() {
     setActiva((cur) => (cur?.nombre === p.nombre ? null : p))
   }
 
-  // Radio de pin: leve compensación para que no crezcan desmedido en zooms muy altos, sin desaparecer.
-  const radioPin = Math.max(2.2, Math.min(6.5, 40 / Math.sqrt(vista.k)))
+  // Radio de pin en unidades "de mapa": al dividir por vista.k, el tamaño en pantalla queda
+  // constante sin importar el zoom (el mismo truco que ya usamos para los strokeWidth).
+  const radioPinPantalla = Math.max(2.2, Math.min(6.5, 40 / Math.sqrt(vista.k)))
+  const radioPin = radioPinPantalla / Math.max(vista.k, 0.0001)
 
   return (
     <div className="relative">
@@ -178,7 +183,12 @@ export function Home() {
             onPointerCancel={handlePointerUp}
             onClickCapture={handleClickCapture}
           >
-            <g style={{ transform: `matrix(${vista.k},0,0,${vista.k},${vista.x},${vista.y})`, transition: 'transform 0.7s cubic-bezier(0.16,1,0.3,1)' }}>
+            <g
+              style={{
+                transform: `matrix(${vista.k},0,0,${vista.k},${vista.x},${vista.y})`,
+                transition: animar ? 'transform 0.7s cubic-bezier(0.16,1,0.3,1)' : 'none',
+              }}
+            >
               {/* Capa base: mismo color, sin fisuras entre provincias */}
               {provincias.map((p) => (
                 <path key={`base-${p.nombre}`} d={p.d} fill={BASE_FILL} stroke={BASE_FILL} strokeWidth={3} strokeLinejoin="round" />
@@ -218,30 +228,30 @@ export function Home() {
                     style={{ pointerEvents: 'none' }}
                   />
                 ))}
-            </g>
 
-            {/* Pines: siempre en su posición geográfica real — sin separación artificial.
-                Para ver sedes muy próximas entre sí, acercá con la rueda del mouse. */}
-            {pinesPosicionados.map((u) => {
-              const visible = !activa || normalizar(u.provincia) === normalizar(activa.nombre)
-              return (
-                <circle
-                  key={u.id}
-                  cx={u.sx}
-                  cy={u.sy}
-                  r={radioPin}
-                  className={`pin ${!u.tieneFicha ? 'pin-no-data' : ''}`}
-                  style={{
-                    opacity: visible ? 1 : 0,
-                    pointerEvents: visible ? 'auto' : 'none',
-                    transition: 'opacity 0.4s ease',
-                  }}
-                  onClick={() => handleSelectPin(u)}
-                  onMouseEnter={() => setHover(u)}
-                  onMouseLeave={() => setHover(null)}
-                />
-              )
-            })}
+              {/* Pines: hijos del mismo grupo transformado que el mapa — quedan pegados a él
+                  en todo momento (arrastre, zoom o animación), nunca se desincronizan. */}
+              {pines.map((u) => {
+                const visible = !activa || normalizar(u.provincia) === normalizar(activa.nombre)
+                return (
+                  <circle
+                    key={u.id}
+                    cx={u.x}
+                    cy={u.y}
+                    r={radioPin}
+                    className={`pin ${!u.tieneFicha ? 'pin-no-data' : ''}`}
+                    style={{
+                      opacity: visible ? 1 : 0,
+                      pointerEvents: visible ? 'auto' : 'none',
+                      transition: 'opacity 0.4s ease',
+                    }}
+                    onClick={() => handleSelectPin(u)}
+                    onMouseEnter={() => setHover(u)}
+                    onMouseLeave={() => setHover(null)}
+                  />
+                )
+              })}
+            </g>
           </svg>
         </div>
       </div>
