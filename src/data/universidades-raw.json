@@ -10,8 +10,8 @@
     "sitio": "http://www.uba.ar",
     "inscriptos_ref_year": 2017,
     "notas": [
-      "La universidad más grande y antigua del país; concentra ~17% de los estudiantes universitarios estatales nacionales.",
-      "Tiene 13 facultades y un ciclo básico común (CBC) que actúa como filtro inicial masivo antes de la carrera de grado."
+      "El Ciclo Básico Común (CBC) funciona como un embudo antes de pisar la facultad: buena parte de la deserción temprana queda invisibilizada ahí, antes de sumarse a las estadísticas de abandono de cada carrera.",
+      "Sostiene una planta de 24.158 docentes universitarios —la más grande del sistema— para un resultado de egreso que ronda 1 de cada 3 inscriptos."
     ],
     "estudiantes2023": 326421,
     "docentesUniversitario": 24136,
@@ -92,8 +92,8 @@
     "sitio": "https://unlp.edu.ar",
     "inscriptos_ref_year": 2017,
     "notas": [
-      "Segunda universidad nacional en cantidad de estudiantes del país.",
-      "Fuerte perfil en ciencias exactas, naturales y agrarias, con sedes distribuidas en todo el partido de La Plata."
+      "Segunda universidad nacional en tamaño: ejecutó más de $92.800 millones en 2024 sin que la tasa de egreso logre despegar del 26-28% en los últimos cinco años.",
+      "El formato de sedes distribuidas por todo el partido de La Plata dificulta un seguimiento centralizado del rendimiento académico."
     ],
     "estudiantes2023": 116182,
     "docentesUniversitario": 13162,
@@ -174,7 +174,7 @@
     "sitio": "https://www.unlam.edu.ar",
     "inscriptos_ref_year": 2017,
     "notas": [
-      "Una de las universidades del conurbano con mejor tasa de cohorte de la muestra relevada.",
+      "Tiene la mejor tasa de egreso de toda la muestra relevada — lo que de todos modos significa que más de la mitad de quienes ingresan no llega a graduarse en el plazo esperado.",
       "Sede única y compacta en San Justo, a diferencia del formato multi-sede de otras universidades del conurbano."
     ],
     "estudiantes2023": 48090,
@@ -256,8 +256,8 @@
     "sitio": "https://www.unpaz.edu.ar",
     "inscriptos_ref_year": 2017,
     "notas": [
-      "Creada por Ley 26.577 (2009) junto con otras cinco universidades del conurbano bonaerense.",
-      "Egresados 2023 (825) equivalen a menos del 3% de la matrícula total (28.071)."
+      "Creada por Ley 26.577 (2009) junto con otras cinco universidades del conurbano bonaerense, en la misma tanda de expansión territorial.",
+      "La matrícula pasó de 3.090 a más de 28.000 estudiantes en una década, pero el aparato de egreso no acompañó ese crecimiento."
     ],
     "estudiantes2023": 28071,
     "docentesUniversitario": 1450,
@@ -339,7 +339,7 @@
     "inscriptos_ref_year": 2017,
     "notas": [
       "Creada por Ley 26.576 (2009).",
-      "La tasa de cohorte (egresados 2023 sobre nuevos inscriptos 2017) es de las más bajas de la muestra relevada: 11,4%."
+      "Más de 31.000 estudiantes matriculados en 2024, pero apenas unos pocos cientos de egresados por año: la brecha entre ingreso y egreso es una de las más marcadas del sistema."
     ],
     "estudiantes2023": 31268,
     "docentesUniversitario": 1623,
@@ -420,8 +420,8 @@
     "sitio": "https://www.ungs.edu.ar",
     "inscriptos_ref_year": 2017,
     "notas": [
-      "De las universidades relevadas, la que muestra la tasa de cohorte más baja: 3,6% (123 egresados en 2023 sobre 3.448 nuevos inscriptos en 2017).",
-      "El costo estimado por graduado ($81,1 M) es varias veces superior al del resto de la muestra."
+      "El caso más extremo de la muestra relevada hasta ahora: combina la peor tasa de egreso con el costo por graduado más alto.",
+      "La matrícula casi se triplicó entre 2013 y 2024, pero los egresados por año se mantienen estancados en cifras de dos y tres dígitos."
     ],
     "estudiantes2023": 19767,
     "docentesUniversitario": 844,
@@ -503,7 +503,7 @@
     "inscriptos_ref_year": 2017,
     "notas": [
       "Creada por Ley 26.543 (2009).",
-      "Tasa de cohorte de 5,7%, entre las más bajas del relevamiento."
+      "En 2024 volvió a crecer en cantidad de egresados respecto de años anteriores, pero sigue entre las tasas de egreso más bajas de todo el relevamiento."
     ],
     "estudiantes2023": 20457,
     "docentesUniversitario": 1133,
@@ -583,8 +583,8 @@
     "sitio": "https://unso.edu.ar",
     "inscriptos_ref_year": null,
     "notas": [
-      "Creada por Ley 27.163 (2015); recién comenzó a reportar estudiantes en el Anuario de la SPU desde 2019.",
-      "Al ser una institución joven, todavía no completa una ventana de 6 años entre ingreso y egreso: la tasa de cohorte estándar no es calculable aún con los datos disponibles."
+      "Creada por Ley 27.163 (2015); recién empezó a reportar estudiantes al Anuario de la SPU en 2019, seis años después de sancionada la ley de creación.",
+      "Todavía no completa una cohorte medible de 6 años, pero ya sostiene una planta de 388 docentes para apenas 198 egresados en 2024."
     ],
     "estudiantes2023": 2831,
     "docentesUniversitario": 286,

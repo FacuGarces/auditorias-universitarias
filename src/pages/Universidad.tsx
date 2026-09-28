@@ -2,13 +2,26 @@ import { Link, useParams } from 'react-router-dom'
 import { getUniversidad } from '../data/universidades'
 import { UniversidadBadge } from '../components/UniversidadBadge'
 import { EvolutionChart } from '../components/EvolutionChart'
+import { notasCriticas } from '../lib/critica'
 import { formatMoneda, formatNumero, formatPorcentaje, ubicacion } from '../lib/format'
 
-function StatCard({ label, value, hint }: { label: string; value: string; hint?: string }) {
+function StatCard({
+  label,
+  value,
+  hint,
+  alerta,
+}: {
+  label: string
+  value: string
+  hint?: string
+  alerta?: boolean
+}) {
   return (
-    <div className="glass rounded-2xl px-5 py-4">
-      <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1">{label}</div>
-      <div className="font-display font-800 text-2xl sm:text-3xl text-upl-crema">{value}</div>
+    <div className={`glass rounded-2xl px-5 py-4 ${alerta ? 'border-[#e2574c]/50 bg-[#e2574c]/10' : ''}`}>
+      <div className={`text-xs uppercase tracking-wide font-semibold mb-1 ${alerta ? 'text-[#ff8a7a]' : 'text-upl-resaltador'}`}>
+        {label}
+      </div>
+      <div className={`font-display font-800 text-2xl sm:text-3xl ${alerta ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}>{value}</div>
       {hint && <div className="text-xs text-upl-crema/55 mt-1">{hint}</div>}
     </div>
   )
@@ -76,38 +89,36 @@ export function Universidad() {
         <>
           <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3">
             <StatCard
-              label="Tasa de cohorte"
-              value={formatPorcentaje(u.tasaCohorte)}
+              label="No llega a graduarse"
+              value={u.tasaCohorte != null ? `${Math.round(100 - u.tasaCohorte)}%` : 'S/D'}
               hint={
                 u.nuevosInscriptos2018
-                  ? `${formatNumero(u.egresados2024)} egresados 2024 / ${formatNumero(u.nuevosInscriptos2018)} inscriptos 2018`
+                  ? `Sobre ${formatNumero(u.nuevosInscriptos2018)} inscriptos en 2018, solo ${formatNumero(u.egresados2024)} se graduaron en 2024 (${formatPorcentaje(u.tasaCohorte)})`
                   : 'Universidad muy joven: sin ventana de 6 años aún'
               }
+              alerta
             />
             <StatCard
-              label="Estudiantes 2024"
-              value={formatNumero(u.estudiantes2024)}
-              hint={`${formatNumero(u.docentesUniversitario)} docentes`}
-            />
-            <StatCard
-              label="Estudiantes regulares"
-              value={formatNumero(u.reinscriptosRegulares2mas)}
-              hint="Reinscriptos con 2+ materias aprobadas en el año"
+              label="No aprobó ninguna materia"
+              value={
+                u.reinscriptos0Materias != null && u.reinscriptosTotal
+                  ? `${Math.round((u.reinscriptos0Materias / u.reinscriptosTotal) * 100)}%`
+                  : 'S/D'
+              }
+              hint={`${formatNumero(u.reinscriptos0Materias)} de ${formatNumero(u.reinscriptosTotal)} reinscriptos, en el último año informado`}
+              alerta
             />
             <StatCard
               label="Costo por graduado"
               value={formatMoneda(u.costoPorGraduado)}
-              hint="Presupuesto ejecutado 2024 / egresados 2024"
+              hint="Presupuesto ejecutado 2024 / egresados 2024 — pesos corrientes"
+              alerta={!!u.costoPorGraduado && u.costoPorGraduado > 15_000_000}
             />
-          </div>
-
-          <div className="mt-4 glass rounded-2xl px-5 py-4">
-            <div className="text-sm text-upl-crema/80">
-              <span className="font-semibold text-upl-crema">{formatNumero(u.reinscriptos0Materias)}</span>{' '}
-              reinscriptos no aprobaron ninguna materia en el año informado, sobre un total de{' '}
-              {formatNumero(u.reinscriptosTotal)} reinscriptos (
-              {u.reinscriptosTotal ? Math.round((u.reinscriptos0Materias! / u.reinscriptosTotal) * 100) : 0}%).
-            </div>
+            <StatCard
+              label="Matrícula 2024"
+              value={formatNumero(u.estudiantes2024)}
+              hint={`${formatNumero(u.docentesUniversitario)} docentes · ${formatNumero(u.reinscriptosRegulares2mas)} regulares (2+ materias aprobadas)`}
+            />
           </div>
 
           <div className="mt-8">
@@ -142,8 +153,22 @@ export function Universidad() {
         </>
       )}
 
+      {u.tieneDatos && notasCriticas(u).length > 0 && (
+        <div className="mt-8">
+          <h2 className="font-display font-700 text-lg text-[#ff8a7a] mb-3">Lo que exponen los números</h2>
+          <ul className="flex flex-col gap-2">
+            {notasCriticas(u).map((nota, i) => (
+              <li key={i} className="flex gap-3 rounded-xl border border-[#e2574c]/40 bg-[#e2574c]/10 px-4 py-3">
+                <span className="text-[#ff8a7a] font-display font-800">⚠</span>
+                <span className="text-sm text-upl-crema/90">{nota}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className="mt-8">
-        <h2 className="font-display font-700 text-lg text-upl-crema mb-3">Notas relevantes</h2>
+        <h2 className="font-display font-700 text-lg text-upl-crema mb-3">Antecedentes</h2>
         <ul className="flex flex-col gap-2">
           {u.notas.map((nota, i) => (
             <li key={i} className="flex gap-3 rounded-xl glass px-4 py-3">
