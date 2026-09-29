@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { getUniversidad } from '../data/universidades'
@@ -48,6 +49,44 @@ function StatCell({
   )
 }
 
+/**
+ * Texto de ayuda recortado a 3 líneas por defecto, con un toggle "Ver más/menos" que solo aparece
+ * si el texto realmente se corta (scrollHeight > clientHeight una vez montado) — así una celda con
+ * un dato corto no muestra un toggle inútil, pero ninguna pierde información al recortarse.
+ */
+function ClampedHint({ text, alerta }: { text: string; alerta?: boolean }) {
+  const [expandido, setExpandido] = useState(false)
+  const [truncado, setTruncado] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function medir() {
+      const el = ref.current
+      if (el) setTruncado(el.scrollHeight - el.clientHeight > 1)
+    }
+    medir()
+    window.addEventListener('resize', medir)
+    return () => window.removeEventListener('resize', medir)
+  }, [text])
+
+  return (
+    <div className="mt-1">
+      <div ref={ref} className={`text-xs text-upl-crema/55 ${expandido ? '' : 'line-clamp-3'}`}>
+        {text}
+      </div>
+      {(truncado || expandido) && (
+        <button
+          type="button"
+          onClick={() => setExpandido((v) => !v)}
+          className={`mt-0.5 text-[11px] font-semibold underline decoration-dotted ${alerta ? 'text-[#ff8a7a]' : 'text-upl-resaltador'}`}
+        >
+          {expandido ? 'Ver menos' : 'Ver más'}
+        </button>
+      )}
+    </div>
+  )
+}
+
 function StatCard({
   label,
   value,
@@ -65,7 +104,7 @@ function StatCard({
         {label}
       </div>
       <div className={`font-display font-800 text-2xl sm:text-3xl ${alerta ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}>{value}</div>
-      {hint && <div className="text-xs text-upl-crema/55 mt-1 line-clamp-3">{hint}</div>}
+      {hint && <ClampedHint text={hint} alerta={alerta} />}
     </StatCell>
   )
 }
@@ -125,7 +164,7 @@ function StatCardRadial({
           <div className={`font-display font-800 text-2xl sm:text-3xl ${alerta ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}>
             {pct != null ? `${pct}%` : 'S/D'}
           </div>
-          {hint && <div className="text-xs text-upl-crema/55 mt-1 line-clamp-3">{hint}</div>}
+          {hint && <ClampedHint text={hint} alerta={alerta} />}
         </div>
       </div>
     </StatCell>
