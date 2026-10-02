@@ -6,6 +6,8 @@ import { Home } from './pages/Home'
 import { Ranking } from './pages/Ranking'
 import { Universidad } from './pages/Universidad'
 import { Kirchneristas } from './pages/Kirchneristas'
+import { Propuestas } from './pages/Propuestas'
+import { Presentacion } from './pages/Presentacion'
 
 // Solo opacity: Home usa `position: fixed` para el mapa de fondo, y cualquier transform (x/y/scale)
 // en un ancestro le crearía un containing block nuevo, corriendo el mapa fijo durante la transición.
@@ -24,10 +26,11 @@ function PageFade({ children }: { children: React.ReactNode }) {
 
 function Shell() {
   const location = useLocation()
-  const esHome = location.pathname === '/'
+  // Home (mapa a pantalla completa) y la presentación tienen su propio chrome: sin navbar.
+  const pantallaPropia = location.pathname === '/' || location.pathname === '/presentacion'
   return (
     <div className="min-h-screen">
-      {!esHome && <Navbar />}
+      {!pantallaPropia && <Navbar />}
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
@@ -47,6 +50,15 @@ function Shell() {
               </PageFade>
             }
           />
+          <Route
+            path="/propuestas"
+            element={
+              <PageFade>
+                <Propuestas />
+              </PageFade>
+            }
+          />
+          <Route path="/presentacion" element={<Presentacion />} />
           <Route
             path="/universidad/:id"
             element={

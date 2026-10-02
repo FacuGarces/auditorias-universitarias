@@ -5,7 +5,7 @@ import { getUniversidad } from '../data/universidades'
 import { UniversidadBadge } from '../components/UniversidadBadge'
 import { EvolutionChart } from '../components/EvolutionChart'
 import { notasCriticas } from '../lib/critica'
-import { formatMoneda, formatNumero, formatPorcentaje, ubicacion } from '../lib/format'
+import { decimal, formatMoneda, formatNumero, formatPorcentaje, ubicacion } from '../lib/format'
 
 const statGridVariants = {
   hidden: {},
@@ -276,15 +276,21 @@ export function Universidad() {
             <StatCard
               label="Costo por graduado"
               value={formatMoneda(u.costoPorGraduado)}
-              hint="Presupuesto ejecutado 2024 / egresados 2024 — pesos constantes de agosto 2026"
-              alerta={!!u.costoPorGraduado && u.costoPorGraduado > 15_000_000}
+              hint={
+                u.docentesNoComparable
+                  ? 'No comparable: el presupuesto informado no incluye al plantel docente de las Fuerzas Armadas'
+                  : 'Presupuesto ejecutado 2024 / egresados 2024 — pesos constantes de agosto 2026'
+              }
+              alerta={!u.docentesNoComparable && !!u.costoPorGraduado && u.costoPorGraduado > 15_000_000}
             />
             <StatCard
               label="Matrícula 2024"
               value={formatNumero(u.estudiantes2024)}
               hint={
-                u.estudiantesActivosPorDocente != null
-                  ? `${formatNumero(u.docentesUniversitario)} docentes · ${u.estudiantesActivosPorDocente} activos por docente (vs. ${u.estudiantesPorDocente} sobre el total)`
+                u.docentesNoComparable
+                  ? `${formatNumero(u.docentesUniversitario)} docentes informados a la SPU — dato incompleto, no comparable (ver Antecedentes)`
+                  : u.estudiantesActivosPorDocente != null
+                  ? `${formatNumero(u.docentesUniversitario)} docentes · ${decimal(u.estudiantesActivosPorDocente)} activos por docente (vs. ${decimal(u.estudiantesPorDocente ?? 0)} sobre el total)`
                   : `${formatNumero(u.docentesUniversitario)} docentes · ${formatNumero(u.reinscriptosRegulares2mas)} regulares (2+ materias aprobadas)`
               }
             />
@@ -292,8 +298,10 @@ export function Universidad() {
               label="Planta no docente"
               value={formatNumero(u.personalNoDocente)}
               hint={
-                u.docentesUniversitario && u.personalNoDocente
-                  ? `1 no docente cada ${(u.docentesUniversitario / u.personalNoDocente).toFixed(1)} docentes universitarios`
+                u.docentesNoComparable
+                  ? 'Relación con docentes no comparable: la planta docente informada está incompleta'
+                  : u.docentesUniversitario && u.personalNoDocente
+                  ? `1 no docente cada ${decimal(u.docentesUniversitario / u.personalNoDocente)} docentes universitarios`
                   : 'Sin dato de personal no docente'
               }
             />
@@ -367,9 +375,9 @@ export function Universidad() {
                       {formatNumero(d.simple2023)}; los "Exclusiva" (dedicación completa), de{' '}
                       {formatNumero(d.excl2017)} a {formatNumero(d.excl2023)}. Los cargos totales crecieron{' '}
                       {varCargos >= 0 ? '+' : ''}
-                      {varCargos.toFixed(1)}%, pero el equivalente a tiempo completo (FTE, pondera por dedicación)
+                      {decimal(varCargos)}%, pero el equivalente a tiempo completo (FTE, pondera por dedicación)
                       solo {varFte >= 0 ? '+' : ''}
-                      {varFte.toFixed(1)}%.
+                      {decimal(varFte)}%.
                     </p>
                     <div className="grid grid-cols-[3rem_1fr] items-center gap-x-3 gap-y-2">
                       <span className="text-xs text-upl-crema/50">2017</span>
@@ -486,6 +494,30 @@ export function Universidad() {
             </motion.li>
           ))}
         </motion.ul>
+        {u.fuentes && u.fuentes.length > 0 && (
+          <div className="mt-3 rounded-xl glass px-4 py-3">
+            <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1.5">Fuentes</div>
+            <ul className="flex flex-col gap-1">
+              {u.fuentes.map((f) => (
+                <li key={f.url} className="text-sm">
+                  {/\.(webp|jpe?g|png)$/i.test(f.url) && (
+                    <a href={f.url} target="_blank" rel="noreferrer" className="block my-2 max-w-sm">
+                      <img src={f.url} alt={f.titulo} className="rounded-lg shadow-lg" loading="lazy" />
+                    </a>
+                  )}
+                  <a
+                    href={f.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-upl-crema/80 underline decoration-upl-resaltador/60 hover:text-upl-amarillo"
+                  >
+                    {f.titulo} ↗
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       <p className="mt-8 mb-8 text-xs text-upl-crema/40">

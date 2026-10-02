@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import mapaEstatico from '../data/mapa-estatico.json'
 import { ubicacion } from '../lib/format'
 import { UniversidadBadge } from '../components/UniversidadBadge'
+import { BuscadorUniversidades } from '../components/BuscadorUniversidades'
 import type { UniversidadMapa } from '../types'
 
 // Límites de departamentos/partidos por provincia — se cargan sólo al entrar a una provincia (code-split).
@@ -93,7 +94,10 @@ function calcularFit(p: Provincia, focoY = 0.4): Vista {
   const bh = y1 - y0
   const cx = (x0 + x1) / 2
   const cy = (y0 + y1) / 2
-  const k = Math.min((width * 0.88) / bw, (height * 0.62) / bh, 60)
+  // En celular el mapa se dibuja mucho más chico, así que se permite acercar más de entrada: si no,
+  // una provincia mínima como CABA quedaba como un punto en el medio de la pantalla.
+  const kMax = typeof window !== 'undefined' && window.innerWidth < 640 ? 200 : 60
+  const k = Math.min((width * 0.88) / bw, (height * 0.62) / bh, kMax)
   return { k, x: width / 2 - k * cx, y: height * focoY - k * cy }
 }
 
@@ -119,6 +123,38 @@ function VistaProvincia({
   const arrastre = useRef<{ x: number; y: number; vx: number; vy: number; movido: boolean } | null>(null)
   const justArrastre = useRef(false)
   const UMBRAL_ARRASTRE = 8
+  // Pellizco (pinch) en pantallas táctiles: punteros activos y estado al empezar el gesto.
+  const punteros = useRef(new Map<number, { x: number; y: number }>())
+  const pinch = useRef<{ d0: number; v0: Vista; q: { x: number; y: number }; m0: { x: number; y: number } } | null>(null)
+
+  /** Pasa una coordenada de pantalla al sistema de coordenadas del viewBox (sin la transformación de zoom). */
+  function aCoordenadasMapa(clientX: number, clientY: number) {
+    const svg = svgRef.current
+    const ctm = svg?.getScreenCTM()
+    if (!svg || !ctm) return null
+    const pt = svg.createSVGPoint()
+    pt.x = clientX
+    pt.y = clientY
+    return pt.matrixTransform(ctm.inverse())
+  }
+
+  /** Zoom anclado en un punto de pantalla (el cursor, el centro del pellizco o el centro del mapa). */
+  function zoomEn(factor: number, clientX: number, clientY: number) {
+    const q = aCoordenadasMapa(clientX, clientY)
+    if (!q) return
+    setVista((v) => {
+      const k = Math.min(Math.max(v.k * factor, minK.current), ZOOM_MAX)
+      const f = k / v.k
+      return { k, x: q.x * (1 - f) + f * v.x, y: q.y * (1 - f) + f * v.y }
+    })
+  }
+
+  function zoomBoton(factor: number) {
+    const r = svgRef.current?.getBoundingClientRect()
+    if (!r) return
+    setAnimar(true)
+    zoomEn(factor, r.left + r.width / 2, r.top + r.height / 2)
+  }
 
   useEffect(() => {
     minK.current = fitInicial.k
@@ -141,30 +177,47 @@ function VistaProvincia({
       if (!svg) return
       e.preventDefault()
       setAnimar(false)
-      const pt = svg.createSVGPoint()
-      pt.x = e.clientX
-      pt.y = e.clientY
-      const ctm = svg.getScreenCTM()
-      if (!ctm) return
-      const q = pt.matrixTransform(ctm.inverse())
-      const factor = e.deltaY < 0 ? 1.22 : 1 / 1.22
-      setVista((v) => {
-        const k = Math.min(Math.max(v.k * factor, minK.current), ZOOM_MAX)
-        const f = k / v.k
-        return { k, x: q.x * (1 - f) + f * v.x, y: q.y * (1 - f) + f * v.y }
-      })
+      zoomEn(e.deltaY < 0 ? 1.22 : 1 / 1.22, e.clientX, e.clientY)
     }
     svg.addEventListener('wheel', onWheel, { passive: false })
     return () => svg.removeEventListener('wheel', onWheel)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function handlePointerDown(e: React.PointerEvent<SVGSVGElement>) {
     // Ojo: NO capturamos el puntero acá todavía. Si lo hiciéramos en todo mousedown, en algunos
     // navegadores el click posterior puede no resolverse igual sobre el path que está debajo del
     // cursor. Solo capturamos una vez que confirmamos que es un arrastre real (ver handlePointerMove).
+    punteros.current.set(e.pointerId, { x: e.clientX, y: e.clientY })
+    if (punteros.current.size === 2) {
+      // Arranca un pellizco: se cancela el arrastre de un dedo y se toma la foto inicial del gesto.
+      const [a, b] = [...punteros.current.values()]
+      const m0 = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }
+      const q = aCoordenadasMapa(m0.x, m0.y)
+      if (q) {
+        pinch.current = { d0: Math.hypot(a.x - b.x, a.y - b.y) || 1, v0: vista, q, m0 }
+        arrastre.current = null
+        justArrastre.current = true
+        setAnimar(false)
+      }
+      return
+    }
     arrastre.current = { x: e.clientX, y: e.clientY, vx: vista.x, vy: vista.y, movido: false }
   }
   function handlePointerMove(e: React.PointerEvent<SVGSVGElement>) {
+    if (punteros.current.has(e.pointerId)) punteros.current.set(e.pointerId, { x: e.clientX, y: e.clientY })
+    const p = pinch.current
+    if (p && punteros.current.size >= 2) {
+      const [a, b] = [...punteros.current.values()]
+      const ctm = svgRef.current?.getScreenCTM()
+      if (!ctm) return
+      const k = Math.min(Math.max(p.v0.k * (Math.hypot(a.x - b.x, a.y - b.y) / p.d0), minK.current), ZOOM_MAX)
+      const f = k / p.v0.k
+      const dx = ((a.x + b.x) / 2 - p.m0.x) / ctm.a
+      const dy = ((a.y + b.y) / 2 - p.m0.y) / ctm.d
+      setVista({ k, x: p.q.x * (1 - f) + f * p.v0.x + dx, y: p.q.y * (1 - f) + f * p.v0.y + dy })
+      return
+    }
     const a = arrastre.current
     const svg = svgRef.current
     if (!a || !svg) return
@@ -180,7 +233,9 @@ function VistaProvincia({
     const dy = (e.clientY - a.y) / ctm.d
     setVista((v) => ({ ...v, x: a.vx + dx, y: a.vy + dy }))
   }
-  function handlePointerUp() {
+  function handlePointerUp(e: React.PointerEvent<SVGSVGElement>) {
+    punteros.current.delete(e.pointerId)
+    if (punteros.current.size < 2) pinch.current = null
     if (arrastre.current?.movido) justArrastre.current = true
     arrastre.current = null
   }
@@ -198,7 +253,10 @@ function VistaProvincia({
 
   // Crece con el zoom (más acercás, más grande y representativo el punto), con techo — y como
   // vista.k nunca puede bajar de minK.current, tampoco puede encogerse por debajo del punto de partida.
-  const radioPin = radioCreciente(vista.k, minK.current)
+  // En celular el SVG se dibuja a ~40% del tamaño de escritorio: sin este factor los puntos quedan de
+  // 1-2 px, imposibles de ver y de tocar.
+  const escalaPin = typeof window !== 'undefined' && window.innerWidth < 640 ? 2.2 : 1
+  const radioPin = radioCreciente(vista.k, minK.current) * escalaPin
   const clipId = `clip-${slug(provincia.nombre)}`
   // CABA se muestra siempre aislada: ni Buenos Aires ni ninguna otra provincia se dibuja alrededor.
   // No es "una vecina más" con zoom — es una vista aparte, como pidió el usuario explícitamente.
@@ -207,7 +265,7 @@ function VistaProvincia({
 
   return (
     <>
-      <div className="absolute inset-0 flex items-center justify-center px-3 pt-24 pb-6">
+      <div className="absolute inset-0 flex items-center justify-center px-3 pt-32 pb-[40vh] sm:pt-24 sm:pb-6">
         <svg
           ref={svgRef}
           viewBox={viewBox}
@@ -288,7 +346,25 @@ function VistaProvincia({
         </svg>
       </div>
 
-      <div className="fixed left-3 bottom-3 z-20 glass rounded-xl px-4 py-3 text-xs text-upl-crema/80 max-w-[220px]">
+      <div className="fixed right-3 z-20 bottom-[calc(38vh+1.25rem)] sm:bottom-auto sm:top-28 flex flex-col overflow-hidden rounded-xl glass-strong">
+        <button
+          onClick={() => zoomBoton(1.6)}
+          aria-label="Acercar"
+          className="w-10 h-10 text-xl text-upl-crema hover:bg-upl-crema/10 active:bg-upl-crema/15"
+        >
+          +
+        </button>
+        <div className="h-px bg-upl-crema/15" />
+        <button
+          onClick={() => zoomBoton(1 / 1.6)}
+          aria-label="Alejar"
+          className="w-10 h-10 text-xl text-upl-crema hover:bg-upl-crema/10 active:bg-upl-crema/15"
+        >
+          −
+        </button>
+      </div>
+
+      <div className="hidden sm:block fixed left-3 bottom-3 z-20 glass rounded-xl px-4 py-3 text-xs text-upl-crema/80 max-w-[220px]">
         <p className="mb-2">
           Arrastrá para mover el mapa y girá la rueda para acercar. Tocá una provincia vecina para saltar directo a
           ella.
@@ -312,11 +388,14 @@ function VistaProvincia({
       )}
 
       <div className="fixed inset-x-0 bottom-0 z-20 flex justify-center px-3 pb-3">
-        <div className="glass-strong rounded-2xl w-full max-w-2xl max-h-[42vh] overflow-y-auto">
-          <div className="sticky top-0 glass-strong flex items-center justify-between px-5 py-3 border-b border-upl-crema/10 gap-3">
+        <div className="glass-strong rounded-2xl w-full max-w-2xl max-h-[38vh] sm:max-h-[42vh] overflow-y-auto">
+          <div className="sticky top-0 z-10 bg-[#1b2142] flex items-center justify-between px-4 sm:px-5 py-3 border-b border-upl-crema/10 gap-3">
             <div className="min-w-0">
               <h2 className="font-display font-700 text-lg text-upl-crema truncate">{provincia.nombre}</h2>
-              <p className="text-[11px] text-upl-crema/45">{Math.round((vista.k / fitInicial.k) * 10) / 10}x de zoom</p>
+              <p className="text-[11px] text-upl-crema/45">
+                {pinesDeLaProvincia.length} {pinesDeLaProvincia.length === 1 ? 'sede' : 'sedes'}
+                <span className="sm:hidden"> · pellizcá el mapa para acercar</span>
+              </p>
             </div>
             <button
               onClick={onVolver}
@@ -359,9 +438,11 @@ function VistaProvincia({
 function MapaNacional({
   onSelectProvincia,
   onSelectPin,
+  onBuscar,
 }: {
   onSelectProvincia: (p: Provincia) => void
   onSelectPin: (u: UniversidadMapa) => void
+  onBuscar: () => void
 }) {
   const [hover, setHover] = useState<UniversidadMapa | null>(null)
 
@@ -378,12 +459,20 @@ function MapaNacional({
   // bien sin transformarse en un blob (la fórmula "proporcional" del zoom daba puntos ilegibles acá).
   const radioPinCapital = capitalVb ? capitalVb.w / 55 : PIN_R_NACIONAL
 
+  // Recuadro de CABA en celular: mismo recorte pero con poco margen, para que la ciudad llene la tarjeta.
+  const capitalVbMovil = useMemo(() => {
+    if (!CAPITAL) return null
+    const [x0, y0, x1, y1] = CAPITAL.bbox
+    const lado = Math.max(x1 - x0, y1 - y0) * 1.15
+    return { x0: (x0 + x1) / 2 - lado / 2, y0: (y0 + y1) / 2 - lado / 2, w: lado, h: lado }
+  }, [])
+
   const pinesCapital = useMemo(() => pines.filter((u) => normalizar(u.provincia) === 'capital federal'), [])
 
   return (
     <>
-      <div className="absolute inset-0 flex items-stretch justify-center px-3 pt-24 pb-6 gap-1">
-        <div className="flex-1 flex items-center justify-end min-w-0">
+      <div className="absolute inset-0 flex items-stretch justify-center px-3 pt-32 pb-28 sm:pt-24 sm:pb-6 gap-1">
+        <div className="flex-1 flex items-center justify-center sm:justify-end min-w-0">
           <svg viewBox={NATIONAL_VIEWBOX} className="w-full h-full max-w-3xl" style={{ overflow: 'visible' }}>
             {/* Capa base: mismo color y borde, sin fisuras entre provincias vecinas (los datasets no
                 comparten vértices exactos en los límites, y sin esto queda un hueco visible, p. ej.
@@ -420,6 +509,27 @@ function MapaNacional({
             ))}
           </svg>
         </div>
+
+        {/* En celular el anexo lateral no entra: CABA (invisible a esta escala) va en un recuadro flotante
+            sobre el mar, a la altura de la Patagonia, que lleva directo a su vista. */}
+        {CAPITAL && capitalVbMovil && (
+          <button
+            onClick={() => onSelectProvincia(CAPITAL)}
+            className="sm:hidden fixed right-3 top-[56%] z-10 w-28 rounded-2xl glass-strong p-2 text-left"
+            aria-label="Ver Capital Federal en detalle"
+          >
+            <svg viewBox={`${capitalVbMovil.x0} ${capitalVbMovil.y0} ${capitalVbMovil.w} ${capitalVbMovil.h}`} className="w-full aspect-square">
+              <path d={CAPITAL.d} fill={BASE_FILL} stroke="rgba(255,255,249,0.65)" strokeWidth={capitalVbMovil.w / 120} />
+              {pinesCapital.map((u) => (
+                <circle key={u.id} cx={u.x} cy={u.y} r={capitalVbMovil.w / 28} {...pinVisual(u.tieneFicha, capitalVbMovil.w / 28)} />
+              ))}
+            </svg>
+            <div className="mt-1 text-[11px] font-semibold text-upl-crema leading-tight">CABA</div>
+            <div className="text-[10px] text-upl-crema/55 leading-tight">
+              {pinesCapital.length} universidades · tocá para ver
+            </div>
+          </button>
+        )}
 
         {/* Anexo de Capital Federal: mismo fondo, sin panel ni borde — es una continuación del mapa, no un modal aparte. */}
         {CAPITAL && capitalVb && (
@@ -466,9 +576,9 @@ function MapaNacional({
         )}
       </div>
 
-      <div className="fixed left-3 bottom-3 z-20 glass rounded-xl px-4 py-3 text-xs text-upl-crema/80 max-w-[220px]">
-        <p className="mb-2">Hacé clic en una provincia para explorar sus sedes.</p>
-        <div className="flex flex-col gap-1.5">
+      <div className="fixed inset-x-3 bottom-3 sm:inset-x-auto sm:left-3 z-20 glass-strong sm:glass rounded-2xl sm:rounded-xl px-4 py-3 text-xs text-upl-crema/80 sm:max-w-[240px]">
+        <p className="mb-2">Tocá una provincia para ver sus sedes, o buscá una universidad.</p>
+        <div className="flex sm:flex-col gap-x-4 gap-y-1.5 mb-2.5">
           <div className="flex items-center gap-1.5">
             <span className="inline-block h-2.5 w-2.5 rounded-full bg-upl-amarillo border border-upl-principal" /> Con ficha de datos
           </div>
@@ -476,6 +586,15 @@ function MapaNacional({
             <span className="inline-block h-2.5 w-2.5 rounded-full border border-dashed border-upl-amarillo" /> Sin datos reportados
           </div>
         </div>
+        <button
+          onClick={onBuscar}
+          className="w-full flex items-center justify-center gap-2 rounded-full bg-upl-crema/10 hover:bg-upl-crema/15 border border-upl-crema/15 px-3 py-2 text-sm font-display font-600 text-upl-crema"
+        >
+          <svg viewBox="0 0 20 20" className="w-4 h-4 text-upl-amarillo" fill="currentColor" aria-hidden>
+            <path d="M8.5 2a6.5 6.5 0 0 1 5.2 10.4l3.9 3.9a.9.9 0 1 1-1.3 1.3l-3.9-3.9A6.5 6.5 0 1 1 8.5 2Zm0 1.8a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4Z" />
+          </svg>
+          Buscar universidad
+        </button>
       </div>
 
       {hover && (
@@ -491,6 +610,8 @@ function MapaNacional({
 
 export function Home() {
   const [activa, setActiva] = useState<Provincia | null>(null)
+  const [buscando, setBuscando] = useState(false)
+  const cerrarBuscador = useCallback(() => setBuscando(false), [])
   const navigate = useNavigate()
 
   function handleSelectPin(u: UniversidadMapa) {
@@ -519,33 +640,41 @@ export function Home() {
             onCambiarProvincia={setActiva}
           />
         ) : (
-          <MapaNacional onSelectProvincia={setActiva} onSelectPin={handleSelectPin} />
+          <MapaNacional onSelectProvincia={setActiva} onSelectPin={handleSelectPin} onBuscar={() => setBuscando(true)} />
         )}
       </div>
 
-      {/* Header flotante */}
+      {/* Header flotante: en celular los accesos van en una segunda fila para que entren completos. */}
       <header className="fixed top-0 inset-x-0 z-20 flex justify-center pt-3 sm:pt-4 px-3">
-        <div className="glass-strong rounded-2xl px-3 sm:px-5 py-2.5 sm:py-3 max-w-2xl w-full flex items-center gap-2 sm:gap-3">
+        <div className="glass-strong rounded-2xl px-3 sm:px-5 py-2.5 sm:py-3 max-w-2xl w-full flex flex-wrap items-center gap-x-2 sm:gap-x-3 gap-y-2">
           <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="UPL" className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg object-cover shrink-0" />
           <div className="min-w-0 flex-1">
-            <h1 className="font-display font-800 text-sm sm:text-lg text-upl-crema leading-tight truncate">Auditorías Universitarias</h1>
-            <p className="hidden sm:block text-xs text-upl-resaltador truncate">Universitarios por la Libertad</p>
+            <h1 className="font-display font-800 text-base sm:text-lg text-upl-crema leading-tight truncate">Auditorías Universitarias</h1>
+            <p className="text-[11px] sm:text-xs text-upl-resaltador truncate">Universitarios por la Libertad</p>
           </div>
-          <Link
-            to="/kirchneristas"
-            className="shrink-0 rounded-full glass-chip text-upl-crema font-display font-600 text-xs sm:text-sm px-2.5 sm:px-4 py-1.5 sm:py-2 hover:bg-upl-crema/15 transition-colors whitespace-nowrap"
-          >
-            <span className="sm:hidden">K</span>
-            <span className="hidden sm:inline">Universidades K</span>
-          </Link>
-          <Link
-            to="/ranking"
-            className="shrink-0 rounded-full bg-upl-amarillo text-upl-principal font-display font-600 text-xs sm:text-sm px-2.5 sm:px-4 py-1.5 sm:py-2 hover:bg-upl-resaltador transition-colors whitespace-nowrap"
-          >
-            Rankings
-          </Link>
+          <nav className="w-full sm:w-auto flex gap-1.5 sm:gap-2">
+            {[
+              { to: '/ranking', label: 'Rankings', destacado: true },
+              { to: '/kirchneristas', label: 'Universidades K' },
+              { to: '/propuestas', label: 'Propuestas' },
+            ].map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                className={`flex-1 sm:flex-none text-center rounded-full font-display font-600 text-xs sm:text-sm px-2.5 sm:px-4 py-1.5 sm:py-2 transition-colors whitespace-nowrap ${
+                  l.destacado
+                    ? 'bg-upl-amarillo text-upl-principal hover:bg-upl-resaltador'
+                    : 'glass-chip text-upl-crema hover:bg-upl-crema/15'
+                }`}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
         </div>
       </header>
+
+      <BuscadorUniversidades abierto={buscando} onCerrar={cerrarBuscador} />
     </div>
   )
 }

@@ -573,10 +573,10 @@
     "id": "undelta",
     "nombre": "Universidad Nacional del Delta",
     "sigla": "UNDELTA",
-    "ciudad": "Campana",
+    "ciudad": "San Fernando",
     "provincia": "Buenos Aires",
-    "lat": -34.1691,
-    "lng": -58.9599,
+    "lat": -34.4447,
+    "lng": -58.5597,
     "tieneFicha": true
   },
   {

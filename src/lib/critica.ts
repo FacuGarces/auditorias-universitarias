@@ -1,5 +1,5 @@
 import type { UniversidadDetalle } from '../types'
-import { formatMoneda, formatNumero } from './format'
+import { decimal, formatMoneda, formatNumero } from './format'
 
 /**
  * Notas generadas automáticamente a partir de los datos crudos, con foco en las
@@ -19,7 +19,7 @@ export function notasCriticas(u: UniversidadDetalle): string[] {
     }
   }
 
-  if (u.costoPorGraduado != null && u.costoPorGraduado > 15_000_000) {
+  if (!u.docentesNoComparable && u.costoPorGraduado != null && u.costoPorGraduado > 15_000_000) {
     notas.push(
       `El Estado ejecuta ${formatMoneda(u.costoPorGraduado)} en promedio por cada graduado en el año informado — muy por encima de universidades más eficientes de la misma muestra.`,
     )
@@ -34,17 +34,17 @@ export function notasCriticas(u: UniversidadDetalle): string[] {
     }
   }
 
-  if (u.estudiantesPorDocente != null && u.estudiantesPorDocente > 18 && u.tasaCohorte != null && u.tasaCohorte < 20) {
+  if (!u.docentesNoComparable && u.estudiantesPorDocente != null && u.estudiantesPorDocente > 18 && u.tasaCohorte != null && u.tasaCohorte < 20) {
     notas.push(
       `Con ${u.estudiantesPorDocente.toString().replace('.', ',')} estudiantes por cada docente y una tasa de egreso de apenas ${u.tasaCohorte}%, la planta docente no se traduce en graduados.`,
     )
   }
 
-  if (u.personalNoDocente != null && u.docentesUniversitario) {
+  if (!u.docentesNoComparable && u.personalNoDocente != null && u.docentesUniversitario) {
     const ratio = u.personalNoDocente / u.docentesUniversitario
     if (ratio > 0.4) {
       notas.push(
-        `Tiene ${formatNumero(u.personalNoDocente)} no docentes cada ${formatNumero(u.docentesUniversitario)} docentes universitarios (1 cada ${(1 / ratio).toFixed(1)}) — una planta administrativa proporcionalmente grande frente a la planta académica.`,
+        `Tiene ${formatNumero(u.personalNoDocente)} no docentes cada ${formatNumero(u.docentesUniversitario)} docentes universitarios (1 cada ${decimal(1 / ratio)}) — una planta administrativa proporcionalmente grande frente a la planta académica.`,
       )
     }
   }

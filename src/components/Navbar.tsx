@@ -54,6 +54,7 @@ export function Navbar() {
           <NavItem to="/" end>Mapa</NavItem>
           <NavItem to="/ranking">Rankings</NavItem>
           <NavItem to="/kirchneristas">Universidades K</NavItem>
+          <NavItem to="/propuestas">Propuestas</NavItem>
         </nav>
       </div>
     </motion.header>

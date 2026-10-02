@@ -11,7 +11,7 @@
     "inscriptos_ref_year": 2017,
     "notas": [
       "El Ciclo Básico Común (CBC) funciona como un embudo antes de pisar la facultad: buena parte de la deserción temprana queda invisibilizada ahí, antes de sumarse a las estadísticas de abandono de cada carrera.",
-      "Sostiene una planta de 24.158 docentes universitarios —la más grande del sistema— para un resultado de egreso que ronda 1 de cada 3 inscriptos.",
+      "Sostiene una planta de 24.136 docentes universitarios —la más grande del sistema— para un resultado de egreso que ronda 1 de cada 3 inscriptos.",
       "Los cargos de dedicación Exclusiva y Semiexclusiva CAYERON en términos absolutos (-8% y -9%) mientras Simple creció +12%.",
       "El crecimiento de planta docente que muestra el número bruto de cargos (+9%) es principalmente de baja dedicación horaria; el FTE ponderado creció solo +5%."
     ],
@@ -695,7 +695,7 @@
     "sitio": "https://www.ungs.edu.ar",
     "inscriptos_ref_year": 2017,
     "notas": [
-      "El caso más extremo de la muestra relevada hasta ahora: combina la peor tasa de egreso con el costo por graduado más alto.",
+      "Combina una de las tasas de egreso más bajas del relevamiento (10%, la 10ª más baja de 54 universidades con cohorte medible) con uno de los costos por graduado más altos (12º más alto de 56).",
       "La matrícula casi se triplicó entre 2013 y 2024, pero los egresados por año se mantienen estancados en cifras de dos y tres dígitos."
     ],
     "estudiantes2023": 19767,
@@ -967,7 +967,7 @@
     "inscriptos_ref_year": null,
     "notas": [
       "Creada por Ley 27.212 (2015); recién empezó a reportar estudiantes al Anuario de la SPU en 2019, seis años después de sancionada la ley de creación.",
-      "Todavía no completa una cohorte medible de 6 años, pero ya sostiene una planta de 388 docentes para apenas 198 egresados en 2024."
+      "Todavía no completa una cohorte medible de 6 años: en 2024 informó 3.554 estudiantes, 307 egresados y una planta de 286 docentes universitarios."
     ],
     "estudiantes2023": 2831,
     "docentesUniversitario": 286,
@@ -1039,19 +1039,33 @@
   "undelta": {
     "nombre": "Universidad Nacional del Delta",
     "sigla": "UNDELTA",
-    "ciudad": "Campana",
+    "ciudad": "San Fernando",
     "provincia": "Buenos Aires",
-    "lat": -34.1691,
-    "lng": -58.9599,
+    "lat": -34.4447,
+    "lng": -58.5597,
     "fundacion": 2023,
     "sitio": "https://www.undelta.edu.ar",
     "notas": [
-      "Creada por Ley 27.727, sancionada el 28/9/2023 y promulgada en octubre de 2023, en las últimas semanas del gobierno de Alberto Fernández (el proyecto lo había presentado Sergio Massa en 2020, pero recién se convirtió en ley en 2023). Todavía no reporta datos de estudiantes, egresados, docentes ni presupuesto en el Anuario de Estadísticas Universitarias de la SPU.",
-      "Señalada por la existencia de una placa/reconocimiento institucional a Malena Galmarini (esposa del entonces ministro Sergio Massa) en sus instalaciones — un caso citado como ejemplo de uso político-partidario de una universidad pública."
+      "Creada por Ley 27.727, sancionada el 28/9/2023 y promulgada en octubre de 2023, en las últimas semanas del gobierno de Alberto Fernández (el proyecto lo había presentado Sergio Massa en 2020). Abarca Tigre, San Fernando y Escobar, con rectorado en San Fernando. Empezó a dictar carreras de grado en 2025 y todavía no reporta datos de estudiantes, egresados, docentes ni presupuesto en el Anuario de Estadísticas Universitarias de la SPU.",
+      "En su sede de San Fernando hay una placa fechada el 4 de agosto de 2025 y firmada por la \"Comunidad de la Universidad Nacional del Delta\" que reconoce a Malena Galmarini (dirigente del Frente Renovador y esposa de Sergio Massa) y a Alicia Aparicio \"por su compromiso, visión y trabajo incansable para hacer realidad la creación de esta Universidad\". Galmarini además creó la Fundación de la Universidad Nacional del Delta, desde la que en 2025 lanzó un \"laboratorio urbano para planificar el futuro de Tigre\", el distrito donde compite políticamente — un caso citado como ejemplo de uso político-partidario de una universidad pública."
     ],
     "tieneDatos": false,
     "esKirchnerista": true,
-    "fundacionLey": "Ley 27.727 (2023, bajo la presidencia de Alberto Fernández)"
+    "fundacionLey": "Ley 27.727 (2023, bajo la presidencia de Alberto Fernández)",
+    "fuentes": [
+      {
+        "titulo": "Ley 27.727 — Boletín Oficial",
+        "url": "https://www.boletinoficial.gob.ar/detalleAviso/primera/295985/20231012"
+      },
+      {
+        "titulo": "Foto de la placa en la sede de San Fernando (relevamiento UPL)",
+        "url": "fuentes/undelta-placa-galmarini.webp"
+      },
+      {
+        "titulo": "Qué Pasa — Malena Galmarini lanzó desde la Fundación de la Universidad del Delta un laboratorio urbano (2025)",
+        "url": "https://www.quepasaweb.com.ar/malena-galmarini-lanzo-desde-la-fundacion-de-la-universidad-del-delta-el-primer-laboratorio-urbano-para-planificar-el-futuro-de-tigre/"
+      }
+    ]
   },
   "unpilar": {
     "nombre": "Universidad Nacional de Pilar",
@@ -1210,7 +1224,7 @@
     "esKirchnerista": true,
     "fundacionLey": "Ley 26.544 (2009, bajo la presidencia de Cristina Fernández de Kirchner)",
     "notas": [
-      "Creada por Ley 26.544 (2009) en Merlo. Señalada públicamente (Infobae, La Nación) porque su rector durante años, Martín Othacehé, es hijo del intendente peronista de Merlo, Raúl Othacehé — citado como caso de manual de universidad del conurbano usada como extensión del poder municipal.",
+      "Creada por Ley 26.544 (2009) en Merlo. Su rector desde 2013 fue Martín Othacehé, hijo del entonces intendente de Merlo, Raúl Othacehé. En 2016 la Asamblea Universitaria lo destituyó por 54 votos a 4, por \"abandono de funciones\" (la investigación interna mencionaba títulos sin tramitar y cierre de sedes), y en 2017 un fallo de Cámara lo repuso — citado como caso de manual de universidad del conurbano usada como extensión del poder municipal.",
       "La mitad de quienes siguen cursando (50,2%) no aprobó ni una materia en el último año informado, y solo 4,2% de los inscriptos se gradúa dentro del plazo de referencia — una de las tasas de egreso más bajas de todo el sistema."
     ],
     "serieEstudiantes": {
@@ -1321,7 +1335,21 @@
       "simple2023": 399,
       "fte2017": 116.8,
       "fte2023": 210.8
-    }
+    },
+    "fuentes": [
+      {
+        "titulo": "La Nación — Tensión en Merlo por el hijo de Othacehé (2017)",
+        "url": "https://www.lanacion.com.ar/politica/tension-en-merlo-por-el-hijo-de-othacehe-nid2068126/"
+      },
+      {
+        "titulo": "Página/12 — Sin títulos ni diplomas en el Oeste (2016)",
+        "url": "https://www.pagina12.com.ar/diario/universidad/10-304008-2016-07-12.html"
+      },
+      {
+        "titulo": "Letra P — Polémica por una decisión judicial que restituye al hijo de Othacehé como rector (2017)",
+        "url": "https://www.letrap.com.ar/nota/2017-10-3-16-48-0-polemica-por-una-decision-judicial-que-restituye-al-hijo-de-othacehe-como-rector"
+      }
+    ]
   },
   "chaco_austral": {
     "nombre": "Universidad Nacional del Chaco Austral",
@@ -1844,7 +1872,7 @@
     "esKirchnerista": true,
     "fundacionLey": "Ley 27.016 (sancionada el 19/11/2014, bajo la presidencia de Cristina Fernández de Kirchner); recién abrió en 2016",
     "notas": [
-      "Creada por Ley 27.016 (2014); reportado públicamente que el impulso fundacional estuvo ligado a un funcionario cercano al entonces vicepresidente Amado Boudou — señalada en las mismas críticas de \"universidad del conurbano\" que UNO.",
+      "Creada por Ley 27.016 (2014). El proyecto lo impulsó Juan Zabaleta (entonces secretario administrativo del Senado y después intendente de Hurlingham) y se presentó en el Senado en un acto con el vicepresidente Amado Boudou. Su primer rector organizador fue Jaime Perczyk, luego ministro de Educación de Alberto Fernández.",
       "Su matrícula se multiplicó por más de 20 en menos de una década (1.749 estudiantes en 2016 a 40.219 en 2024), con solo 1.450 docentes universitarios para sostenerla — casi 28 estudiantes por cada docente, muy por encima del resto del sistema."
     ],
     "serieEstudiantes": {
@@ -1939,7 +1967,17 @@
       "simple2023": 1736,
       "fte2017": 105.2,
       "fte2023": 507.5
-    }
+    },
+    "fuentes": [
+      {
+        "titulo": "La Política Online — Una universidad para Hurlingham (2013)",
+        "url": "https://www.lapoliticaonline.com/nota/nota-93895/"
+      },
+      {
+        "titulo": "Ley 27.016 — texto oficial",
+        "url": "https://www.argentina.gob.ar/normativa/nacional/ley-27016-239548/texto"
+      }
+    ]
   },
   "rafaela": {
     "nombre": "Universidad Nacional de Rafaela",
@@ -3357,7 +3395,8 @@
     "esKirchnerista": true,
     "notas": [
       "Creada por Ley 27.015 (2014, bajo la presidencia de Cristina Fernández de Kirchner), impulsada por el entonces ministro de Defensa Agustín Rossi, sobre institutos universitarios preexistentes de las Fuerzas Armadas.",
-      "26% de quienes siguen cursando no aprobó ni una sola materia en el último año informado."
+      "26% de quienes siguen cursando no aprobó ni una sola materia en el último año informado.",
+      "La SPU informa solo 34 docentes universitarios propios para 8.492 estudiantes: la mayor parte del plantel docente depende de las Fuerzas Armadas y no figura en el Anuario (ni en el presupuesto ejecutado de la universidad). Por eso sus indicadores por docente y su costo por graduado no son comparables y se excluyen de los rankings y promedios."
     ],
     "serieEstudiantes": {
       "2007": 9713,
@@ -3473,7 +3512,8 @@
     "costoPorGraduado": 6685618,
     "estudiantesPorDocente": 249.8,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 105.8
+    "estudiantesActivosPorDocente": 105.8,
+    "docentesNoComparable": true
   },
   "entre_rios": {
     "nombre": "Universidad Nacional de Entre Ríos",

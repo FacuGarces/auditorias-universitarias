@@ -8,7 +8,13 @@ export interface UniversidadDetalle {
   fundacion: number
   sitio: string
   notas: string[]
+  // Fuentes periodísticas u oficiales que respaldan las notas de antecedentes.
+  fuentes?: { titulo: string; url: string }[]
   tieneDatos: boolean
+  // true cuando la SPU no informa la planta docente real (ej. UNDEF, cuyo plantel depende de las
+  // Fuerzas Armadas): sus ratios por docente y su costo por graduado (el presupuesto tampoco incluye
+  // esos salarios) quedan fuera de rankings y promedios.
+  docentesNoComparable?: boolean
   // Universidades creadas por ley durante gobiernos de Néstor Kirchner, Cristina Fernández de
   // Kirchner o Alberto Fernández — ver la sección "Universidades kirchneristas".
   esKirchnerista?: boolean

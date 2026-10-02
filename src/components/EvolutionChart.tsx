@@ -21,7 +21,9 @@ export function EvolutionChart({ data, color = '#facf3b', height = 150, formatVa
   }
 
   const fmt = formatValue ?? ((v: number) => `${v}`)
-  const width = 480
+  // En celular el gráfico se dibuja más angosto en unidades de viewBox: así el texto de los ejes
+  // queda proporcionalmente más grande en vez de achicarse a ~5 px.
+  const width = typeof window !== 'undefined' && window.innerWidth < 640 ? 330 : 480
   const padLeft = 50
   const padRight = 10
   const padTop = 18

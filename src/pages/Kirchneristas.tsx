@@ -4,7 +4,9 @@ import { motion } from 'motion/react'
 import { universidadesArray } from '../data/universidades'
 import { UniversidadBadge } from '../components/UniversidadBadge'
 import { formatMoneda, formatNumero, ubicacion } from '../lib/format'
-import { METRICAS, esPeor, promedio, type MetricaId } from '../lib/metricas'
+import { METRICAS, esPeor, type MetricaId } from '../lib/metricas'
+import { ProvinciaCombobox } from '../components/ProvinciaCombobox'
+import { filtrarPorProvincia, nombreProvincia, useProvinciaFiltro } from '../lib/provincias'
 
 const listVariants = {
   hidden: {},
@@ -35,9 +37,12 @@ export function Kirchneristas() {
   const [invertido, setInvertido] = useState(false)
   const cfg = METRICAS[metrica]
   const ascendente = invertido ? !cfg.ordenAsc : cfg.ordenAsc
+  const [provincia, setProvincia] = useProvinciaFiltro()
+  const enProvincia = useMemo(() => filtrarPorProvincia(universidadesArray, provincia), [provincia])
+  const totalK = universidadesArray.filter((u) => u.esKirchnerista).length
 
   const universidades = useMemo(() => {
-    const kirchneristas = universidadesArray.filter((u) => u.esKirchnerista)
+    const kirchneristas = enProvincia.filter((u) => u.esKirchnerista)
     return kirchneristas.slice().sort((a, b) => {
       const va = cfg.valor(a)
       const vb = cfg.valor(b)
@@ -46,11 +51,11 @@ export function Kirchneristas() {
       if (vb == null) return -1
       return ascendente ? va - vb : vb - va
     })
-  }, [cfg, ascendente])
+  }, [cfg, ascendente, enProvincia])
 
   const comparativa = useMemo(() => {
-    const kUnis = universidadesArray.filter((u) => u.esKirchnerista && u.tieneDatos)
-    const restoUnis = universidadesArray.filter((u) => !u.esKirchnerista && u.tieneDatos)
+    const kUnis = enProvincia.filter((u) => u.esKirchnerista && u.tieneDatos)
+    const restoUnis = enProvincia.filter((u) => !u.esKirchnerista && u.tieneDatos)
     return (Object.keys(METRICAS) as MetricaId[]).map((key) => {
       const m = METRICAS[key]
       return {
@@ -58,11 +63,13 @@ export function Kirchneristas() {
         label: m.label,
         formato: m.formato,
         ordenAsc: m.ordenAsc,
-        k: promedio(kUnis, m.valor),
-        resto: promedio(restoUnis, m.valor),
+        k: m.agregado(kUnis),
+        resto: m.agregado(restoUnis),
+        nK: kUnis.length,
+        nResto: restoUnis.length,
       }
     })
-  }, [])
+  }, [enProvincia])
 
   return (
     <div className="relative min-h-screen">
@@ -86,7 +93,7 @@ export function Kirchneristas() {
           transition={{ duration: 0.4, delay: 0.05 }}
           className="text-upl-crema/60 mb-4"
         >
-          {universidades.length} universidades nacionales creadas por ley durante los gobiernos de Néstor Kirchner,
+          {totalK} universidades nacionales creadas por ley durante los gobiernos de Néstor Kirchner,
           Cristina Fernández de Kirchner o Alberto Fernández — la mayoría, sancionadas para responder a pedidos de
           intendentes del conurbano bonaerense o de legisladores propios, más que a un plan de oferta académica.
         </motion.p>
@@ -109,11 +116,14 @@ export function Kirchneristas() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.15 }}
-          className="mb-6"
+          className="relative z-30 mb-6"
         >
-          <h2 className="font-display font-700 text-sm text-upl-crema/70 mb-2">
-            Promedio universidades K vs. resto del sistema
-          </h2>
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+            <h2 className="font-display font-700 text-sm text-upl-crema/70">
+              Universidades K vs. resto {provincia ? `de ${nombreProvincia(provincia)}` : 'del sistema'}
+            </h2>
+            <ProvinciaCombobox value={provincia} onChange={setProvincia} />
+          </div>
           <div className="rounded-2xl overflow-hidden flex flex-wrap gap-px border border-upl-crema/12 bg-upl-crema/15 [backdrop-filter:blur(18px)] shadow-[0_8px_30px_rgba(10,8,30,0.35)]">
             {comparativa.map((c) => {
               const kPeor = esPeor(c.k, c.resto, c.ordenAsc)
@@ -123,35 +133,42 @@ export function Kirchneristas() {
                   <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">{c.label}</div>
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <div className="text-[11px] text-upl-crema/50">Universidades K</div>
+                      <div className="text-[11px] text-upl-crema/50">Universidades K ({c.nK})</div>
                       <div
                         className={`font-display font-800 text-xl ${kPeor ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}
                       >
                         {c.formato(c.k)}
                       </div>
+                      {kPeor && <div className="text-[10px] font-semibold text-[#ff8a7a]">▼ peor</div>}
                     </div>
                     <div className="text-upl-crema/20 text-sm shrink-0">vs</div>
                     <div className="text-right">
-                      <div className="text-[11px] text-upl-crema/50">Resto del sistema</div>
+                      <div className="text-[11px] text-upl-crema/50">Resto ({c.nResto})</div>
                       <div
                         className={`font-display font-800 text-xl ${restoPeor ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}
                       >
                         {c.formato(c.resto)}
                       </div>
+                      {restoPeor && <div className="text-[10px] font-semibold text-[#ff8a7a]">▼ peor</div>}
                     </div>
                   </div>
                 </div>
               )
             })}
           </div>
+          <p className="mt-2 text-[11px] text-upl-crema/45">
+            Valores de grupo ponderados por tamaño (ej. tasa de cohorte = suma de egresados sobre suma de inscriptos), no
+            promedio simple de cada universidad. La UNDEF queda fuera de los indicadores por docente y del costo por graduado (su planta docente depende de las Fuerzas Armadas).
+          </p>
         </motion.div>
 
-        <div className="flex flex-wrap gap-2 mb-4">
+        {/* En celular las métricas van en una fila con scroll horizontal en vez de apilarse. */}
+        <div className="flex sm:flex-wrap gap-2 mb-4 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto [scrollbar-width:none]">
           {(Object.keys(METRICAS) as MetricaId[]).map((key) => (
             <button
               key={key}
               onClick={() => setMetrica(key)}
-              className={`relative rounded-full px-4 py-2 font-display font-600 text-sm transition-colors ${
+              className={`relative shrink-0 whitespace-nowrap rounded-full px-4 py-2 font-display font-600 text-sm transition-colors ${
                 metrica === key ? 'text-upl-principal' : 'glass-chip text-upl-crema hover:bg-upl-crema/15'
               }`}
             >
@@ -168,7 +185,7 @@ export function Kirchneristas() {
         </div>
 
         <div className="flex items-center justify-between gap-3 mb-4">
-          <p className="text-sm text-upl-crema/50">{cfg.subtitulo}</p>
+          <p className="text-xs sm:text-sm text-upl-crema/50">{cfg.subtitulo}</p>
           <motion.button
             onClick={() => setInvertido((v) => !v)}
             whileTap={{ scale: 0.94 }}
@@ -194,26 +211,28 @@ export function Kirchneristas() {
                 to={`/universidad/${u.id}`}
                 className="group block rounded-xl glass-flat hover:bg-[#e2574c]/10 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 px-4 py-3 transition-all duration-200"
               >
-                <div className="flex items-center gap-4">
-                  <UniversidadBadge sigla={u.sigla} />
+                <div className="flex items-start sm:items-center gap-3 sm:gap-4">
+                  <UniversidadBadge sigla={u.sigla} size="lista" />
                   <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-upl-crema truncate">{u.nombre}</div>
-                    <div className="text-xs text-upl-crema/50 truncate">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="font-semibold text-sm sm:text-base text-upl-crema leading-snug line-clamp-2">{u.nombre}</div>
+                      {u.tieneDatos ? (
+                        <div className="text-right shrink-0">
+                          <div className="font-display font-700 text-upl-amarillo">{cfg.formato(cfg.valor(u))}</div>
+                          <div className="hidden sm:block text-[11px] text-upl-crema/40">{cfg.label}</div>
+                        </div>
+                      ) : (
+                        <div className="text-right shrink-0 text-xs text-upl-crema/40 italic">Sin datos</div>
+                      )}
+                    </div>
+                    <div className="text-xs text-upl-crema/50 line-clamp-2 sm:truncate">
                       {ubicacion(u.ciudad, u.provincia)} · {u.fundacionLey ?? `Fundada en ${u.fundacion}`}
                     </div>
                     <div className="text-[11px] text-[#ff8a7a] mt-0.5">{periodoDe(u.fundacion)}</div>
                   </div>
-                  {u.tieneDatos ? (
-                    <div className="text-right shrink-0">
-                      <div className="font-display font-700 text-upl-amarillo">{cfg.formato(cfg.valor(u))}</div>
-                      <div className="text-[11px] text-upl-crema/40">{cfg.label}</div>
-                    </div>
-                  ) : (
-                    <div className="text-right shrink-0 text-xs text-upl-crema/40 italic">Sin datos</div>
-                  )}
                 </div>
                 {u.tieneDatos && (
-                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-upl-crema/60 pl-[calc(3.5rem+1rem)]">
+                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-upl-crema/60 sm:pl-[calc(3.5rem+1rem)]">
                     <span>{formatNumero(u.estudiantes2024)} estudiantes</span>
                     {u.costoPorGraduado != null && <span>{formatMoneda(u.costoPorGraduado)} por graduado</span>}
                     {u.personalNoDocente != null && <span>{formatNumero(u.personalNoDocente)} no docentes</span>}
