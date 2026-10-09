@@ -64,7 +64,7 @@ npm run deploy   # publica dist/ en GitHub Pages
 
 ## Dominio propio
 
-1. Cambiar la URL en `sitio.json` (ej. `"https://auditoriasuniversitarias.com.ar/"`) y correr `npm run build && npm run deploy`. Eso actualiza la ruta base, los canónicos, el sitemap, el QR de la presentación y genera el archivo `CNAME`.
+1. Cambiar la URL en `sitio.json` (hoy `"https://upl-auditoriasuniversitarias.com/"`) y correr `npm run build && npm run deploy`. Eso actualiza la ruta base, los canónicos, el sitemap, el QR de la presentación y genera el archivo `CNAME`.
 2. En el proveedor del dominio, cargar los DNS de GitHub Pages: cuatro registros `A` en la raíz → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`, y un `CNAME` para `www` → `facugarces.github.io`.
 3. En GitHub → Settings → Pages: verificar que figure el dominio y activar **Enforce HTTPS**. La dirección vieja de github.io redirige sola al dominio nuevo.
 4. En Google Search Console: verificar el dominio y enviar `https://<dominio>/sitemap.xml`.

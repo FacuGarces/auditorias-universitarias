@@ -1,4 +1,4 @@
 {
-  "//": "URL pública del sitio. Al comprar el dominio propio, cambiar SOLO esta línea (ej. \"https://auditoriasuniversitarias.com.ar/\") y volver a deployar: la ruta base, los links canónicos, el sitemap, el QR y el archivo CNAME de GitHub Pages salen de acá.",
-  "url": "https://facugarces.github.io/auditorias-universitarias/"
+  "//": "URL pública del sitio. Al comprar el dominio propio, cambiar SOLO esta línea (ej. \"https://otro-dominio.com/\") y volver a deployar: la ruta base, los links canónicos, el sitemap, el QR y el archivo CNAME de GitHub Pages salen de acá.",
+  "url": "https://upl-auditoriasuniversitarias.com/"
 }
