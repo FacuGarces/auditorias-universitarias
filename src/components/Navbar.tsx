@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { motion } from 'motion/react'
+import { MonedaToggle } from './MonedaToggle'
+import { useVolver } from '../lib/volver'
 
 function NavItem({ to, end, children }: { to: string; end?: boolean; children: React.ReactNode }) {
   return (
@@ -31,6 +33,7 @@ function NavItem({ to, end, children }: { to: string; end?: boolean; children: R
 }
 
 export function Navbar() {
+  const volver = useVolver()
   return (
     <motion.header
       initial={{ y: -24, opacity: 0 }}
@@ -39,6 +42,16 @@ export function Navbar() {
       className="sticky top-0 z-30 glass-strong border-b-0"
     >
       <div className="mx-auto max-w-6xl flex flex-wrap items-center justify-between px-3 sm:px-4 py-3 gap-x-3 gap-y-2">
+        <div className="flex items-center gap-2 min-w-0 flex-1">
+        {/* En celular no hay barra del navegador a mano: botón propio para volver a la pantalla anterior. */}
+        <button
+          type="button"
+          onClick={volver}
+          aria-label="Volver"
+          className="sm:hidden shrink-0 w-9 h-9 rounded-full glass-chip text-upl-crema text-lg leading-none flex items-center justify-center active:bg-upl-crema/15"
+        >
+          ‹
+        </button>
         <NavLink to="/" className="flex items-center gap-2 sm:gap-3 min-w-0 group">
           <img
             src={`${import.meta.env.BASE_URL}logo.jpg`}
@@ -50,11 +63,16 @@ export function Navbar() {
             <div className="hidden sm:block text-[11px] text-upl-resaltador tracking-wide">Universitarios por la Libertad</div>
           </div>
         </NavLink>
-        <nav className="flex gap-1.5 sm:gap-2 shrink-0">
+        <MonedaToggle className="ml-auto sm:hidden" />
+        </div>
+        <nav className="flex gap-1.5 sm:gap-2 shrink-0 items-center">
           <NavItem to="/" end>Mapa</NavItem>
           <NavItem to="/ranking">Rankings</NavItem>
           <NavItem to="/kirchneristas">Universidades K</NavItem>
           <NavItem to="/propuestas">Propuestas</NavItem>
+          <span className="hidden sm:inline-flex ml-1">
+            <MonedaToggle />
+          </span>
         </nav>
       </div>
     </motion.header>

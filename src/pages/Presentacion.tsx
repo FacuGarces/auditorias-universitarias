@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { Fragment, useCallback, useEffect, useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import mapaEstatico from '../data/mapa-estatico.json'
@@ -7,7 +7,8 @@ import { EvolutionChart } from '../components/EvolutionChart'
 import { QrCode } from '../components/QrCode'
 import { formatMoneda, formatNumero, formatPorcentaje } from '../lib/format'
 import { METRICAS } from '../lib/metricas'
-import { propuestas } from '../lib/propuestas'
+import { POSICION_PRINCIPAL, propuestaPrincipal, propuestas } from '../lib/propuestas'
+import { useMoneda } from '../lib/moneda'
 import { SITIO_URL, SITIO_URL_CORTA, resumenSistema } from '../lib/sistema'
 
 /*
@@ -98,6 +99,8 @@ function MapaSedes() {
 }
 
 function useDiapositivas() {
+  // Los montos se formatean en la moneda elegida: hay que recalcular las diapositivas si cambia.
+  const { moneda, tc } = useMoneda()
   return useMemo(() => {
     const r = resumenSistema(universidadesArray)
     const conDatos = universidadesArray.filter((u) => u.tieneDatos)
@@ -122,6 +125,7 @@ function useDiapositivas() {
       uno?.reinscriptos0Materias != null && uno.reinscriptosTotal ? Math.round((uno.reinscriptos0Materias / uno.reinscriptosTotal) * 100) : null
     const d = r.dedicacion
     const lista = propuestas()
+    const avanzar = propuestaPrincipal()
 
     const slides: { id: string; contenido: React.ReactNode }[] = [
       {
@@ -427,22 +431,57 @@ function useDiapositivas() {
         contenido: (
           <div>
             <Eyebrow>Qué proponemos</Eyebrow>
-            <ol className="space-y-[2.6vh]">
+            <ol className="space-y-[2.2vh]">
               {lista.map((p, i) => (
-                <motion.li
-                  key={p.titulo}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + i * 0.08 }}
-                  className="flex items-baseline gap-[2vw]"
-                >
-                  <span className="font-display font-800 text-upl-amarillo text-[clamp(2rem,4.4vw,4rem)] leading-none w-[1.2em] shrink-0">
-                    {i + 1}
-                  </span>
-                  <span className="font-display font-700 text-upl-crema text-[clamp(1.3rem,3vw,2.8rem)] leading-tight">{p.titulo}</span>
-                </motion.li>
+                <Fragment key={p.titulo}>
+                  {i === POSICION_PRINCIPAL && (
+                    <motion.li
+                      initial={{ opacity: 0, scale: 0.96 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.1 + i * 0.08 }}
+                      className="rounded-2xl border-2 border-upl-amarillo/70 bg-upl-amarillo/[0.12] px-[2vw] py-[1.6vh]"
+                    >
+                      <span className="font-display font-800 text-upl-amarillo text-[clamp(1.4rem,3.2vw,3rem)] leading-tight">
+                        ★ {avanzar.nombre}
+                      </span>
+                      <span className="block text-upl-crema/80 text-[clamp(0.95rem,1.7vw,1.6rem)] leading-snug">{avanzar.bajada}</span>
+                    </motion.li>
+                  )}
+                  <motion.li
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + i * 0.08 }}
+                    className="flex items-baseline gap-[2vw]"
+                  >
+                    <span className="font-display font-800 text-upl-amarillo text-[clamp(2rem,4.4vw,4rem)] leading-none w-[1.2em] shrink-0">
+                      {i + 1}
+                    </span>
+                    <span className="font-display font-700 text-upl-crema text-[clamp(1.3rem,3vw,2.8rem)] leading-tight">{p.titulo}</span>
+                  </motion.li>
+                </Fragment>
               ))}
             </ol>
+          </div>
+        ),
+      },
+      {
+        id: 'avanzar',
+        contenido: (
+          <div>
+            <Eyebrow>La propuesta central</Eyebrow>
+            <h2 className="font-display font-800 text-upl-amarillo leading-none text-[clamp(3rem,8vw,7rem)]">{avanzar.nombre}</h2>
+            <p className="mt-[2vh] font-display font-700 text-upl-crema text-[clamp(1.3rem,3vw,2.8rem)] leading-tight max-w-[30ch]">
+              {avanzar.bajada}
+            </p>
+            <div className="mt-[4vh] grid grid-cols-2 md:grid-cols-4 gap-[1.5vw]">
+              {avanzar.ejes.map((e) => (
+                <div key={e.titulo} className="rounded-2xl border border-upl-crema/15 bg-upl-principal-light/40 px-[1.4vw] py-[1.6vh]">
+                  <div className="font-display font-800 text-upl-amarillo text-[clamp(1.1rem,2vw,1.9rem)]">{e.titulo}</div>
+                  <div className="text-upl-crema/70 text-[clamp(0.8rem,1.15vw,1.1rem)] leading-snug mt-1">{e.texto}</div>
+                </div>
+              ))}
+            </div>
+            <Fuente>{avanzar.dato} Anuario SPU 2024, cuadro 2.1.13.</Fuente>
           </div>
         ),
       },
@@ -469,7 +508,8 @@ function useDiapositivas() {
       },
     ]
     return slides
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [moneda, tc.venta])
 }
 
 export function Presentacion() {
