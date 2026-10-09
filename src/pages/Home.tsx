@@ -110,14 +110,21 @@ function ToggleSedes({ activo, onChange }: { activo: boolean; onChange: (v: bool
 /**
  * Radio "de mapa" (unidades crudas) que representa un tamaño en pantalla CRECIENTE a medida que
  * se hace zoom (k crece respecto del encuadre inicial kMin), con un techo para que no se dispare.
- * Al encuadre inicial (k===kMin) el punto se ve igual que en el mapa nacional (PIN_R_NACIONAL).
- * Crecimiento lineal (no logarítmico) para que se note de verdad al acercar.
+ * Al encuadre inicial (k===kMin) el punto mide `base` en pantalla — más grande que en el mapa
+ * nacional, porque en una provincia grande (Río Negro, Santa Cruz) con el tamaño nacional los puntos
+ * quedaban casi invisibles hasta hacer zoom. Crecimiento lineal (no logarítmico) para que se note
+ * de verdad al acercar.
  */
-function radioCreciente(k: number, kMin: number) {
+function radioCreciente(k: number, kMin: number, base: number) {
   const zoomRelativo = k / kMin
-  const pantalla = Math.min(16, PIN_R_NACIONAL * zoomRelativo)
+  const pantalla = Math.min(18, base * zoomRelativo)
   return pantalla / k
 }
+
+// Tamaño inicial de los puntos al abrir una provincia. CABA va más chico: concentra 20 puntos en
+// pocas cuadras y con el tamaño general quedaban encimados.
+const PIN_R_PROVINCIA = 5.5
+const PIN_R_CABA = 3.8
 
 /**
  * Borde y punteado siempre proporcionales al radio actual — así un pin "sin datos" es SIEMPRE
@@ -314,8 +321,9 @@ function VistaProvincia({
   // vista.k nunca puede bajar de minK.current, tampoco puede encogerse por debajo del punto de partida.
   // En celular el SVG se dibuja a ~40% del tamaño de escritorio: sin este factor los puntos quedan de
   // 1-2 px, imposibles de ver y de tocar.
-  const escalaPin = esMovil() ? 2.2 : 1
-  const radioPin = radioCreciente(vista.k, minK.current) * escalaPin
+  const escalaPin = esMovil() ? 2.2 : 1.4
+  const radioPin =
+    radioCreciente(vista.k, minK.current, provincia.nombre === 'Capital Federal' ? PIN_R_CABA : PIN_R_PROVINCIA) * escalaPin
   const clipId = `clip-${slug(provincia.nombre)}`
   // CABA se muestra siempre aislada: ni Buenos Aires ni ninguna otra provincia se dibuja alrededor.
   // No es "una vecina más" con zoom — es una vista aparte, como pidió el usuario explícitamente.
