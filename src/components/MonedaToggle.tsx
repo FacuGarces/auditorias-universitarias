@@ -24,7 +24,7 @@ export function MonedaToggle({ className = '' }: { className?: string }) {
           role="radio"
           aria-checked={moneda === o.id}
           onClick={() => setMoneda(o.id)}
-          className={`rounded-full px-2.5 py-1 transition-colors ${
+          className={`rounded-full px-2 sm:px-2.5 py-1 max-[379px]:px-1.5 max-[379px]:text-[11px] transition-colors ${
             moneda === o.id ? 'bg-upl-amarillo text-upl-principal' : 'text-upl-crema/70 hover:text-upl-crema'
           }`}
         >

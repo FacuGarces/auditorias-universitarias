@@ -8,7 +8,8 @@ import { BuscadorUniversidades } from '../components/BuscadorUniversidades'
 import { MonedaToggle } from '../components/MonedaToggle'
 import { PinTooltip, type HoverMapa } from '../components/PinTooltip'
 import type { UniversidadMapa } from '../types'
-import { RUTAS, rutaProvincia, rutaSede, rutaUniversidad, slugProvincia } from '../lib/rutas'
+import { ENLACES, RUTAS, rutaProvincia, rutaSede, rutaUniversidad, slugProvincia } from '../lib/rutas'
+import { LinkAnuarios } from '../components/LinkAnuarios'
 import { useMeta } from '../lib/meta'
 
 // Límites de departamentos/partidos por provincia — se cargan sólo al entrar a una provincia (code-split).
@@ -762,6 +763,9 @@ function MapaNacional({
           </svg>
           Buscar universidad
         </button>
+        <p className="mt-2 text-[11px] text-upl-crema/50">
+          Fuente: <LinkAnuarios>Anuarios SPU</LinkAnuarios>
+        </p>
       </div>
 
       <PinTooltip hover={hover} />
@@ -849,9 +853,11 @@ export function Home() {
         )}
       </div>
 
-      {/* Header flotante: en celular los accesos van en una segunda fila para que entren completos. */}
+      {/* Header flotante. Escritorio ancho (lg+): una sola fila — marca, accesos y moneda. Más angosto: la
+          marca y la moneda arriba, los accesos en una segunda fila a todo el ancho. El título nunca se
+          recorta: el contenedor es lo bastante ancho y los accesos bajan de fila antes de apretarlo. */}
       <header className="fixed top-0 inset-x-0 z-20 flex justify-center pt-3 sm:pt-4 px-3">
-        <div className="glass-strong rounded-2xl px-3 sm:px-5 py-2.5 sm:py-3 max-w-2xl w-full flex flex-wrap items-center gap-x-2 sm:gap-x-3 gap-y-2">
+        <div className="glass-strong rounded-2xl px-3 sm:px-5 py-2.5 sm:py-3 max-w-5xl w-full flex flex-wrap items-center gap-x-3 gap-y-2">
           {activa && (
             <button
               type="button"
@@ -862,13 +868,21 @@ export function Home() {
               ‹
             </button>
           )}
-          <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="UPL" className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg object-cover shrink-0" />
-          <div className="min-w-0 flex-1">
-            <h1 className="font-display font-800 text-base sm:text-lg text-upl-crema leading-tight truncate">Auditorías Universitarias</h1>
-            <p className="text-[11px] sm:text-xs text-upl-resaltador truncate">Universitarios por la Libertad</p>
-          </div>
-          <MonedaToggle className="sm:order-last" />
-          <nav className="w-full sm:w-auto flex gap-1.5 sm:gap-2">
+          <Link to={RUTAS.inicio} className="flex items-center gap-2.5 sm:gap-3 min-w-0 mr-auto lg:mr-0">
+            {/* En celulares angostos, con el botón de volver a la vista, el logo no entra en la fila sin
+                recortar el título: se oculta (el título ya identifica el sitio). */}
+            <img
+              src={`${import.meta.env.BASE_URL}logo.jpg`}
+              alt="UPL"
+              className={`h-8 w-8 sm:h-10 sm:w-10 rounded-lg object-cover shrink-0 ${activa ? 'max-[429px]:hidden' : ''}`}
+            />
+            <div className="min-w-0">
+              <h1 className="font-display font-800 text-base max-[379px]:text-sm sm:text-xl text-upl-crema leading-tight whitespace-nowrap">Auditorías Universitarias</h1>
+              <p className="text-[11px] sm:text-xs text-upl-resaltador whitespace-nowrap">Universitarios por la Libertad</p>
+            </div>
+          </Link>
+          <MonedaToggle className="lg:order-last" />
+          <nav className="w-full lg:w-auto lg:ml-auto flex gap-1.5 sm:gap-2">
             {[
               { to: RUTAS.rankings, label: 'Rankings', destacado: true },
               { to: RUTAS.kirchneristas, label: 'Universidades K' },
@@ -886,6 +900,15 @@ export function Home() {
                 {l.label}
               </Link>
             ))}
+            <a
+              href={ENLACES.anuarios}
+              target="_blank"
+              rel="noreferrer"
+              title="Anuarios de Estadísticas Universitarias (SPU) — la fuente de todos los datos"
+              className="hidden sm:inline-block text-center rounded-full glass-chip text-upl-crema hover:bg-upl-crema/15 font-display font-600 text-sm px-4 py-2 transition-colors whitespace-nowrap"
+            >
+              Anuarios SPU <span aria-hidden>↗</span>
+            </a>
           </nav>
         </div>
       </header>

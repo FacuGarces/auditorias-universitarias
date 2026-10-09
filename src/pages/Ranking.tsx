@@ -12,6 +12,7 @@ import { resumenSistema } from '../lib/sistema'
 import { metricaDesdeSlug, rutaRanking, rutaUniversidad } from '../lib/rutas'
 import { useMeta } from '../lib/meta'
 import { NoEncontrada } from './NoEncontrada'
+import { LinkAnuarios } from '../components/LinkAnuarios'
 
 // Fila del ranking como link real (<a href>): se puede abrir en otra pestaña y Google la sigue.
 const MotionLink = motion.create(Link)
@@ -171,7 +172,7 @@ function RankingMetrica({ metrica }: { metrica: MetricaId }) {
         </ol>
 
         <p className="mt-6 mb-8 text-xs text-upl-crema/40">
-          Fuente: Anuarios de Estadísticas Universitarias — Secretaría de Políticas Universitarias.
+          Fuente: <LinkAnuarios /> — Secretaría de Políticas Universitarias.
         </p>
       </div>
     </div>

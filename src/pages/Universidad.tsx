@@ -10,6 +10,7 @@ import { useVolver } from '../lib/volver'
 import { useMeta } from '../lib/meta'
 import { RUTAS, idUniversidad, rutaSede, rutaUniversidad, slugSede } from '../lib/rutas'
 import { NoEncontrada } from './NoEncontrada'
+import { LinkAnuarios } from '../components/LinkAnuarios'
 import { decimal, formatMoneda, formatNumero, formatPorcentaje, ubicacion, unidadMonetaria } from '../lib/format'
 import { gastoExtranjeros, gastoPorEstudiante, pctExtranjeros } from '../lib/extranjeros'
 
@@ -619,7 +620,7 @@ function FichaUniversidad({ id, sedes, sede }: { id: string; sedes: typeof todas
       </div>
 
       <p className="mt-8 mb-8 text-xs text-upl-crema/40">
-        Fuente: Anuarios de Estadísticas Universitarias — Secretaría de Políticas Universitarias (SPU). Año de
+        Fuente: <LinkAnuarios /> — Secretaría de Políticas Universitarias (SPU). Año de
         referencia 2024, salvo indicación contraria.
       </p>
     </div>

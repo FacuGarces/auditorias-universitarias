@@ -8,6 +8,7 @@ import { METRICAS, esPeor, type MetricaId } from '../lib/metricas'
 import { ProvinciaCombobox } from '../components/ProvinciaCombobox'
 import { RUTAS, rutaUniversidad } from '../lib/rutas'
 import { useMeta } from '../lib/meta'
+import { LinkAnuarios } from '../components/LinkAnuarios'
 import { filtrarPorProvincia, nombreProvincia, useProvinciaFiltro } from '../lib/provincias'
 
 const listVariants = {
@@ -252,7 +253,7 @@ export function Kirchneristas() {
         </motion.ol>
 
         <p className="mt-6 mb-8 text-xs text-upl-crema/40">
-          Fuente: Anuarios de Estadísticas Universitarias (SPU) y leyes de creación publicadas en el Boletín
+          Fuente: <LinkAnuarios /> (SPU) y leyes de creación publicadas en el Boletín
           Oficial. Costo por graduado en {unidadMonetaria()}.
         </p>
       </div>

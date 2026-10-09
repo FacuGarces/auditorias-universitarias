@@ -124,3 +124,9 @@ export function rutaDesdeHashViejo(hash: string): string | null {
       return '/'
   }
 }
+
+/** Enlaces externos a las fuentes oficiales. */
+export const ENLACES = {
+  // Página oficial de la SPU con todos los Anuarios de Estadísticas Universitarias (1999–2024, PDF y CSV).
+  anuarios: 'https://www.argentina.gob.ar/educacion/universidades/informacion/publicaciones/anuarios',
+} as const

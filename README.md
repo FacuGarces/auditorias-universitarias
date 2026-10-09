@@ -38,7 +38,7 @@ Hay datos completos cargados para 59 de las 62 universidades nacionales. Las tre
 
 ## Fuentes
 
-- Anuarios de Estadísticas Universitarias 2017 / 2019 / 2023 / 2024 (SPU).
+- [Anuarios de Estadísticas Universitarias](https://www.argentina.gob.ar/educacion/universidades/informacion/publicaciones/anuarios) 2017 / 2019 / 2023 / 2024 (SPU).
 - Portal de Información de las Universidades Públicas (PIU, AGN): ejecución del gasto por partida, usada en las notas de cada ficha. `scripts/enriquecer_piu_extranjeros.py` regenera esas notas y los estudiantes extranjeros.
 - Los datos de tasa de cohorte comparan egresados de un año con los nuevos inscriptos 6 años antes.
 - Los promedios de grupos (sistema, provincia, universidades K vs. resto) están ponderados por tamaño: por ejemplo, la tasa de cohorte agregada es la suma de egresados sobre la suma de inscriptos, no el promedio de las tasas de cada universidad.
