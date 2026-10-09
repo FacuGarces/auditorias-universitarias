@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import mapaEstatico from '../data/mapa-estatico.json'
+import { sedes, type Sede } from '../data/sedes'
 import { ubicacion } from '../lib/format'
 import { UniversidadBadge } from '../components/UniversidadBadge'
 import { BuscadorUniversidades } from '../components/BuscadorUniversidades'
+import { MonedaToggle } from '../components/MonedaToggle'
+import { PinTooltip, type HoverMapa } from '../components/PinTooltip'
 import type { UniversidadMapa } from '../types'
 
 // Límites de departamentos/partidos por provincia — se cargan sólo al entrar a una provincia (code-split).
@@ -48,6 +51,9 @@ const BASE_FILL = '#4a5580'
 // (la costa llega como máximo a ~595). En la vista nacional recortamos ese margen para que el
 // mapa quede pegado al anexo de Capital Federal, sin tocar el sistema de coordenadas compartido.
 const NATIONAL_VIEWBOX = '0 0 620 900'
+// En celular no hay anexo de CABA al costado: el recorte se ajusta al territorio (x 205–595) para que
+// el mapa quede centrado en vez de corrido a la derecha por el margen vacío del oeste.
+const NATIONAL_VIEWBOX_MOVIL = '195 10 410 880'
 const CAPITAL = provincias.find((p) => p.nombre === 'Capital Federal') ?? null
 
 const PIN_R_NACIONAL = 3.4
@@ -57,6 +63,49 @@ const PIN_FILL = '#facf3b'
 const PIN_STROKE_DATA = '#242c50'
 const PIN_STROKE_NODATA = '#facf3b'
 const ZOOM_MAX = 400
+// Sedes y unidades académicas: otro color y un poco más chicas que la sede central.
+const SEDE_FILL = '#8fb7ff'
+const SEDE_ESCALA = 0.62
+
+function esMovil() {
+  return typeof window !== 'undefined' && window.innerWidth < 640
+}
+
+/** Hover sobre un punto del mapa (sede central o sede regional) a partir del evento del mouse. */
+function hoverDe(e: React.MouseEvent, u: UniversidadMapa | Sede): HoverMapa {
+  return 'universidad' in u
+    ? { universidad: u.universidad, sede: { nombre: u.nombre, ciudad: u.ciudad, provincia: u.provincia }, x: e.clientX, y: e.clientY }
+    : { universidad: u.id, x: e.clientX, y: e.clientY }
+}
+
+function sedeVisual(r: number) {
+  return { fill: SEDE_FILL, stroke: PIN_STROKE_DATA, strokeWidth: PIN_STROKE_W_BASE * (r / PIN_R_NACIONAL) }
+}
+
+/** Switch para mostrar u ocultar las sedes regionales / unidades académicas. */
+function ToggleSedes({ activo, onChange }: { activo: boolean; onChange: (v: boolean) => void }) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={activo}
+      onClick={() => onChange(!activo)}
+      className="flex items-center gap-2 text-left"
+    >
+      <span
+        className={`relative inline-flex h-4 w-7 shrink-0 rounded-full transition-colors ${activo ? 'bg-[#8fb7ff]' : 'bg-upl-crema/25'}`}
+      >
+        <span
+          className={`absolute top-0.5 h-3 w-3 rounded-full bg-upl-principal shadow transition-transform ${activo ? 'translate-x-3.5' : 'translate-x-0.5'}`}
+        />
+      </span>
+      <span className="flex items-center gap-1.5">
+        <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#8fb7ff] border border-upl-principal" />
+        Sedes y facultades {activo ? '' : '(ocultas)'}
+      </span>
+    </button>
+  )
+}
 
 /**
  * Radio "de mapa" (unidades crudas) que representa un tamaño en pantalla CRECIENTE a medida que
@@ -107,17 +156,21 @@ function VistaProvincia({
   onVolver,
   onSelectPin,
   onCambiarProvincia,
+  mostrarSedes,
+  onMostrarSedes,
 }: {
   provincia: Provincia
   onVolver: () => void
-  onSelectPin: (u: UniversidadMapa) => void
+  onSelectPin: (id: string) => void
   onCambiarProvincia: (p: Provincia) => void
+  mostrarSedes: boolean
+  onMostrarSedes: (v: boolean) => void
 }) {
   const fitInicial = useMemo(() => calcularFit(provincia), [provincia])
   const [vista, setVista] = useState<Vista>(fitInicial)
   const [animar, setAnimar] = useState(true)
   const [deptoPaths, setDeptoPaths] = useState<string[]>([])
-  const [hover, setHover] = useState<UniversidadMapa | null>(null)
+  const [hover, setHover] = useState<HoverMapa | null>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const minK = useRef(fitInicial.k)
   const arrastre = useRef<{ x: number; y: number; vx: number; vy: number; movido: boolean } | null>(null)
@@ -250,12 +303,16 @@ function VistaProvincia({
     () => pines.filter((u) => normalizar(u.provincia) === normalizar(provincia.nombre)),
     [provincia],
   )
+  const sedesDeLaProvincia = useMemo(
+    () => sedes.filter((s) => normalizar(s.provincia) === normalizar(provincia.nombre)),
+    [provincia],
+  )
 
   // Crece con el zoom (más acercás, más grande y representativo el punto), con techo — y como
   // vista.k nunca puede bajar de minK.current, tampoco puede encogerse por debajo del punto de partida.
   // En celular el SVG se dibuja a ~40% del tamaño de escritorio: sin este factor los puntos quedan de
   // 1-2 px, imposibles de ver y de tocar.
-  const escalaPin = typeof window !== 'undefined' && window.innerWidth < 640 ? 2.2 : 1
+  const escalaPin = esMovil() ? 2.2 : 1
   const radioPin = radioCreciente(vista.k, minK.current) * escalaPin
   const clipId = `clip-${slug(provincia.nombre)}`
   // CABA se muestra siempre aislada: ni Buenos Aires ni ninguna otra provincia se dibuja alrededor.
@@ -325,6 +382,26 @@ function VistaProvincia({
               ))}
             </g>
 
+            {sedes.map((s) => {
+              const visible = mostrarSedes && normalizar(s.provincia) === normalizar(provincia.nombre)
+              const r = radioPin * SEDE_ESCALA
+              return (
+                <circle
+                  key={s.id}
+                  cx={s.x}
+                  cy={s.y}
+                  r={r}
+                  className="pin"
+                  {...sedeVisual(r)}
+                  style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? 'auto' : 'none', transition: 'opacity 0.35s ease-out' }}
+                  onClick={() => onSelectPin(s.universidad)}
+                  onMouseEnter={(e) => setHover(hoverDe(e, s))}
+                  onMouseMove={(e) => setHover(hoverDe(e, s))}
+                  onMouseLeave={() => setHover(null)}
+                />
+              )
+            })}
+
             {pines.map((u) => {
               const visible = normalizar(u.provincia) === normalizar(provincia.nombre)
               return (
@@ -336,8 +413,9 @@ function VistaProvincia({
                   className="pin"
                   {...pinVisual(u.tieneFicha, radioPin)}
                   style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? 'auto' : 'none', transition: 'opacity 0.35s ease-out' }}
-                  onClick={() => onSelectPin(u)}
-                  onMouseEnter={() => setHover(u)}
+                  onClick={() => onSelectPin(u.id)}
+                  onMouseEnter={(e) => setHover(hoverDe(e, u))}
+                  onMouseMove={(e) => setHover(hoverDe(e, u))}
                   onMouseLeave={() => setHover(null)}
                 />
               )
@@ -376,16 +454,11 @@ function VistaProvincia({
           <div className="flex items-center gap-1.5">
             <span className="inline-block h-2.5 w-2.5 rounded-full border border-dashed border-upl-amarillo" /> Sin datos reportados
           </div>
+          <ToggleSedes activo={mostrarSedes} onChange={onMostrarSedes} />
         </div>
       </div>
 
-      {hover && (
-        <div className="pointer-events-none fixed right-3 bottom-3 z-20 glass rounded-xl px-4 py-2.5 text-xs sm:text-sm max-w-[240px]">
-          <div className="font-semibold text-upl-crema">{hover.sigla}</div>
-          <div className="text-upl-crema/70">{ubicacion(hover.ciudad, hover.provincia)}</div>
-          {!hover.tieneFicha && <div className="mt-1 text-upl-amarillo">Sin ficha de datos aún</div>}
-        </div>
-      )}
+      <PinTooltip hover={hover} />
 
       <div className="fixed inset-x-0 bottom-0 z-20 flex justify-center px-3 pb-3">
         <div className="glass-strong rounded-2xl w-full max-w-2xl max-h-[38vh] sm:max-h-[42vh] overflow-y-auto">
@@ -393,9 +466,15 @@ function VistaProvincia({
             <div className="min-w-0">
               <h2 className="font-display font-700 text-lg text-upl-crema truncate">{provincia.nombre}</h2>
               <p className="text-[11px] text-upl-crema/45">
-                {pinesDeLaProvincia.length} {pinesDeLaProvincia.length === 1 ? 'sede' : 'sedes'}
+                {pinesDeLaProvincia.length} {pinesDeLaProvincia.length === 1 ? 'universidad' : 'universidades'}
+                {sedesDeLaProvincia.length > 0 && ` · ${sedesDeLaProvincia.length} sedes y facultades`}
                 <span className="sm:hidden"> · pellizcá el mapa para acercar</span>
               </p>
+              {sedesDeLaProvincia.length > 0 && (
+                <div className="sm:hidden mt-1 text-[11px] text-upl-crema/70">
+                  <ToggleSedes activo={mostrarSedes} onChange={onMostrarSedes} />
+                </div>
+              )}
             </div>
             <button
               onClick={onVolver}
@@ -411,7 +490,7 @@ function VistaProvincia({
             {pinesDeLaProvincia.map((u) => (
               <button
                 key={u.id}
-                onClick={() => onSelectPin(u)}
+                onClick={() => onSelectPin(u.id)}
                 disabled={!u.tieneFicha}
                 className={`flex items-center gap-3 rounded-xl px-3 py-2 text-left transition-colors ${
                   u.tieneFicha ? 'hover:bg-upl-amarillo/15 cursor-pointer' : 'opacity-50 cursor-default'
@@ -439,12 +518,16 @@ function MapaNacional({
   onSelectProvincia,
   onSelectPin,
   onBuscar,
+  mostrarSedes,
+  onMostrarSedes,
 }: {
   onSelectProvincia: (p: Provincia) => void
-  onSelectPin: (u: UniversidadMapa) => void
+  onSelectPin: (id: string) => void
   onBuscar: () => void
+  mostrarSedes: boolean
+  onMostrarSedes: (v: boolean) => void
 }) {
-  const [hover, setHover] = useState<UniversidadMapa | null>(null)
+  const [hover, setHover] = useState<HoverMapa | null>(null)
 
   const capitalVb = useMemo(() => {
     if (!CAPITAL) return null
@@ -468,12 +551,13 @@ function MapaNacional({
   }, [])
 
   const pinesCapital = useMemo(() => pines.filter((u) => normalizar(u.provincia) === 'capital federal'), [])
+  const sedesCapital = useMemo(() => sedes.filter((s) => normalizar(s.provincia) === 'capital federal'), [])
 
   return (
     <>
       <div className="absolute inset-0 flex items-stretch justify-center px-3 pt-32 pb-28 sm:pt-24 sm:pb-6 gap-1">
         <div className="flex-1 flex items-center justify-center sm:justify-end min-w-0">
-          <svg viewBox={NATIONAL_VIEWBOX} className="w-full h-full max-w-3xl" style={{ overflow: 'visible' }}>
+          <svg viewBox={esMovil() ? NATIONAL_VIEWBOX_MOVIL : NATIONAL_VIEWBOX} className="w-full h-full max-w-3xl" style={{ overflow: 'visible' }}>
             {/* Capa base: mismo color y borde, sin fisuras entre provincias vecinas (los datasets no
                 comparten vértices exactos en los límites, y sin esto queda un hueco visible, p. ej.
                 entre Santiago del Estero, Chaco y Santa Fe). */}
@@ -494,6 +578,24 @@ function MapaNacional({
               />
             ))}
 
+            {mostrarSedes &&
+              sedes
+                .filter((s) => normalizar(s.provincia) !== 'capital federal')
+                .map((s) => (
+                  <circle
+                    key={s.id}
+                    cx={s.x}
+                    cy={s.y}
+                    r={PIN_R_NACIONAL * SEDE_ESCALA}
+                    className="pin"
+                    {...sedeVisual(PIN_R_NACIONAL * SEDE_ESCALA)}
+                    onClick={() => onSelectPin(s.universidad)}
+                    onMouseEnter={(e) => setHover(hoverDe(e, s))}
+                    onMouseMove={(e) => setHover(hoverDe(e, s))}
+                    onMouseLeave={() => setHover(null)}
+                  />
+                ))}
+
             {pines.map((u) => (
               <circle
                 key={u.id}
@@ -502,8 +604,9 @@ function MapaNacional({
                 r={PIN_R_NACIONAL}
                 className="pin"
                 {...pinVisual(u.tieneFicha, PIN_R_NACIONAL)}
-                onClick={() => onSelectPin(u)}
-                onMouseEnter={() => setHover(u)}
+                onClick={() => onSelectPin(u.id)}
+                onMouseEnter={(e) => setHover(hoverDe(e, u))}
+                onMouseMove={(e) => setHover(hoverDe(e, u))}
                 onMouseLeave={() => setHover(null)}
               />
             ))}
@@ -520,6 +623,10 @@ function MapaNacional({
           >
             <svg viewBox={`${capitalVbMovil.x0} ${capitalVbMovil.y0} ${capitalVbMovil.w} ${capitalVbMovil.h}`} className="w-full aspect-square">
               <path d={CAPITAL.d} fill={BASE_FILL} stroke="rgba(255,255,249,0.65)" strokeWidth={capitalVbMovil.w / 120} />
+              {mostrarSedes &&
+                sedesCapital.map((s) => (
+                  <circle key={s.id} cx={s.x} cy={s.y} r={capitalVbMovil.w / 52} {...sedeVisual(capitalVbMovil.w / 52)} />
+                ))}
               {pinesCapital.map((u) => (
                 <circle key={u.id} cx={u.x} cy={u.y} r={capitalVbMovil.w / 28} {...pinVisual(u.tieneFicha, capitalVbMovil.w / 28)} />
               ))}
@@ -551,6 +658,24 @@ function MapaNacional({
                   stroke="rgba(255,255,249,0.65)"
                   strokeWidth={capitalVb.w / 350}
                 />
+                {mostrarSedes &&
+                  sedesCapital.map((s) => (
+                    <circle
+                      key={s.id}
+                      cx={s.x}
+                      cy={s.y}
+                      r={radioPinCapital * SEDE_ESCALA}
+                      className="pin"
+                      {...sedeVisual(radioPinCapital * SEDE_ESCALA)}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        onSelectPin(s.universidad)
+                      }}
+                      onMouseEnter={(e) => setHover(hoverDe(e, s))}
+                      onMouseMove={(e) => setHover(hoverDe(e, s))}
+                      onMouseLeave={() => setHover(null)}
+                    />
+                  ))}
                 {pinesCapital.map((u) => (
                   <circle
                     key={u.id}
@@ -561,12 +686,13 @@ function MapaNacional({
                     {...pinVisual(u.tieneFicha, radioPinCapital)}
                     onClick={(e) => {
                       e.stopPropagation()
-                      onSelectPin(u)
+                      onSelectPin(u.id)
                     }}
                     onMouseEnter={(e) => {
                       e.stopPropagation()
-                      setHover(u)
+                      setHover(hoverDe(e, u))
                     }}
+                    onMouseMove={(e) => setHover(hoverDe(e, u))}
                     onMouseLeave={() => setHover(null)}
                   />
                 ))}
@@ -586,6 +712,9 @@ function MapaNacional({
             <span className="inline-block h-2.5 w-2.5 rounded-full border border-dashed border-upl-amarillo" /> Sin datos reportados
           </div>
         </div>
+        <div className="mb-2.5">
+          <ToggleSedes activo={mostrarSedes} onChange={onMostrarSedes} />
+        </div>
         <button
           onClick={onBuscar}
           className="w-full flex items-center justify-center gap-2 rounded-full bg-upl-crema/10 hover:bg-upl-crema/15 border border-upl-crema/15 px-3 py-2 text-sm font-display font-600 text-upl-crema"
@@ -597,25 +726,42 @@ function MapaNacional({
         </button>
       </div>
 
-      {hover && (
-        <div className="pointer-events-none fixed right-3 bottom-3 z-20 glass rounded-xl px-4 py-2.5 text-xs sm:text-sm max-w-[240px]">
-          <div className="font-semibold text-upl-crema">{hover.sigla}</div>
-          <div className="text-upl-crema/70">{ubicacion(hover.ciudad, hover.provincia)}</div>
-          {!hover.tieneFicha && <div className="mt-1 text-upl-amarillo">Sin ficha de datos aún</div>}
-        </div>
-      )}
+      <PinTooltip hover={hover} />
     </>
   )
 }
 
 export function Home() {
-  const [activa, setActiva] = useState<Provincia | null>(null)
+  // La provincia abierta vive en la URL (?p=slug): así el botón "atrás" del celular/navegador vuelve
+  // de la provincia al país, y al volver de una ficha se reabre la provincia en la que estabas.
+  const [params, setParams] = useSearchParams()
+  const activa = useMemo(() => provincias.find((p) => slug(p.nombre) === params.get('p')) ?? null, [params])
+  const entroDesdeNacional = useRef(false)
+  const [mostrarSedes, setMostrarSedes] = useState(true)
   const [buscando, setBuscando] = useState(false)
   const cerrarBuscador = useCallback(() => setBuscando(false), [])
   const navigate = useNavigate()
 
-  function handleSelectPin(u: UniversidadMapa) {
-    if (u.tieneFicha) navigate(`/universidad/${u.id}`)
+  function abrirProvincia(p: Provincia) {
+    // Desde el país se apila una entrada nueva; saltar entre provincias vecinas la reemplaza, para que
+    // "atrás" siempre lleve al mapa nacional.
+    const desdeNacional = !activa
+    if (desdeNacional) entroDesdeNacional.current = true
+    setParams({ p: slug(p.nombre) }, { replace: !desdeNacional })
+  }
+
+  function volverAlPais() {
+    if (entroDesdeNacional.current) {
+      entroDesdeNacional.current = false
+      navigate(-1)
+    } else {
+      setParams({}, { replace: true })
+    }
+  }
+
+  function handleSelectPin(id: string) {
+    const destino = pines.find((u) => u.id === id)
+    if (destino ? destino.tieneFicha : true) navigate(`/universidad/${id}`)
   }
 
   // CABA se muestra sola, sin nada más alrededor — los blobs decorativos de fondo quedaban pegados
@@ -635,23 +781,42 @@ export function Home() {
         {activa ? (
           <VistaProvincia
             provincia={activa}
-            onVolver={() => setActiva(null)}
+            onVolver={volverAlPais}
             onSelectPin={handleSelectPin}
-            onCambiarProvincia={setActiva}
+            onCambiarProvincia={abrirProvincia}
+            mostrarSedes={mostrarSedes}
+            onMostrarSedes={setMostrarSedes}
           />
         ) : (
-          <MapaNacional onSelectProvincia={setActiva} onSelectPin={handleSelectPin} onBuscar={() => setBuscando(true)} />
+          <MapaNacional
+            onSelectProvincia={abrirProvincia}
+            onSelectPin={handleSelectPin}
+            onBuscar={() => setBuscando(true)}
+            mostrarSedes={mostrarSedes}
+            onMostrarSedes={setMostrarSedes}
+          />
         )}
       </div>
 
       {/* Header flotante: en celular los accesos van en una segunda fila para que entren completos. */}
       <header className="fixed top-0 inset-x-0 z-20 flex justify-center pt-3 sm:pt-4 px-3">
         <div className="glass-strong rounded-2xl px-3 sm:px-5 py-2.5 sm:py-3 max-w-2xl w-full flex flex-wrap items-center gap-x-2 sm:gap-x-3 gap-y-2">
+          {activa && (
+            <button
+              type="button"
+              onClick={volverAlPais}
+              aria-label="Volver al mapa del país"
+              className="sm:hidden shrink-0 w-8 h-8 rounded-full glass-chip text-upl-crema text-lg leading-none flex items-center justify-center active:bg-upl-crema/15"
+            >
+              ‹
+            </button>
+          )}
           <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="UPL" className="h-8 w-8 sm:h-10 sm:w-10 rounded-lg object-cover shrink-0" />
           <div className="min-w-0 flex-1">
             <h1 className="font-display font-800 text-base sm:text-lg text-upl-crema leading-tight truncate">Auditorías Universitarias</h1>
             <p className="text-[11px] sm:text-xs text-upl-resaltador truncate">Universitarios por la Libertad</p>
           </div>
+          <MonedaToggle className="sm:order-last" />
           <nav className="w-full sm:w-auto flex gap-1.5 sm:gap-2">
             {[
               { to: '/ranking', label: 'Rankings', destacado: true },
