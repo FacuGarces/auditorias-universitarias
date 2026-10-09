@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import mapaEstatico from '../data/mapa-estatico.json'
 import { sedes, type Sede } from '../data/sedes'
@@ -67,8 +67,20 @@ const ZOOM_MAX = 400
 const SEDE_FILL = '#8fb7ff'
 const SEDE_ESCALA = 0.72
 
-function esMovil() {
-  return typeof window !== 'undefined' && window.innerWidth < 640
+// Mismo corte que el breakpoint `sm` de Tailwind. Es reactivo (y no un chequeo de window.innerWidth
+// al renderizar) porque si la página se abre en escritorio y después se achica la ventana, el mapa
+// se quedaba con el recorte de escritorio y aparecía corrido a la derecha.
+const MQ_MOVIL = '(max-width: 639px)'
+
+function useEsMovil() {
+  return useSyncExternalStore(
+    (avisar) => {
+      const mq = window.matchMedia(MQ_MOVIL)
+      mq.addEventListener('change', avisar)
+      return () => mq.removeEventListener('change', avisar)
+    },
+    () => window.matchMedia(MQ_MOVIL).matches,
+  )
 }
 
 /** Hover sobre un punto del mapa (sede central o sede regional) a partir del evento del mouse. */
@@ -144,7 +156,7 @@ function pinVisual(tieneFicha: boolean, r: number) {
 
 type Vista = { k: number; x: number; y: number }
 
-function calcularFit(p: Provincia, focoY = 0.4): Vista {
+function calcularFit(p: Provincia, movil: boolean, focoY = 0.4): Vista {
   const [x0, y0, x1, y1] = p.bbox
   const bw = x1 - x0
   const bh = y1 - y0
@@ -154,7 +166,7 @@ function calcularFit(p: Provincia, focoY = 0.4): Vista {
   // una provincia mínima como CABA quedaba como un punto en el medio de la pantalla.
   // CABA (la provincia más chica, y ahora con sus facultades y sedes) necesita más zoom también en
   // escritorio: con el tope general de 60 quedaba como una mancha chica con 20 puntos encimados.
-  const kMax = typeof window !== 'undefined' && window.innerWidth < 640 ? 200 : p.nombre === 'Capital Federal' ? 95 : 60
+  const kMax = movil ? 200 : p.nombre === 'Capital Federal' ? 95 : 60
   const k = Math.min((width * 0.88) / bw, (height * 0.62) / bh, kMax)
   return { k, x: width / 2 - k * cx, y: height * focoY - k * cy }
 }
@@ -175,7 +187,11 @@ function VistaProvincia({
   mostrarSedes: boolean
   onMostrarSedes: (v: boolean) => void
 }) {
-  const fitInicial = useMemo(() => calcularFit(provincia, provincia.nombre === 'Capital Federal' && !esMovil() ? 0.3 : 0.4), [provincia])
+  const movil = useEsMovil()
+  const fitInicial = useMemo(
+    () => calcularFit(provincia, movil, provincia.nombre === 'Capital Federal' && !movil ? 0.3 : 0.4),
+    [provincia, movil],
+  )
   const [vista, setVista] = useState<Vista>(fitInicial)
   const [animar, setAnimar] = useState(true)
   const [deptoPaths, setDeptoPaths] = useState<string[]>([])
@@ -231,6 +247,13 @@ function VistaProvincia({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [provincia.nombre])
+
+  // Si cambia el layout (celular ↔ escritorio) se re-encuadra con el fit que corresponde.
+  useEffect(() => {
+    minK.current = fitInicial.k
+    setVista(fitInicial)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [movil])
 
   useEffect(() => {
     const svg = svgRef.current
@@ -321,7 +344,7 @@ function VistaProvincia({
   // vista.k nunca puede bajar de minK.current, tampoco puede encogerse por debajo del punto de partida.
   // En celular el SVG se dibuja a ~40% del tamaño de escritorio: sin este factor los puntos quedan de
   // 1-2 px, imposibles de ver y de tocar.
-  const escalaPin = esMovil() ? 2.2 : 1.4
+  const escalaPin = movil ? 2.2 : 1.4
   const radioPin =
     radioCreciente(vista.k, minK.current, provincia.nombre === 'Capital Federal' ? PIN_R_CABA : PIN_R_PROVINCIA) * escalaPin
   const clipId = `clip-${slug(provincia.nombre)}`
@@ -538,6 +561,7 @@ function MapaNacional({
   onMostrarSedes: (v: boolean) => void
 }) {
   const [hover, setHover] = useState<HoverMapa | null>(null)
+  const movil = useEsMovil()
 
   const capitalVb = useMemo(() => {
     if (!CAPITAL) return null
@@ -567,7 +591,7 @@ function MapaNacional({
     <>
       <div className="absolute inset-0 flex items-stretch justify-center px-3 pt-32 pb-28 sm:pt-24 sm:pb-6 gap-1">
         <div className="flex-1 flex items-center justify-center sm:justify-end min-w-0">
-          <svg viewBox={esMovil() ? NATIONAL_VIEWBOX_MOVIL : NATIONAL_VIEWBOX} className="w-full h-full max-w-3xl" style={{ overflow: 'visible' }}>
+          <svg viewBox={movil ? NATIONAL_VIEWBOX_MOVIL : NATIONAL_VIEWBOX} className="w-full h-full max-w-3xl" style={{ overflow: 'visible' }}>
             {/* Capa base: mismo color y borde, sin fisuras entre provincias vecinas (los datasets no
                 comparten vértices exactos en los límites, y sin esto queda un hueco visible, p. ej.
                 entre Santiago del Estero, Chaco y Santa Fe). */}
