@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://facugarces.github.io/auditorias-universitarias/sitemap.xml
+Sitemap: https://upl-auditoriasuniversitarias.com/sitemap.xml
