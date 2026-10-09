@@ -2,10 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { getUniversidad } from '../data/universidades'
+import { sedes as todasLasSedes } from '../data/sedes'
 import { UniversidadBadge } from '../components/UniversidadBadge'
 import { EvolutionChart } from '../components/EvolutionChart'
 import { notasCriticas } from '../lib/critica'
 import { useVolver } from '../lib/volver'
+import { useMeta } from '../lib/meta'
+import { RUTAS, idUniversidad, rutaSede, rutaUniversidad, slugSede } from '../lib/rutas'
+import { NoEncontrada } from './NoEncontrada'
 import { decimal, formatMoneda, formatNumero, formatPorcentaje, ubicacion, unidadMonetaria } from '../lib/format'
 import { gastoExtranjeros, gastoPorEstudiante, pctExtranjeros } from '../lib/extranjeros'
 
@@ -186,20 +190,47 @@ function toSerie(obj: Record<string, number | string> | undefined) {
 }
 
 export function Universidad() {
-  const { id = '' } = useParams()
-  const u = getUniversidad(id)
-  const volver = useVolver('/ranking')
+  const { slug = '', sede: slugDeSede } = useParams()
+  const id = idUniversidad(slug)
+  const sedesDeLaUni = id ? todasLasSedes.filter((s) => s.universidad === id) : []
+  const sede = slugDeSede ? sedesDeLaUni.find((s) => slugSede(s.nombre) === slugDeSede) : undefined
+  if (!id || (slugDeSede && !sede)) return <NoEncontrada />
+  return <FichaUniversidad id={id} sedes={sedesDeLaUni} sede={sede} />
+}
 
-  if (!u) {
-    return (
-      <div className="mx-auto max-w-3xl px-4 py-16 text-center">
-        <p className="text-upl-crema">No encontramos esa universidad.</p>
-        <Link to="/" className="underline text-upl-resaltador">
-          Volver al mapa
-        </Link>
-      </div>
-    )
-  }
+function descripcionFicha(u: NonNullable<ReturnType<typeof getUniversidad>>): string {
+  if (!u.tieneDatos) return `${u.nombre} (${u.sigla}): todavía no informa datos al Anuario de Estadísticas Universitarias de la SPU.`
+  const partes = [
+    u.tasaCohorte != null && `${Math.round(100 - u.tasaCohorte)}% de los ingresantes no se recibe a tiempo`,
+    u.reinscriptos0Materias != null && u.reinscriptosTotal && `${Math.round((u.reinscriptos0Materias / u.reinscriptosTotal) * 100)}% de los reinscriptos no aprobó ninguna materia`,
+    u.costoPorGraduado != null && !u.docentesNoComparable && `cada graduado cuesta ${formatMoneda(u.costoPorGraduado, { nominal: true })}`,
+  ].filter(Boolean)
+  return `${u.nombre} (${u.sigla}) en números: ${partes.join(', ')}. Datos oficiales de la SPU, 2024.`
+}
+
+function FichaUniversidad({ id, sedes, sede }: { id: string; sedes: typeof todasLasSedes; sede?: (typeof todasLasSedes)[number] }) {
+  const u = getUniversidad(id)!
+  const volver = useVolver(RUTAS.rankings)
+  const sedesRef = useRef<HTMLDivElement>(null)
+
+  // Una sede tiene su propio link (para compartirla o llegar desde el mapa), pero Google indexa una sola
+  // página por universidad: el canónico de la sede apunta a la ficha.
+  useMeta({
+    titulo: sede
+      ? `${sede.nombre}${sede.nombre.includes(sede.ciudad) ? '' : ` (${sede.ciudad})`} — ${u.sigla}`
+      : `${u.nombre} (${u.sigla})`,
+    descripcion: descripcionFicha(u),
+    ruta: sede ? rutaSede(id, sede.nombre) : rutaUniversidad(id),
+    canonica: rutaUniversidad(id),
+  })
+
+  // Con una sede en la URL, baja hasta la lista de sedes. Con delay: la transición de página (PageFade)
+  // hace scrollTo(0, 0) al montarse, y su efecto corre después que este.
+  useEffect(() => {
+    if (!sede) return
+    const t = setTimeout(() => sedesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 350)
+    return () => clearTimeout(t)
+  }, [sede])
 
   const serieEstudiantes = toSerie(u.serieEstudiantes)
   const serieEgresados = toSerie(u.serieEgresados)
@@ -235,7 +266,7 @@ export function Universidad() {
           </p>
           {u.esKirchnerista && (
             <Link
-              to="/kirchneristas"
+              to={RUTAS.kirchneristas}
               className="mt-1 inline-block rounded-full bg-[#e2574c]/15 border border-[#e2574c]/40 text-[#ff8a7a] text-xs font-semibold px-3 py-1 transition-colors hover:bg-[#e2574c]/25"
             >
               Universidad creada durante un gobierno kirchnerista →
@@ -243,6 +274,16 @@ export function Universidad() {
           )}
         </div>
       </motion.div>
+
+      {sede && (
+        <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-xl border border-[#8fb7ff]/40 bg-[#8fb7ff]/10 px-4 py-2.5 text-sm text-upl-crema/85">
+          <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#8fb7ff]" />
+          <span>
+            <span className="font-semibold text-upl-crema">{sede.nombre}</span> · {sede.ciudad} — sede de la {u.sigla}. Los
+            datos de la ficha son de toda la universidad.
+          </span>
+        </div>
+      )}
 
       {!u.tieneDatos ? (
         <div className="mt-8 rounded-2xl border-2 border-dashed border-upl-amarillo/60 glass px-5 py-6">
@@ -494,6 +535,35 @@ export function Universidad() {
               </motion.li>
             ))}
           </motion.ul>
+        </div>
+      )}
+
+      {sedes.length > 0 && (
+        <div ref={sedesRef} className="mt-8 scroll-mt-28">
+          <h2 className="font-display font-700 text-lg text-upl-crema mb-3">Sedes y unidades académicas</h2>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {sedes.map((s) => {
+              const activa = s.id === sede?.id
+              return (
+                <li key={s.id}>
+                  <Link
+                    to={rutaSede(id, s.nombre)}
+                    replace
+                    aria-current={activa ? 'location' : undefined}
+                    className={`flex items-start gap-2.5 rounded-xl px-3.5 py-2.5 transition-colors ${
+                      activa ? 'bg-[#8fb7ff]/20 border border-[#8fb7ff]/60' : 'glass hover:bg-upl-crema/10'
+                    }`}
+                  >
+                    <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#8fb7ff]" />
+                    <span className="min-w-0">
+                      <span className="block text-sm font-semibold text-upl-crema leading-snug">{s.nombre}</span>
+                      <span className="block text-xs text-upl-crema/55">{ubicacion(s.ciudad, s.provincia)}</span>
+                    </span>
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
         </div>
       )}
 

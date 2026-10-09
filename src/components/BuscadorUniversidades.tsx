@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useNavigate } from 'react-router-dom'
+import { rutaUniversidad } from '../lib/rutas'
 import { mapaUniversidades } from '../data/mapaUniversidades'
 import { ubicacion } from '../lib/format'
 import { UniversidadBadge } from './UniversidadBadge'
@@ -88,7 +89,7 @@ export function BuscadorUniversidades({ abierto, onCerrar }: { abierto: boolean;
               {resultados.map((u) => (
                 <li key={u.id}>
                   <button
-                    onClick={() => navigate(`/universidad/${u.id}`)}
+                    onClick={() => navigate(rutaUniversidad(u.id))}
                     className="w-full flex items-center gap-3 rounded-xl px-3 py-2 text-left hover:bg-upl-amarillo/15 active:bg-upl-amarillo/15 transition-colors"
                   >
                     <UniversidadBadge sigla={u.sigla} size="sm" />

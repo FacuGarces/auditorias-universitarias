@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
 import { universidadesArray } from '../data/universidades'
 import { UniversidadBadge } from '../components/UniversidadBadge'
@@ -9,15 +9,34 @@ import { ubicacion } from '../lib/format'
 import { METRICAS, type MetricaId } from '../lib/metricas'
 import { filtrarPorProvincia, nombreProvincia, useProvinciaFiltro } from '../lib/provincias'
 import { resumenSistema } from '../lib/sistema'
+import { metricaDesdeSlug, rutaRanking, rutaUniversidad } from '../lib/rutas'
+import { useMeta } from '../lib/meta'
+import { NoEncontrada } from './NoEncontrada'
+
+// Fila del ranking como link real (<a href>): se puede abrir en otra pestaña y Google la sigue.
+const MotionLink = motion.create(Link)
 
 export function Ranking() {
-  const [metrica, setMetrica] = useState<MetricaId>('cohorte')
+  const { metrica: slug } = useParams()
+  const metrica = metricaDesdeSlug(slug)
+  if (!metrica) return <NoEncontrada />
+  return <RankingMetrica metrica={metrica} />
+}
+
+function RankingMetrica({ metrica }: { metrica: MetricaId }) {
   const [invertido, setInvertido] = useState(false)
   const navigate = useNavigate()
   const cfg = METRICAS[metrica]
   const ascendente = invertido ? !cfg.ordenAsc : cfg.ordenAsc
 
   const [provincia, setProvincia] = useProvinciaFiltro()
+  // La métrica vive en la URL (/rankings/costo-por-graduado): cada ranking se puede compartir.
+  const setMetrica = (m: MetricaId) => navigate(rutaRanking(m, provincia), { replace: true })
+  useMeta({
+    titulo: `Ranking de universidades: ${cfg.label.toLowerCase()}`,
+    descripcion: `Las universidades nacionales argentinas ordenadas por ${cfg.label.toLowerCase()}. ${cfg.subtitulo}`,
+    ruta: rutaRanking(metrica),
+  })
   const universidades = useMemo(() => filtrarPorProvincia(universidadesArray, provincia), [provincia])
   const resumen = useMemo(() => resumenSistema(universidades), [universidades])
 
@@ -129,8 +148,8 @@ export function Ranking() {
                 exit={{ opacity: 0 }}
                 transition={{ layout: { type: 'spring', stiffness: 350, damping: 32 }, opacity: { duration: 0.15 } }}
               >
-                <motion.button
-                  onClick={() => navigate(`/universidad/${u.id}`)}
+                <MotionLink
+                  to={rutaUniversidad(u.id)}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                   className="w-full flex items-center gap-2.5 sm:gap-4 rounded-xl glass-flat hover:bg-upl-amarillo/10 px-3 sm:px-4 py-3 text-left transition-colors"
@@ -145,7 +164,7 @@ export function Ranking() {
                     <div className="font-display font-700 text-base sm:text-lg text-upl-amarillo">{cfg.formato(cfg.valor(u))}</div>
                     {cfg.detalle?.(u) && <div className="text-[11px] text-upl-crema/50">{cfg.detalle(u)}</div>}
                   </div>
-                </motion.button>
+                </MotionLink>
               </motion.li>
             ))}
           </AnimatePresence>

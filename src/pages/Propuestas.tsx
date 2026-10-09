@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
+import { useMeta } from '../lib/meta'
+import { RUTAS } from '../lib/rutas'
 import { POSICION_PRINCIPAL, propuestaPrincipal, propuestas, type Propuesta } from '../lib/propuestas'
 
 const listVariants = {
@@ -98,6 +100,12 @@ function AvanzAR() {
 
 export function Propuestas() {
   const lista = propuestas()
+  useMeta({
+    titulo: 'Qué proponemos',
+    descripcion:
+      'Las propuestas de Universitarios por la Libertad para la universidad pública: examen de ingreso, regularidad que exija rendir materias, financiamiento mixto, auditorías externas y las Becas AvanzAR.',
+    ruta: RUTAS.propuestas,
+  })
 
   return (
     <div className="relative min-h-screen">

@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import { universidadesArray } from '../data/universidades'
+import { slugProvincia } from './rutas'
 
 type Uni = (typeof universidadesArray)[number]
 
@@ -29,16 +30,24 @@ export function filtrarPorProvincia<T extends Pick<Uni, 'provincia'>>(us: T[], p
   return provincia ? us.filter((u) => u.provincia === provincia) : us
 }
 
+/** Nombre de provincia a partir del valor de `?provincia=` (slug, o el nombre completo de links viejos). */
+function provinciaDesdeParam(valor: string | null): string | null {
+  if (!valor) return null
+  const nombres = new Set(universidadesArray.map((u) => u.provincia))
+  if (nombres.has(valor)) return valor
+  return [...nombres].find((n) => slugProvincia(n) === valor) ?? null
+}
+
 /**
- * Provincia elegida, guardada en la URL (`?provincia=...`) para que un link compartido — o el que
- * se abre durante una presentación — llegue ya filtrado.
+ * Provincia elegida, guardada en la URL (`?provincia=buenos-aires`) para que un link compartido — o
+ * el que se abre durante una presentación — llegue ya filtrado.
  */
 export function useProvinciaFiltro(): [string | null, (provincia: string | null) => void] {
   const [params, setParams] = useSearchParams()
-  const provincia = params.get('provincia')
+  const provincia = provinciaDesdeParam(params.get('provincia'))
   const setProvincia = (p: string | null) => {
     const next = new URLSearchParams(params)
-    if (p) next.set('provincia', p)
+    if (p) next.set('provincia', slugProvincia(p))
     else next.delete('provincia')
     setParams(next, { replace: true })
   }

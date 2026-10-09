@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { MonedaToggle } from './MonedaToggle'
 import { useVolver } from '../lib/volver'
+import { RUTAS } from '../lib/rutas'
 
 function NavItem({ to, end, children }: { to: string; end?: boolean; children: React.ReactNode }) {
   return (
@@ -67,9 +68,9 @@ export function Navbar() {
         </div>
         <nav className="flex gap-1.5 sm:gap-2 shrink-0 items-center">
           <NavItem to="/" end>Mapa</NavItem>
-          <NavItem to="/ranking">Rankings</NavItem>
-          <NavItem to="/kirchneristas">Universidades K</NavItem>
-          <NavItem to="/propuestas">Propuestas</NavItem>
+          <NavItem to={RUTAS.rankings}>Rankings</NavItem>
+          <NavItem to={RUTAS.kirchneristas}>Universidades K</NavItem>
+          <NavItem to={RUTAS.propuestas}>Propuestas</NavItem>
           <span className="hidden sm:inline-flex ml-1">
             <MonedaToggle />
           </span>

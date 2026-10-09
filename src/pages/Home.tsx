@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import mapaEstatico from '../data/mapa-estatico.json'
 import { sedes, type Sede } from '../data/sedes'
 import { ubicacion } from '../lib/format'
@@ -8,6 +8,8 @@ import { BuscadorUniversidades } from '../components/BuscadorUniversidades'
 import { MonedaToggle } from '../components/MonedaToggle'
 import { PinTooltip, type HoverMapa } from '../components/PinTooltip'
 import type { UniversidadMapa } from '../types'
+import { RUTAS, rutaProvincia, rutaSede, rutaUniversidad, slugProvincia } from '../lib/rutas'
+import { useMeta } from '../lib/meta'
 
 // Límites de departamentos/partidos por provincia — se cargan sólo al entrar a una provincia (code-split).
 const departamentosModules = import.meta.glob('../data/departamentos/*.json')
@@ -182,7 +184,7 @@ function VistaProvincia({
 }: {
   provincia: Provincia
   onVolver: () => void
-  onSelectPin: (id: string) => void
+  onSelectPin: (id: string, sede?: Sede) => void
   onCambiarProvincia: (p: Provincia) => void
   mostrarSedes: boolean
   onMostrarSedes: (v: boolean) => void
@@ -427,7 +429,7 @@ function VistaProvincia({
                   className="pin"
                   {...sedeVisual(r)}
                   style={{ opacity: visible ? 1 : 0, pointerEvents: visible ? 'auto' : 'none', transition: 'opacity 0.35s ease-out' }}
-                  onClick={() => onSelectPin(s.universidad)}
+                  onClick={() => onSelectPin(s.universidad, s)}
                   onMouseEnter={(e) => setHover(hoverDe(e, s))}
                   onMouseMove={(e) => setHover(hoverDe(e, s))}
                   onMouseLeave={() => setHover(null)}
@@ -521,10 +523,12 @@ function VistaProvincia({
               <p className="text-upl-crema/60 text-sm px-2 py-3">No relevamos sedes universitarias nacionales en esta provincia todavía.</p>
             )}
             {pinesDeLaProvincia.map((u) => (
-              <button
+              // Link real (<a href>) y no botón: se puede abrir en otra pestaña y Google lo sigue.
+              <Link
                 key={u.id}
-                onClick={() => onSelectPin(u.id)}
-                disabled={!u.tieneFicha}
+                to={rutaUniversidad(u.id)}
+                aria-disabled={!u.tieneFicha}
+                onClick={(e) => !u.tieneFicha && e.preventDefault()}
                 className={`flex items-center gap-3 rounded-xl px-3 py-2 text-left transition-colors ${
                   u.tieneFicha ? 'hover:bg-upl-amarillo/15 cursor-pointer' : 'opacity-50 cursor-default'
                 }`}
@@ -537,7 +541,7 @@ function VistaProvincia({
                     {!u.tieneFicha && ' · sin ficha aún'}
                   </div>
                 </div>
-              </button>
+              </Link>
             ))}
           </div>
         </div>
@@ -555,7 +559,7 @@ function MapaNacional({
   onMostrarSedes,
 }: {
   onSelectProvincia: (p: Provincia) => void
-  onSelectPin: (id: string) => void
+  onSelectPin: (id: string, sede?: Sede) => void
   onBuscar: () => void
   mostrarSedes: boolean
   onMostrarSedes: (v: boolean) => void
@@ -623,7 +627,7 @@ function MapaNacional({
                     r={PIN_R_NACIONAL * SEDE_ESCALA}
                     className="pin"
                     {...sedeVisual(PIN_R_NACIONAL * SEDE_ESCALA)}
-                    onClick={() => onSelectPin(s.universidad)}
+                    onClick={() => onSelectPin(s.universidad, s)}
                     onMouseEnter={(e) => setHover(hoverDe(e, s))}
                     onMouseMove={(e) => setHover(hoverDe(e, s))}
                     onMouseLeave={() => setHover(null)}
@@ -703,7 +707,7 @@ function MapaNacional({
                       {...sedeVisual(radioPinCapital * SEDE_ESCALA)}
                       onClick={(e) => {
                         e.stopPropagation()
-                        onSelectPin(s.universidad)
+                        onSelectPin(s.universidad, s)
                       }}
                       onMouseEnter={(e) => setHover(hoverDe(e, s))}
                       onMouseMove={(e) => setHover(hoverDe(e, s))}
@@ -768,8 +772,8 @@ function MapaNacional({
 export function Home() {
   // La provincia abierta vive en la URL (?p=slug): así el botón "atrás" del celular/navegador vuelve
   // de la provincia al país, y al volver de una ficha se reabre la provincia en la que estabas.
-  const [params, setParams] = useSearchParams()
-  const activa = useMemo(() => provincias.find((p) => slug(p.nombre) === params.get('p')) ?? null, [params])
+  const { provincia: slugActiva } = useParams()
+  const activa = useMemo(() => (slugActiva ? provincias.find((p) => slugProvincia(p.nombre) === slugActiva) ?? null : null), [slugActiva])
   const entroDesdeNacional = useRef(false)
   const [mostrarSedes, setMostrarSedes] = useState(true)
   const [buscando, setBuscando] = useState(false)
@@ -781,7 +785,7 @@ export function Home() {
     // "atrás" siempre lleve al mapa nacional.
     const desdeNacional = !activa
     if (desdeNacional) entroDesdeNacional.current = true
-    setParams({ p: slug(p.nombre) }, { replace: !desdeNacional })
+    navigate(rutaProvincia(p.nombre), { replace: !desdeNacional })
   }
 
   function volverAlPais() {
@@ -789,14 +793,27 @@ export function Home() {
       entroDesdeNacional.current = false
       navigate(-1)
     } else {
-      setParams({}, { replace: true })
+      navigate(RUTAS.inicio, { replace: true })
     }
   }
 
-  function handleSelectPin(id: string) {
+  function handleSelectPin(id: string, sede?: Sede) {
+    if (sede) return navigate(rutaSede(sede.universidad, sede.nombre))
     const destino = pines.find((u) => u.id === id)
-    if (destino ? destino.tieneFicha : true) navigate(`/universidad/${id}`)
+    if (destino ? destino.tieneFicha : true) navigate(rutaUniversidad(id))
   }
+
+  const cantidadEnProvincia = activa ? pines.filter((u) => normalizar(u.provincia) === normalizar(activa.nombre)).length : 0
+  useMeta({
+    titulo: activa ? `Universidades nacionales en ${activa.nombre === 'Capital Federal' ? 'la Ciudad de Buenos Aires' : activa.nombre}` : null,
+    descripcion: activa
+      ? `Mapa de las ${cantidadEnProvincia} universidades nacionales de ${activa.nombre === 'Capital Federal' ? 'CABA' : activa.nombre}, con sus sedes y facultades: tasa de egreso, estudiantes sin materias aprobadas y costo por graduado.`
+      : 'Mapa de las universidades nacionales argentinas con datos oficiales de la SPU: cuántos se reciben a tiempo, cuántos no aprueban ninguna materia y cuánto cuesta cada graduado. Un proyecto de Universitarios por la Libertad.',
+    ruta: activa ? rutaProvincia(activa.nombre) : RUTAS.inicio,
+  })
+
+  // Provincia inexistente en la URL (/mapa/cualquiera): al mapa del país.
+  if (slugActiva && !activa) return <Navigate to={RUTAS.inicio} replace />
 
   // CABA se muestra sola, sin nada más alrededor — los blobs decorativos de fondo quedaban pegados
   // a su silueta como si fueran una extensión del mismo color, así que ahí van afuera.
@@ -853,9 +870,9 @@ export function Home() {
           <MonedaToggle className="sm:order-last" />
           <nav className="w-full sm:w-auto flex gap-1.5 sm:gap-2">
             {[
-              { to: '/ranking', label: 'Rankings', destacado: true },
-              { to: '/kirchneristas', label: 'Universidades K' },
-              { to: '/propuestas', label: 'Propuestas' },
+              { to: RUTAS.rankings, label: 'Rankings', destacado: true },
+              { to: RUTAS.kirchneristas, label: 'Universidades K' },
+              { to: RUTAS.propuestas, label: 'Propuestas' },
             ].map((l) => (
               <Link
                 key={l.to}

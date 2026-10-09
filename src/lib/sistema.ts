@@ -1,11 +1,14 @@
 import { universidadesArray } from '../data/universidades'
 import { METRICAS } from './metricas'
 import { resumenExtranjeros } from './extranjeros'
+import sitio from '../../sitio.json'
 
 type Uni = (typeof universidadesArray)[number]
 
-export const SITIO_URL = 'https://facugarces.github.io/auditorias-universitarias/'
-export const SITIO_URL_CORTA = 'facugarces.github.io/auditorias-universitarias'
+/** URL pública del sitio (se configura en sitio.json). */
+export const SITIO_URL = sitio.url
+/** La misma, sin protocolo ni barra final — para mostrar o imprimir ("auditorias.com.ar"). */
+export const SITIO_URL_CORTA = sitio.url.replace(/^https?:\/\//, '').replace(/\/$/, '')
 
 export interface Punto {
   label: string

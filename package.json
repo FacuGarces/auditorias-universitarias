@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/prerender.mjs",
     "lint": "oxlint",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "test": "python3 scripts/verificar_sedes.py"
   },
   "dependencies": {
     "motion": "^13.4.4",
@@ -27,6 +28,7 @@
     "gh-pages": "^6.3.0",
     "oxlint": "^1.81.0",
     "postcss": "^8.5.28",
+    "puppeteer-core": "^23.11.1",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"

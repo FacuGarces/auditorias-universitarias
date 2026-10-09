@@ -14,7 +14,23 @@ Un proyecto de [Universitarios por la Libertad](https://twitter.com/upl_arg).
 - **Universidades kirchneristas**: las creadas por ley entre 2003 y 2023, comparadas contra el resto del sistema.
 - **Ficha por universidad** con estudiantes, egresados, docentes, presupuesto, notas relevantes (irregularidades, contexto institucional) y sus fuentes.
 - **Qué proponemos**: las cuatro propuestas de UPL y la propuesta central (Becas AvanzAR), cada una ligada al dato que la justifica.
-- **Modo presentación** (`#/presentacion`): diapositivas a pantalla completa con los datos en vivo, para exponer en paneles.
+- **Modo presentación** (`/presentacion`): diapositivas a pantalla completa con los datos en vivo, para exponer en paneles.
+
+## URLs
+
+Todas las URLs se arman en `src/lib/rutas.ts`:
+
+| Página | URL |
+|---|---|
+| Mapa / una provincia | `/`, `/mapa/buenos-aires`, `/mapa/caba` |
+| Universidad (por sigla) | `/universidades/uba` |
+| Sede (se entra por link; Google indexa la ficha) | `/universidades/uba/sedes/cbc-tigre` |
+| Rankings | `/rankings`, `/rankings/costo-por-graduado?provincia=buenos-aires` |
+| Universidades kirchneristas | `/universidades-kirchneristas` |
+| Propuestas | `/propuestas` |
+| Presentación (no se indexa) | `/presentacion?s=3` |
+
+Los links viejos con `#/` (QR impresos) redirigen solos a la URL nueva.
 
 ## Estado del relevamiento
 
@@ -38,6 +54,19 @@ npm run dev
 ## Build y deploy
 
 ```bash
-npm run build
-npm run deploy
+npm run build    # vite build + prerender de cada URL (necesita Google Chrome instalado)
+npm test         # verifica que cada sede y pin caiga dentro de su provincia
+npm run deploy   # publica dist/ en GitHub Pages
 ```
+
+`npm run build` genera un HTML por página (título, descripción y canónico propios, para Google), más
+`sitemap.xml`, `robots.txt` y `404.html`.
+
+## Dominio propio
+
+1. Cambiar la URL en `sitio.json` (ej. `"https://auditoriasuniversitarias.com.ar/"`) y correr `npm run build && npm run deploy`. Eso actualiza la ruta base, los canónicos, el sitemap, el QR de la presentación y genera el archivo `CNAME`.
+2. En el proveedor del dominio, cargar los DNS de GitHub Pages: cuatro registros `A` en la raíz → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`, y un `CNAME` para `www` → `facugarces.github.io`.
+3. En GitHub → Settings → Pages: verificar que figure el dominio y activar **Enforce HTTPS**. La dirección vieja de github.io redirige sola al dominio nuevo.
+4. En Google Search Console: verificar el dominio y enviar `https://<dominio>/sitemap.xml`.
+
+El build también sirve para un hosting Apache como Hostinger: subir el contenido de `dist/` a `public_html` (incluye el `.htaccess`).

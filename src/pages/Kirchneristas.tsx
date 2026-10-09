@@ -6,6 +6,8 @@ import { UniversidadBadge } from '../components/UniversidadBadge'
 import { formatMoneda, formatNumero, ubicacion, unidadMonetaria } from '../lib/format'
 import { METRICAS, esPeor, type MetricaId } from '../lib/metricas'
 import { ProvinciaCombobox } from '../components/ProvinciaCombobox'
+import { RUTAS, rutaUniversidad } from '../lib/rutas'
+import { useMeta } from '../lib/meta'
 import { filtrarPorProvincia, nombreProvincia, useProvinciaFiltro } from '../lib/provincias'
 
 const listVariants = {
@@ -33,6 +35,12 @@ function periodoDe(fundacion: number): string {
 }
 
 export function Kirchneristas() {
+  useMeta({
+    titulo: 'Universidades kirchneristas',
+    descripcion:
+      'Las universidades nacionales creadas por ley durante los gobiernos de Néstor Kirchner, Cristina Fernández de Kirchner y Alberto Fernández, comparadas con el resto del sistema: egreso, docentes y costo por graduado.',
+    ruta: RUTAS.kirchneristas,
+  })
   const [metrica, setMetrica] = useState<MetricaId>('cohorte')
   const [invertido, setInvertido] = useState(false)
   const cfg = METRICAS[metrica]
@@ -208,7 +216,7 @@ export function Kirchneristas() {
           {universidades.map((u) => (
             <motion.li key={u.id} variants={itemVariants}>
               <Link
-                to={`/universidad/${u.id}`}
+                to={rutaUniversidad(u.id)}
                 className="group block rounded-xl glass-flat hover:bg-[#e2574c]/10 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 px-4 py-3 transition-all duration-200"
               >
                 <div className="flex items-start sm:items-center gap-3 sm:gap-4">

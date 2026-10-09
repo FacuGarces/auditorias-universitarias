@@ -1,6 +1,7 @@
 import { universidadesArray } from '../data/universidades'
 import { formatMoneda, formatNumero, formatPorcentaje } from './format'
 import { resumenSistema } from './sistema'
+import { rutaRanking } from './rutas'
 
 export interface Propuesta {
   titulo: string
@@ -38,14 +39,14 @@ export function propuestas(): Propuesta[] {
       detalle:
         'El ingreso irrestricto no democratiza: llena las aulas de primer año y vacía las del último. Un examen de ingreso — como el que tienen Brasil, Chile o Colombia — ordena la oferta según la capacidad real de cada universidad y garantiza que quien entra tenga las herramientas para terminar. Con nivelación previa gratuita para que nadie quede afuera por la escuela de la que viene.',
       dato: `${r.noSeReciben} de cada 100 ingresantes no se recibe en la ventana de 6 años (${formatPorcentaje(r.cohorte)} de egreso).`,
-      link: { label: 'Ver el ranking', to: '/ranking' },
+      link: { label: 'Ver el ranking de egreso', to: rutaRanking('cohorte') },
     },
     {
       titulo: 'Regularidad que exija rendir materias',
       detalle:
         'Revisar los criterios de regularidad para que ser alumno signifique estudiar: un mínimo de materias aprobadas por año para conservar la regularidad y los beneficios, que se cumpla de verdad y con excepciones para quien trabaja o tiene hijos a cargo. La Ley de Educación Superior ya pide aprobar al menos dos materias por año (art. 50); hoy casi nadie lo controla.',
       dato: `${formatNumero(r.ceroMateriasN)} reinscriptos no aprobaron ninguna materia en el último año informado (${formatPorcentaje(r.ceroMateriasPct)}) y siguen figurando como estudiantes.`,
-      link: { label: 'Ver el ranking', to: '/ranking' },
+      link: { label: 'Ver el ranking', to: rutaRanking('ceroMaterias') },
     },
     {
       titulo: 'Financiamiento mixto, con aportes privados',
@@ -55,7 +56,7 @@ export function propuestas(): Propuesta[] {
         r.extranjeros.gasto != null
           ? `Solo los ${formatNumero(r.extranjeros.extranjeros)} estudiantes extranjeros de grado le cuestan al Estado ${formatMoneda(r.extranjeros.gasto)} por año.`
           : `Hay ${formatNumero(r.extranjeros.extranjeros)} estudiantes extranjeros de grado que no pagan arancel.`,
-      link: { label: 'Ver gasto por universidad', to: '/ranking' },
+      link: { label: 'Ver gasto por universidad', to: rutaRanking('extranjeros') },
     },
     {
       titulo: 'Auditorías externas, arbitradas por el Estado nacional',

@@ -9,6 +9,8 @@ import { formatMoneda, formatNumero, formatPorcentaje, unidadMonetaria } from '.
 import { METRICAS } from '../lib/metricas'
 import { POSICION_PRINCIPAL, propuestaPrincipal, propuestas } from '../lib/propuestas'
 import { useMoneda } from '../lib/moneda'
+import { useMeta } from '../lib/meta'
+import { RUTAS } from '../lib/rutas'
 import { SITIO_URL, SITIO_URL_CORTA, resumenSistema } from '../lib/sistema'
 
 /*
@@ -513,6 +515,8 @@ function useDiapositivas() {
 }
 
 export function Presentacion() {
+  // Herramienta para exponer en paneles: se entra por link (o QR), pero no se indexa.
+  useMeta({ titulo: 'Presentación', descripcion: 'Modo presentación de Auditorías Universitarias.', ruta: RUTAS.presentacion, indexar: false })
   const slides = useDiapositivas()
   const [params, setParams] = useSearchParams()
   const total = slides.length
