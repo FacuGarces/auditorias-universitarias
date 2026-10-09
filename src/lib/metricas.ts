@@ -1,7 +1,8 @@
 import { universidadesArray } from '../data/universidades'
-import { formatMoneda, formatPorcentaje } from './format'
+import { formatMoneda, formatNumero, formatPorcentaje, unidadMonetaria } from './format'
+import { gastoExtranjeros, pctExtranjeros } from './extranjeros'
 
-export type MetricaId = 'cohorte' | 'docentes' | 'costo' | 'ceroMaterias' | 'noDocentes'
+export type MetricaId = 'cohorte' | 'docentes' | 'costo' | 'ceroMaterias' | 'noDocentes' | 'extranjeros'
 
 type Uni = (typeof universidadesArray)[number]
 
@@ -33,6 +34,13 @@ export const METRICAS: Record<
     valor: (u: Uni) => number | null | undefined
     formato: (v: number | null | undefined) => string
     ordenAsc: boolean
+    /** Dato secundario que acompaña al valor en las filas del ranking. */
+    detalle?: (u: Uni) => string | null
+    /**
+     * true si agregado() es un total absoluto (suma de pesos), no una tasa: no tiene sentido
+     * comparar grupos de distinto tamaño con él (ej. universidades K vs. resto).
+     */
+    agregadoEsTotal?: boolean
     /**
      * Valor agregado de un grupo de universidades, ponderado por tamaño (suma de numeradores sobre
      * suma de denominadores). Un promedio simple de las tasas le daría el mismo peso a una
@@ -66,7 +74,9 @@ export const METRICAS: Record<
   },
   costo: {
     label: 'Costo por graduado',
-    subtitulo: 'Presupuesto ejecutado 2024 dividido egresados 2024, en pesos constantes de agosto 2026. Menor = mejor.',
+    get subtitulo() {
+      return `Presupuesto ejecutado 2024 dividido egresados 2024, en ${unidadMonetaria()}. Menor = mejor.`
+    },
     valor: (u) => (u.docentesNoComparable ? null : u.costoPorGraduado),
     formato: (v) => formatMoneda(v),
     ordenAsc: true,
@@ -99,6 +109,24 @@ export const METRICAS: Record<
       const validas = us.filter((u) => noDocentesCada100(u) != null)
       const den = sumar(validas, (u) => u.docentesUniversitario)
       return den ? Math.round((sumar(validas, (u) => u.personalNoDocente) / den) * 100) : null
+    },
+  },
+  extranjeros: {
+    label: 'Gasto en extranjeros',
+    get subtitulo() {
+      return `Presupuesto 2024 por estudiante × estudiantes extranjeros de grado, en ${unidadMonetaria()}: lo que se ahorraría si se les cobrara un arancel que cubra su costo.`
+    },
+    valor: gastoExtranjeros,
+    formato: (v) => formatMoneda(v),
+    detalle: (u) => {
+      const pct = pctExtranjeros(u)
+      return pct == null ? null : `${formatNumero(u.extranjeros2024)} extranjeros · ${formatPorcentaje(pct)} del padrón`
+    },
+    ordenAsc: false,
+    agregadoEsTotal: true,
+    agregado: (us) => {
+      const validas = us.filter((u) => gastoExtranjeros(u) != null)
+      return validas.length ? sumar(validas, gastoExtranjeros) : null
     },
   },
 }

@@ -13,7 +13,9 @@
       "El Ciclo Básico Común (CBC) funciona como un embudo antes de pisar la facultad: buena parte de la deserción temprana queda invisibilizada ahí, antes de sumarse a las estadísticas de abandono de cada carrera.",
       "Sostiene una planta de 24.136 docentes universitarios —la más grande del sistema— para un resultado de egreso que ronda 1 de cada 3 inscriptos.",
       "Los cargos de dedicación Exclusiva y Semiexclusiva CAYERON en términos absolutos (-8% y -9%) mientras Simple creció +12%.",
-      "El crecimiento de planta docente que muestra el número bruto de cargos (+9%) es principalmente de baja dedicación horaria; el FTE ponderado creció solo +5%."
+      "El crecimiento de planta docente que muestra el número bruto de cargos (+9%) es principalmente de baja dedicación horaria; el FTE ponderado creció solo +5%.",
+      "Ejecución presupuestaria (PIU-AGN): en 2025 gastó $6.327 millones en productos alimenticios (incluye comedores y hospitales universitarios) — más de lo que destinó a becas para estudiantes ($5.831 millones).",
+      "Ejecución presupuestaria (PIU-AGN): el gasto en publicidad y propaganda pasó de $16,2 millones en 2024 a $513 millones en 2025 (×31,6 en pesos corrientes, con una inflación anual muy por debajo de ese salto)."
     ],
     "estudiantes2023": 326421,
     "docentesUniversitario": 24136,
@@ -144,7 +146,14 @@
       "fte2017": 9981.8,
       "fte2023": 10450.5
     },
-    "estudiantesActivosPorDocente": 5.8
+    "estudiantesActivosPorDocente": 5.8,
+    "extranjeros2024": 35759,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "unlp": {
     "nombre": "Universidad Nacional de La Plata",
@@ -291,7 +300,8 @@
       "fte2017": 6335.2,
       "fte2023": 7039.8
     },
-    "estudiantesActivosPorDocente": 3.8
+    "estudiantesActivosPorDocente": 3.8,
+    "extranjeros2024": 15851
   },
   "unlam": {
     "nombre": "Universidad Nacional de La Matanza",
@@ -436,7 +446,8 @@
       "simple2023": 1279,
       "fte2017": 1733.8,
       "fte2023": 1935.2
-    }
+    },
+    "extranjeros2024": 1281
   },
   "unpaz": {
     "nombre": "Universidad Nacional de José C. Paz",
@@ -552,7 +563,8 @@
     },
     "esKirchnerista": true,
     "fundacionLey": "Ley 26.577 (2009, bajo la presidencia de Cristina Fernández de Kirchner)",
-    "estudiantesActivosPorDocente": 8.3
+    "estudiantesActivosPorDocente": 8.3,
+    "extranjeros2024": 831
   },
   "jauretche": {
     "nombre": "Universidad Nacional Arturo Jauretche",
@@ -566,7 +578,9 @@
     "inscriptos_ref_year": 2017,
     "notas": [
       "Creada por Ley 26.576 (2009).",
-      "Más de 31.000 estudiantes matriculados en 2024, pero apenas unos pocos cientos de egresados por año: la brecha entre ingreso y egreso es una de las más marcadas del sistema."
+      "Más de 31.000 estudiantes matriculados en 2024, pero apenas unos pocos cientos de egresados por año: la brecha entre ingreso y egreso es una de las más marcadas del sistema.",
+      "Ejecución presupuestaria (PIU-AGN): en 2024 ejecutó $39,5 millones en pasajes y viáticos, 2,0 veces más que en becas estudiantiles ($19,7 millones).",
+      "Ejecución presupuestaria (PIU-AGN): en 2024 gastó $33,3 millones en productos alimenticios — 1,7 veces lo que destinó a becas para estudiantes ($19,7 millones)."
     ],
     "estudiantes2023": 31268,
     "docentesUniversitario": 1623,
@@ -682,7 +696,14 @@
       "simple2023": 584,
       "fte2017": 279.2,
       "fte2023": 778.0
-    }
+    },
+    "extranjeros2024": 803,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "ungs": {
     "nombre": "Universidad Nacional de General Sarmiento",
@@ -827,7 +848,8 @@
       "simple2023": 666,
       "fte2017": 408.8,
       "fte2023": 651.0
-    }
+    },
+    "extranjeros2024": 171
   },
   "undav": {
     "nombre": "Universidad Nacional de Avellaneda",
@@ -841,7 +863,8 @@
     "inscriptos_ref_year": 2017,
     "notas": [
       "Creada por Ley 26.543 (2009).",
-      "En 2024 volvió a crecer en cantidad de egresados respecto de años anteriores, pero sigue entre las tasas de egreso más bajas de todo el relevamiento."
+      "En 2024 volvió a crecer en cantidad de egresados respecto de años anteriores, pero sigue entre las tasas de egreso más bajas de todo el relevamiento.",
+      "Ejecución presupuestaria (PIU-AGN): en 2025 ejecutó $79,2 millones en pasajes y viáticos, 2,7 veces más que en becas estudiantiles ($29,4 millones)."
     ],
     "estudiantes2023": 20457,
     "docentesUniversitario": 1133,
@@ -953,7 +976,14 @@
       "simple2023": 935,
       "fte2017": 85.2,
       "fte2023": 336.8
-    }
+    },
+    "extranjeros2024": 745,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "unso": {
     "nombre": "Universidad Nacional Scalabrini Ortiz",
@@ -1034,7 +1064,8 @@
     },
     "esKirchnerista": true,
     "fundacionLey": "Ley 27.212 (2015, bajo la presidencia de Cristina Fernández de Kirchner)",
-    "estudiantesActivosPorDocente": 5.2
+    "estudiantesActivosPorDocente": 5.2,
+    "extranjeros2024": 107
   },
   "undelta": {
     "nombre": "Universidad Nacional del Delta",
@@ -1210,7 +1241,8 @@
       "simple2023": 860,
       "fte2017": 209.5,
       "fte2023": 294.0
-    }
+    },
+    "extranjeros2024": 510
   },
   "oeste": {
     "nombre": "Universidad Nacional del Oeste",
@@ -1349,7 +1381,8 @@
         "titulo": "Letra P — Polémica por una decisión judicial que restituye al hijo de Othacehé como rector (2017)",
         "url": "https://www.letrap.com.ar/nota/2017-10-3-16-48-0-polemica-por-una-decision-judicial-que-restituye-al-hijo-de-othacehe-como-rector"
       }
-    ]
+    ],
+    "extranjeros2024": 307
   },
   "chaco_austral": {
     "nombre": "Universidad Nacional del Chaco Austral",
@@ -1364,7 +1397,8 @@
     "fundacionLey": "Ley 26.335, sancionada el 4/12/2007 (última semana de Néstor Kirchner) y promulgada el 28/12/2007, ya bajo Cristina Fernández de Kirchner",
     "notas": [
       "Creada en la transición entre los gobiernos de Néstor y Cristina Kirchner, a fines de 2007.",
-      "Más de la mitad de sus reinscriptos (53,6%) no aprobó ni una materia en el último año informado, y solo 5,2% de los inscriptos se gradúa dentro del plazo de referencia de 6 años."
+      "Más de la mitad de sus reinscriptos (53,6%) no aprobó ni una materia en el último año informado, y solo 5,2% de los inscriptos se gradúa dentro del plazo de referencia de 6 años.",
+      "Ejecución presupuestaria (PIU-AGN): en 2023 gastó $65,6 millones en publicidad y propaganda, el equivalente al 86% de todo lo que destinó a becas ($76,1 millones)."
     ],
     "serieEstudiantes": {
       "2009": 1949,
@@ -1486,7 +1520,14 @@
       "simple2023": 1121,
       "fte2017": 219.0,
       "fte2023": 364.2
-    }
+    },
+    "extranjeros2024": 85,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "rio_negro": {
     "nombre": "Universidad Nacional de Río Negro",
@@ -1625,7 +1666,8 @@
       "fte2017": 461.5,
       "fte2023": 573.5
     },
-    "estudiantesActivosPorDocente": 4.1
+    "estudiantesActivosPorDocente": 4.1,
+    "extranjeros2024": 286
   },
   "villa_mercedes": {
     "nombre": "Universidad Nacional de Villa Mercedes",
@@ -1743,7 +1785,8 @@
       "simple2023": 403,
       "fte2017": 131.2,
       "fte2023": 218.8
-    }
+    },
+    "extranjeros2024": 18
   },
   "tierra_del_fuego": {
     "nombre": "Universidad Nacional de Tierra del Fuego",
@@ -1858,7 +1901,8 @@
       "simple2023": 312,
       "fte2017": 200.0,
       "fte2023": 309.0
-    }
+    },
+    "extranjeros2024": 168
   },
   "hurlingham": {
     "nombre": "Universidad Nacional de Hurlingham",
@@ -1977,7 +2021,8 @@
         "titulo": "Ley 27.016 — texto oficial",
         "url": "https://www.argentina.gob.ar/normativa/nacional/ley-27016-239548/texto"
       }
-    ]
+    ],
+    "extranjeros2024": 904
   },
   "rafaela": {
     "nombre": "Universidad Nacional de Rafaela",
@@ -1992,7 +2037,8 @@
     "fundacionLey": "Ley 27.062 (sancionada el 3/12/2014, bajo la presidencia de Cristina Fernández de Kirchner)",
     "notas": [
       "Creada por Ley 27.062 (2014) en Santa Fe.",
-      "Institución todavía muy chica (3.263 estudiantes en 2024): sus indicadores de egreso son volátiles año a año por el bajo número de casos, más que por una tendencia consolidada."
+      "Institución todavía muy chica (3.263 estudiantes en 2024): sus indicadores de egreso son volátiles año a año por el bajo número de casos, más que por una tendencia consolidada.",
+      "Ejecución presupuestaria (PIU-AGN): en 2025 ejecutó $185 millones en pasajes y viáticos, 1,6 veces más que en becas estudiantiles ($114 millones)."
     ],
     "serieEstudiantes": {
       "2016": 192,
@@ -2080,7 +2126,14 @@
       "simple2023": 524,
       "fte2017": 37.5,
       "fte2023": 176.0
-    }
+    },
+    "extranjeros2024": 18,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "alto_uruguay": {
     "nombre": "Universidad Nacional del Alto Uruguay",
@@ -2095,7 +2148,9 @@
     "fundacionLey": "Ley 27.074 (sancionada el 10/12/2014, bajo la presidencia de Cristina Fernández de Kirchner)",
     "notas": [
       "Creada por Ley 27.074 (2014-2015), pero tardó cuatro años en abrir: el Ministerio de Educación recién autorizó su puesta en marcha por Resolución 145/2019 — un caso testigo de la distancia entre la ley de creación y el funcionamiento real.",
-      "38,3% de sus reinscriptos no aprobó ni una materia en el último año informado."
+      "38,3% de sus reinscriptos no aprobó ni una materia en el último año informado.",
+      "Ejecución presupuestaria (PIU-AGN): en 2024 gastó $10,1 millones en publicidad y propaganda, 3,0 veces todo lo que destinó a becas ($3,4 millones).",
+      "Ejecución presupuestaria (PIU-AGN): en 2024 ejecutó $19,7 millones en pasajes y viáticos, 5,8 veces más que en becas estudiantiles ($3,4 millones)."
     ],
     "serieEstudiantes": {
       "2019": 435,
@@ -2157,7 +2212,14 @@
     "costoPorGraduado": 147816064,
     "estudiantesPorDocente": 13.8,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 5.1
+    "estudiantesActivosPorDocente": 5.1,
+    "extranjeros2024": 6,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "comechingones": {
     "nombre": "Universidad Nacional de los Comechingones",
@@ -2172,7 +2234,8 @@
     "fundacionLey": "Ley 26.998 (sancionada el 22/10/2014, bajo la presidencia de Cristina Fernández de Kirchner)",
     "notas": [
       "Creada por Ley 26.998 (2014) en Villa de Merlo, San Luis (no debe confundirse con la Universidad Nacional del Oeste, en Merlo, Buenos Aires).",
-      "Casi 2 de cada 3 reinscriptos (62,7%) no aprobó ni una sola materia en el último año informado — la peor proporción de todo el relevamiento hasta ahora."
+      "Casi 2 de cada 3 reinscriptos (62,7%) no aprobó ni una sola materia en el último año informado — la peor proporción de todo el relevamiento hasta ahora.",
+      "Ejecución presupuestaria (PIU-AGN): en 2024 gastó $17,4 millones en publicidad y propaganda, el equivalente al 66% de todo lo que destinó a becas ($26,3 millones)."
     ],
     "serieEstudiantes": {
       "2024": 1816
@@ -2219,7 +2282,14 @@
     "costoPorGraduado": 233838706,
     "estudiantesPorDocente": 13.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 1.8
+    "estudiantesActivosPorDocente": 1.8,
+    "extranjeros2024": 22,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "guillermo_brown": {
     "nombre": "Universidad Nacional Guillermo Brown",
@@ -2306,7 +2376,8 @@
       "simple2023": 291,
       "fte2017": 1.0,
       "fte2023": 135.8
-    }
+    },
+    "extranjeros2024": 82
   },
   "ezeiza": {
     "nombre": "Universidad Nacional de Ezeiza",
@@ -2500,7 +2571,8 @@
       "fte2017": 905.5,
       "fte2023": 1029.0
     },
-    "estudiantesActivosPorDocente": 4.1
+    "estudiantesActivosPorDocente": 4.1,
+    "extranjeros2024": 1368
   },
   "catamarca": {
     "nombre": "Universidad Nacional de Catamarca",
@@ -2647,7 +2719,8 @@
       "fte2017": 670.8,
       "fte2023": 717.2
     },
-    "estudiantesActivosPorDocente": 3.4
+    "estudiantesActivosPorDocente": 3.4,
+    "extranjeros2024": 66
   },
   "unicen": {
     "nombre": "Universidad Nacional del Centro de la Pcia. de Bs. As.",
@@ -2664,7 +2737,9 @@
       "Creada por Ley 20.753 (1974), sobre la base de la Universidad de Tandil, el Instituto Universitario de Olavarría y el Departamento de Agronomía de Azul.",
       "34% de quienes siguen cursando no aprobó ni una sola materia en el último año informado.",
       "Oferta muy fragmentada por sede (Tandil, Olavarría, Azul, Quequén): cerca de 70 carreras reales distintas en el listado oficial, con 10 disciplinas anómalas detectadas, dos con 0 egresados en 2023 (Física y Otras Ciencias Aplicadas).",
-      "Cargos docentes crecieron +24,8% en términos absolutos, con un FTE ponderado algo menor (+19,3%): la brecha es más chica que en otras universidades del grupo."
+      "Cargos docentes crecieron +24,8% en términos absolutos, con un FTE ponderado algo menor (+19,3%): la brecha es más chica que en otras universidades del grupo.",
+      "Ejecución presupuestaria (PIU-AGN): en 2024 gastó $171 millones en productos alimenticios — 2,3 veces lo que destinó a becas para estudiantes ($74,8 millones).",
+      "Ejecución presupuestaria (PIU-AGN): en 2024 gastó $30,9 millones en publicidad y propaganda, el equivalente al 41% de todo lo que destinó a becas ($74,8 millones)."
     ],
     "serieEstudiantes": {
       "2007": 10937,
@@ -2794,7 +2869,14 @@
       "fte2017": 1176,
       "fte2023": 1403
     },
-    "estudiantesActivosPorDocente": 3.2
+    "estudiantesActivosPorDocente": 3.2,
+    "extranjeros2024": 243,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "chilecito": {
     "nombre": "Universidad Nacional de Chilecito",
@@ -2811,7 +2893,8 @@
       "Creada por Ley 25.813 (2003, bajo la presidencia de Néstor Kirchner), sobre la base de la sede de Chilecito de la UNLaR.",
       "De cada 100 personas que se inscribieron, 90 no llegaron a graduarse dentro del plazo de referencia de 6 años (9.9% de tasa de egreso).",
       "Segunda universidad estatal de la provincia de La Rioja (junto a UNLaR), con 25 carreras reales en 4 escuelas. Educación pasa de 61 a 7 egresados (-88,5%) pese a crecer de 710 a 873 estudiantes.",
-      "A nivel institución, los Nuevos Inscriptos crecieron +71,6% (659 a 1.131) mientras los Egresados totales cayeron -40,2% (112 a 67): una divergencia fuerte entre entrada y salida del sistema."
+      "A nivel institución, los Nuevos Inscriptos crecieron +71,6% (659 a 1.131) mientras los Egresados totales cayeron -40,2% (112 a 67): una divergencia fuerte entre entrada y salida del sistema.",
+      "Ejecución presupuestaria (PIU-AGN): en 2023 ejecutó $35,0 millones en pasajes y viáticos, 2,0 veces más que en becas estudiantiles ($17,2 millones)."
     ],
     "serieEstudiantes": {
       "2007": 1337,
@@ -2941,7 +3024,14 @@
       "fte2017": 240.0,
       "fte2023": 265.2
     },
-    "estudiantesActivosPorDocente": 2.3
+    "estudiantesActivosPorDocente": 2.3,
+    "extranjeros2024": 34,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "comahue": {
     "nombre": "Universidad Nacional del Comahue",
@@ -3086,7 +3176,8 @@
       "simple2023": 2959,
       "fte2017": 1582.0,
       "fte2023": 1848.8
-    }
+    },
+    "extranjeros2024": 818
   },
   "cordoba": {
     "nombre": "Universidad Nacional de Córdoba",
@@ -3233,7 +3324,8 @@
       "fte2017": 4605.5,
       "fte2023": 5225.8
     },
-    "estudiantesActivosPorDocente": 6.1
+    "estudiantesActivosPorDocente": 6.1,
+    "extranjeros2024": 3568
   },
   "cuyo": {
     "nombre": "Universidad Nacional de Cuyo",
@@ -3380,7 +3472,8 @@
       "fte2017": 2640.0,
       "fte2023": 2718.0
     },
-    "estudiantesActivosPorDocente": 3.1
+    "estudiantesActivosPorDocente": 3.1,
+    "extranjeros2024": 876
   },
   "defensa": {
     "nombre": "Universidad de la Defensa Nacional",
@@ -3513,7 +3606,8 @@
     "estudiantesPorDocente": 249.8,
     "tieneDatos": true,
     "estudiantesActivosPorDocente": 105.8,
-    "docentesNoComparable": true
+    "docentesNoComparable": true,
+    "extranjeros2024": 100
   },
   "entre_rios": {
     "nombre": "Universidad Nacional de Entre Ríos",
@@ -3658,7 +3752,8 @@
       "simple2023": 2912,
       "fte2017": 1210.5,
       "fte2023": 1384.5
-    }
+    },
+    "extranjeros2024": 288
   },
   "formosa": {
     "nombre": "Universidad Nacional de Formosa",
@@ -3803,7 +3898,8 @@
       "simple2023": 1027,
       "fte2017": 503.2,
       "fte2023": 485.2
-    }
+    },
+    "extranjeros2024": 61
   },
   "jujuy": {
     "nombre": "Universidad Nacional de Jujuy",
@@ -3947,7 +4043,8 @@
       "fte2017": 776.0,
       "fte2023": 1045.8
     },
-    "estudiantesActivosPorDocente": 3.0
+    "estudiantesActivosPorDocente": 3.0,
+    "extranjeros2024": 185
   },
   "la_pampa": {
     "nombre": "Universidad Nacional de La Pampa",
@@ -3962,7 +4059,8 @@
     "esKirchnerista": false,
     "notas": [
       "Creada como universidad provincial en 1958, nacionalizada por Ley 20.275 (1973).",
-      "De cada 100 personas que se inscribieron, 86 no llegaron a graduarse dentro del plazo de referencia de 6 años (14.3% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 86 no llegaron a graduarse dentro del plazo de referencia de 6 años (14.3% de tasa de egreso).",
+      "Ejecución presupuestaria (PIU-AGN): en 2025 gastó $366 millones en productos alimenticios — más de lo que destinó a becas para estudiantes ($314 millones)."
     ],
     "serieEstudiantes": {
       "2007": 8902,
@@ -4092,7 +4190,14 @@
       "simple2023": 1921,
       "fte2017": 820.0,
       "fte2023": 937.8
-    }
+    },
+    "extranjeros2024": 81,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "la_rioja": {
     "nombre": "Universidad Nacional de La Rioja",
@@ -4109,7 +4214,8 @@
       "Creada como universidad provincial en 1972, elevada a nacional por Ley 24.299 (1993).",
       "De cada 100 personas que se inscribieron, 86 no llegaron a graduarse dentro del plazo de referencia de 6 años (14.3% de tasa de egreso).",
       "ÚNICA universidad estatal del país (de 68 analizadas) que ofrece la carrera de Teología, en 2017 y en 2023 por igual. Ninguna otra institución del sistema reporta estudiantes en esa disciplina.",
-      "Teología tiene matrícula estable (38 a 39 estudiantes) pero los egresados caen a la mitad (4 a 2). Medicina pierde 78,9% de Nuevos Inscriptos y los Cargos Totales de personal docente caen -2,7% (uno de los pocos casos de baja real, no solo de FTE)."
+      "Teología tiene matrícula estable (38 a 39 estudiantes) pero los egresados caen a la mitad (4 a 2). Medicina pierde 78,9% de Nuevos Inscriptos y los Cargos Totales de personal docente caen -2,7% (uno de los pocos casos de baja real, no solo de FTE).",
+      "Ejecución presupuestaria (PIU-AGN): en 2024 ejecutó $46,0 millones en pasajes y viáticos, 1,5 veces más que en becas estudiantiles ($31,6 millones)."
     ],
     "serieEstudiantes": {
       "2007": 21030,
@@ -4239,7 +4345,14 @@
       "fte2017": 1123.2,
       "fte2023": 1081.0
     },
-    "estudiantesActivosPorDocente": 4.1
+    "estudiantesActivosPorDocente": 4.1,
+    "extranjeros2024": 329,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "lanus": {
     "nombre": "Universidad Nacional de Lanús",
@@ -4384,7 +4497,8 @@
       "simple2023": 443,
       "fte2017": 425.0,
       "fte2023": 455.2
-    }
+    },
+    "extranjeros2024": 496
   },
   "litoral": {
     "nombre": "Universidad Nacional del Litoral",
@@ -4529,7 +4643,8 @@
       "simple2023": 2959,
       "fte2017": 1788.2,
       "fte2023": 1886.8
-    }
+    },
+    "extranjeros2024": 192
   },
   "lomas": {
     "nombre": "Universidad Nacional de Lomas de Zamora",
@@ -4674,7 +4789,8 @@
       "simple2023": 4219,
       "fte2017": 1112.5,
       "fte2023": 1290.8
-    }
+    },
+    "extranjeros2024": 933
   },
   "lujan": {
     "nombre": "Universidad Nacional de Luján",
@@ -4809,7 +4925,8 @@
     "costoPorGraduado": 74850776,
     "estudiantesPorDocente": 13.1,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.2
+    "estudiantesActivosPorDocente": 3.2,
+    "extranjeros2024": 675
   },
   "mar_del_plata": {
     "nombre": "Universidad Nacional de Mar del Plata",
@@ -4824,7 +4941,8 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 21.139 (1975), nacionalizando la Universidad Provincial de Mar del Plata (1961).",
-      "De cada 100 personas que se inscribieron, 80 no llegaron a graduarse dentro del plazo de referencia de 6 años (20.3% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 80 no llegaron a graduarse dentro del plazo de referencia de 6 años (20.3% de tasa de egreso).",
+      "Ejecución presupuestaria (PIU-AGN): en 2024 gastó $972 millones en productos alimenticios — 2,4 veces lo que destinó a becas para estudiantes ($401 millones)."
     ],
     "serieEstudiantes": {
       "2007": 23886,
@@ -4954,7 +5072,14 @@
       "simple2023": 4908,
       "fte2017": 1914.8,
       "fte2023": 2389.0
-    }
+    },
+    "extranjeros2024": 1183,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "misiones": {
     "nombre": "Universidad Nacional de Misiones",
@@ -4969,7 +5094,8 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 20.286 (1973), Plan Taquini.",
-      "De cada 100 personas que se inscribieron, 84 no llegaron a graduarse dentro del plazo de referencia de 6 años (16.3% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 84 no llegaron a graduarse dentro del plazo de referencia de 6 años (16.3% de tasa de egreso).",
+      "Ejecución presupuestaria (PIU-AGN): en 2025 gastó $598 millones en productos alimenticios — 1,8 veces lo que destinó a becas para estudiantes ($335 millones)."
     ],
     "serieEstudiantes": {
       "2007": 18436,
@@ -5099,7 +5225,14 @@
       "simple2023": 1501,
       "fte2017": 903.5,
       "fte2023": 1013.2
-    }
+    },
+    "extranjeros2024": 427,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "nordeste": {
     "nombre": "Universidad Nacional del Nordeste",
@@ -5244,7 +5377,8 @@
       "simple2023": 4716,
       "fte2017": 1735.5,
       "fte2023": 1866.0
-    }
+    },
+    "extranjeros2024": 522
   },
   "unnoba": {
     "nombre": "Universidad Nacional del Noroeste de la Pcia. de Bs. As.",
@@ -5259,7 +5393,9 @@
     "esKirchnerista": true,
     "notas": [
       "Creada por decreto del Poder Ejecutivo en 2002 (bajo la presidencia de Eduardo Duhalde) y ratificada por el Congreso mediante Ley 25.824, sancionada en noviembre de 2003 ya bajo la presidencia de Néstor Kirchner.",
-      "De cada 100 personas que se inscribieron, 76 no llegaron a graduarse dentro del plazo de referencia de 6 años (24.1% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 76 no llegaron a graduarse dentro del plazo de referencia de 6 años (24.1% de tasa de egreso).",
+      "Ejecución presupuestaria (PIU-AGN): en 2025 gastó $217 millones en productos alimenticios — 2,9 veces lo que destinó a becas para estudiantes ($75,8 millones).",
+      "Ejecución presupuestaria (PIU-AGN): en 2025 ejecutó $206 millones en pasajes y viáticos, 2,7 veces más que en becas estudiantiles ($75,8 millones)."
     ],
     "serieEstudiantes": {
       "2007": 3624,
@@ -5379,7 +5515,14 @@
     "costoPorGraduado": 48281907,
     "estudiantesPorDocente": 12.7,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 4.0
+    "estudiantesActivosPorDocente": 4.0,
+    "extranjeros2024": 84,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "patagonia_austral": {
     "nombre": "Universidad Nacional de la Patagonia Austral",
@@ -5524,7 +5667,8 @@
       "simple2023": 991,
       "fte2017": 563.8,
       "fte2023": 650.8
-    }
+    },
+    "extranjeros2024": 358
   },
   "patagonia_sjb": {
     "nombre": "Universidad Nacional de la Patagonia San Juan Bosco",
@@ -5539,7 +5683,8 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 22.173 (1980), por unificación de la Universidad Nacional de la Patagonia y la Universidad de la Patagonia San Juan Bosco.",
-      "De cada 100 personas que se inscribieron, 87 no llegaron a graduarse dentro del plazo de referencia de 6 años (13.3% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 87 no llegaron a graduarse dentro del plazo de referencia de 6 años (13.3% de tasa de egreso).",
+      "Ejecución presupuestaria (PIU-AGN): en 2025 ejecutó $170 millones en pasajes y viáticos, 3,6 veces más que en becas estudiantiles ($47,7 millones)."
     ],
     "serieEstudiantes": {
       "2007": 12353,
@@ -5625,7 +5770,14 @@
     "reinscriptosTotal": 21144,
     "reinscriptos0Materias": 14604,
     "reinscriptosRegulares2mas": 4009,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "extranjeros2024": 1005,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "pedagogica": {
     "nombre": "Universidad Pedagógica Nacional",
@@ -5716,7 +5868,8 @@
     "costoPorGraduado": 39979918,
     "estudiantesPorDocente": 12.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.3
+    "estudiantesActivosPorDocente": 3.3,
+    "extranjeros2024": 96
   },
   "quilmes": {
     "nombre": "Universidad Nacional de Quilmes",
@@ -5731,7 +5884,8 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 23.749 (1989).",
-      "De cada 100 personas que se inscribieron, 92 no llegaron a graduarse dentro del plazo de referencia de 6 años (8.4% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 92 no llegaron a graduarse dentro del plazo de referencia de 6 años (8.4% de tasa de egreso).",
+      "Ejecución presupuestaria (PIU-AGN): en 2025 gastó $609 millones en productos alimenticios — más de lo que destinó a becas para estudiantes ($419 millones)."
     ],
     "serieEstudiantes": {
       "2007": 12413,
@@ -5861,7 +6015,14 @@
       "simple2023": 615,
       "fte2017": 598.0,
       "fte2023": 690.2
-    }
+    },
+    "extranjeros2024": 748,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "rio_cuarto": {
     "nombre": "Universidad Nacional de Río Cuarto",
@@ -6005,7 +6166,8 @@
       "fte2017": 1279.5,
       "fte2023": 1313.8
     },
-    "estudiantesActivosPorDocente": 3.7
+    "estudiantesActivosPorDocente": 3.7,
+    "extranjeros2024": 158
   },
   "rosario": {
     "nombre": "Universidad Nacional de Rosario",
@@ -6022,7 +6184,8 @@
       "Creada por Ley 17.987 (1968), por separación de las facultades rosarinas de la Universidad Nacional del Litoral.",
       "De cada 100 personas que se inscribieron, 75 no llegaron a graduarse dentro del plazo de referencia de 6 años (24.7% de tasa de egreso).",
       "Arquitectura y Diseño (-86%) y Derecho (-85,9%) colapsaron en egresados de forma casi idéntica, pese a que estudiantes (+17%) y cargos docentes (+13%) crecieron.",
-      "La coincidencia entre dos carreras sin relación sugiere posible cambio de metodología de conteo entre 2017 y 2023, además de o en lugar de una caída real."
+      "La coincidencia entre dos carreras sin relación sugiere posible cambio de metodología de conteo entre 2017 y 2023, además de o en lugar de una caída real.",
+      "Ejecución presupuestaria (PIU-AGN): el gasto en publicidad y propaganda pasó de $24,9 millones en 2024 a $68,3 millones en 2025 (×2,7 en pesos corrientes, con una inflación anual muy por debajo de ese salto)."
     ],
     "serieEstudiantes": {
       "2007": 72121,
@@ -6152,7 +6315,14 @@
       "fte2017": 3998.5,
       "fte2023": 4456.8
     },
-    "estudiantesActivosPorDocente": 3.6
+    "estudiantesActivosPorDocente": 3.6,
+    "extranjeros2024": 6206,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "salta": {
     "nombre": "Universidad Nacional de Salta",
@@ -6167,7 +6337,8 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 19.633 (1972), Plan Taquini.",
-      "De cada 100 personas que se inscribieron, 90 no llegaron a graduarse dentro del plazo de referencia de 6 años (10.5% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 90 no llegaron a graduarse dentro del plazo de referencia de 6 años (10.5% de tasa de egreso).",
+      "Ejecución presupuestaria (PIU-AGN): en el primer semestre de 2025 gastó $307 millones en productos alimenticios — 1,7 veces lo que destinó a becas para estudiantes ($181 millones)."
     ],
     "serieEstudiantes": {
       "2007": 22304,
@@ -6297,7 +6468,14 @@
       "simple2023": 1214,
       "fte2017": 1128.0,
       "fte2023": 1171.0
-    }
+    },
+    "extranjeros2024": 331,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "san_antonio_areco": {
     "nombre": "Universidad Nacional de San Antonio de Areco",
@@ -6312,7 +6490,8 @@
     "esKirchnerista": true,
     "notas": [
       "Creada por Ley 27.213 (2015, bajo la presidencia de Cristina Fernández de Kirchner) — sancionada la misma semana que la Universidad Nacional Scalabrini Ortiz (UNSO).",
-      "37% de quienes siguen cursando no aprobó ni una sola materia en el último año informado."
+      "37% de quienes siguen cursando no aprobó ni una sola materia en el último año informado.",
+      "Ejecución presupuestaria (PIU-AGN): en 2025 ejecutó $99,0 millones en pasajes y viáticos, 3,0 veces más que en becas estudiantiles ($32,6 millones)."
     ],
     "serieEstudiantes": {
       "2017": 482,
@@ -6395,7 +6574,14 @@
       "simple2023": 162,
       "fte2017": 25.0,
       "fte2023": 64.5
-    }
+    },
+    "extranjeros2024": 30,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "san_juan": {
     "nombre": "Universidad Nacional de San Juan",
@@ -6412,7 +6598,8 @@
       "Creada por Ley 20.367 (1973), Plan Taquini.",
       "De cada 100 personas que se inscribieron, 80 no llegaron a graduarse dentro del plazo de referencia de 6 años (20.4% de tasa de egreso).",
       "Mayor cantidad total de anomalías detectadas (37). Caída de egresados repetida en las cuatro ramas grandes de la universidad.",
-      "Cargos Exclusiva cayeron -14% mientras Simple creció +22%: sustitución de dedicaciones altas por dedicaciones bajas."
+      "Cargos Exclusiva cayeron -14% mientras Simple creció +22%: sustitución de dedicaciones altas por dedicaciones bajas.",
+      "Ejecución presupuestaria (PIU-AGN): el gasto en publicidad y propaganda pasó de $36,8 millones en 2024 a $148 millones en 2025 (×4,0 en pesos corrientes, con una inflación anual muy por debajo de ese salto)."
     ],
     "serieEstudiantes": {
       "2007": 19866,
@@ -6542,7 +6729,14 @@
       "fte2017": 1921.2,
       "fte2023": 1990.0
     },
-    "estudiantesActivosPorDocente": 2.9
+    "estudiantesActivosPorDocente": 2.9,
+    "extranjeros2024": 154,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "san_luis": {
     "nombre": "Universidad Nacional de San Luis",
@@ -6687,7 +6881,8 @@
       "simple2023": 405,
       "fte2017": 1339.5,
       "fte2023": 1579.8
-    }
+    },
+    "extranjeros2024": 233
   },
   "san_martin": {
     "nombre": "Universidad Nacional de San Martín",
@@ -6832,7 +7027,8 @@
       "simple2023": 2257,
       "fte2017": 658.2,
       "fte2023": 843.2
-    }
+    },
+    "extranjeros2024": 917
   },
   "santiago": {
     "nombre": "Universidad Nacional de Santiago del Estero",
@@ -6977,7 +7173,8 @@
       "simple2023": 866,
       "fte2017": 646.0,
       "fte2023": 781.0
-    }
+    },
+    "extranjeros2024": 30
   },
   "sur": {
     "nombre": "Universidad Nacional del Sur",
@@ -6992,7 +7189,8 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Decreto-Ley 154 (1956), sobre la base del Instituto Tecnológico del Sur.",
-      "De cada 100 personas que se inscribieron, 81 no llegaron a graduarse dentro del plazo de referencia de 6 años (18.9% de tasa de egreso)."
+      "De cada 100 personas que se inscribieron, 81 no llegaron a graduarse dentro del plazo de referencia de 6 años (18.9% de tasa de egreso).",
+      "Ejecución presupuestaria (PIU-AGN): las becas estudiantiles cayeron de $835 millones en 2024 a $262 millones en 2025 (-69% aun sin descontar la inflación), mientras pasajes y viáticos subían de $191 millones a $315 millones."
     ],
     "serieEstudiantes": {
       "2007": 18934,
@@ -7122,7 +7320,14 @@
       "simple2023": 2612,
       "fte2017": 1336.0,
       "fte2023": 1438.5
-    }
+    },
+    "extranjeros2024": 335,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "utn": {
     "nombre": "Universidad Tecnológica Nacional",
@@ -7240,7 +7445,8 @@
       "2024": 44478700
     },
     "costoPorGraduado": 70947751,
-    "tieneDatos": true
+    "tieneDatos": true,
+    "extranjeros2024": 1444
   },
   "tres_de_febrero": {
     "nombre": "Universidad Nacional de Tres de Febrero",
@@ -7255,7 +7461,8 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 24.495 (1995).",
-      "28% de quienes siguen cursando no aprobó ni una sola materia en el último año informado."
+      "28% de quienes siguen cursando no aprobó ni una sola materia en el último año informado.",
+      "Ejecución presupuestaria (PIU-AGN): en 2024 ejecutó $110 millones en pasajes y viáticos, 2,2 veces más que en becas estudiantiles ($50,0 millones)."
     ],
     "serieEstudiantes": {
       "2007": 6840,
@@ -7385,7 +7592,14 @@
       "simple2023": 430,
       "fte2017": 484.0,
       "fte2023": 584.5
-    }
+    },
+    "extranjeros2024": 227,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "tucuman": {
     "nombre": "Universidad Nacional de Tucumán",
@@ -7402,7 +7616,8 @@
       "Fundada como universidad provincial en 1912, nacionalizada por Ley 11.027 (1921).",
       "De cada 100 personas que se inscribieron, 83 no llegaron a graduarse dentro del plazo de referencia de 6 años (16.9% de tasa de egreso).",
       "Derecho cae 70% en egresados (726 a 218, pierde 508), la segunda caída más grande de Derecho de todo el análisis después de Rosario.",
-      "A nivel rama, Ciencias Sociales pierde 546 egresados (-48,5%)."
+      "A nivel rama, Ciencias Sociales pierde 546 egresados (-48,5%).",
+      "Ejecución presupuestaria (PIU-AGN): en 2025 gastó $641 millones en productos alimenticios — más de lo que destinó a becas para estudiantes ($591 millones)."
     ],
     "serieEstudiantes": {
       "2007": 59653,
@@ -7532,7 +7747,14 @@
       "fte2017": 2944.8,
       "fte2023": 3127.0
     },
-    "estudiantesActivosPorDocente": 5.4
+    "estudiantesActivosPorDocente": 5.4,
+    "extranjeros2024": 231,
+    "fuentes": [
+      {
+        "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
+        "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
+      }
+    ]
   },
   "villa_maria": {
     "nombre": "Universidad Nacional de Villa María",
@@ -7679,7 +7901,8 @@
       "fte2017": 422.2,
       "fte2023": 496.5
     },
-    "estudiantesActivosPorDocente": 4.1
+    "estudiantesActivosPorDocente": 4.1,
+    "extranjeros2024": 24
   },
   "madres_plaza_mayo": {
     "nombre": "Universidad Nacional Madres de Plaza de Mayo",
@@ -7738,7 +7961,8 @@
       "2021": 3.0,
       "2022": 1.0,
       "2023": 4.0
-    }
+    },
+    "extranjeros2024": 77
   },
   "rio_tercero": {
     "nombre": "Universidad Nacional de Río Tercero",

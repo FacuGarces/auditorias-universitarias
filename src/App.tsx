@@ -8,6 +8,7 @@ import { Universidad } from './pages/Universidad'
 import { Kirchneristas } from './pages/Kirchneristas'
 import { Propuestas } from './pages/Propuestas'
 import { Presentacion } from './pages/Presentacion'
+import { useMoneda } from './lib/moneda'
 
 // Solo opacity: Home usa `position: fixed` para el mapa de fondo, y cualquier transform (x/y/scale)
 // en un ancestro le crearía un containing block nuevo, corriendo el mapa fijo durante la transición.
@@ -26,6 +27,9 @@ function PageFade({ children }: { children: React.ReactNode }) {
 
 function Shell() {
   const location = useLocation()
+  // Suscripción a la moneda elegida: al cambiar, re-renderiza todo el árbol para que cada
+  // formatMoneda() vuelva a formatear en la moneda nueva.
+  useMoneda()
   // Home (mapa a pantalla completa) y la presentación tienen su propio chrome: sin navbar.
   const pantallaPropia = location.pathname === '/' || location.pathname === '/presentacion'
   return (

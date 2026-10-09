@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { universidadesArray } from '../data/universidades'
 import { UniversidadBadge } from '../components/UniversidadBadge'
-import { formatMoneda, formatNumero, ubicacion } from '../lib/format'
+import { formatMoneda, formatNumero, ubicacion, unidadMonetaria } from '../lib/format'
 import { METRICAS, esPeor, type MetricaId } from '../lib/metricas'
 import { ProvinciaCombobox } from '../components/ProvinciaCombobox'
 import { filtrarPorProvincia, nombreProvincia, useProvinciaFiltro } from '../lib/provincias'
@@ -56,7 +56,7 @@ export function Kirchneristas() {
   const comparativa = useMemo(() => {
     const kUnis = enProvincia.filter((u) => u.esKirchnerista && u.tieneDatos)
     const restoUnis = enProvincia.filter((u) => !u.esKirchnerista && u.tieneDatos)
-    return (Object.keys(METRICAS) as MetricaId[]).map((key) => {
+    return (Object.keys(METRICAS) as MetricaId[]).filter((key) => !METRICAS[key].agregadoEsTotal).map((key) => {
       const m = METRICAS[key]
       return {
         key,
@@ -245,7 +245,7 @@ export function Kirchneristas() {
 
         <p className="mt-6 mb-8 text-xs text-upl-crema/40">
           Fuente: Anuarios de Estadísticas Universitarias (SPU) y leyes de creación publicadas en el Boletín
-          Oficial. Costo por graduado en pesos constantes de agosto 2026.
+          Oficial. Costo por graduado en {unidadMonetaria()}.
         </p>
       </div>
     </div>

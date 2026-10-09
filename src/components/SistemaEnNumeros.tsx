@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { EvolutionChart } from './EvolutionChart'
-import { formatMoneda, formatNumero, formatPorcentaje } from '../lib/format'
+import { formatMoneda, formatNumero, formatPorcentaje, unidadMonetaria } from '../lib/format'
 import type { ResumenSistema } from '../lib/sistema'
 
 const gridVariants = {
@@ -80,8 +80,16 @@ export function SistemaEnNumeros({ titulo, resumen: r }: { titulo: string; resum
         <Kpi
           label="Costo por graduado"
           value={formatMoneda(r.costoPorGraduado)}
-          hint="Promedio ponderado por egresados, en pesos constantes de agosto 2026."
+          hint={`Promedio ponderado por egresados, en ${unidadMonetaria()}.`}
         />
+        {r.extranjeros.gasto != null && (
+          <Kpi
+            alerta
+            label="Gasto en estudiantes extranjeros"
+            value={formatMoneda(r.extranjeros.gasto)}
+            hint={`${formatNumero(r.extranjeros.extranjeros)} extranjeros, ${formatPorcentaje(r.extranjeros.pct)} del padrón de grado. Es lo que se ahorraría por año si pagaran un arancel que cubra su costo (presupuesto 2024 por estudiante).`}
+          />
+        )}
         {vi && ve && (
           <Kpi
             label={`Ingresantes vs. egresados (${vi.desde}→${vi.hasta})`}

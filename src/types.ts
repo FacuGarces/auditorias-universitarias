@@ -33,6 +33,8 @@ export interface UniversidadDetalle {
   presupuesto2019?: number
   presupuesto2023?: number
   presupuesto2024?: number
+  // Estudiantes extranjeros de pregrado y grado (Anuario SPU 2024, cuadro 2.1.25).
+  extranjeros2024?: number
   reinscriptosTotal?: number
   reinscriptosRegulares2mas?: number
   reinscriptos0Materias?: number

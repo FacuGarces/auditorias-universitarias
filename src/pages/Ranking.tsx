@@ -141,8 +141,9 @@ export function Ranking() {
                     <div className="font-semibold text-sm sm:text-base text-upl-crema leading-snug line-clamp-2">{u.nombre}</div>
                     <div className="text-xs text-upl-crema/50 truncate">{ubicacion(u.ciudad, u.provincia)}</div>
                   </div>
-                  <div className="font-display font-700 text-base sm:text-lg text-upl-amarillo shrink-0 text-right">
-                    {cfg.formato(cfg.valor(u))}
+                  <div className="shrink-0 text-right">
+                    <div className="font-display font-700 text-base sm:text-lg text-upl-amarillo">{cfg.formato(cfg.valor(u))}</div>
+                    {cfg.detalle?.(u) && <div className="text-[11px] text-upl-crema/50">{cfg.detalle(u)}</div>}
                   </div>
                 </motion.button>
               </motion.li>

@@ -5,7 +5,13 @@ import { getUniversidad } from '../data/universidades'
 import { UniversidadBadge } from '../components/UniversidadBadge'
 import { EvolutionChart } from '../components/EvolutionChart'
 import { notasCriticas } from '../lib/critica'
-import { decimal, formatMoneda, formatNumero, formatPorcentaje, ubicacion } from '../lib/format'
+import { useVolver } from '../lib/volver'
+import { decimal, formatMoneda, formatNumero, formatPorcentaje, ubicacion, unidadMonetaria } from '../lib/format'
+import { gastoExtranjeros, gastoPorEstudiante, pctExtranjeros } from '../lib/extranjeros'
+
+// Prefijo de las notas generadas desde el Portal de Información Universitaria de la AGN
+// (scripts/enriquecer_piu_extranjeros.py).
+const NOTA_PIU = 'Ejecución presupuestaria (PIU-AGN)'
 
 const statGridVariants = {
   hidden: {},
@@ -182,6 +188,7 @@ function toSerie(obj: Record<string, number | string> | undefined) {
 export function Universidad() {
   const { id = '' } = useParams()
   const u = getUniversidad(id)
+  const volver = useVolver('/ranking')
 
   if (!u) {
     return (
@@ -207,9 +214,9 @@ export function Universidad() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
-      <Link to="/ranking" className="text-sm text-upl-crema/50 hover:text-upl-crema">
-        ← Volver al ranking
-      </Link>
+      <button type="button" onClick={volver} className="text-sm text-upl-crema/50 hover:text-upl-crema">
+        ← Volver
+      </button>
 
       <motion.div
         initial={{ opacity: 0, y: 16 }}
@@ -279,7 +286,7 @@ export function Universidad() {
               hint={
                 u.docentesNoComparable
                   ? 'No comparable: el presupuesto informado no incluye al plantel docente de las Fuerzas Armadas'
-                  : 'Presupuesto ejecutado 2024 / egresados 2024 — pesos constantes de agosto 2026'
+                  : `Presupuesto ejecutado 2024 / egresados 2024 — ${unidadMonetaria()}`
               }
               alerta={!u.docentesNoComparable && !!u.costoPorGraduado && u.costoPorGraduado > 15_000_000}
             />
@@ -294,6 +301,18 @@ export function Universidad() {
                   : `${formatNumero(u.docentesUniversitario)} docentes · ${formatNumero(u.reinscriptosRegulares2mas)} regulares (2+ materias aprobadas)`
               }
             />
+            {u.extranjeros2024 != null && (
+              <StatCard
+                label="Estudiantes extranjeros"
+                value={`${formatNumero(u.extranjeros2024)} · ${formatPorcentaje(pctExtranjeros(u))}`}
+                hint={
+                  gastoExtranjeros(u) != null
+                    ? `Costo para el Estado: ${formatMoneda(gastoExtranjeros(u))} por año (${formatMoneda(gastoPorEstudiante(u))} por estudiante) — lo que se ahorraría con un arancel para extranjeros`
+                    : 'Porcentaje del padrón de grado 2024. Sin presupuesto 2024 informado para estimar su costo'
+                }
+                alerta={(pctExtranjeros(u) ?? 0) >= 5}
+              />
+            )}
             <StatCard
               label="Planta no docente"
               value={formatNumero(u.personalNoDocente)}
@@ -437,13 +456,13 @@ export function Universidad() {
               {serieCostoReal.length >= 2 && (
                 <motion.div {...revealProps} className="glass rounded-2xl px-5 py-4 sm:col-span-2">
                   <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
-                    Costo por graduado — pesos constantes de agosto 2026
+                    Costo por graduado — {unidadMonetaria()}
                   </div>
                   <EvolutionChart data={serieCostoReal} color="#ff8a7a" formatValue={(v) => formatMoneda(v)} />
                   <p className="text-xs text-upl-crema/40 mt-2">
                     En pesos corrientes de cada año (sin ajustar por inflación) hubiera mostrado{' '}
                     {serieCostoNominal.length >= 2 &&
-                      `${formatMoneda(serieCostoNominal[0].value)} → ${formatMoneda(serieCostoNominal[serieCostoNominal.length - 1].value)}`}
+                      `${formatMoneda(serieCostoNominal[0].value, { nominal: true })} → ${formatMoneda(serieCostoNominal[serieCostoNominal.length - 1].value, { nominal: true })}`}
                     , una comparación sin sentido dada la inflación acumulada del período — por eso esta ficha usa
                     siempre pesos constantes de agosto 2026 (deflactados por IPC).
                   </p>
@@ -490,7 +509,16 @@ export function Universidad() {
           {u.notas.map((nota, i) => (
             <motion.li key={i} variants={statCardVariants} className="flex gap-3 rounded-xl glass px-4 py-3">
               <span className="text-upl-resaltador font-display font-800">·</span>
-              <span className="text-sm text-upl-crema/85">{nota}</span>
+              <span className="text-sm text-upl-crema/85">
+                {nota.startsWith(NOTA_PIU) ? (
+                  <>
+                    <span className="font-semibold text-upl-resaltador">{NOTA_PIU}:</span>
+                    {nota.slice(NOTA_PIU.length + 1)}
+                  </>
+                ) : (
+                  nota
+                )}
+              </span>
             </motion.li>
           ))}
         </motion.ul>

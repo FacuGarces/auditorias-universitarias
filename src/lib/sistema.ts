@@ -1,5 +1,6 @@
 import { universidadesArray } from '../data/universidades'
 import { METRICAS } from './metricas'
+import { resumenExtranjeros } from './extranjeros'
 
 type Uni = (typeof universidadesArray)[number]
 
@@ -83,6 +84,7 @@ export function resumenSistema(us: Uni[]) {
     ceroMateriasPct: METRICAS.ceroMaterias.agregado(conDatos),
     ceroMateriasN: conCeroMaterias.reduce((acc, u) => acc + (u.reinscriptos0Materias ?? 0), 0),
     costoPorGraduado: METRICAS.costo.agregado(conDatos),
+    extranjeros: resumenExtranjeros(conDatos),
     ingresantes,
     egresados,
     variacionIngresantes: variacion(ingresantes),
