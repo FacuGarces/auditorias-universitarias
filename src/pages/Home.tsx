@@ -65,7 +65,7 @@ const PIN_STROKE_NODATA = '#facf3b'
 const ZOOM_MAX = 400
 // Sedes y unidades académicas: otro color y un poco más chicas que la sede central.
 const SEDE_FILL = '#8fb7ff'
-const SEDE_ESCALA = 0.62
+const SEDE_ESCALA = 0.72
 
 function esMovil() {
   return typeof window !== 'undefined' && window.innerWidth < 640
@@ -145,7 +145,9 @@ function calcularFit(p: Provincia, focoY = 0.4): Vista {
   const cy = (y0 + y1) / 2
   // En celular el mapa se dibuja mucho más chico, así que se permite acercar más de entrada: si no,
   // una provincia mínima como CABA quedaba como un punto en el medio de la pantalla.
-  const kMax = typeof window !== 'undefined' && window.innerWidth < 640 ? 200 : 60
+  // CABA (la provincia más chica, y ahora con sus facultades y sedes) necesita más zoom también en
+  // escritorio: con el tope general de 60 quedaba como una mancha chica con 20 puntos encimados.
+  const kMax = typeof window !== 'undefined' && window.innerWidth < 640 ? 200 : p.nombre === 'Capital Federal' ? 95 : 60
   const k = Math.min((width * 0.88) / bw, (height * 0.62) / bh, kMax)
   return { k, x: width / 2 - k * cx, y: height * focoY - k * cy }
 }
@@ -166,7 +168,7 @@ function VistaProvincia({
   mostrarSedes: boolean
   onMostrarSedes: (v: boolean) => void
 }) {
-  const fitInicial = useMemo(() => calcularFit(provincia), [provincia])
+  const fitInicial = useMemo(() => calcularFit(provincia, provincia.nombre === 'Capital Federal' && !esMovil() ? 0.3 : 0.4), [provincia])
   const [vista, setVista] = useState<Vista>(fitInicial)
   const [animar, setAnimar] = useState(true)
   const [deptoPaths, setDeptoPaths] = useState<string[]>([])

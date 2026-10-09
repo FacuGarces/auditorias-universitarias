@@ -5,7 +5,7 @@ import mapaEstatico from '../data/mapa-estatico.json'
 import { getUniversidad, universidadesArray } from '../data/universidades'
 import { EvolutionChart } from '../components/EvolutionChart'
 import { QrCode } from '../components/QrCode'
-import { formatMoneda, formatNumero, formatPorcentaje } from '../lib/format'
+import { formatMoneda, formatNumero, formatPorcentaje, unidadMonetaria } from '../lib/format'
 import { METRICAS } from '../lib/metricas'
 import { POSICION_PRINCIPAL, propuestaPrincipal, propuestas } from '../lib/propuestas'
 import { useMoneda } from '../lib/moneda'
@@ -266,7 +266,7 @@ function useDiapositivas() {
             <div className="flex flex-wrap items-end gap-x-6 gap-y-2">
               <Grande>{formatMoneda(r.costoPorGraduado)}</Grande>
               <p className="text-upl-crema/80 text-[clamp(1rem,2vw,1.8rem)] mb-[1vh] max-w-[22ch]">
-                por graduado, promedio del sistema (pesos de agosto 2026)
+                por graduado, promedio del sistema ({unidadMonetaria()})
               </p>
             </div>
             <div className="mt-[5vh] space-y-[2.2vh]">

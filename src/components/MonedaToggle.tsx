@@ -1,14 +1,14 @@
 import { setMoneda, useMoneda, type Moneda } from '../lib/moneda'
 import { formatNumero } from '../lib/format'
 
-/** Selector pesos / dólares (oficial vendedor, vía dolarapi.com). */
+/** Selector Pesos / USD (oficial vendedor, vía dolarapi.com). */
 export function MonedaToggle({ className = '' }: { className?: string }) {
   const { moneda, tc } = useMoneda()
   const fecha = new Date(tc.fecha).toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit' })
   const titulo = `Dólar oficial vendedor: $${formatNumero(tc.venta)}${tc.enVivo ? ` (al ${fecha})` : ' (valor de respaldo)'}`
   const opciones: { id: Moneda; label: string }[] = [
-    { id: 'ARS', label: '$' },
-    { id: 'USD', label: 'US$' },
+    { id: 'ARS', label: 'Pesos' },
+    { id: 'USD', label: 'USD' },
   ]
   return (
     <div

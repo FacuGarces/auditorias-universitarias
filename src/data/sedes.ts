@@ -3,6 +3,10 @@
  * funcionan fuera de la sede central (o, en la UBA y la UNLP, cada facultad por separado). Ubicación a
  * nivel ciudad — aproximada a la manzana en CABA y La Plata. No es un relevamiento exhaustivo: cubre
  * las universidades con mayor dispersión territorial.
+ *
+ * Los contornos del mapa están simplificados: una sede costera o de frontera con su coordenada real
+ * puede caer en el agua o en la provincia vecina. scripts/verificar_sedes.py lo controla (y con
+ * --corregir corre esas sedes al punto interior más cercano) — correrlo después de sumar sedes.
  */
 import mapaEstatico from './mapa-estatico.json'
 import { universidades } from './universidades'
@@ -36,10 +40,32 @@ const RAW: SedeRaw[] = [
   ['uba', 'Facultad de Filosofía y Letras', 'CABA', CABA, -34.6237, -58.4385],
   ['uba', 'Facultad de Psicología', 'CABA', CABA, -34.611, -58.411],
   ['uba', 'Facultad de Ciencias Sociales', 'CABA', CABA, -34.6223, -58.3843],
-  ['uba', 'Facultad de Ciencias Exactas y Naturales', 'CABA', CABA, -34.542, -58.4425],
-  ['uba', 'Facultad de Arquitectura, Diseño y Urbanismo', 'CABA', CABA, -34.5408, -58.4455],
+  ['uba', 'Facultad de Ciencias Exactas y Naturales', 'CABA', CABA, -34.5469, -58.4459],
+  ['uba', 'Facultad de Arquitectura, Diseño y Urbanismo', 'CABA', CABA, -34.5454, -58.4487],
   ['uba', 'Facultad de Agronomía', 'CABA', CABA, -34.5925, -58.482],
   ['uba', 'Facultad de Ciencias Veterinarias', 'CABA', CABA, -34.5945, -58.487],
+  // UBA — sedes del CBC en la provincia de Buenos Aires
+  ['uba', 'CBC — Centro Regional Sur', 'Avellaneda', BA, -34.661, -58.366],
+  ['uba', 'CBC — Centro Regional Norte', 'Martínez', BA, -34.49, -58.505],
+  ['uba', 'CBC — Sede Vicente López', 'Munro', BA, -34.529, -58.524],
+  ['uba', 'CBC — Sede San Miguel', 'San Miguel', BA, -34.541, -58.706],
+  ['uba', 'CBC — Sede Tigre', 'Tigre', BA, -34.426, -58.58],
+  ['uba', 'CBC — Sede Escobar', 'Ingeniero Maschwitz', BA, -34.381, -58.741],
+  ['uba', 'CBC — Sede Pilar', 'Pilar', BA, -34.458, -58.914],
+  ['uba', 'CBC — Sede Moreno', 'Moreno', BA, -34.65, -58.79],
+  ['uba', 'CBC — Sede Campana', 'Campana', BA, -34.166, -58.961],
+  ['uba', 'CBC — Sede Baradero', 'Baradero', BA, -33.811, -59.504],
+  ['uba', 'CBC — Sede San Andrés de Giles', 'San Andrés de Giles', BA, -34.446, -59.445],
+  ['uba', 'CBC — Sede Salto', 'Salto', BA, -34.293, -60.255],
+  ['uba', 'CBC — Sede Chivilcoy', 'Chivilcoy', BA, -34.899, -60.02],
+  ['uba', 'CBC — Sede Bragado', 'Bragado', BA, -35.119, -60.489],
+  ['uba', 'CBC — Sede Lobos', 'Lobos', BA, -35.185, -59.096],
+  ['uba', 'CBC — Sede La Costa', 'Santa Teresita', BA, -36.5824, -56.7851],
+  // UNIPE — sedes en la provincia (rectorado en CABA)
+  ['pedagogica', 'Sede La Plata', 'City Bell', BA, -34.87, -58.045],
+  ['pedagogica', 'Sede Pilar', 'Pilar', BA, -34.454, -58.909],
+  ['pedagogica', 'Sede Almirante Brown', 'Adrogué', BA, -34.8, -58.39],
+  ['pedagogica', 'Sede Mar del Plata', 'Mar del Plata', BA, -38.0264, -57.6140],
   // UNLP — facultades
   ['unlp', 'Facultad de Ciencias Exactas', 'La Plata', BA, -34.9065, -57.9445],
   ['unlp', 'Facultad de Ingeniería', 'La Plata', BA, -34.9055, -57.9405],
@@ -66,19 +92,19 @@ const RAW: SedeRaw[] = [
   ['utn', 'Facultad Regional General Pacheco', 'General Pacheco', BA, -34.4563, -58.6347],
   ['utn', 'Facultad Regional Haedo', 'Haedo', BA, -34.644, -58.5945],
   ['utn', 'Facultad Regional La Plata', 'Berisso', BA, -34.9, -57.925],
-  ['utn', 'Facultad Regional San Nicolás', 'San Nicolás', BA, -33.3342, -60.2108],
+  ['utn', 'Facultad Regional San Nicolás', 'San Nicolás', BA, -33.3883, -60.2281],
   ['utn', 'Facultad Regional Trenque Lauquen', 'Trenque Lauquen', BA, -35.9706, -62.7333],
   ['utn', 'Facultad Regional Córdoba', 'Córdoba', 'Córdoba', -31.4425, -64.194],
-  ['utn', 'Facultad Regional San Francisco', 'San Francisco', 'Córdoba', -31.4278, -62.0828],
+  ['utn', 'Facultad Regional San Francisco', 'San Francisco', 'Córdoba', -31.4036, -62.1884],
   ['utn', 'Facultad Regional Villa María', 'Villa María', 'Córdoba', -32.4075, -63.2403],
-  ['utn', 'Facultad Regional Rosario', 'Rosario', 'Santa Fe', -32.9545, -60.644],
+  ['utn', 'Facultad Regional Rosario', 'Rosario', 'Santa Fe', -32.9718, -60.7211],
   ['utn', 'Facultad Regional Santa Fe', 'Santa Fe', 'Santa Fe', -31.617, -60.675],
   ['utn', 'Facultad Regional Rafaela', 'Rafaela', 'Santa Fe', -31.2503, -61.4867],
   ['utn', 'Facultad Regional Reconquista', 'Reconquista', 'Santa Fe', -29.145, -59.645],
   ['utn', 'Facultad Regional Venado Tuerto', 'Venado Tuerto', 'Santa Fe', -33.7456, -61.9688],
   ['utn', 'Facultad Regional Paraná', 'Paraná', 'Entre Ríos', -31.7333, -60.5297],
   ['utn', 'Facultad Regional Concepción del Uruguay', 'Concepción del Uruguay', 'Entre Ríos', -32.4796, -58.2373],
-  ['utn', 'Facultad Regional Concordia', 'Concordia', 'Entre Ríos', -31.3879, -58.0259],
+  ['utn', 'Facultad Regional Concordia', 'Concordia', 'Entre Ríos', -31.3879, -58.0711],
   ['utn', 'Facultad Regional Resistencia', 'Resistencia', 'Chaco', -27.4556, -58.9789],
   ['utn', 'Facultad Regional Tucumán', 'San Miguel de Tucumán', 'Tucumán', -26.817, -65.199],
   ['utn', 'Facultad Regional La Rioja', 'La Rioja', 'La Rioja', -29.4131, -66.8558],
@@ -134,7 +160,7 @@ const RAW: SedeRaw[] = [
   ['litoral', 'Sede Reconquista-Avellaneda', 'Reconquista', 'Santa Fe', -29.15, -59.65],
   ['litoral', 'Sede Regional Gálvez', 'Gálvez', 'Santa Fe', -32.0293, -61.2209],
   ['entre_rios', 'Sede Concepción del Uruguay', 'Concepción del Uruguay', 'Entre Ríos', -32.4846, -58.2323],
-  ['entre_rios', 'Sede Concordia', 'Concordia', 'Entre Ríos', -31.3929, -58.0209],
+  ['entre_rios', 'Sede Concordia', 'Concordia', 'Entre Ríos', -31.3929, -58.0736],
   ['entre_rios', 'Facultad de Ciencias de la Gestión', 'Gualeguaychú', 'Entre Ríos', -33.0094, -58.5172],
   ['entre_rios', 'Facultades de Ingeniería y Cs. Agropecuarias', 'Oro Verde', 'Entre Ríos', -31.825, -60.517],
   ['entre_rios', 'Facultad de Ciencias de la Alimentación (sede Villaguay)', 'Villaguay', 'Entre Ríos', -31.8653, -59.0269],
@@ -143,7 +169,7 @@ const RAW: SedeRaw[] = [
   ['villa_maria', 'Sede Villa del Rosario', 'Villa del Rosario', 'Córdoba', -31.5532, -63.5347],
   // NEA y NOA
   ['nordeste', 'Campus Resistencia', 'Resistencia', 'Chaco', -27.4606, -58.9839],
-  ['nordeste', 'Sede Paso de los Libres', 'Paso de los Libres', 'Corrientes', -29.7125, -57.0877],
+  ['nordeste', 'Sede Paso de los Libres', 'Paso de los Libres', 'Corrientes', -29.7013, -57.1360],
   ['misiones', 'Facultad de Ingeniería y Facultad de Arte', 'Oberá', 'Misiones', -27.4871, -55.1199],
   ['misiones', 'Facultad de Ciencias Forestales', 'Eldorado', 'Misiones', -26.4084, -54.6944],
   ['salta', 'Sede Regional Tartagal', 'Tartagal', 'Salta', -22.5164, -63.8013],

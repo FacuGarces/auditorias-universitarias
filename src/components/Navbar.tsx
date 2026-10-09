@@ -42,7 +42,7 @@ export function Navbar() {
       className="sticky top-0 z-30 glass-strong border-b-0"
     >
       <div className="mx-auto max-w-6xl flex flex-wrap items-center justify-between px-3 sm:px-4 py-3 gap-x-3 gap-y-2">
-        <div className="flex items-center gap-2 min-w-0 flex-1">
+        <div className="flex items-center gap-2 min-w-0 w-full sm:w-auto sm:flex-1">
         {/* En celular no hay barra del navegador a mano: botón propio para volver a la pantalla anterior. */}
         <button
           type="button"
