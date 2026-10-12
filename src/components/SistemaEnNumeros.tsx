@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { motion } from 'motion/react'
 import { EvolutionChart } from './EvolutionChart'
-import { formatMoneda, formatNumero, formatPorcentaje, unidadMonetaria } from '../lib/format'
+import { decimal, formatMoneda, formatNumero, formatPorcentaje, unidadMonetaria } from '../lib/format'
 import type { ResumenSistema } from '../lib/sistema'
 
 const gridVariants = {
@@ -34,13 +35,16 @@ function Kpi({ label, value, hint, alerta }: { label: string; value: React.React
 }
 
 /**
- * Panel de totales agregados de un grupo de universidades (todo el país o una provincia): KPIs +
- * evolución de ingresantes y egresados, todo en un solo marco con zonas internas.
+ * Panel de totales agregados de un grupo de universidades (todo el país o una provincia). Como la ficha
+ * de cada universidad: arriba un resumen de cuatro números y, al hacer click, el resto de los KPIs y la
+ * evolución de ingresantes y egresados (transición de altura grid 0fr → 1fr; el contenido queda en el
+ * DOM para el prerender, con `inert` mientras está cerrado).
  */
 export function SistemaEnNumeros({ titulo, resumen: r }: { titulo: string; resumen: ResumenSistema }) {
   const vi = r.variacionIngresantes
   const ve = r.variacionEgresados
   const d = r.dedicacion
+  const [abierto, setAbierto] = useState(false)
 
   return (
     <section className="rounded-2xl overflow-hidden border border-upl-crema/12 bg-upl-crema/15 [backdrop-filter:blur(18px)] shadow-[0_8px_30px_rgba(10,8,30,0.35)]">
@@ -82,6 +86,40 @@ export function SistemaEnNumeros({ titulo, resumen: r }: { titulo: string; resum
           value={formatMoneda(r.costoPorGraduado)}
           hint={`Promedio ponderado por egresados, en ${unidadMonetaria()}.`}
         />
+        <Kpi
+          alerta={r.activosPorDocente != null && r.activosPorDocente < 4}
+          label="Estudiantes activos por docente"
+          value={r.activosPorDocente != null ? `${decimal(r.activosPorDocente)} x 1` : 'S/D'}
+          hint="Estudiantes que aprobaron al menos una materia en 2024, por cada cargo docente universitario."
+        />
+      </motion.div>
+
+      <button
+        type="button"
+        onClick={() => setAbierto((v) => !v)}
+        aria-expanded={abierto}
+        className="w-full mt-px flex items-center justify-center gap-2 bg-upl-principal/70 hover:bg-upl-principal/50 px-5 py-2.5 text-sm font-semibold text-upl-resaltador transition-colors"
+      >
+        {abierto ? 'Ver menos' : 'Ver más datos y gráficos'}
+        <motion.svg
+          viewBox="0 0 20 20"
+          className="w-4 h-4"
+          fill="currentColor"
+          animate={{ rotate: abierto ? 180 : 0 }}
+          transition={{ duration: 0.25 }}
+          aria-hidden
+        >
+          <path d="M5.3 7.3a1 1 0 0 1 1.4 0L10 10.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 0-1.4Z" />
+        </motion.svg>
+      </button>
+
+      <div
+        className={`grid transition-[grid-template-rows] duration-300 ease-out ${abierto ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
+        inert={!abierto}
+      >
+        <div className="overflow-hidden">
+          <div className={`transition-opacity duration-300 ${abierto ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="flex flex-wrap gap-px mt-px">
         {r.extranjeros.gasto != null && (
           <Kpi
             alerta
@@ -104,8 +142,7 @@ export function SistemaEnNumeros({ titulo, resumen: r }: { titulo: string; resum
             hint={`2017→2023, ${d.universidades} universidades. Cargos simples: ${signo(d.simple2023 - d.simple2017)}; exclusivos: ${signo(d.excl2023 - d.excl2017)}. FTE = equivalente a tiempo completo.`}
           />
         )}
-      </motion.div>
-
+            </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-px mt-px">
         <div className="bg-upl-principal-light/40 px-5 py-4">
           <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">Ingresantes nuevos por año</div>
@@ -120,6 +157,9 @@ export function SistemaEnNumeros({ titulo, resumen: r }: { titulo: string; resum
         Suma de las universidades relevadas. Cada gráfico usa su propia escala: los egresados son un volumen mucho menor
         al de ingresantes. Parte del crecimiento de ingresantes se explica por universidades nuevas que se suman a la serie.
       </p>
+          </div>
+        </div>
+      </div>
     </section>
   )
 }
