@@ -45,7 +45,7 @@ export function propuestas(): Propuesta[] {
       titulo: 'Regularidad que exija rendir materias',
       detalle:
         'Revisar los criterios de regularidad para que ser alumno signifique estudiar: un mínimo de materias aprobadas por año para conservar la regularidad y los beneficios, que se cumpla de verdad y con excepciones para quien trabaja o tiene hijos a cargo. La Ley de Educación Superior ya pide aprobar al menos dos materias por año (art. 50); hoy casi nadie lo controla.',
-      dato: `${formatNumero(r.ceroMateriasN)} reinscriptos no aprobaron ninguna materia en el último año informado (${formatPorcentaje(r.ceroMateriasPct)}) y siguen figurando como estudiantes.`,
+      dato: `${formatNumero(r.ceroMateriasN)} inscriptos no aprobaron ninguna materia en 2024 (${formatPorcentaje(r.ceroMateriasPct)}) y siguen figurando como estudiantes.`,
       link: { label: 'Ver el ranking', to: rutaRanking('ceroMaterias') },
     },
     {

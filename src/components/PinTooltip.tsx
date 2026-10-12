@@ -66,7 +66,7 @@ export function PinTooltip({ hover }: { hover: HoverMapa | null }) {
         <div className="mt-2.5 pt-2.5 border-t border-upl-crema/10 flex flex-col gap-1">
           {hover.sede && <div className="text-[10px] uppercase tracking-wide text-upl-crema/40 mb-0.5">Datos de toda la {u.sigla}</div>}
           <Fila label="Se recibe en tiempo y forma" valor={formatPorcentaje(u.tasaCohorte)} alerta={(u.tasaCohorte ?? 100) < 30} />
-          <Fila label="Reinscriptos sin aprobar materias" valor={formatPorcentaje(ceroMaterias)} alerta={(ceroMaterias ?? 0) >= 25} />
+          <Fila label="Inscriptos sin aprobar materias" valor={formatPorcentaje(ceroMaterias)} alerta={(ceroMaterias ?? 0) >= 25} />
           <Fila label="Costo por graduado" valor={u.docentesNoComparable ? 'No comparable' : formatMoneda(u.costoPorGraduado)} />
           {extranjeros != null && <Fila label="Extranjeros en el padrón" valor={formatPorcentaje(extranjeros)} />}
           <div className="mt-1 text-[10px] text-upl-resaltador">Click para ver la ficha completa →</div>

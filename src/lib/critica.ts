@@ -25,18 +25,21 @@ export function notasCriticas(u: UniversidadDetalle): string[] {
     )
   }
 
-  if (u.reinscriptos0Materias != null && u.reinscriptosTotal) {
-    const pct = Math.round((u.reinscriptos0Materias / u.reinscriptosTotal) * 100)
-    if (pct >= 20) {
+  // Si una nota curada ya da este dato (con más contexto), no se repite como alerta.
+  const notaConMaterias = u.notas.some((n) => /aprobó (ni una|ninguna) (sola )?materia/.test(n))
+  if (u.sinMaterias2024 != null && u.inscriptos2024 && !notaConMaterias) {
+    const pct = Math.round((u.sinMaterias2024 / u.inscriptos2024) * 100)
+    if (pct >= 40) {
       notas.push(
-        `${pct}% de quienes siguen cursando (${formatNumero(u.reinscriptos0Materias)} personas) no aprobó ni una sola materia en el último año informado.`,
+        `${pct}% de sus inscriptos 2024 (${formatNumero(u.sinMaterias2024)} personas) no aprobó ni una sola materia en todo el año.`,
       )
     }
   }
 
-  if (!u.docentesNoComparable && u.estudiantesPorDocente != null && u.estudiantesPorDocente > 18 && u.tasaCohorte != null && u.tasaCohorte < 20) {
+  const activosPorDocente = u.docentesNoComparable ? null : u.estudiantesActivosPorDocente
+  if (activosPorDocente != null && activosPorDocente < 4) {
     notas.push(
-      `Con ${u.estudiantesPorDocente.toString().replace('.', ',')} estudiantes por cada docente y una tasa de egreso de apenas ${u.tasaCohorte}%, la planta docente no se traduce en graduados.`,
+      `Tiene ${formatNumero(u.cargosDocentes2024)} cargos docentes para ${formatNumero(u.estudiantesActivos2024)} estudiantes que aprobaron al menos una materia: ${decimal(activosPorDocente)} estudiantes activos por cargo, muy por debajo del promedio del sistema.`,
     )
   }
 

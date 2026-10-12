@@ -1,5 +1,5 @@
 import { universidadesArray } from '../data/universidades'
-import { formatMoneda, formatNumero, formatPorcentaje, unidadMonetaria } from './format'
+import { decimal, formatMoneda, formatNumero, formatPorcentaje, unidadMonetaria } from './format'
 import { gastoExtranjeros, pctExtranjeros } from './extranjeros'
 
 export type MetricaId = 'cohorte' | 'docentes' | 'costo' | 'ceroMaterias' | 'noDocentes' | 'extranjeros'
@@ -17,8 +17,13 @@ function sumar(us: Uni[], campo: (u: Uni) => number | null | undefined): number 
 }
 
 function ceroMaterias(u: Uni): number | null {
-  if (u.reinscriptos0Materias == null || !u.reinscriptosTotal) return null
-  return cociente(u.reinscriptos0Materias, u.reinscriptosTotal, 100)
+  if (u.sinMaterias2024 == null || !u.inscriptos2024) return null
+  return cociente(u.sinMaterias2024, u.inscriptos2024, 100)
+}
+
+function activosPorDocente(u: Uni): number | null {
+  if (u.docentesNoComparable || u.estudiantesActivos2024 == null || !u.cargosDocentes2024) return null
+  return cociente(u.estudiantesActivos2024, u.cargosDocentes2024)
 }
 
 function noDocentesCada100(u: Uni): number | null {
@@ -33,7 +38,8 @@ export const METRICAS: Record<
     subtitulo: string
     valor: (u: Uni) => number | null | undefined
     formato: (v: number | null | undefined) => string
-    ordenAsc: boolean
+    /** true si un valor menor es mejor (costo, sin materias…); false si mayor es mejor (egreso). */
+    menorEsMejor: boolean
     /** Dato secundario que acompaña al valor en las filas del ranking. */
     detalle?: (u: Uni) => string | null
     /**
@@ -54,7 +60,7 @@ export const METRICAS: Record<
     subtitulo: 'Egresados 2024 sobre nuevos inscriptos 2018 (ventana de 6 años). Mayor = mejor.',
     valor: (u) => u.tasaCohorte,
     formato: (v) => formatPorcentaje(v),
-    ordenAsc: false,
+    menorEsMejor: false,
     agregado: (us) => {
       const conCohorte = us.filter((u) => u.tasaCohorte != null && u.nuevosInscriptos2018)
       return cociente(sumar(conCohorte, (u) => u.egresados2024), sumar(conCohorte, (u) => u.nuevosInscriptos2018), 100)
@@ -63,13 +69,14 @@ export const METRICAS: Record<
   docentes: {
     label: 'Estudiantes activos por docente',
     subtitulo:
-      'Estudiantes regulares (2+ materias aprobadas) por cada docente universitario — se excluyen del padrón quienes no son regulares. Menor = mejor.',
-    valor: (u) => (u.docentesNoComparable ? null : u.estudiantesActivosPorDocente),
-    formato: (v) => (v == null ? 'S/D' : `${v.toString().replace('.', ',')} x 1`),
-    ordenAsc: true,
+      'Estudiantes que aprobaron al menos una materia en 2024 (reinscriptos + nuevos inscriptos) por cada cargo docente universitario. Menos estudiantes activos por cargo = planta sobredimensionada para los que realmente cursan.',
+    valor: activosPorDocente,
+    formato: (v) => (v == null ? 'S/D' : `${decimal(v)} x 1`),
+    // Desde UPL, el problema es la planta docente cara para pocos estudiantes que cursan: el peor es el ratio más bajo.
+    menorEsMejor: false,
     agregado: (us) => {
-      const validas = us.filter((u) => !u.docentesNoComparable && u.estudiantesActivosPorDocente != null)
-      return cociente(sumar(validas, (u) => u.reinscriptosRegulares2mas), sumar(validas, (u) => u.docentesUniversitario))
+      const validas = us.filter((u) => activosPorDocente(u) != null)
+      return cociente(sumar(validas, (u) => u.estudiantesActivos2024), sumar(validas, (u) => u.cargosDocentes2024))
     },
   },
   costo: {
@@ -79,7 +86,7 @@ export const METRICAS: Record<
     },
     valor: (u) => (u.docentesNoComparable ? null : u.costoPorGraduado),
     formato: (v) => formatMoneda(v),
-    ordenAsc: true,
+    menorEsMejor: true,
     agregado: (us) => {
       const validas = us.filter((u) => !u.docentesNoComparable && u.costoPorGraduado != null && u.egresados2024)
       const egresados = sumar(validas, (u) => u.egresados2024)
@@ -88,15 +95,16 @@ export const METRICAS: Record<
     },
   },
   ceroMaterias: {
-    label: 'Reinscriptos sin materias',
+    label: 'Estudiantes sin materias',
     subtitulo:
-      'Porcentaje de quienes se reinscribieron para seguir cursando que no aprobó ninguna materia en el último año informado. Menor = mejor.',
+      'Porcentaje de los inscriptos 2024 (reinscriptos + nuevos inscriptos) que no aprobó ninguna materia en todo el año. Menor = mejor.',
     valor: ceroMaterias,
     formato: (v) => formatPorcentaje(v),
-    ordenAsc: true,
+    detalle: (u) => (u.sinMaterias2024 == null ? null : `${formatNumero(u.sinMaterias2024)} de ${formatNumero(u.inscriptos2024)}`),
+    menorEsMejor: true,
     agregado: (us) => {
       const validas = us.filter((u) => ceroMaterias(u) != null)
-      return cociente(sumar(validas, (u) => u.reinscriptos0Materias), sumar(validas, (u) => u.reinscriptosTotal), 100)
+      return cociente(sumar(validas, (u) => u.sinMaterias2024), sumar(validas, (u) => u.inscriptos2024), 100)
     },
   },
   noDocentes: {
@@ -104,7 +112,7 @@ export const METRICAS: Record<
     subtitulo: 'Personal no docente (administrativo, técnico, de servicios) cada 100 docentes universitarios. Menor = mejor.',
     valor: noDocentesCada100,
     formato: (v) => (v == null ? 'S/D' : `${v} c/100`),
-    ordenAsc: true,
+    menorEsMejor: true,
     agregado: (us) => {
       const validas = us.filter((u) => noDocentesCada100(u) != null)
       const den = sumar(validas, (u) => u.docentesUniversitario)
@@ -122,7 +130,7 @@ export const METRICAS: Record<
       const pct = pctExtranjeros(u)
       return pct == null ? null : `${formatNumero(u.extranjeros2024)} extranjeros · ${formatPorcentaje(pct)} del padrón`
     },
-    ordenAsc: false,
+    menorEsMejor: true,
     agregadoEsTotal: true,
     agregado: (us) => {
       const validas = us.filter((u) => gastoExtranjeros(u) != null)
@@ -132,7 +140,24 @@ export const METRICAS: Record<
 }
 
 /** true si `valor` es peor que `otro` para esta métrica (según si menor o mayor es mejor). */
-export function esPeor(valor: number | null, otro: number | null, ordenAsc: boolean): boolean {
+export function esPeor(valor: number | null, otro: number | null, menorEsMejor: boolean): boolean {
   if (valor == null || otro == null) return false
-  return ordenAsc ? valor > otro : valor < otro
+  return menorEsMejor ? valor > otro : valor < otro
+}
+
+/**
+ * Ordena de peor a mejor (o al revés con `mejorPrimero`); las universidades sin dato van al final.
+ * Los rankings siempre arrancan por la peor: la primera fila es la que hay que mirar.
+ */
+export function ordenarPorMetrica<T extends Uni>(us: T[], id: MetricaId, mejorPrimero = false, desempate?: (a: T, b: T) => number): T[] {
+  const { valor, menorEsMejor } = METRICAS[id]
+  const ascendente = menorEsMejor === mejorPrimero
+  return us.slice().sort((a, b) => {
+    const va = valor(a)
+    const vb = valor(b)
+    if (va == null && vb == null) return desempate ? desempate(a, b) : 0
+    if (va == null) return 1
+    if (vb == null) return -1
+    return ascendente ? va - vb : vb - va
+  })
 }

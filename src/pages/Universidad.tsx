@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { motion } from 'motion/react'
-import { getUniversidad } from '../data/universidades'
+import { getUniversidad, universidadesArray } from '../data/universidades'
 import { sedes as todasLasSedes } from '../data/sedes'
 import { UniversidadBadge } from '../components/UniversidadBadge'
 import { EvolutionChart } from '../components/EvolutionChart'
@@ -10,7 +10,8 @@ import { useVolver } from '../lib/volver'
 import { useMeta } from '../lib/meta'
 import { RUTAS, idUniversidad, rutaSede, rutaUniversidad, slugSede } from '../lib/rutas'
 import { NoEncontrada } from './NoEncontrada'
-import { LinkAnuarios } from '../components/LinkAnuarios'
+import { FuentesDatos } from '../components/FuentesDatos'
+import { METRICAS } from '../lib/metricas'
 import { decimal, formatMoneda, formatNumero, formatPorcentaje, ubicacion, unidadMonetaria } from '../lib/format'
 import { gastoExtranjeros, gastoPorEstudiante, pctExtranjeros } from '../lib/extranjeros'
 
@@ -26,13 +27,6 @@ const statCardVariants = {
   hidden: { opacity: 0, y: 16 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
 } as const
-const revealProps = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.25 },
-  transition: { duration: 0.45, ease: 'easeOut' },
-} as const
-
 /**
  * Celda de una sola pieza dentro del panel de estadísticas: usa flexbox (no grid) para que cada
  * fila reparta el ancho sobrante entre sus propias celdas. Así, si el número de items es impar y
@@ -190,20 +184,82 @@ function toSerie(obj: Record<string, number | string> | undefined) {
     .sort((a, b) => Number(a.label) - Number(b.label))
 }
 
+/**
+ * Bloque desplegable de la ficha: cerrado muestra solo el título y una línea de resumen, y al hacer click
+ * se abre con una transición de altura (grid 0fr → 1fr). El contenido queda en el DOM aunque esté
+ * cerrado — lo lee el prerender para Google — pero `inert` lo saca del foco y de los lectores de pantalla.
+ */
+function Seccion({
+  titulo,
+  resumen,
+  alerta,
+  abierta,
+  onToggle,
+  seccionRef,
+  children,
+}: {
+  titulo: string
+  resumen: string
+  alerta?: boolean
+  abierta: boolean
+  onToggle: () => void
+  seccionRef?: React.Ref<HTMLDivElement>
+  children: React.ReactNode
+}) {
+  return (
+    <div
+      ref={seccionRef}
+      className={`scroll-mt-28 rounded-2xl border transition-colors duration-200 ${
+        alerta ? 'border-[#e2574c]/35 bg-[#e2574c]/[0.07]' : 'border-upl-crema/12 bg-upl-principal-light/25'
+      } ${abierta ? 'shadow-[0_8px_30px_rgba(10,8,30,0.3)]' : 'hover:bg-upl-crema/[0.06]'}`}
+    >
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={abierta}
+        className="w-full flex items-center gap-3 px-4 sm:px-5 py-3.5 text-left"
+      >
+        <div className="min-w-0 flex-1">
+          <div className={`font-display font-700 text-base ${alerta ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}>{titulo}</div>
+          <div className="text-xs text-upl-crema/55 truncate">{resumen}</div>
+        </div>
+        <motion.svg
+          viewBox="0 0 20 20"
+          className={`w-5 h-5 shrink-0 ${alerta ? 'text-[#ff8a7a]' : 'text-upl-resaltador'}`}
+          fill="currentColor"
+          animate={{ rotate: abierta ? 180 : 0 }}
+          transition={{ duration: 0.25 }}
+          aria-hidden
+        >
+          <path d="M5.3 7.3a1 1 0 0 1 1.4 0L10 10.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 0-1.4Z" />
+        </motion.svg>
+      </button>
+      <div
+        className={`grid transition-[grid-template-rows] duration-300 ease-out ${abierta ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
+        inert={!abierta}
+      >
+        <div className="overflow-hidden">
+          <div className={`px-4 sm:px-5 pb-4 transition-opacity duration-300 ${abierta ? 'opacity-100' : 'opacity-0'}`}>{children}</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function Universidad() {
   const { slug = '', sede: slugDeSede } = useParams()
   const id = idUniversidad(slug)
   const sedesDeLaUni = id ? todasLasSedes.filter((s) => s.universidad === id) : []
   const sede = slugDeSede ? sedesDeLaUni.find((s) => slugSede(s.nombre) === slugDeSede) : undefined
   if (!id || (slugDeSede && !sede)) return <NoEncontrada />
-  return <FichaUniversidad id={id} sedes={sedesDeLaUni} sede={sede} />
+  return <FichaUniversidad key={id} id={id} sedes={sedesDeLaUni} sede={sede} />
 }
 
 function descripcionFicha(u: NonNullable<ReturnType<typeof getUniversidad>>): string {
   if (!u.tieneDatos) return `${u.nombre} (${u.sigla}): todavía no informa datos al Anuario de Estadísticas Universitarias de la SPU.`
   const partes = [
     u.tasaCohorte != null && `${Math.round(100 - u.tasaCohorte)}% de los ingresantes no se recibe a tiempo`,
-    u.reinscriptos0Materias != null && u.reinscriptosTotal && `${Math.round((u.reinscriptos0Materias / u.reinscriptosTotal) * 100)}% de los reinscriptos no aprobó ninguna materia`,
+    u.sinMaterias2024 != null && u.inscriptos2024 && `${Math.round((u.sinMaterias2024 / u.inscriptos2024) * 100)}% de los inscriptos no aprobó ninguna materia en el año`,
     u.costoPorGraduado != null && !u.docentesNoComparable && `cada graduado cuesta ${formatMoneda(u.costoPorGraduado, { nominal: true })}`,
   ].filter(Boolean)
   return `${u.nombre} (${u.sigla}) en números: ${partes.join(', ')}. Datos oficiales de la SPU, 2024.`
@@ -213,6 +269,8 @@ function FichaUniversidad({ id, sedes, sede }: { id: string; sedes: typeof todas
   const u = getUniversidad(id)!
   const volver = useVolver(RUTAS.rankings)
   const sedesRef = useRef<HTMLDivElement>(null)
+  // Todo cerrado al entrar (se ve solo el resumen); con una sede en la URL, se abre la lista de sedes.
+  const [abiertas, setAbiertas] = useState<Set<string>>(() => new Set(sede ? ['sedes'] : []))
 
   // Una sede tiene su propio link (para compartirla o llegar desde el mapa), pero Google indexa una sola
   // página por universidad: el canónico de la sede apunta a la ficha.
@@ -229,6 +287,7 @@ function FichaUniversidad({ id, sedes, sede }: { id: string; sedes: typeof todas
   // hace scrollTo(0, 0) al montarse, y su efecto corre después que este.
   useEffect(() => {
     if (!sede) return
+    setAbiertas((prev) => (prev.has('sedes') ? prev : new Set(prev).add('sedes')))
     const t = setTimeout(() => sedesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 350)
     return () => clearTimeout(t)
   }, [sede])
@@ -243,6 +302,325 @@ function FichaUniversidad({ id, sedes, sede }: { id: string; sedes: typeof todas
     : []
   const serieCostoReal = toSerie(u.serieCostoPorGraduadoReal)
   const serieCostoNominal = toSerie(u.serieCostoPorGraduadoNominal)
+
+  const sinMaterias = METRICAS.ceroMaterias.valor({ id, ...u })
+  const activosPorDocente = METRICAS.docentes.valor({ id, ...u })
+  const promedioSinMaterias = METRICAS.ceroMaterias.agregado(universidadesArray)
+  const promedioActivos = METRICAS.docentes.agregado(universidadesArray)
+  const criticas = u.tieneDatos ? notasCriticas(u) : []
+  const graficos = [serieCohorte.length >= 2, true, true, true, serieCostoReal.length >= 2].filter(Boolean).length
+
+  const secciones: { id: string; titulo: string; resumen: string; alerta?: boolean; contenido: React.ReactNode }[] = []
+  if (u.tieneDatos) {
+    secciones.push({
+      id: 'indicadores',
+      titulo: 'Matrícula, docentes y quiénes cursan',
+      resumen: `${formatNumero(u.estudiantes2024)} estudiantes · ${formatNumero(u.cargosDocentes2024 ?? u.docentesUniversitario)} cargos docentes · ${formatNumero(u.personalNoDocente)} no docentes`,
+      contenido: (
+        <>
+          <div className="rounded-xl overflow-hidden flex flex-wrap gap-px border border-upl-crema/12 bg-upl-crema/15">
+            <StatCard
+              label="Matrícula 2024"
+              value={formatNumero(u.estudiantes2024)}
+              hint={
+                u.estudiantesActivos2024 != null
+                  ? `${formatNumero(u.estudiantesActivos2024)} aprobaron al menos una materia en el año (activos)`
+                  : 'Estudiantes de pregrado y grado'
+              }
+            />
+            <StatCard
+              label="Cargos docentes"
+              value={formatNumero(u.cargosDocentes2024)}
+              hint={
+                u.docentesNoComparable
+                  ? 'Dato incompleto, no comparable: la mayor parte del plantel depende de las Fuerzas Armadas (ver Antecedentes)'
+                  : `Cargos universitarios a septiembre 2024 (RHUN) — una persona puede tener más de uno. ${formatNumero(u.docentesUniversitario)} docentes informados como personas`
+              }
+            />
+            {u.extranjeros2024 != null && (
+              <StatCard
+                label="Estudiantes extranjeros"
+                value={`${formatNumero(u.extranjeros2024)} · ${formatPorcentaje(pctExtranjeros(u))}`}
+                hint={
+                  gastoExtranjeros(u) != null
+                    ? `Costo para el Estado: ${formatMoneda(gastoExtranjeros(u))} por año (${formatMoneda(gastoPorEstudiante(u))} por estudiante) — lo que se ahorraría con un arancel para extranjeros`
+                    : 'Porcentaje del padrón de grado 2024. Sin presupuesto 2024 informado para estimar su costo'
+                }
+                alerta={(pctExtranjeros(u) ?? 0) >= 5}
+              />
+            )}
+            <StatCard
+              label="Planta no docente"
+              value={formatNumero(u.personalNoDocente)}
+              hint={
+                u.docentesNoComparable
+                  ? 'Relación con docentes no comparable: la planta docente informada está incompleta'
+                  : u.docentesUniversitario && u.personalNoDocente
+                  ? `1 no docente cada ${decimal(u.docentesUniversitario / u.personalNoDocente)} docentes universitarios`
+                  : 'Sin dato de personal no docente'
+              }
+            />
+          </div>
+
+          {u.inscriptos2024 && u.sinMaterias2024 != null && u.unaMateria2024 != null && (
+            <div className="mt-3 rounded-xl bg-upl-principal/30 px-4 py-3.5">
+              <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1">
+                Cuántos cursan de verdad
+              </div>
+              <p className="text-xs text-upl-crema/50 mb-3">
+                Materias aprobadas en 2024 por los {formatNumero(u.inscriptos2024)} inscriptos (reinscriptos + nuevos
+                inscriptos).
+              </p>
+              {(() => {
+                const total = u.inscriptos2024!
+                const cero = u.sinMaterias2024!
+                const unaMateria = u.unaMateria2024!
+                const dosOMas = Math.max(total - cero - unaMateria, 0)
+                const pct = (n: number) => Math.round((n / total) * 100)
+                return (
+                  <>
+                    <div className="flex h-3 rounded-full overflow-hidden bg-upl-principal/40">
+                      <BarraProgreso pct={pct(dosOMas)} color="bg-[#8fd19e]" />
+                      <BarraProgreso pct={pct(unaMateria)} color="bg-upl-resaltador" delay={0.1} />
+                      <BarraProgreso pct={pct(cero)} color="bg-[#e2574c]" delay={0.2} />
+                    </div>
+                    <div className="flex flex-wrap gap-x-5 gap-y-1 mt-2.5 text-xs text-upl-crema/70">
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#8fd19e] shrink-0" />
+                        2 o más materias: {pct(dosOMas)}% ({formatNumero(dosOMas)})
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-upl-resaltador shrink-0" />
+                        1 materia: {pct(unaMateria)}% ({formatNumero(unaMateria)})
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#e2574c] shrink-0" />
+                        Ninguna: {pct(cero)}% ({formatNumero(cero)})
+                      </span>
+                    </div>
+                  </>
+                )
+              })()}
+            </div>
+          )}
+
+          {u.dedicacionDocente && (
+            <div className="mt-3 rounded-xl bg-upl-principal/30 px-4 py-3.5">
+              <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1">
+                Cargos docentes por dedicación — 2017 vs. 2023
+              </div>
+              {(() => {
+                const d = u.dedicacionDocente!
+                const total2017 = d.excl2017 + d.semi2017 + d.simple2017
+                const total2023 = d.excl2023 + d.semi2023 + d.simple2023
+                const varCargos = ((total2023 - total2017) / total2017) * 100
+                const varFte = ((d.fte2023 - d.fte2017) / d.fte2017) * 100
+                const bar = (excl: number, semi: number, simple: number, total: number, delayBase: number) => (
+                  <div className="flex h-3 rounded-full overflow-hidden bg-upl-principal/40">
+                    <BarraProgreso pct={(excl / total) * 100} color="bg-[#8fd19e]" delay={delayBase} />
+                    <BarraProgreso pct={(semi / total) * 100} color="bg-upl-resaltador" delay={delayBase + 0.1} />
+                    <BarraProgreso pct={(simple / total) * 100} color="bg-[#e2574c]" delay={delayBase + 0.2} />
+                  </div>
+                )
+                return (
+                  <>
+                    <p className="text-xs text-upl-crema/50 mb-3">
+                      Los cargos "Simple" (menor carga horaria) crecieron de {formatNumero(d.simple2017)} a{' '}
+                      {formatNumero(d.simple2023)}; los "Exclusiva" (dedicación completa), de{' '}
+                      {formatNumero(d.excl2017)} a {formatNumero(d.excl2023)}. Los cargos totales crecieron{' '}
+                      {varCargos >= 0 ? '+' : ''}
+                      {decimal(varCargos)}%, pero el equivalente a tiempo completo (FTE, pondera por dedicación)
+                      solo {varFte >= 0 ? '+' : ''}
+                      {decimal(varFte)}%.
+                    </p>
+                    <div className="grid grid-cols-[3rem_1fr] items-center gap-x-3 gap-y-2">
+                      <span className="text-xs text-upl-crema/50">2017</span>
+                      {bar(d.excl2017, d.semi2017, d.simple2017, total2017, 0)}
+                      <span className="text-xs text-upl-crema/50">2023</span>
+                      {bar(d.excl2023, d.semi2023, d.simple2023, total2023, 0.35)}
+                    </div>
+                    <div className="flex flex-wrap gap-x-5 gap-y-1 mt-2.5 text-xs text-upl-crema/70">
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#8fd19e] shrink-0" />
+                        Exclusiva
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-upl-resaltador shrink-0" />
+                        Semiexclusiva
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#e2574c] shrink-0" />
+                        Simple
+                      </span>
+                    </div>
+                  </>
+                )
+              })()}
+            </div>
+          )}
+        </>
+      ),
+    })
+
+    secciones.push({
+      id: 'evolucion',
+      titulo: 'Evolución histórica',
+      resumen: `${graficos} gráficos: ${serieCohorte.length >= 2 ? 'tasa de egreso, ' : ''}matrícula, ingresantes, egresados${serieCostoReal.length >= 2 ? ' y costo por graduado' : ''}`,
+      contenido: (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {serieCohorte.length >= 2 && (
+            <div className="rounded-xl bg-upl-principal/30 px-4 py-3.5 sm:col-span-2">
+              <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
+                Tasa de cohorte por año de egreso
+              </div>
+              <EvolutionChart data={serieCohorte} color="#facf3b" formatValue={(v) => `${v}%`} height={140} />
+            </div>
+          )}
+          <div className="rounded-xl bg-upl-principal/30 px-4 py-3.5">
+            <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">Estudiantes totales</div>
+            <EvolutionChart data={serieEstudiantes} color="#8fb7ff" formatValue={(v) => formatNumero(v)} />
+          </div>
+          <div className="rounded-xl bg-upl-principal/30 px-4 py-3.5">
+            <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">Ingresantes nuevos</div>
+            <EvolutionChart data={serieIngresantes} color="#8fb7ff" formatValue={(v) => formatNumero(v)} />
+          </div>
+          <div className="rounded-xl bg-upl-principal/30 px-4 py-3.5">
+            <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">Egresados por año</div>
+            <EvolutionChart data={serieEgresados} color="#e4b862" formatValue={(v) => formatNumero(v)} />
+          </div>
+          {serieCostoReal.length >= 2 && (
+            <div className="rounded-xl bg-upl-principal/30 px-4 py-3.5 sm:col-span-2">
+              <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
+                Costo por graduado — {unidadMonetaria()}
+              </div>
+              <EvolutionChart data={serieCostoReal} color="#ff8a7a" formatValue={(v) => formatMoneda(v)} />
+              <p className="text-xs text-upl-crema/40 mt-2">
+                En pesos corrientes de cada año (sin ajustar por inflación) hubiera mostrado{' '}
+                {serieCostoNominal.length >= 2 &&
+                  `${formatMoneda(serieCostoNominal[0].value, { nominal: true })} → ${formatMoneda(serieCostoNominal[serieCostoNominal.length - 1].value, { nominal: true })}`}
+                , una comparación sin sentido dada la inflación acumulada del período — por eso esta ficha usa
+                siempre pesos constantes de agosto 2026 (deflactados por IPC).
+              </p>
+            </div>
+          )}
+        </div>
+      ),
+    })
+  }
+
+  if (criticas.length > 0) {
+    secciones.push({
+      id: 'criticas',
+      titulo: 'Lo que exponen los números',
+      resumen: `${criticas.length} ${criticas.length === 1 ? 'alerta' : 'alertas'} — ${criticas[0]}`,
+      alerta: true,
+      contenido: (
+        <ul className="flex flex-col gap-2">
+          {criticas.map((nota, i) => (
+            <li key={i} className="flex gap-3 rounded-xl border border-[#e2574c]/40 bg-[#e2574c]/10 px-4 py-3">
+              <span className="text-[#ff8a7a] font-display font-800">⚠</span>
+              <span className="text-sm text-upl-crema/90">{nota}</span>
+            </li>
+          ))}
+        </ul>
+      ),
+    })
+  }
+
+  if (sedes.length > 0) {
+    secciones.push({
+      id: 'sedes',
+      titulo: 'Sedes y unidades académicas',
+      resumen: `${sedes.length} ${sedes.length === 1 ? 'sede' : 'sedes'}: ${sedes.slice(0, 3).map((s) => s.nombre).join(', ')}${sedes.length > 3 ? '…' : ''}`,
+      contenido: (
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {sedes.map((s) => {
+            const activa = s.id === sede?.id
+            return (
+              <li key={s.id}>
+                <Link
+                  to={rutaSede(id, s.nombre)}
+                  replace
+                  aria-current={activa ? 'location' : undefined}
+                  className={`flex items-start gap-2.5 rounded-xl px-3.5 py-2.5 transition-colors ${
+                    activa ? 'bg-[#8fb7ff]/20 border border-[#8fb7ff]/60' : 'bg-upl-principal/30 hover:bg-upl-crema/10'
+                  }`}
+                >
+                  <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#8fb7ff]" />
+                  <span className="min-w-0">
+                    <span className="block text-sm font-semibold text-upl-crema leading-snug">{s.nombre}</span>
+                    <span className="block text-xs text-upl-crema/55">{ubicacion(s.ciudad, s.provincia)}</span>
+                  </span>
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      ),
+    })
+  }
+
+  if (u.notas.length > 0 || (u.fuentes?.length ?? 0) > 0) {
+    secciones.push({
+      id: 'antecedentes',
+      titulo: 'Antecedentes y fuentes',
+      resumen: `${u.notas.length} ${u.notas.length === 1 ? 'nota' : 'notas'}${u.fuentes?.length ? ` · ${u.fuentes.length} ${u.fuentes.length === 1 ? 'fuente' : 'fuentes'}` : ''} — ${u.notas[0] ?? ''}`,
+      contenido: (
+        <>
+          <ul className="flex flex-col gap-2">
+            {u.notas.map((nota, i) => (
+              <li key={i} className="flex gap-3 rounded-xl bg-upl-principal/30 px-4 py-3">
+                <span className="text-upl-resaltador font-display font-800">·</span>
+                <span className="text-sm text-upl-crema/85">
+                  {nota.startsWith(NOTA_PIU) ? (
+                    <>
+                      <span className="font-semibold text-upl-resaltador">{NOTA_PIU}:</span>
+                      {nota.slice(NOTA_PIU.length + 1)}
+                    </>
+                  ) : (
+                    nota
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+          {u.fuentes && u.fuentes.length > 0 && (
+            <div className="mt-3 rounded-xl bg-upl-principal/30 px-4 py-3">
+              <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1.5">Fuentes</div>
+              <ul className="flex flex-col gap-1">
+                {u.fuentes.map((f) => (
+                  <li key={f.url} className="text-sm">
+                    {/\.(webp|jpe?g|png)$/i.test(f.url) && (
+                      <a href={f.url} target="_blank" rel="noreferrer" className="block my-2 max-w-sm">
+                        <img src={f.url} alt={f.titulo} className="rounded-lg shadow-lg" loading="lazy" />
+                      </a>
+                    )}
+                    <a
+                      href={f.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-upl-crema/80 underline decoration-upl-resaltador/60 hover:text-upl-amarillo"
+                    >
+                      {f.titulo} ↗
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </>
+      ),
+    })
+  }
+
+  const alternar = (s: string) =>
+    setAbiertas((prev) => {
+      const next = new Set(prev)
+      if (next.has(s)) next.delete(s)
+      else next.add(s)
+      return next
+    })
+  const todasAbiertas = secciones.length > 0 && secciones.every((s) => abiertas.has(s.id))
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
@@ -296,11 +674,15 @@ function FichaUniversidad({ id, sedes, sede }: { id: string; sedes: typeof todas
         </div>
       ) : (
         <>
+          <div className="mt-8 mb-2 flex items-baseline justify-between gap-3">
+            <h2 className="font-display font-700 text-lg text-upl-crema">Resumen</h2>
+            <span className="text-xs text-upl-crema/45">Datos 2024</span>
+          </div>
           <motion.div
             variants={statGridVariants}
             initial="hidden"
             animate="visible"
-            className="mt-8 rounded-2xl overflow-hidden flex flex-wrap gap-px border border-upl-crema/12 bg-upl-crema/15 [backdrop-filter:blur(18px)] shadow-[0_8px_30px_rgba(10,8,30,0.35)]"
+            className="rounded-2xl overflow-hidden flex flex-wrap gap-px border border-upl-crema/12 bg-upl-crema/15 [backdrop-filter:blur(18px)] shadow-[0_8px_30px_rgba(10,8,30,0.35)]"
           >
             <StatCardRadial
               label="No llega a graduarse"
@@ -314,13 +696,27 @@ function FichaUniversidad({ id, sedes, sede }: { id: string; sedes: typeof todas
             />
             <StatCardRadial
               label="No aprobó ninguna materia"
-              pct={
-                u.reinscriptos0Materias != null && u.reinscriptosTotal
-                  ? Math.round((u.reinscriptos0Materias / u.reinscriptosTotal) * 100)
-                  : null
+              pct={sinMaterias != null ? Math.round(sinMaterias) : null}
+              hint={
+                sinMaterias != null
+                  ? `${formatNumero(u.sinMaterias2024)} de ${formatNumero(u.inscriptos2024)} inscriptos 2024 (reinscriptos + ingresantes) — sistema: ${formatPorcentaje(promedioSinMaterias)}`
+                  : 'La SPU no informa materias aprobadas para esta universidad'
               }
-              hint={`${formatNumero(u.reinscriptos0Materias)} de ${formatNumero(u.reinscriptosTotal)} reinscriptos, en el último año informado`}
               alerta
+            />
+            <StatCard
+              label="Estudiantes activos por docente"
+              value={
+                u.docentesNoComparable ? 'No comparable' : activosPorDocente != null ? `${decimal(activosPorDocente)} x 1` : 'S/D'
+              }
+              hint={
+                u.docentesNoComparable
+                  ? `La SPU informa solo ${formatNumero(u.cargosDocentes2024)} cargos docentes propios: su plantel depende de las Fuerzas Armadas`
+                  : activosPorDocente != null
+                  ? `${formatNumero(u.estudiantesActivos2024)} estudiantes que aprobaron al menos una materia, para ${formatNumero(u.cargosDocentes2024)} cargos docentes — sistema: ${decimal(promedioActivos ?? 0)} x 1`
+                  : 'Sin cargos docentes informados en RHUN'
+              }
+              alerta={activosPorDocente != null && activosPorDocente < 4}
             />
             <StatCard
               label="Costo por graduado"
@@ -332,297 +728,37 @@ function FichaUniversidad({ id, sedes, sede }: { id: string; sedes: typeof todas
               }
               alerta={!u.docentesNoComparable && !!u.costoPorGraduado && u.costoPorGraduado > 15_000_000}
             />
-            <StatCard
-              label="Matrícula 2024"
-              value={formatNumero(u.estudiantes2024)}
-              hint={
-                u.docentesNoComparable
-                  ? `${formatNumero(u.docentesUniversitario)} docentes informados a la SPU — dato incompleto, no comparable (ver Antecedentes)`
-                  : u.estudiantesActivosPorDocente != null
-                  ? `${formatNumero(u.docentesUniversitario)} docentes · ${decimal(u.estudiantesActivosPorDocente)} activos por docente (vs. ${decimal(u.estudiantesPorDocente ?? 0)} sobre el total)`
-                  : `${formatNumero(u.docentesUniversitario)} docentes · ${formatNumero(u.reinscriptosRegulares2mas)} regulares (2+ materias aprobadas)`
-              }
-            />
-            {u.extranjeros2024 != null && (
-              <StatCard
-                label="Estudiantes extranjeros"
-                value={`${formatNumero(u.extranjeros2024)} · ${formatPorcentaje(pctExtranjeros(u))}`}
-                hint={
-                  gastoExtranjeros(u) != null
-                    ? `Costo para el Estado: ${formatMoneda(gastoExtranjeros(u))} por año (${formatMoneda(gastoPorEstudiante(u))} por estudiante) — lo que se ahorraría con un arancel para extranjeros`
-                    : 'Porcentaje del padrón de grado 2024. Sin presupuesto 2024 informado para estimar su costo'
-                }
-                alerta={(pctExtranjeros(u) ?? 0) >= 5}
-              />
-            )}
-            <StatCard
-              label="Planta no docente"
-              value={formatNumero(u.personalNoDocente)}
-              hint={
-                u.docentesNoComparable
-                  ? 'Relación con docentes no comparable: la planta docente informada está incompleta'
-                  : u.docentesUniversitario && u.personalNoDocente
-                  ? `1 no docente cada ${decimal(u.docentesUniversitario / u.personalNoDocente)} docentes universitarios`
-                  : 'Sin dato de personal no docente'
-              }
-            />
           </motion.div>
-
-          {u.reinscriptosTotal != null && u.reinscriptosRegulares2mas != null && u.reinscriptos0Materias != null && (
-            <motion.div {...revealProps} className="mt-3 glass rounded-2xl px-5 py-4">
-              <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1">
-                Quiénes son "activos" sobre el total de la matrícula
-              </div>
-              <p className="text-xs text-upl-crema/50 mb-3">
-                De {formatNumero(u.estudiantes2024)} estudiantes totales en 2024, {formatNumero(u.reinscriptosTotal)}{' '}
-                ya venían cursando (reinscriptos) — el resto son ingresantes nuevos de ese año, todavía sin
-                materias que evaluar.
-              </p>
-              {(() => {
-                const total = u.reinscriptosTotal!
-                const regulares = u.reinscriptosRegulares2mas!
-                const cero = u.reinscriptos0Materias!
-                const unaMateria = Math.max(total - regulares - cero, 0)
-                const pct = (n: number) => Math.round((n / total) * 100)
-                return (
-                  <>
-                    <div className="flex h-3 rounded-full overflow-hidden bg-upl-principal/40">
-                      <BarraProgreso pct={pct(regulares)} color="bg-[#8fd19e]" />
-                      <BarraProgreso pct={pct(unaMateria)} color="bg-upl-resaltador" delay={0.1} />
-                      <BarraProgreso pct={pct(cero)} color="bg-[#e2574c]" delay={0.2} />
-                    </div>
-                    <div className="flex flex-wrap gap-x-5 gap-y-1 mt-2.5 text-xs text-upl-crema/70">
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#8fd19e] shrink-0" />
-                        Regulares (2+ materias): {pct(regulares)}% ({formatNumero(regulares)})
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-upl-resaltador shrink-0" />
-                        1 materia: {pct(unaMateria)}% ({formatNumero(unaMateria)})
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#e2574c] shrink-0" />
-                        0 materias: {pct(cero)}% ({formatNumero(cero)})
-                      </span>
-                    </div>
-                  </>
-                )
-              })()}
-            </motion.div>
-          )}
-
-          {u.dedicacionDocente && (
-            <motion.div {...revealProps} className="mt-3 glass rounded-2xl px-5 py-4">
-              <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1">
-                Cargos docentes por dedicación — 2017 vs. 2023
-              </div>
-              {(() => {
-                const d = u.dedicacionDocente!
-                const total2017 = d.excl2017 + d.semi2017 + d.simple2017
-                const total2023 = d.excl2023 + d.semi2023 + d.simple2023
-                const varCargos = ((total2023 - total2017) / total2017) * 100
-                const varFte = ((d.fte2023 - d.fte2017) / d.fte2017) * 100
-                const bar = (excl: number, semi: number, simple: number, total: number, delayBase: number) => (
-                  <div className="flex h-3 rounded-full overflow-hidden bg-upl-principal/40">
-                    <BarraProgreso pct={(excl / total) * 100} color="bg-[#8fd19e]" delay={delayBase} />
-                    <BarraProgreso pct={(semi / total) * 100} color="bg-upl-resaltador" delay={delayBase + 0.1} />
-                    <BarraProgreso pct={(simple / total) * 100} color="bg-[#e2574c]" delay={delayBase + 0.2} />
-                  </div>
-                )
-                return (
-                  <>
-                    <p className="text-xs text-upl-crema/50 mb-3">
-                      Los cargos "Simple" (menor carga horaria) crecieron de {formatNumero(d.simple2017)} a{' '}
-                      {formatNumero(d.simple2023)}; los "Exclusiva" (dedicación completa), de{' '}
-                      {formatNumero(d.excl2017)} a {formatNumero(d.excl2023)}. Los cargos totales crecieron{' '}
-                      {varCargos >= 0 ? '+' : ''}
-                      {decimal(varCargos)}%, pero el equivalente a tiempo completo (FTE, pondera por dedicación)
-                      solo {varFte >= 0 ? '+' : ''}
-                      {decimal(varFte)}%.
-                    </p>
-                    <div className="grid grid-cols-[3rem_1fr] items-center gap-x-3 gap-y-2">
-                      <span className="text-xs text-upl-crema/50">2017</span>
-                      {bar(d.excl2017, d.semi2017, d.simple2017, total2017, 0)}
-                      <span className="text-xs text-upl-crema/50">2023</span>
-                      {bar(d.excl2023, d.semi2023, d.simple2023, total2023, 0.35)}
-                    </div>
-                    <div className="flex flex-wrap gap-x-5 gap-y-1 mt-2.5 text-xs text-upl-crema/70">
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#8fd19e] shrink-0" />
-                        Exclusiva
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-upl-resaltador shrink-0" />
-                        Semiexclusiva
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#e2574c] shrink-0" />
-                        Simple
-                      </span>
-                    </div>
-                  </>
-                )
-              })()}
-            </motion.div>
-          )}
-
-          <div className="mt-8">
-            <h2 className="font-display font-700 text-lg text-upl-crema mb-3">Evolución histórica</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {serieCohorte.length >= 2 && (
-                <motion.div {...revealProps} className="glass rounded-2xl px-5 py-4 sm:col-span-2">
-                  <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
-                    Tasa de cohorte por año de egreso
-                  </div>
-                  <EvolutionChart data={serieCohorte} color="#facf3b" formatValue={(v) => `${v}%`} height={140} />
-                </motion.div>
-              )}
-              <motion.div {...revealProps} className="glass rounded-2xl px-5 py-4">
-                <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
-                  Estudiantes totales
-                </div>
-                <EvolutionChart data={serieEstudiantes} color="#8fb7ff" formatValue={(v) => formatNumero(v)} />
-              </motion.div>
-              <motion.div {...revealProps} className="glass rounded-2xl px-5 py-4">
-                <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
-                  Ingresantes nuevos
-                </div>
-                <EvolutionChart data={serieIngresantes} color="#8fb7ff" formatValue={(v) => formatNumero(v)} />
-              </motion.div>
-              <motion.div {...revealProps} className="glass rounded-2xl px-5 py-4">
-                <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
-                  Egresados por año
-                </div>
-                <EvolutionChart data={serieEgresados} color="#e4b862" formatValue={(v) => formatNumero(v)} />
-              </motion.div>
-              {serieCostoReal.length >= 2 && (
-                <motion.div {...revealProps} className="glass rounded-2xl px-5 py-4 sm:col-span-2">
-                  <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">
-                    Costo por graduado — {unidadMonetaria()}
-                  </div>
-                  <EvolutionChart data={serieCostoReal} color="#ff8a7a" formatValue={(v) => formatMoneda(v)} />
-                  <p className="text-xs text-upl-crema/40 mt-2">
-                    En pesos corrientes de cada año (sin ajustar por inflación) hubiera mostrado{' '}
-                    {serieCostoNominal.length >= 2 &&
-                      `${formatMoneda(serieCostoNominal[0].value, { nominal: true })} → ${formatMoneda(serieCostoNominal[serieCostoNominal.length - 1].value, { nominal: true })}`}
-                    , una comparación sin sentido dada la inflación acumulada del período — por eso esta ficha usa
-                    siempre pesos constantes de agosto 2026 (deflactados por IPC).
-                  </p>
-                </motion.div>
-              )}
-            </div>
-          </div>
         </>
       )}
 
-      {u.tieneDatos && notasCriticas(u).length > 0 && (
-        <div className="mt-8">
-          <h2 className="font-display font-700 text-lg text-[#ff8a7a] mb-3">Lo que exponen los números</h2>
-          <motion.ul
-            className="flex flex-col gap-2"
-            variants={statGridVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-          >
-            {notasCriticas(u).map((nota, i) => (
-              <motion.li
-                key={i}
-                variants={statCardVariants}
-                className="flex gap-3 rounded-xl border border-[#e2574c]/40 bg-[#e2574c]/10 px-4 py-3"
-              >
-                <span className="text-[#ff8a7a] font-display font-800">⚠</span>
-                <span className="text-sm text-upl-crema/90">{nota}</span>
-              </motion.li>
-            ))}
-          </motion.ul>
-        </div>
-      )}
-
-      {sedes.length > 0 && (
-        <div ref={sedesRef} className="mt-8 scroll-mt-28">
-          <h2 className="font-display font-700 text-lg text-upl-crema mb-3">Sedes y unidades académicas</h2>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {sedes.map((s) => {
-              const activa = s.id === sede?.id
-              return (
-                <li key={s.id}>
-                  <Link
-                    to={rutaSede(id, s.nombre)}
-                    replace
-                    aria-current={activa ? 'location' : undefined}
-                    className={`flex items-start gap-2.5 rounded-xl px-3.5 py-2.5 transition-colors ${
-                      activa ? 'bg-[#8fb7ff]/20 border border-[#8fb7ff]/60' : 'glass hover:bg-upl-crema/10'
-                    }`}
-                  >
-                    <span className="mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full bg-[#8fb7ff]" />
-                    <span className="min-w-0">
-                      <span className="block text-sm font-semibold text-upl-crema leading-snug">{s.nombre}</span>
-                      <span className="block text-xs text-upl-crema/55">{ubicacion(s.ciudad, s.provincia)}</span>
-                    </span>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      )}
-
-      <div className="mt-8">
-        <h2 className="font-display font-700 text-lg text-upl-crema mb-3">Antecedentes</h2>
-        <motion.ul
-          className="flex flex-col gap-2"
-          variants={statGridVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+      <div className="mt-6 flex items-center justify-between gap-3">
+        <h2 className="font-display font-700 text-lg text-upl-crema">{u.tieneDatos ? 'Todos los datos' : 'Más información'}</h2>
+        <button
+          type="button"
+          onClick={() => setAbiertas(todasAbiertas ? new Set() : new Set(secciones.map((s) => s.id)))}
+          className="rounded-full glass-chip text-upl-crema text-xs font-semibold px-3 py-1.5 hover:bg-upl-crema/15 transition-colors"
         >
-          {u.notas.map((nota, i) => (
-            <motion.li key={i} variants={statCardVariants} className="flex gap-3 rounded-xl glass px-4 py-3">
-              <span className="text-upl-resaltador font-display font-800">·</span>
-              <span className="text-sm text-upl-crema/85">
-                {nota.startsWith(NOTA_PIU) ? (
-                  <>
-                    <span className="font-semibold text-upl-resaltador">{NOTA_PIU}:</span>
-                    {nota.slice(NOTA_PIU.length + 1)}
-                  </>
-                ) : (
-                  nota
-                )}
-              </span>
-            </motion.li>
-          ))}
-        </motion.ul>
-        {u.fuentes && u.fuentes.length > 0 && (
-          <div className="mt-3 rounded-xl glass px-4 py-3">
-            <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1.5">Fuentes</div>
-            <ul className="flex flex-col gap-1">
-              {u.fuentes.map((f) => (
-                <li key={f.url} className="text-sm">
-                  {/\.(webp|jpe?g|png)$/i.test(f.url) && (
-                    <a href={f.url} target="_blank" rel="noreferrer" className="block my-2 max-w-sm">
-                      <img src={f.url} alt={f.titulo} className="rounded-lg shadow-lg" loading="lazy" />
-                    </a>
-                  )}
-                  <a
-                    href={f.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-upl-crema/80 underline decoration-upl-resaltador/60 hover:text-upl-amarillo"
-                  >
-                    {f.titulo} ↗
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+          {todasAbiertas ? 'Cerrar todo' : 'Abrir todo'}
+        </button>
+      </div>
+      <div className="mt-3 flex flex-col gap-2">
+        {secciones.map((s) => (
+          <Seccion
+            key={s.id}
+            titulo={s.titulo}
+            resumen={s.resumen}
+            alerta={s.alerta}
+            abierta={abiertas.has(s.id)}
+            onToggle={() => alternar(s.id)}
+            seccionRef={s.id === 'sedes' ? sedesRef : undefined}
+          >
+            {s.contenido}
+          </Seccion>
+        ))}
       </div>
 
-      <p className="mt-8 mb-8 text-xs text-upl-crema/40">
-        Fuente: <LinkAnuarios /> — Secretaría de Políticas Universitarias (SPU). Año de
-        referencia 2024, salvo indicación contraria.
-      </p>
+      <FuentesDatos className="mt-8 mb-8" />
     </div>
   )
 }

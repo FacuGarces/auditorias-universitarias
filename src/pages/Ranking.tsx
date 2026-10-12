@@ -6,13 +6,13 @@ import { UniversidadBadge } from '../components/UniversidadBadge'
 import { ProvinciaCombobox } from '../components/ProvinciaCombobox'
 import { SistemaEnNumeros } from '../components/SistemaEnNumeros'
 import { ubicacion } from '../lib/format'
-import { METRICAS, type MetricaId } from '../lib/metricas'
+import { METRICAS, ordenarPorMetrica, type MetricaId } from '../lib/metricas'
 import { filtrarPorProvincia, nombreProvincia, useProvinciaFiltro } from '../lib/provincias'
 import { resumenSistema } from '../lib/sistema'
 import { metricaDesdeSlug, rutaRanking, rutaUniversidad } from '../lib/rutas'
 import { useMeta } from '../lib/meta'
 import { NoEncontrada } from './NoEncontrada'
-import { LinkAnuarios } from '../components/LinkAnuarios'
+import { FuentesDatos } from '../components/FuentesDatos'
 
 // Fila del ranking como link real (<a href>): se puede abrir en otra pestaña y Google la sigue.
 const MotionLink = motion.create(Link)
@@ -25,10 +25,10 @@ export function Ranking() {
 }
 
 function RankingMetrica({ metrica }: { metrica: MetricaId }) {
-  const [invertido, setInvertido] = useState(false)
+  // Siempre arranca de la peor a la mejor; el botón da vuelta el orden.
+  const [mejorPrimero, setMejorPrimero] = useState(false)
   const navigate = useNavigate()
   const cfg = METRICAS[metrica]
-  const ascendente = invertido ? !cfg.ordenAsc : cfg.ordenAsc
 
   const [provincia, setProvincia] = useProvinciaFiltro()
   // La métrica vive en la URL (/rankings/costo-por-graduado): cada ranking se puede compartir.
@@ -41,18 +41,10 @@ function RankingMetrica({ metrica }: { metrica: MetricaId }) {
   const universidades = useMemo(() => filtrarPorProvincia(universidadesArray, provincia), [provincia])
   const resumen = useMemo(() => resumenSistema(universidades), [universidades])
 
-  const filas = useMemo(() => {
-    const conDatos = universidades.filter((u) => u.tieneDatos)
-    return conDatos
-      .slice()
-      .sort((a, b) => {
-        const va = cfg.valor(a)
-        const vb = cfg.valor(b)
-        if (va == null) return 1
-        if (vb == null) return -1
-        return ascendente ? va - vb : vb - va
-      })
-  }, [cfg, ascendente, universidades])
+  const filas = useMemo(
+    () => ordenarPorMetrica(universidades.filter((u) => u.tieneDatos), metrica, mejorPrimero),
+    [metrica, mejorPrimero, universidades],
+  )
 
   return (
     <div className="relative min-h-screen">
@@ -121,20 +113,20 @@ function RankingMetrica({ metrica }: { metrica: MetricaId }) {
         <div className="flex items-center justify-between gap-3 mb-4">
           <p className="text-xs sm:text-sm text-upl-crema/50">{cfg.subtitulo}</p>
           <motion.button
-            onClick={() => setInvertido((v) => !v)}
+            onClick={() => setMejorPrimero((v) => !v)}
             whileTap={{ scale: 0.94 }}
             className="shrink-0 rounded-full glass-chip text-upl-crema text-xs font-semibold px-3 py-1.5 hover:bg-upl-crema/15 transition-colors whitespace-nowrap"
           >
             <motion.span
-              key={ascendente ? 'asc' : 'desc'}
+              key={mejorPrimero ? 'mejor' : 'peor'}
               initial={{ rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               transition={{ duration: 0.25 }}
               className="inline-block"
             >
-              {ascendente ? '↑' : '↓'}
+              ⇅
             </motion.span>{' '}
-            {ascendente ? 'Menor a mayor' : 'Mayor a menor'}
+            {mejorPrimero ? 'De mejor a peor' : 'De peor a mejor'}
           </motion.button>
         </div>
 
@@ -171,9 +163,7 @@ function RankingMetrica({ metrica }: { metrica: MetricaId }) {
           </AnimatePresence>
         </ol>
 
-        <p className="mt-6 mb-8 text-xs text-upl-crema/40">
-          Fuente: <LinkAnuarios /> — Secretaría de Políticas Universitarias.
-        </p>
+        <FuentesDatos className="mt-6 mb-8" />
       </div>
     </div>
   )

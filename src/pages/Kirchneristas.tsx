@@ -4,11 +4,11 @@ import { motion } from 'motion/react'
 import { universidadesArray } from '../data/universidades'
 import { UniversidadBadge } from '../components/UniversidadBadge'
 import { formatMoneda, formatNumero, ubicacion, unidadMonetaria } from '../lib/format'
-import { METRICAS, esPeor, type MetricaId } from '../lib/metricas'
+import { METRICAS, esPeor, ordenarPorMetrica, type MetricaId } from '../lib/metricas'
 import { ProvinciaCombobox } from '../components/ProvinciaCombobox'
 import { RUTAS, rutaUniversidad } from '../lib/rutas'
 import { useMeta } from '../lib/meta'
-import { LinkAnuarios } from '../components/LinkAnuarios'
+import { FuentesDatos } from '../components/FuentesDatos'
 import { filtrarPorProvincia, nombreProvincia, useProvinciaFiltro } from '../lib/provincias'
 
 const listVariants = {
@@ -20,47 +20,38 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
 } as const
 
-const PERIODOS: Record<string, string> = {
-  '2007': 'Néstor Kirchner / transición a CFK',
-  '2009': 'Cristina Fernández de Kirchner (1er mandato)',
-  '2014': 'Cristina Fernández de Kirchner (2do mandato)',
-  '2015': 'Cristina Fernández de Kirchner (2do mandato)',
-  '2023': 'Alberto Fernández',
-}
-
+// Gobierno bajo el que se creó cada universidad, por año de la ley (o del decreto, en el caso de la UNNOBA).
 function periodoDe(fundacion: number): string {
-  if (fundacion <= 2008) return PERIODOS['2007']
-  if (fundacion <= 2013) return PERIODOS['2009']
-  if (fundacion <= 2015) return PERIODOS['2014']
-  return PERIODOS['2023']
+  if (fundacion <= 2002) return 'Eduardo Duhalde (decreto) · ratificada por ley con Néstor Kirchner'
+  if (fundacion <= 2006) return 'Néstor Kirchner'
+  if (fundacion === 2007) return 'Néstor Kirchner / transición a CFK'
+  if (fundacion <= 2011) return 'Cristina Fernández de Kirchner (1er mandato)'
+  if (fundacion <= 2015) return 'Cristina Fernández de Kirchner (2do mandato)'
+  return 'Alberto Fernández'
 }
 
 export function Kirchneristas() {
   useMeta({
     titulo: 'Universidades kirchneristas',
     descripcion:
-      'Las universidades nacionales creadas por ley durante los gobiernos de Néstor Kirchner, Cristina Fernández de Kirchner y Alberto Fernández, comparadas con el resto del sistema: egreso, docentes y costo por graduado.',
+      'Las universidades nacionales creadas entre 2002 y 2023, durante los gobiernos de Néstor Kirchner, Cristina Fernández de Kirchner y Alberto Fernández, comparadas con el resto del sistema: egreso, docentes y costo por graduado.',
     ruta: RUTAS.kirchneristas,
   })
   const [metrica, setMetrica] = useState<MetricaId>('cohorte')
-  const [invertido, setInvertido] = useState(false)
+  // Siempre arranca de la peor a la mejor; el botón da vuelta el orden.
+  const [mejorPrimero, setMejorPrimero] = useState(false)
   const cfg = METRICAS[metrica]
-  const ascendente = invertido ? !cfg.ordenAsc : cfg.ordenAsc
   const [provincia, setProvincia] = useProvinciaFiltro()
   const enProvincia = useMemo(() => filtrarPorProvincia(universidadesArray, provincia), [provincia])
-  const totalK = universidadesArray.filter((u) => u.esKirchnerista).length
+  const todasK = universidadesArray.filter((u) => u.esKirchnerista)
+  const totalK = todasK.length
+  const desde = Math.min(...todasK.map((u) => u.fundacion))
+  const hasta = Math.max(...todasK.map((u) => u.fundacion))
 
   const universidades = useMemo(() => {
     const kirchneristas = enProvincia.filter((u) => u.esKirchnerista)
-    return kirchneristas.slice().sort((a, b) => {
-      const va = cfg.valor(a)
-      const vb = cfg.valor(b)
-      if (va == null && vb == null) return a.fundacion - b.fundacion
-      if (va == null) return 1
-      if (vb == null) return -1
-      return ascendente ? va - vb : vb - va
-    })
-  }, [cfg, ascendente, enProvincia])
+    return ordenarPorMetrica(kirchneristas, metrica, mejorPrimero, (a, b) => a.fundacion - b.fundacion)
+  }, [metrica, mejorPrimero, enProvincia])
 
   const comparativa = useMemo(() => {
     const kUnis = enProvincia.filter((u) => u.esKirchnerista && u.tieneDatos)
@@ -71,7 +62,7 @@ export function Kirchneristas() {
         key,
         label: m.label,
         formato: m.formato,
-        ordenAsc: m.ordenAsc,
+        menorEsMejor: m.menorEsMejor,
         k: m.agregado(kUnis),
         resto: m.agregado(restoUnis),
         nK: kUnis.length,
@@ -102,9 +93,11 @@ export function Kirchneristas() {
           transition={{ duration: 0.4, delay: 0.05 }}
           className="text-upl-crema/60 mb-4"
         >
-          {totalK} universidades nacionales creadas por ley durante los gobiernos de Néstor Kirchner,
-          Cristina Fernández de Kirchner o Alberto Fernández — la mayoría, sancionadas para responder a pedidos de
-          intendentes del conurbano bonaerense o de legisladores propios, más que a un plan de oferta académica.
+          {totalK} universidades nacionales creadas entre {desde} y {hasta}, durante los gobiernos de Néstor Kirchner
+          (2003–2007), Cristina Fernández de Kirchner (2007–2015) y Alberto Fernández (2019–2023) — la primera, la
+          UNNOBA, creada por decreto de Duhalde en 2002 y ratificada por ley ya con Kirchner. La mayoría, sancionadas
+          para responder a pedidos de intendentes del conurbano bonaerense o de legisladores propios, más que a un
+          plan de oferta académica.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -135,8 +128,8 @@ export function Kirchneristas() {
           </div>
           <div className="rounded-2xl overflow-hidden flex flex-wrap gap-px border border-upl-crema/12 bg-upl-crema/15 [backdrop-filter:blur(18px)] shadow-[0_8px_30px_rgba(10,8,30,0.35)]">
             {comparativa.map((c) => {
-              const kPeor = esPeor(c.k, c.resto, c.ordenAsc)
-              const restoPeor = esPeor(c.resto, c.k, c.ordenAsc)
+              const kPeor = esPeor(c.k, c.resto, c.menorEsMejor)
+              const restoPeor = esPeor(c.resto, c.k, c.menorEsMejor)
               return (
                 <div key={c.key} className="flex-1 min-w-[220px] px-5 py-4 bg-upl-principal-light/40">
                   <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-2">{c.label}</div>
@@ -196,20 +189,20 @@ export function Kirchneristas() {
         <div className="flex items-center justify-between gap-3 mb-4">
           <p className="text-xs sm:text-sm text-upl-crema/50">{cfg.subtitulo}</p>
           <motion.button
-            onClick={() => setInvertido((v) => !v)}
+            onClick={() => setMejorPrimero((v) => !v)}
             whileTap={{ scale: 0.94 }}
             className="shrink-0 rounded-full glass-chip text-upl-crema text-xs font-semibold px-3 py-1.5 hover:bg-upl-crema/15 transition-colors whitespace-nowrap"
           >
             <motion.span
-              key={ascendente ? 'asc' : 'desc'}
+              key={mejorPrimero ? 'mejor' : 'peor'}
               initial={{ rotate: -90, opacity: 0 }}
               animate={{ rotate: 0, opacity: 1 }}
               transition={{ duration: 0.25 }}
               className="inline-block"
             >
-              {ascendente ? '↑' : '↓'}
+              ⇅
             </motion.span>{' '}
-            {ascendente ? 'Menor a mayor' : 'Mayor a menor'}
+            {mejorPrimero ? 'De mejor a peor' : 'De peor a mejor'}
           </motion.button>
         </div>
 
@@ -252,10 +245,9 @@ export function Kirchneristas() {
           ))}
         </motion.ol>
 
-        <p className="mt-6 mb-8 text-xs text-upl-crema/40">
-          Fuente: <LinkAnuarios /> (SPU) y leyes de creación publicadas en el Boletín
-          Oficial. Costo por graduado en {unidadMonetaria()}.
-        </p>
+        <FuentesDatos className="mt-6 mb-8">
+          Leyes de creación publicadas en el Boletín Oficial. Costo por graduado en {unidadMonetaria()}.
+        </FuentesDatos>
       </div>
     </div>
   )

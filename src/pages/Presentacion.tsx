@@ -117,14 +117,13 @@ function useDiapositivas() {
       .filter((u) => u.costoPorGraduado != null)
       .sort((a, b) => b.costoPorGraduado! - a.costoPorGraduado!)
       .slice(0, 5)
-    const reinscriptos = conDatos.filter((u) => METRICAS.ceroMaterias.valor(u) != null && u.reinscriptosRegulares2mas != null)
-    const totalReinscriptos = reinscriptos.reduce((a, u) => a + u.reinscriptosTotal!, 0)
-    const regulares = reinscriptos.reduce((a, u) => a + u.reinscriptosRegulares2mas!, 0)
-    const cero = reinscriptos.reduce((a, u) => a + u.reinscriptos0Materias!, 0)
-    const pct = (n: number) => Math.round((n / totalReinscriptos) * 100)
+    const inscriptos = conDatos.filter((u) => METRICAS.ceroMaterias.valor(u) != null && u.unaMateria2024 != null)
+    const totalInscriptos = inscriptos.reduce((a, u) => a + u.inscriptos2024!, 0)
+    const cero = inscriptos.reduce((a, u) => a + u.sinMaterias2024!, 0)
+    const regulares = totalInscriptos - cero - inscriptos.reduce((a, u) => a + u.unaMateria2024!, 0)
+    const pct = (n: number) => Math.round((n / totalInscriptos) * 100)
     const uno = getUniversidad('oeste')
-    const unoCero =
-      uno?.reinscriptos0Materias != null && uno.reinscriptosTotal ? Math.round((uno.reinscriptos0Materias / uno.reinscriptosTotal) * 100) : null
+    const unoCero = uno ? METRICAS.ceroMaterias.valor({ id: 'oeste', ...uno }) : null
     const d = r.dedicacion
     const lista = propuestas()
     const avanzar = propuestaPrincipal()
@@ -223,8 +222,8 @@ function useDiapositivas() {
             <Eyebrow>Inscriptos, pero no cursando</Eyebrow>
             <Grande alerta>{formatNumero(r.ceroMateriasN)}</Grande>
             <p className="mt-[2vh] text-upl-crema text-[clamp(1.2rem,2.6vw,2.4rem)] max-w-[34ch] leading-snug">
-              estudiantes que se reinscribieron no aprobaron <span className="text-[#ff8a7a] font-semibold">ninguna</span>{' '}
-              materia en todo el año: {formatPorcentaje(r.ceroMateriasPct)} de los reinscriptos.
+              estudiantes inscriptos no aprobaron <span className="text-[#ff8a7a] font-semibold">ninguna</span>{' '}
+              materia en todo 2024: {formatPorcentaje(r.ceroMateriasPct)} de los inscriptos.
             </p>
             <div className="mt-[5vh] flex h-[4vh] rounded-full overflow-hidden">
               <motion.div initial={{ width: 0 }} animate={{ width: `${pct(regulares)}%` }} transition={{ duration: 0.7 }} className="bg-[#8fd19e]" />
@@ -241,7 +240,7 @@ function useDiapositivas() {
               <span>● 1 materia: {100 - pct(regulares) - pct(cero)}%</span>
               <span className="text-[#ff8a7a]">● 0 materias: {pct(cero)}%</span>
             </div>
-            <Fuente>Reinscriptos del último año informado · Anuarios SPU</Fuente>
+            <Fuente>Reinscriptos + nuevos inscriptos 2024 · Anuario SPU 2024, cuadros 2.1.10 y 2.1.28a</Fuente>
           </div>
         ),
       },
@@ -363,7 +362,7 @@ function useDiapositivas() {
                       { v: formatNumero(uno.estudiantes2024), l: 'estudiantes' },
                       { v: formatNumero(uno.egresados2024), l: 'egresados en 2024', alerta: true },
                       { v: formatPorcentaje(uno.tasaCohorte), l: 'se recibe a tiempo', alerta: true },
-                      { v: unoCero != null ? `${unoCero}%` : 'S/D', l: 'de los reinscriptos, sin materias', alerta: true },
+                      { v: unoCero != null ? `${Math.round(unoCero)}%` : 'S/D', l: 'de los inscriptos, sin materias', alerta: true },
                     ].map((x) => (
                       <div key={x.l} className="glass rounded-2xl px-5 py-5">
                         <div className={`font-display font-800 leading-none text-[clamp(2rem,5vw,4.4rem)] ${x.alerta ? 'text-[#ff8a7a]' : 'text-upl-crema'}`}>

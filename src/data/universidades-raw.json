@@ -24,10 +24,8 @@
     "egresados2023": 18591,
     "presupuesto2023": 255839758121.38,
     "reinscriptosTotal": 240654,
-    "reinscriptosRegulares2mas": 139770,
     "reinscriptos0Materias": 57784,
     "tasaCohorte": 30.6,
-    "estudiantesPorDocente": 12.6,
     "costoPorGraduado": 47152472,
     "serieEstudiantes": {
       "2007": 306871,
@@ -146,14 +144,19 @@
       "fte2017": 9981.8,
       "fte2023": 10450.5
     },
-    "estudiantesActivosPorDocente": 5.8,
+    "estudiantesActivosPorDocente": 6.5,
     "extranjeros2024": 35759,
     "fuentes": [
       {
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 304567,
+    "sinMaterias2024": 87282,
+    "unaMateria2024": 50442,
+    "estudiantesActivos2024": 217285,
+    "cargosDocentes2024": 33450
   },
   "unlp": {
     "nombre": "Universidad Nacional de La Plata",
@@ -178,10 +181,8 @@
     "egresados2023": 6499,
     "presupuesto2023": 92868382428.47,
     "reinscriptosTotal": 90055,
-    "reinscriptosRegulares2mas": 50030,
     "reinscriptos0Materias": 22054,
     "tasaCohorte": 26.0,
-    "estudiantesPorDocente": 9.4,
     "costoPorGraduado": 54367161,
     "serieEstudiantes": {
       "2007": 90323,
@@ -300,8 +301,13 @@
       "fte2017": 6335.2,
       "fte2023": 7039.8
     },
-    "estudiantesActivosPorDocente": 3.8,
-    "extranjeros2024": 15851
+    "estudiantesActivosPorDocente": 4.3,
+    "extranjeros2024": 15851,
+    "inscriptos2024": 123134,
+    "sinMaterias2024": 35339,
+    "unaMateria2024": 22659,
+    "estudiantesActivos2024": 87795,
+    "cargosDocentes2024": 20503
   },
   "unlam": {
     "nombre": "Universidad Nacional de La Matanza",
@@ -324,10 +330,8 @@
     "egresados2023": 2932,
     "presupuesto2023": 30119945597.17,
     "reinscriptosTotal": 38800,
-    "reinscriptosRegulares2mas": 22949,
     "reinscriptos0Materias": 11374,
     "tasaCohorte": 46.0,
-    "estudiantesPorDocente": 12.5,
     "costoPorGraduado": 33675418,
     "serieEstudiantes": {
       "2007": 30276,
@@ -436,7 +440,7 @@
       "2024": 21111858
     },
     "esKirchnerista": false,
-    "estudiantesActivosPorDocente": 6.1,
+    "estudiantesActivosPorDocente": 8.5,
     "dedicacionDocente": {
       "excl2017": 663,
       "excl2023": 717,
@@ -447,7 +451,12 @@
       "fte2017": 1733.8,
       "fte2023": 1935.2
     },
-    "extranjeros2024": 1281
+    "extranjeros2024": 1281,
+    "inscriptos2024": 47380,
+    "sinMaterias2024": 13090,
+    "unaMateria2024": 5302,
+    "estudiantesActivos2024": 34290,
+    "cargosDocentes2024": 4032
   },
   "unpaz": {
     "nombre": "Universidad Nacional de José C. Paz",
@@ -470,10 +479,8 @@
     "egresados2023": 825,
     "presupuesto2023": 9677372061.08,
     "reinscriptosTotal": 22148,
-    "reinscriptosRegulares2mas": 11989,
     "reinscriptos0Materias": 7442,
     "tasaCohorte": 29.2,
-    "estudiantesPorDocente": 20.6,
     "costoPorGraduado": 29469886,
     "serieEstudiantes": {
       "2012": 3090,
@@ -563,8 +570,13 @@
     },
     "esKirchnerista": true,
     "fundacionLey": "Ley 26.577 (2009, bajo la presidencia de Cristina Fernández de Kirchner)",
-    "estudiantesActivosPorDocente": 8.3,
-    "extranjeros2024": 831
+    "estudiantesActivosPorDocente": 8.1,
+    "extranjeros2024": 831,
+    "inscriptos2024": 29941,
+    "sinMaterias2024": 10934,
+    "unaMateria2024": 3858,
+    "estudiantesActivos2024": 19007,
+    "cargosDocentes2024": 2360
   },
   "jauretche": {
     "nombre": "Universidad Nacional Arturo Jauretche",
@@ -589,10 +601,8 @@
     "egresados2023": 873,
     "presupuesto2023": 11296779563.58,
     "reinscriptosTotal": 22321,
-    "reinscriptosRegulares2mas": 10469,
     "reinscriptos0Materias": 7774,
     "tasaCohorte": 14.6,
-    "estudiantesPorDocente": 21.7,
     "costoPorGraduado": 42550401,
     "serieEstudiantes": {
       "2011": 3049,
@@ -686,7 +696,7 @@
     },
     "esKirchnerista": true,
     "fundacionLey": "Ley 26.576 (2009, bajo la presidencia de Cristina Fernández de Kirchner)",
-    "estudiantesActivosPorDocente": 6.5,
+    "estudiantesActivosPorDocente": 9.9,
     "dedicacionDocente": {
       "excl2017": 120,
       "excl2023": 159,
@@ -703,7 +713,12 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 35231,
+    "sinMaterias2024": 14955,
+    "unaMateria2024": 5382,
+    "estudiantesActivos2024": 20276,
+    "cargosDocentes2024": 2048
   },
   "ungs": {
     "nombre": "Universidad Nacional de General Sarmiento",
@@ -726,10 +741,8 @@
     "egresados2023": 123,
     "presupuesto2023": 9975396693.64,
     "reinscriptosTotal": 14660,
-    "reinscriptosRegulares2mas": 4906,
     "reinscriptos0Materias": 6974,
     "tasaCohorte": 10.0,
-    "estudiantesPorDocente": 27.6,
     "costoPorGraduado": 110370020,
     "serieEstudiantes": {
       "2007": 4001,
@@ -838,7 +851,7 @@
       "2024": 69193383
     },
     "esKirchnerista": false,
-    "estudiantesActivosPorDocente": 5.8,
+    "estudiantesActivosPorDocente": 9.7,
     "dedicacionDocente": {
       "excl2017": 317,
       "excl2023": 405,
@@ -849,7 +862,12 @@
       "fte2017": 408.8,
       "fte2023": 651.0
     },
-    "extranjeros2024": 171
+    "extranjeros2024": 171,
+    "inscriptos2024": 23325,
+    "sinMaterias2024": 12140,
+    "unaMateria2024": 3560,
+    "estudiantesActivos2024": 11185,
+    "cargosDocentes2024": 1155
   },
   "undav": {
     "nombre": "Universidad Nacional de Avellaneda",
@@ -873,10 +891,8 @@
     "egresados2023": 347,
     "presupuesto2023": 8243268775.97,
     "reinscriptosTotal": 12873,
-    "reinscriptosRegulares2mas": 6348,
     "reinscriptos0Materias": 4617,
     "tasaCohorte": 7.6,
-    "estudiantesPorDocente": 17.4,
     "costoPorGraduado": 47290529,
     "serieEstudiantes": {
       "2011": 641,
@@ -966,7 +982,7 @@
     },
     "esKirchnerista": true,
     "fundacionLey": "Ley 26.543 (2009, bajo la presidencia de Cristina Fernández de Kirchner)",
-    "estudiantesActivosPorDocente": 5.6,
+    "estudiantesActivosPorDocente": 6.8,
     "dedicacionDocente": {
       "excl2017": 23,
       "excl2023": 47,
@@ -983,7 +999,12 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 19766,
+    "sinMaterias2024": 9079,
+    "unaMateria2024": 2489,
+    "estudiantesActivos2024": 10687,
+    "cargosDocentes2024": 1569
   },
   "unso": {
     "nombre": "Universidad Nacional Scalabrini Ortiz",
@@ -1006,10 +1027,8 @@
     "egresados2023": 198,
     "presupuesto2023": 1906491200.73,
     "reinscriptosTotal": 2041,
-    "reinscriptosRegulares2mas": 1478,
     "reinscriptos0Materias": 390,
     "tasaCohorte": null,
-    "estudiantesPorDocente": 12.4,
     "costoPorGraduado": 16511041,
     "serieEstudiantes": {
       "2019": 440,
@@ -1064,8 +1083,13 @@
     },
     "esKirchnerista": true,
     "fundacionLey": "Ley 27.212 (2015, bajo la presidencia de Cristina Fernández de Kirchner)",
-    "estudiantesActivosPorDocente": 5.2,
-    "extranjeros2024": 107
+    "estudiantesActivosPorDocente": 7.8,
+    "extranjeros2024": 107,
+    "inscriptos2024": 3554,
+    "sinMaterias2024": 835,
+    "unaMateria2024": 254,
+    "estudiantesActivos2024": 2719,
+    "cargosDocentes2024": 348
   },
   "undelta": {
     "nombre": "Universidad Nacional del Delta",
@@ -1096,7 +1120,13 @@
         "titulo": "Qué Pasa — Malena Galmarini lanzó desde la Fundación de la Universidad del Delta un laboratorio urbano (2025)",
         "url": "https://www.quepasaweb.com.ar/malena-galmarini-lanzo-desde-la-fundacion-de-la-universidad-del-delta-el-primer-laboratorio-urbano-para-planificar-el-futuro-de-tigre/"
       }
-    ]
+    ],
+    "inscriptos2024": null,
+    "sinMaterias2024": null,
+    "unaMateria2024": null,
+    "estudiantesActivos2024": null,
+    "cargosDocentes2024": null,
+    "estudiantesActivosPorDocente": null
   },
   "unpilar": {
     "nombre": "Universidad Nacional de Pilar",
@@ -1112,7 +1142,13 @@
     ],
     "tieneDatos": false,
     "esKirchnerista": true,
-    "fundacionLey": "Ley 27.728 (2023, bajo la presidencia de Alberto Fernández)"
+    "fundacionLey": "Ley 27.728 (2023, bajo la presidencia de Alberto Fernández)",
+    "inscriptos2024": null,
+    "sinMaterias2024": null,
+    "unaMateria2024": null,
+    "estudiantesActivos2024": null,
+    "cargosDocentes2024": null,
+    "estudiantesActivosPorDocente": null
   },
   "moreno": {
     "nombre": "Universidad Nacional de Moreno",
@@ -1127,7 +1163,7 @@
     "fundacionLey": "Ley 26.575 (sancionada el 2/12/2009, bajo la presidencia de Cristina Fernández de Kirchner)",
     "notas": [
       "Creada por Ley 26.575 (2009), en la misma tanda de universidades del conurbano bonaerense que UNPAZ, UNAJ y UNDAV.",
-      "Un tercio de quienes siguen cursando (33,5%) no aprobó ni una sola materia en el último año informado, y apenas 1 de cada 7 inscriptos llega a graduarse en el plazo de referencia."
+      "Más de un tercio de sus inscriptos 2024 (35,1%) no aprobó ni una sola materia en todo el año, y apenas 1 de cada 7 inscriptos llega a graduarse en el plazo de referencia."
     ],
     "serieEstudiantes": {
       "2011": 1007,
@@ -1211,7 +1247,6 @@
     },
     "reinscriptosTotal": 9667,
     "reinscriptos0Materias": 3238,
-    "reinscriptosRegulares2mas": 4868,
     "presupuesto2017": 276392362.08,
     "presupuesto2019": 536910959.79,
     "presupuesto2023": 6120323318.44,
@@ -1229,9 +1264,8 @@
       "2024": 34949338
     },
     "costoPorGraduado": 55747514,
-    "estudiantesPorDocente": 21.2,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 7.6,
+    "estudiantesActivosPorDocente": 8.8,
     "dedicacionDocente": {
       "excl2017": 12,
       "excl2023": 34,
@@ -1242,7 +1276,12 @@
       "fte2017": 209.5,
       "fte2023": 294.0
     },
-    "extranjeros2024": 510
+    "extranjeros2024": 510,
+    "inscriptos2024": 13476,
+    "sinMaterias2024": 4734,
+    "unaMateria2024": 2038,
+    "estudiantesActivos2024": 8742,
+    "cargosDocentes2024": 997
   },
   "oeste": {
     "nombre": "Universidad Nacional del Oeste",
@@ -1257,7 +1296,7 @@
     "fundacionLey": "Ley 26.544 (2009, bajo la presidencia de Cristina Fernández de Kirchner)",
     "notas": [
       "Creada por Ley 26.544 (2009) en Merlo. Su rector desde 2013 fue Martín Othacehé, hijo del entonces intendente de Merlo, Raúl Othacehé. En 2016 la Asamblea Universitaria lo destituyó por 54 votos a 4, por \"abandono de funciones\" (la investigación interna mencionaba títulos sin tramitar y cierre de sedes), y en 2017 un fallo de Cámara lo repuso — citado como caso de manual de universidad del conurbano usada como extensión del poder municipal.",
-      "La mitad de quienes siguen cursando (50,2%) no aprobó ni una materia en el último año informado, y solo 4,2% de los inscriptos se gradúa dentro del plazo de referencia — una de las tasas de egreso más bajas de todo el sistema."
+      "Casi 2 de cada 3 inscriptos 2024 (64,2%) no aprobó ni una materia en todo el año, y solo 4,2% de los inscriptos se gradúa dentro del plazo de referencia — una de las tasas de egreso más bajas de todo el sistema."
     ],
     "serieEstudiantes": {
       "2012": 1433,
@@ -1337,7 +1376,6 @@
     },
     "reinscriptosTotal": 10956,
     "reinscriptos0Materias": 5500,
-    "reinscriptosRegulares2mas": 4206,
     "presupuesto2017": 185528119.47,
     "presupuesto2019": 299049273.37,
     "presupuesto2023": 4666922483.97,
@@ -1355,9 +1393,8 @@
       "2024": 114586430
     },
     "costoPorGraduado": 182776241,
-    "estudiantesPorDocente": 32.0,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 8.3,
+    "estudiantesActivosPorDocente": 10.0,
     "dedicacionDocente": {
       "excl2017": 10,
       "excl2023": 47,
@@ -1382,7 +1419,12 @@
         "url": "https://www.letrap.com.ar/nota/2017-10-3-16-48-0-polemica-por-una-decision-judicial-que-restituye-al-hijo-de-othacehe-como-rector"
       }
     ],
-    "extranjeros2024": 307
+    "extranjeros2024": 307,
+    "inscriptos2024": 16112,
+    "sinMaterias2024": 10347,
+    "unaMateria2024": 1317,
+    "estudiantesActivos2024": 5765,
+    "cargosDocentes2024": 577
   },
   "chaco_austral": {
     "nombre": "Universidad Nacional del Chaco Austral",
@@ -1397,7 +1439,7 @@
     "fundacionLey": "Ley 26.335, sancionada el 4/12/2007 (última semana de Néstor Kirchner) y promulgada el 28/12/2007, ya bajo Cristina Fernández de Kirchner",
     "notas": [
       "Creada en la transición entre los gobiernos de Néstor y Cristina Kirchner, a fines de 2007.",
-      "Más de la mitad de sus reinscriptos (53,6%) no aprobó ni una materia en el último año informado, y solo 5,2% de los inscriptos se gradúa dentro del plazo de referencia de 6 años.",
+      "Casi 6 de cada 10 inscriptos 2024 (59,3%) no aprobó ni una materia en todo el año, y solo 5,2% de los inscriptos se gradúa dentro del plazo de referencia de 6 años.",
       "Ejecución presupuestaria (PIU-AGN): en 2023 gastó $65,6 millones en publicidad y propaganda, el equivalente al 86% de todo lo que destinó a becas ($76,1 millones)."
     ],
     "serieEstudiantes": {
@@ -1490,7 +1532,6 @@
     },
     "reinscriptosTotal": 12263,
     "reinscriptos0Materias": 6578,
-    "reinscriptosRegulares2mas": 4330,
     "presupuesto2017": 319857818.49,
     "presupuesto2019": 521776923.53,
     "presupuesto2023": 6348801114.97,
@@ -1508,9 +1549,8 @@
       "2024": 36778170
     },
     "costoPorGraduado": 58664676,
-    "estudiantesPorDocente": 21.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 5.4,
+    "estudiantesActivosPorDocente": 5.7,
     "dedicacionDocente": {
       "excl2017": 58,
       "excl2023": 60,
@@ -1527,7 +1567,12 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 17458,
+    "sinMaterias2024": 10354,
+    "unaMateria2024": 1792,
+    "estudiantesActivos2024": 7104,
+    "cargosDocentes2024": 1243
   },
   "rio_negro": {
     "nombre": "Universidad Nacional de Río Negro",
@@ -1542,7 +1587,7 @@
     "fundacionLey": "Ley 26.330 (sancionada y promulgada el 19/12/2007, primera ley de creación universitaria de Cristina Fernández de Kirchner)",
     "notas": [
       "Primera universidad creada por ley durante la presidencia de Cristina Fernández de Kirchner, con sedes distribuidas en Viedma, Bariloche y General Roca.",
-      "Poco más de un tercio de sus reinscriptos (35,8%) no aprobó ni una materia en el último año informado, y solo 14,7% de los inscriptos se gradúa dentro del plazo de referencia.",
+      "4 de cada 10 inscriptos 2024 (39,5%) no aprobó ni una materia en todo el año, y solo 14,7% de los inscriptos se gradúa dentro del plazo de referencia.",
       "Seleccionada por fragmentación académica: 53 carreras reales (42 de grado + 11 tecnicaturas de ciclo corto) con tasas de egreso por disciplina muy bajas (1% a 4%) en Arquitectura y Diseño, Ingeniería, Informática y Economía y Administración, pese a matrícula creciente.",
       "Cargos docentes crecieron +37,9% en términos absolutos, pero el FTE ponderado por dedicación solo +24,3%: buena parte del crecimiento es en cargos Simple (914 a 1.406, +54%), no Exclusiva (+0,7%)."
     ],
@@ -1636,7 +1681,6 @@
     },
     "reinscriptosTotal": 9639,
     "reinscriptos0Materias": 3450,
-    "reinscriptosRegulares2mas": 4824,
     "presupuesto2017": 684548782.7,
     "presupuesto2019": 1533439696.9,
     "presupuesto2023": 11719819245.84,
@@ -1654,7 +1698,6 @@
       "2024": 55095873
     },
     "costoPorGraduado": 87883151,
-    "estudiantesPorDocente": 11.5,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 141,
@@ -1666,8 +1709,13 @@
       "fte2017": 461.5,
       "fte2023": 573.5
     },
-    "estudiantesActivosPorDocente": 4.1,
-    "extranjeros2024": 286
+    "estudiantesActivosPorDocente": 4.8,
+    "extranjeros2024": 286,
+    "inscriptos2024": 13495,
+    "sinMaterias2024": 5334,
+    "unaMateria2024": 1753,
+    "estudiantesActivos2024": 8161,
+    "cargosDocentes2024": 1697
   },
   "villa_mercedes": {
     "nombre": "Universidad Nacional de Villa Mercedes",
@@ -1682,7 +1730,7 @@
     "fundacionLey": "Ley 26.542 (sancionada el 11/11/2009, bajo la presidencia de Cristina Fernández de Kirchner)",
     "notas": [
       "Creada por Ley 26.542 (2009) en San Luis, en la misma tanda legislativa que Villa Mercedes, Tierra del Fuego y las universidades del conurbano bonaerense.",
-      "Solo 13% de sus inscriptos se gradúa dentro del plazo de referencia de 6 años, y 4 de cada 10 reinscriptos no aprobó ninguna materia en el último año informado."
+      "Solo 13% de sus inscriptos se gradúa dentro del plazo de referencia de 6 años, y casi la mitad de los inscriptos 2024 (45,9%) no aprobó ninguna materia en todo el año."
     ],
     "serieEstudiantes": {
       "2013": 879,
@@ -1755,7 +1803,6 @@
     },
     "reinscriptosTotal": 2372,
     "reinscriptos0Materias": 935,
-    "reinscriptosRegulares2mas": 1128,
     "presupuesto2017": 151173201.14,
     "presupuesto2019": 312986604.7,
     "presupuesto2023": 2042305157.75,
@@ -1773,9 +1820,8 @@
       "2024": 52780802
     },
     "costoPorGraduado": 84190394,
-    "estudiantesPorDocente": 9.2,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 2.7,
+    "estudiantesActivosPorDocente": 3.8,
     "dedicacionDocente": {
       "excl2017": 44,
       "excl2023": 59,
@@ -1786,7 +1832,12 @@
       "fte2017": 131.2,
       "fte2023": 218.8
     },
-    "extranjeros2024": 18
+    "extranjeros2024": 18,
+    "inscriptos2024": 3902,
+    "sinMaterias2024": 1791,
+    "unaMateria2024": 438,
+    "estudiantesActivos2024": 2111,
+    "cargosDocentes2024": 560
   },
   "tierra_del_fuego": {
     "nombre": "Universidad Nacional de Tierra del Fuego",
@@ -1873,7 +1924,6 @@
     },
     "reinscriptosTotal": 2945,
     "reinscriptos0Materias": 1337,
-    "reinscriptosRegulares2mas": 1134,
     "presupuesto2017": 347500534.51,
     "presupuesto2019": 702075438.61,
     "presupuesto2023": 5925830563.39,
@@ -1889,9 +1939,8 @@
       "2024": 176486810
     },
     "costoPorGraduado": 281513228,
-    "estudiantesPorDocente": 10.3,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 2.5,
+    "estudiantesActivosPorDocente": 3.6,
     "dedicacionDocente": {
       "excl2017": 97,
       "excl2023": 160,
@@ -1902,7 +1951,12 @@
       "fte2017": 200.0,
       "fte2023": 309.0
     },
-    "extranjeros2024": 168
+    "extranjeros2024": 168,
+    "inscriptos2024": 4699,
+    "sinMaterias2024": 2437,
+    "unaMateria2024": 648,
+    "estudiantesActivos2024": 2262,
+    "cargosDocentes2024": 630
   },
   "hurlingham": {
     "nombre": "Universidad Nacional de Hurlingham",
@@ -1917,7 +1971,7 @@
     "fundacionLey": "Ley 27.016 (sancionada el 19/11/2014, bajo la presidencia de Cristina Fernández de Kirchner); recién abrió en 2016",
     "notas": [
       "Creada por Ley 27.016 (2014). El proyecto lo impulsó Juan Zabaleta (entonces secretario administrativo del Senado y después intendente de Hurlingham) y se presentó en el Senado en un acto con el vicepresidente Amado Boudou. Su primer rector organizador fue Jaime Perczyk, luego ministro de Educación de Alberto Fernández.",
-      "Su matrícula se multiplicó por más de 20 en menos de una década (1.749 estudiantes en 2016 a 40.219 en 2024), con solo 1.450 docentes universitarios para sostenerla — casi 28 estudiantes por cada docente, muy por encima del resto del sistema."
+      "Su matrícula se multiplicó por más de 20 en menos de una década (1.749 estudiantes en 2016 a 40.219 en 2024), y un tercio de sus inscriptos 2024 (33,2%) no aprobó ninguna materia en todo el año."
     ],
     "serieEstudiantes": {
       "2016": 1749,
@@ -1981,7 +2035,6 @@
     },
     "reinscriptosTotal": 27156,
     "reinscriptos0Materias": 8651,
-    "reinscriptosRegulares2mas": 13429,
     "presupuesto2017": 173268347.19,
     "presupuesto2019": 593512974.09,
     "presupuesto2023": 12075979150.46,
@@ -1999,9 +2052,8 @@
       "2024": 18582912
     },
     "costoPorGraduado": 29641510,
-    "estudiantesPorDocente": 27.7,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 9.3,
+    "estudiantesActivosPorDocente": 9.5,
     "dedicacionDocente": {
       "excl2017": 7,
       "excl2023": 49,
@@ -2022,7 +2074,12 @@
         "url": "https://www.argentina.gob.ar/normativa/nacional/ley-27016-239548/texto"
       }
     ],
-    "extranjeros2024": 904
+    "extranjeros2024": 904,
+    "inscriptos2024": 40219,
+    "sinMaterias2024": 13340,
+    "unaMateria2024": 7254,
+    "estudiantesActivos2024": 26879,
+    "cargosDocentes2024": 2819
   },
   "rafaela": {
     "nombre": "Universidad Nacional de Rafaela",
@@ -2100,7 +2157,6 @@
     },
     "reinscriptosTotal": 1777,
     "reinscriptos0Materias": 392,
-    "reinscriptosRegulares2mas": 1169,
     "presupuesto2017": 58193484.46,
     "presupuesto2019": 191015737.16,
     "presupuesto2023": 3531177945.58,
@@ -2114,9 +2170,8 @@
       "2024": 26394176
     },
     "costoPorGraduado": 42101218,
-    "estudiantesPorDocente": 8.2,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 2.9,
+    "estudiantesActivosPorDocente": 4.0,
     "dedicacionDocente": {
       "excl2017": 3,
       "excl2023": 7,
@@ -2133,7 +2188,12 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 3263,
+    "sinMaterias2024": 883,
+    "unaMateria2024": 322,
+    "estudiantesActivos2024": 2380,
+    "cargosDocentes2024": 592
   },
   "alto_uruguay": {
     "nombre": "Universidad Nacional del Alto Uruguay",
@@ -2148,7 +2208,7 @@
     "fundacionLey": "Ley 27.074 (sancionada el 10/12/2014, bajo la presidencia de Cristina Fernández de Kirchner)",
     "notas": [
       "Creada por Ley 27.074 (2014-2015), pero tardó cuatro años en abrir: el Ministerio de Educación recién autorizó su puesta en marcha por Resolución 145/2019 — un caso testigo de la distancia entre la ley de creación y el funcionamiento real.",
-      "38,3% de sus reinscriptos no aprobó ni una materia en el último año informado.",
+      "39,0% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año.",
       "Ejecución presupuestaria (PIU-AGN): en 2024 gastó $10,1 millones en publicidad y propaganda, 3,0 veces todo lo que destinó a becas ($3,4 millones).",
       "Ejecución presupuestaria (PIU-AGN): en 2024 ejecutó $19,7 millones en pasajes y viáticos, 5,8 veces más que en becas estudiantiles ($3,4 millones)."
     ],
@@ -2196,7 +2256,6 @@
     },
     "reinscriptosTotal": 991,
     "reinscriptos0Materias": 380,
-    "reinscriptosRegulares2mas": 497,
     "presupuesto2017": 11769531.94,
     "presupuesto2019": 60231624.11,
     "presupuesto2023": 743400992.01,
@@ -2210,16 +2269,20 @@
       "2024": 92669129
     },
     "costoPorGraduado": 147816064,
-    "estudiantesPorDocente": 13.8,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 5.1,
+    "estudiantesActivosPorDocente": 6.1,
     "extranjeros2024": 6,
     "fuentes": [
       {
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 1349,
+    "sinMaterias2024": 526,
+    "unaMateria2024": 165,
+    "estudiantesActivos2024": 823,
+    "cargosDocentes2024": 134
   },
   "comechingones": {
     "nombre": "Universidad Nacional de los Comechingones",
@@ -2234,7 +2297,7 @@
     "fundacionLey": "Ley 26.998 (sancionada el 22/10/2014, bajo la presidencia de Cristina Fernández de Kirchner)",
     "notas": [
       "Creada por Ley 26.998 (2014) en Villa de Merlo, San Luis (no debe confundirse con la Universidad Nacional del Oeste, en Merlo, Buenos Aires).",
-      "Casi 2 de cada 3 reinscriptos (62,7%) no aprobó ni una sola materia en el último año informado — la peor proporción de todo el relevamiento hasta ahora.",
+      "7 de cada 10 inscriptos 2024 (70,4%) no aprobó ni una sola materia en todo el año — la segunda peor proporción del relevamiento, solo detrás de la Universidad Madres de Plaza de Mayo.",
       "Ejecución presupuestaria (PIU-AGN): en 2024 gastó $17,4 millones en publicidad y propaganda, el equivalente al 66% de todo lo que destinó a becas ($26,3 millones)."
     ],
     "serieEstudiantes": {
@@ -2268,7 +2331,6 @@
     },
     "reinscriptosTotal": 847,
     "reinscriptos0Materias": 531,
-    "reinscriptosRegulares2mas": 241,
     "presupuesto2017": 33651955.33,
     "presupuesto2019": 119891469.7,
     "presupuesto2023": 1706774278.12,
@@ -2280,16 +2342,20 @@
       "2024": 146598608
     },
     "costoPorGraduado": 233838706,
-    "estudiantesPorDocente": 13.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 1.8,
+    "estudiantesActivosPorDocente": 3.6,
     "extranjeros2024": 22,
     "fuentes": [
       {
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 1816,
+    "sinMaterias2024": 1279,
+    "unaMateria2024": 100,
+    "estudiantesActivos2024": 537,
+    "cargosDocentes2024": 150
   },
   "guillermo_brown": {
     "nombre": "Universidad Nacional Guillermo Brown",
@@ -2304,7 +2370,7 @@
     "fundacionLey": "Ley 27.193 (sancionada el 7/10/2015, bajo la presidencia de Cristina Fernández de Kirchner); recién abrió en agosto de 2019",
     "notas": [
       "Creada por Ley 27.193 (2015) en Almirante Brown, pero no empezó a dictar clases hasta agosto de 2019 — casi cuatro años después de sancionada la ley.",
-      "3 de cada 10 reinscriptos no aprobó ninguna materia en el último año informado."
+      "1 de cada 3 inscriptos 2024 (33,6%) no aprobó ninguna materia en todo el año."
     ],
     "serieEstudiantes": {
       "2019": 267,
@@ -2350,7 +2416,6 @@
     },
     "reinscriptosTotal": 2674,
     "reinscriptos0Materias": 811,
-    "reinscriptosRegulares2mas": 1496,
     "presupuesto2017": 29846503.41,
     "presupuesto2019": 74332849.14,
     "presupuesto2023": 3022727143.64,
@@ -2364,9 +2429,8 @@
       "2024": 34856761
     },
     "costoPorGraduado": 55599845,
-    "estudiantesPorDocente": 12.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 4.0,
+    "estudiantesActivosPorDocente": 8.5,
     "dedicacionDocente": {
       "excl2017": 1,
       "excl2023": 22,
@@ -2377,7 +2441,12 @@
       "fte2017": 1.0,
       "fte2023": 135.8
     },
-    "extranjeros2024": 82
+    "extranjeros2024": 82,
+    "inscriptos2024": 4830,
+    "sinMaterias2024": 1623,
+    "unaMateria2024": 562,
+    "estudiantesActivos2024": 3207,
+    "cargosDocentes2024": 379
   },
   "ezeiza": {
     "nombre": "Universidad Nacional de Ezeiza",
@@ -2541,7 +2610,6 @@
     },
     "reinscriptosTotal": 14976,
     "reinscriptos0Materias": 3736,
-    "reinscriptosRegulares2mas": 8913,
     "presupuesto2017": 921065484.43,
     "presupuesto2019": 1594135363.25,
     "presupuesto2023": 13873638086.48,
@@ -2559,7 +2627,6 @@
       "2024": 418355642
     },
     "costoPorGraduado": 667316992,
-    "estudiantesPorDocente": 10.5,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 32,
@@ -2571,8 +2638,13 @@
       "fte2017": 905.5,
       "fte2023": 1029.0
     },
-    "estudiantesActivosPorDocente": 4.1,
-    "extranjeros2024": 1368
+    "estudiantesActivosPorDocente": 3.8,
+    "extranjeros2024": 1368,
+    "inscriptos2024": 22932,
+    "sinMaterias2024": 7879,
+    "unaMateria2024": 2823,
+    "estudiantesActivos2024": 15053,
+    "cargosDocentes2024": 3987
   },
   "catamarca": {
     "nombre": "Universidad Nacional de Catamarca",
@@ -2689,7 +2761,6 @@
     },
     "reinscriptosTotal": 12331,
     "reinscriptos0Materias": 6319,
-    "reinscriptosRegulares2mas": 4452,
     "presupuesto2017": 1112421474.34,
     "presupuesto2019": 1988695905.61,
     "presupuesto2023": 16551789092.82,
@@ -2707,7 +2778,6 @@
       "2024": 60820259
     },
     "costoPorGraduado": 97014091,
-    "estudiantesPorDocente": 12.5,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 309,
@@ -2719,8 +2789,13 @@
       "fte2017": 670.8,
       "fte2023": 717.2
     },
-    "estudiantesActivosPorDocente": 3.4,
-    "extranjeros2024": 66
+    "estudiantesActivosPorDocente": 5.4,
+    "extranjeros2024": 66,
+    "inscriptos2024": 16452,
+    "sinMaterias2024": 7960,
+    "unaMateria2024": 2055,
+    "estudiantesActivos2024": 8492,
+    "cargosDocentes2024": 1584
   },
   "unicen": {
     "nombre": "Universidad Nacional del Centro de la Pcia. de Bs. As.",
@@ -2735,7 +2810,7 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 20.753 (1974), sobre la base de la Universidad de Tandil, el Instituto Universitario de Olavarría y el Departamento de Agronomía de Azul.",
-      "34% de quienes siguen cursando no aprobó ni una sola materia en el último año informado.",
+      "37% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año.",
       "Oferta muy fragmentada por sede (Tandil, Olavarría, Azul, Quequén): cerca de 70 carreras reales distintas en el listado oficial, con 10 disciplinas anómalas detectadas, dos con 0 egresados en 2023 (Física y Otras Ciencias Aplicadas).",
       "Cargos docentes crecieron +24,8% en términos absolutos, con un FTE ponderado algo menor (+19,3%): la brecha es más chica que en otras universidades del grupo.",
       "Ejecución presupuestaria (PIU-AGN): en 2024 gastó $171 millones en productos alimenticios — 2,3 veces lo que destinó a becas para estudiantes ($74,8 millones).",
@@ -2839,7 +2914,6 @@
     },
     "reinscriptosTotal": 14700,
     "reinscriptos0Materias": 5031,
-    "reinscriptosRegulares2mas": 7422,
     "presupuesto2017": 1459282749.61,
     "presupuesto2019": 2445288887.62,
     "presupuesto2023": 20940882311.23,
@@ -2857,7 +2931,6 @@
       "2024": 44651808
     },
     "costoPorGraduado": 71223875,
-    "estudiantesPorDocente": 8.3,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 559,
@@ -2869,14 +2942,19 @@
       "fte2017": 1176,
       "fte2023": 1403
     },
-    "estudiantesActivosPorDocente": 3.2,
+    "estudiantesActivosPorDocente": 3.6,
     "extranjeros2024": 243,
     "fuentes": [
       {
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 19269,
+    "sinMaterias2024": 7159,
+    "unaMateria2024": 2801,
+    "estudiantesActivos2024": 12110,
+    "cargosDocentes2024": 3374
   },
   "chilecito": {
     "nombre": "Universidad Nacional de Chilecito",
@@ -2994,7 +3072,6 @@
     },
     "reinscriptosTotal": 2392,
     "reinscriptos0Materias": 915,
-    "reinscriptosRegulares2mas": 1041,
     "presupuesto2017": 349676607.36,
     "presupuesto2019": 709934282.07,
     "presupuesto2023": 5118235864.17,
@@ -3012,7 +3089,6 @@
       "2024": 134785190
     },
     "costoPorGraduado": 214995183,
-    "estudiantesPorDocente": 8.2,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 92,
@@ -3024,14 +3100,19 @@
       "fte2017": 240.0,
       "fte2023": 265.2
     },
-    "estudiantesActivosPorDocente": 2.3,
+    "estudiantesActivosPorDocente": 3.7,
     "extranjeros2024": 34,
     "fuentes": [
       {
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 3680,
+    "sinMaterias2024": 1645,
+    "unaMateria2024": 510,
+    "estudiantesActivos2024": 2035,
+    "cargosDocentes2024": 553
   },
   "comahue": {
     "nombre": "Universidad Nacional del Comahue",
@@ -3146,7 +3227,6 @@
     },
     "reinscriptosTotal": 24244,
     "reinscriptos0Materias": 12539,
-    "reinscriptosRegulares2mas": 7954,
     "presupuesto2017": 1886868428.49,
     "presupuesto2019": 3183033424.66,
     "presupuesto2023": 26638438132.81,
@@ -3164,9 +3244,8 @@
       "2024": 57576674
     },
     "costoPorGraduado": 91840265,
-    "estudiantesPorDocente": 12.2,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 2.9,
+    "estudiantesActivosPorDocente": 3.1,
     "dedicacionDocente": {
       "excl2017": 566,
       "excl2023": 602,
@@ -3177,7 +3256,12 @@
       "fte2017": 1582.0,
       "fte2023": 1848.8
     },
-    "extranjeros2024": 818
+    "extranjeros2024": 818,
+    "inscriptos2024": 33565,
+    "sinMaterias2024": 18572,
+    "unaMateria2024": 4645,
+    "estudiantesActivos2024": 14993,
+    "cargosDocentes2024": 4793
   },
   "cordoba": {
     "nombre": "Universidad Nacional de Córdoba",
@@ -3294,7 +3378,6 @@
     },
     "reinscriptosTotal": 125934,
     "reinscriptos0Materias": 59202,
-    "reinscriptosRegulares2mas": 50135,
     "presupuesto2017": 6419429353.48,
     "presupuesto2019": 11906132137.93,
     "presupuesto2023": 102287423829.29,
@@ -3312,7 +3395,6 @@
       "2024": 37813868
     },
     "costoPorGraduado": 60316712,
-    "estudiantesPorDocente": 19.4,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 1292,
@@ -3324,8 +3406,13 @@
       "fte2017": 4605.5,
       "fte2023": 5225.8
     },
-    "estudiantesActivosPorDocente": 6.1,
-    "extranjeros2024": 3568
+    "estudiantesActivosPorDocente": 6.4,
+    "extranjeros2024": 3568,
+    "inscriptos2024": 159928,
+    "sinMaterias2024": 77940,
+    "unaMateria2024": 19905,
+    "estudiantesActivos2024": 81988,
+    "cargosDocentes2024": 12756
   },
   "cuyo": {
     "nombre": "Universidad Nacional de Cuyo",
@@ -3340,7 +3427,7 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Decreto 26.971 (1939, creada por decreto del Poder Ejecutivo, no por ley).",
-      "32% de quienes siguen cursando no aprobó ni una sola materia en el último año informado.",
+      "29% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año.",
       "Cargos Exclusiva cayeron -10% pese a que el total de cargos creció +9%: la misma sustitución de dedicaciones altas por bajas que en otras universidades.",
       "Economía y Administración perdió 274 egresados (-52,7%), una de las caídas más grandes en una carrera históricamente masiva."
     ],
@@ -3442,7 +3529,6 @@
     },
     "reinscriptosTotal": 27499,
     "reinscriptos0Materias": 8684,
-    "reinscriptosRegulares2mas": 14421,
     "presupuesto2017": 3611370484.87,
     "presupuesto2019": 6442261089.52,
     "presupuesto2023": 48735625537.77,
@@ -3460,7 +3546,6 @@
       "2024": 52758874
     },
     "costoPorGraduado": 84155416,
-    "estudiantesPorDocente": 7.4,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 780,
@@ -3472,8 +3557,13 @@
       "fte2017": 2640.0,
       "fte2023": 2718.0
     },
-    "estudiantesActivosPorDocente": 3.1,
-    "extranjeros2024": 876
+    "estudiantesActivosPorDocente": 3.6,
+    "extranjeros2024": 876,
+    "inscriptos2024": 34098,
+    "sinMaterias2024": 9769,
+    "unaMateria2024": 5005,
+    "estudiantesActivos2024": 24329,
+    "cargosDocentes2024": 6670
   },
   "defensa": {
     "nombre": "Universidad de la Defensa Nacional",
@@ -3488,7 +3578,7 @@
     "esKirchnerista": true,
     "notas": [
       "Creada por Ley 27.015 (2014, bajo la presidencia de Cristina Fernández de Kirchner), impulsada por el entonces ministro de Defensa Agustín Rossi, sobre institutos universitarios preexistentes de las Fuerzas Armadas.",
-      "26% de quienes siguen cursando no aprobó ni una sola materia en el último año informado.",
+      "29% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año.",
       "La SPU informa solo 34 docentes universitarios propios para 8.492 estudiantes: la mayor parte del plantel docente depende de las Fuerzas Armadas y no figura en el Anuario (ni en el presupuesto ejecutado de la universidad). Por eso sus indicadores por docente y su costo por graduado no son comparables y se excluyen de los rankings y promedios."
     ],
     "serieEstudiantes": {
@@ -3585,7 +3675,6 @@
     },
     "reinscriptosTotal": 5610,
     "reinscriptos0Materias": 1458,
-    "reinscriptosRegulares2mas": 3597,
     "presupuesto2017": 58417916.5,
     "presupuesto2019": 116848245.55,
     "presupuesto2023": 1184635239.16,
@@ -3603,11 +3692,15 @@
       "2024": 4191361
     },
     "costoPorGraduado": 6685618,
-    "estudiantesPorDocente": 249.8,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 105.8,
+    "estudiantesActivosPorDocente": 178.5,
     "docentesNoComparable": true,
-    "extranjeros2024": 100
+    "extranjeros2024": 100,
+    "inscriptos2024": 8492,
+    "sinMaterias2024": 2424,
+    "unaMateria2024": 676,
+    "estudiantesActivos2024": 6068,
+    "cargosDocentes2024": 34
   },
   "entre_rios": {
     "nombre": "Universidad Nacional de Entre Ríos",
@@ -3722,7 +3815,6 @@
     },
     "reinscriptosTotal": 16406,
     "reinscriptos0Materias": 6338,
-    "reinscriptosRegulares2mas": 7850,
     "presupuesto2017": 1174484088.25,
     "presupuesto2019": 2086109484.79,
     "presupuesto2023": 19148168484.64,
@@ -3740,9 +3832,8 @@
       "2024": 28227499
     },
     "costoPorGraduado": 45025542,
-    "estudiantesPorDocente": 11.2,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.4,
+    "estudiantesActivosPorDocente": 3.8,
     "dedicacionDocente": {
       "excl2017": 194,
       "excl2023": 159,
@@ -3753,7 +3844,12 @@
       "fte2017": 1210.5,
       "fte2023": 1384.5
     },
-    "extranjeros2024": 288
+    "extranjeros2024": 288,
+    "inscriptos2024": 25664,
+    "sinMaterias2024": 10239,
+    "unaMateria2024": 3472,
+    "estudiantesActivos2024": 15425,
+    "cargosDocentes2024": 4037
   },
   "formosa": {
     "nombre": "Universidad Nacional de Formosa",
@@ -3868,7 +3964,6 @@
     },
     "reinscriptosTotal": 6352,
     "reinscriptos0Materias": 3290,
-    "reinscriptosRegulares2mas": 2113,
     "presupuesto2017": 721921414.95,
     "presupuesto2019": 1219112462.49,
     "presupuesto2023": 8517427891.68,
@@ -3886,9 +3981,8 @@
       "2024": 67293727
     },
     "costoPorGraduado": 107339887,
-    "estudiantesPorDocente": 12.3,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 2.9,
+    "estudiantesActivosPorDocente": 2.7,
     "dedicacionDocente": {
       "excl2017": 103,
       "excl2023": 87,
@@ -3899,7 +3993,12 @@
       "fte2017": 503.2,
       "fte2023": 485.2
     },
-    "extranjeros2024": 61
+    "extranjeros2024": 61,
+    "inscriptos2024": 9064,
+    "sinMaterias2024": 5328,
+    "unaMateria2024": 1150,
+    "estudiantesActivos2024": 3736,
+    "cargosDocentes2024": 1408
   },
   "jujuy": {
     "nombre": "Universidad Nacional de Jujuy",
@@ -4016,7 +4115,6 @@
     },
     "reinscriptosTotal": 23517,
     "reinscriptos0Materias": 16126,
-    "reinscriptosRegulares2mas": 4796,
     "presupuesto2017": 1096620590.01,
     "presupuesto2019": 1916971557.04,
     "presupuesto2023": 16628455419.52,
@@ -4031,7 +4129,6 @@
       "2023": 46190154
     },
     "costoPorGraduado": 160469995,
-    "estudiantesPorDocente": 20.1,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 260,
@@ -4043,8 +4140,13 @@
       "fte2017": 776.0,
       "fte2023": 1045.8
     },
-    "estudiantesActivosPorDocente": 3.0,
-    "extranjeros2024": 185
+    "estudiantesActivosPorDocente": 3.6,
+    "extranjeros2024": 185,
+    "inscriptos2024": 32101,
+    "sinMaterias2024": 21967,
+    "unaMateria2024": 3334,
+    "estudiantesActivos2024": 10134,
+    "cargosDocentes2024": 2783
   },
   "la_pampa": {
     "nombre": "Universidad Nacional de La Pampa",
@@ -4160,7 +4262,6 @@
     },
     "reinscriptosTotal": 9803,
     "reinscriptos0Materias": 4027,
-    "reinscriptosRegulares2mas": 4141,
     "presupuesto2017": 935269721.52,
     "presupuesto2019": 1650554423.32,
     "presupuesto2023": 15274863999.01,
@@ -4178,9 +4279,8 @@
       "2024": 75506497
     },
     "costoPorGraduado": 120440036,
-    "estudiantesPorDocente": 10.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.1,
+    "estudiantesActivosPorDocente": 3.0,
     "dedicacionDocente": {
       "excl2017": 269,
       "excl2023": 278,
@@ -4197,7 +4297,12 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 14519,
+    "sinMaterias2024": 6562,
+    "unaMateria2024": 2076,
+    "estudiantesActivos2024": 7957,
+    "cargosDocentes2024": 2692
   },
   "la_rioja": {
     "nombre": "Universidad Nacional de La Rioja",
@@ -4315,7 +4420,6 @@
     },
     "reinscriptosTotal": 19503,
     "reinscriptos0Materias": 8774,
-    "reinscriptosRegulares2mas": 7516,
     "presupuesto2017": 1066537267.99,
     "presupuesto2019": 1850364239.06,
     "presupuesto2023": 16105154865.7,
@@ -4333,7 +4437,6 @@
       "2024": 39590191
     },
     "costoPorGraduado": 63150116,
-    "estudiantesPorDocente": 15.4,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 44,
@@ -4345,14 +4448,19 @@
       "fte2017": 1123.2,
       "fte2023": 1081.0
     },
-    "estudiantesActivosPorDocente": 4.1,
+    "estudiantesActivosPorDocente": 4.7,
     "extranjeros2024": 329,
     "fuentes": [
       {
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 28048,
+    "sinMaterias2024": 13742,
+    "unaMateria2024": 3859,
+    "estudiantesActivos2024": 14306,
+    "cargosDocentes2024": 3045
   },
   "lanus": {
     "nombre": "Universidad Nacional de Lanús",
@@ -4367,7 +4475,7 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 24.496 (1995).",
-      "32% de quienes siguen cursando no aprobó ni una sola materia en el último año informado."
+      "31% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año."
     ],
     "serieEstudiantes": {
       "2007": 8859,
@@ -4467,7 +4575,6 @@
     },
     "reinscriptosTotal": 13058,
     "reinscriptos0Materias": 4217,
-    "reinscriptosRegulares2mas": 6860,
     "presupuesto2017": 627936617.05,
     "presupuesto2019": 1089827193.05,
     "presupuesto2023": 8965069731.97,
@@ -4485,9 +4592,8 @@
       "2024": 19624125
     },
     "costoPorGraduado": 31302344,
-    "estudiantesPorDocente": 15.7,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 6.5,
+    "estudiantesActivosPorDocente": 9.6,
     "dedicacionDocente": {
       "excl2017": 181,
       "excl2023": 186,
@@ -4498,7 +4604,12 @@
       "fte2017": 425.0,
       "fte2023": 455.2
     },
-    "extranjeros2024": 496
+    "extranjeros2024": 496,
+    "inscriptos2024": 16583,
+    "sinMaterias2024": 5174,
+    "unaMateria2024": 2383,
+    "estudiantesActivos2024": 11409,
+    "cargosDocentes2024": 1188
   },
   "litoral": {
     "nombre": "Universidad Nacional del Litoral",
@@ -4613,7 +4724,6 @@
     },
     "reinscriptosTotal": 42439,
     "reinscriptos0Materias": 18295,
-    "reinscriptosRegulares2mas": 17356,
     "presupuesto2017": 2346995552.75,
     "presupuesto2019": 4299403372.11,
     "presupuesto2023": 33700286221.29,
@@ -4631,9 +4741,8 @@
       "2024": 33114603
     },
     "costoPorGraduado": 52820938,
-    "estudiantesPorDocente": 13.4,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 4.1,
+    "estudiantesActivosPorDocente": 5.7,
     "dedicacionDocente": {
       "excl2017": 628,
       "excl2023": 590,
@@ -4644,7 +4753,12 @@
       "fte2017": 1788.2,
       "fte2023": 1886.8
     },
-    "extranjeros2024": 192
+    "extranjeros2024": 192,
+    "inscriptos2024": 57094,
+    "sinMaterias2024": 24874,
+    "unaMateria2024": 9210,
+    "estudiantesActivos2024": 32220,
+    "cargosDocentes2024": 5626
   },
   "lomas": {
     "nombre": "Universidad Nacional de Lomas de Zamora",
@@ -4659,7 +4773,7 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 19.888 (1972), Plan Taquini.",
-      "43% de quienes siguen cursando no aprobó ni una sola materia en el último año informado."
+      "42% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año."
     ],
     "serieEstudiantes": {
       "2007": 33519,
@@ -4759,7 +4873,6 @@
     },
     "reinscriptosTotal": 28345,
     "reinscriptos0Materias": 12194,
-    "reinscriptosRegulares2mas": 11814,
     "presupuesto2017": 1173561803.11,
     "presupuesto2019": 2202199866.64,
     "presupuesto2023": 19280468313.68,
@@ -4777,9 +4890,8 @@
       "2024": 16421769
     },
     "costoPorGraduado": 26194281,
-    "estudiantesPorDocente": 12.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 4.3,
+    "estudiantesActivosPorDocente": 4.7,
     "dedicacionDocente": {
       "excl2017": 126,
       "excl2023": 129,
@@ -4790,7 +4902,12 @@
       "fte2017": 1112.5,
       "fte2023": 1290.8
     },
-    "extranjeros2024": 933
+    "extranjeros2024": 933,
+    "inscriptos2024": 35247,
+    "sinMaterias2024": 14731,
+    "unaMateria2024": 5195,
+    "estudiantesActivos2024": 20516,
+    "cargosDocentes2024": 4392
   },
   "lujan": {
     "nombre": "Universidad Nacional de Luján",
@@ -4905,7 +5022,6 @@
     },
     "reinscriptosTotal": 15039,
     "reinscriptos0Materias": 6974,
-    "reinscriptosRegulares2mas": 5776,
     "presupuesto2017": 1132556620.32,
     "presupuesto2019": 2008244395.82,
     "presupuesto2023": 17076977447.22,
@@ -4923,10 +5039,14 @@
       "2024": 46925592
     },
     "costoPorGraduado": 74850776,
-    "estudiantesPorDocente": 13.1,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.2,
-    "extranjeros2024": 675
+    "estudiantesActivosPorDocente": 4.2,
+    "extranjeros2024": 675,
+    "inscriptos2024": 23425,
+    "sinMaterias2024": 12108,
+    "unaMateria2024": 3203,
+    "estudiantesActivos2024": 11317,
+    "cargosDocentes2024": 2694
   },
   "mar_del_plata": {
     "nombre": "Universidad Nacional de Mar del Plata",
@@ -5042,7 +5162,6 @@
     },
     "reinscriptosTotal": 32466,
     "reinscriptos0Materias": 12952,
-    "reinscriptosRegulares2mas": 14698,
     "presupuesto2017": 1829117356.84,
     "presupuesto2019": 3312807966.84,
     "presupuesto2023": 29767476584.31,
@@ -5060,9 +5179,8 @@
       "2024": 48634520
     },
     "costoPorGraduado": 77576680,
-    "estudiantesPorDocente": 10.1,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.2,
+    "estudiantesActivosPorDocente": 3.5,
     "dedicacionDocente": {
       "excl2017": 647,
       "excl2023": 660,
@@ -5079,7 +5197,12 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 46845,
+    "sinMaterias2024": 20477,
+    "unaMateria2024": 6301,
+    "estudiantesActivos2024": 26368,
+    "cargosDocentes2024": 7478
   },
   "misiones": {
     "nombre": "Universidad Nacional de Misiones",
@@ -5195,7 +5318,6 @@
     },
     "reinscriptosTotal": 21029,
     "reinscriptos0Materias": 10384,
-    "reinscriptosRegulares2mas": 8066,
     "presupuesto2017": 1386483143.3,
     "presupuesto2019": 2370599540.73,
     "presupuesto2023": 21328545913.72,
@@ -5213,9 +5335,8 @@
       "2024": 41861087
     },
     "costoPorGraduado": 66772410,
-    "estudiantesPorDocente": 16.8,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 4.8,
+    "estudiantesActivosPorDocente": 5.3,
     "dedicacionDocente": {
       "excl2017": 340,
       "excl2023": 329,
@@ -5232,7 +5353,12 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 28048,
+    "sinMaterias2024": 13958,
+    "unaMateria2024": 3254,
+    "estudiantesActivos2024": 14090,
+    "cargosDocentes2024": 2640
   },
   "nordeste": {
     "nombre": "Universidad Nacional del Nordeste",
@@ -5247,7 +5373,7 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Decreto-Ley 22.299 (1956), integrando facultades que antes dependían de la UNL y la UNT.",
-      "38% de quienes siguen cursando no aprobó ni una sola materia en el último año informado."
+      "42% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año."
     ],
     "serieEstudiantes": {
       "2007": 52251,
@@ -5347,7 +5473,6 @@
     },
     "reinscriptosTotal": 45301,
     "reinscriptos0Materias": 17225,
-    "reinscriptosRegulares2mas": 21496,
     "presupuesto2017": 2576502942.32,
     "presupuesto2019": 4595081377.65,
     "presupuesto2023": 42989982001.01,
@@ -5365,9 +5490,8 @@
       "2024": 22385347
     },
     "costoPorGraduado": 35706755,
-    "estudiantesPorDocente": 17.5,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 5.9,
+    "estudiantesActivosPorDocente": 6.8,
     "dedicacionDocente": {
       "excl2017": 574,
       "excl2023": 573,
@@ -5378,7 +5502,12 @@
       "fte2017": 1735.5,
       "fte2023": 1866.0
     },
-    "extranjeros2024": 522
+    "extranjeros2024": 522,
+    "inscriptos2024": 64187,
+    "sinMaterias2024": 27211,
+    "unaMateria2024": 8137,
+    "estudiantesActivos2024": 36976,
+    "cargosDocentes2024": 5436
   },
   "unnoba": {
     "nombre": "Universidad Nacional del Noroeste de la Pcia. de Bs. As.",
@@ -5495,7 +5624,6 @@
     },
     "reinscriptosTotal": 6324,
     "reinscriptos0Materias": 2583,
-    "reinscriptosRegulares2mas": 2761,
     "presupuesto2017": 402476856.05,
     "presupuesto2019": 789104664.69,
     "presupuesto2023": 8517022564.09,
@@ -5513,16 +5641,20 @@
       "2024": 30268985
     },
     "costoPorGraduado": 48281907,
-    "estudiantesPorDocente": 12.7,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 4.0,
+    "estudiantesActivosPorDocente": 5.5,
     "extranjeros2024": 84,
     "fuentes": [
       {
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 8767,
+    "sinMaterias2024": 3970,
+    "unaMateria2024": 1219,
+    "estudiantesActivos2024": 4797,
+    "cargosDocentes2024": 880
   },
   "patagonia_austral": {
     "nombre": "Universidad Nacional de la Patagonia Austral",
@@ -5637,7 +5769,6 @@
     },
     "reinscriptosTotal": 7940,
     "reinscriptos0Materias": 4302,
-    "reinscriptosRegulares2mas": 2625,
     "presupuesto2017": 877456306,
     "presupuesto2019": 1463510628.35,
     "presupuesto2023": 12846452663.44,
@@ -5655,9 +5786,8 @@
       "2024": 101512358
     },
     "costoPorGraduado": 161921854,
-    "estudiantesPorDocente": 14.2,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.1,
+    "estudiantesActivosPorDocente": 3.5,
     "dedicacionDocente": {
       "excl2017": 223,
       "excl2023": 229,
@@ -5668,7 +5798,12 @@
       "fte2017": 563.8,
       "fte2023": 650.8
     },
-    "extranjeros2024": 358
+    "extranjeros2024": 358,
+    "inscriptos2024": 11910,
+    "sinMaterias2024": 7107,
+    "unaMateria2024": 1370,
+    "estudiantesActivos2024": 4803,
+    "cargosDocentes2024": 1364
   },
   "patagonia_sjb": {
     "nombre": "Universidad Nacional de la Patagonia San Juan Bosco",
@@ -5769,7 +5904,6 @@
     "tasaCohorte": 13.3,
     "reinscriptosTotal": 21144,
     "reinscriptos0Materias": 14604,
-    "reinscriptosRegulares2mas": 4009,
     "tieneDatos": true,
     "extranjeros2024": 1005,
     "fuentes": [
@@ -5777,7 +5911,13 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 27456,
+    "sinMaterias2024": 18477,
+    "unaMateria2024": 3376,
+    "estudiantesActivos2024": 8979,
+    "cargosDocentes2024": 3374,
+    "estudiantesActivosPorDocente": 2.7
   },
   "pedagogica": {
     "nombre": "Universidad Pedagógica Nacional",
@@ -5792,7 +5932,7 @@
     "esKirchnerista": true,
     "notas": [
       "Creada por Ley 27.194 (2015, bajo la presidencia de Cristina Fernández de Kirchner), nacionalizando la Universidad Pedagógica provincial bonaerense (creada en 2006).",
-      "31% de quienes siguen cursando no aprobó ni una sola materia en el último año informado."
+      "43% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año."
     ],
     "serieEstudiantes": {
       "2017": 365,
@@ -5852,7 +5992,6 @@
     },
     "reinscriptosTotal": 1918,
     "reinscriptos0Materias": 600,
-    "reinscriptosRegulares2mas": 964,
     "presupuesto2017": 82932413.06,
     "presupuesto2019": 240422130.61,
     "presupuesto2023": 2145831015.19,
@@ -5866,10 +6005,14 @@
       "2024": 25064287
     },
     "costoPorGraduado": 39979918,
-    "estudiantesPorDocente": 12.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.3,
-    "extranjeros2024": 96
+    "estudiantesActivosPorDocente": 6.1,
+    "extranjeros2024": 96,
+    "inscriptos2024": 3724,
+    "sinMaterias2024": 1619,
+    "unaMateria2024": 460,
+    "estudiantesActivos2024": 2105,
+    "cargosDocentes2024": 343
   },
   "quilmes": {
     "nombre": "Universidad Nacional de Quilmes",
@@ -5985,7 +6128,6 @@
     },
     "reinscriptosTotal": 20463,
     "reinscriptos0Materias": 7696,
-    "reinscriptosRegulares2mas": 9475,
     "presupuesto2017": 895689742.09,
     "presupuesto2019": 1516989188.98,
     "presupuesto2023": 14029933309.91,
@@ -6003,9 +6145,8 @@
       "2024": 39921234
     },
     "costoPorGraduado": 63678161,
-    "estudiantesPorDocente": 25.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 7.4,
+    "estudiantesActivosPorDocente": 15.9,
     "dedicacionDocente": {
       "excl2017": 327,
       "excl2023": 386,
@@ -6022,7 +6163,12 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 32975,
+    "sinMaterias2024": 12691,
+    "unaMateria2024": 7058,
+    "estudiantesActivos2024": 20284,
+    "cargosDocentes2024": 1274
   },
   "rio_cuarto": {
     "nombre": "Universidad Nacional de Río Cuarto",
@@ -6139,7 +6285,6 @@
     },
     "reinscriptosTotal": 13016,
     "reinscriptos0Materias": 4915,
-    "reinscriptosRegulares2mas": 6203,
     "presupuesto2017": 1377783100.9,
     "presupuesto2019": 2359332787.87,
     "presupuesto2023": 19734470913.45,
@@ -6154,7 +6299,6 @@
       "2023": 25562786
     },
     "costoPorGraduado": 88808108,
-    "estudiantesPorDocente": 10.1,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 803,
@@ -6166,8 +6310,13 @@
       "fte2017": 1279.5,
       "fte2023": 1313.8
     },
-    "estudiantesActivosPorDocente": 3.7,
-    "extranjeros2024": 158
+    "estudiantesActivosPorDocente": 4.9,
+    "extranjeros2024": 158,
+    "inscriptos2024": 16868,
+    "sinMaterias2024": 6438,
+    "unaMateria2024": 2485,
+    "estudiantesActivos2024": 10430,
+    "cargosDocentes2024": 2118
   },
   "rosario": {
     "nombre": "Universidad Nacional de Rosario",
@@ -6285,7 +6434,6 @@
     },
     "reinscriptosTotal": 84008,
     "reinscriptos0Materias": 44539,
-    "reinscriptosRegulares2mas": 28327,
     "presupuesto2017": 4152246789.84,
     "presupuesto2019": 7456967792.36,
     "presupuesto2023": 66779569715.93,
@@ -6303,7 +6451,6 @@
       "2024": 38584571
     },
     "costoPorGraduado": 61546057,
-    "estudiantesPorDocente": 13.2,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 1134,
@@ -6315,14 +6462,19 @@
       "fte2017": 3998.5,
       "fte2023": 4456.8
     },
-    "estudiantesActivosPorDocente": 3.6,
+    "estudiantesActivosPorDocente": 4.0,
     "extranjeros2024": 6206,
     "fuentes": [
       {
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 104357,
+    "sinMaterias2024": 55030,
+    "unaMateria2024": 12946,
+    "estudiantesActivos2024": 49327,
+    "cargosDocentes2024": 12476
   },
   "salta": {
     "nombre": "Universidad Nacional de Salta",
@@ -6438,7 +6590,6 @@
     },
     "reinscriptosTotal": 31029,
     "reinscriptos0Materias": 17645,
-    "reinscriptosRegulares2mas": 9342,
     "presupuesto2017": 1300251820.44,
     "presupuesto2019": 2364885319.94,
     "presupuesto2023": 20812872313.15,
@@ -6456,9 +6607,8 @@
       "2024": 63046825
     },
     "costoPorGraduado": 100565675,
-    "estudiantesPorDocente": 21.8,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 5.3,
+    "estudiantesActivosPorDocente": 6.2,
     "dedicacionDocente": {
       "excl2017": 395,
       "excl2023": 397,
@@ -6475,7 +6625,12 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 38191,
+    "sinMaterias2024": 21712,
+    "unaMateria2024": 5112,
+    "estudiantesActivos2024": 16479,
+    "cargosDocentes2024": 2679
   },
   "san_antonio_areco": {
     "nombre": "Universidad Nacional de San Antonio de Areco",
@@ -6490,7 +6645,7 @@
     "esKirchnerista": true,
     "notas": [
       "Creada por Ley 27.213 (2015, bajo la presidencia de Cristina Fernández de Kirchner) — sancionada la misma semana que la Universidad Nacional Scalabrini Ortiz (UNSO).",
-      "37% de quienes siguen cursando no aprobó ni una sola materia en el último año informado.",
+      "46% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año.",
       "Ejecución presupuestaria (PIU-AGN): en 2025 ejecutó $99,0 millones en pasajes y viáticos, 3,0 veces más que en becas estudiantiles ($32,6 millones)."
     ],
     "serieEstudiantes": {
@@ -6548,7 +6703,6 @@
     },
     "reinscriptosTotal": 1408,
     "reinscriptos0Materias": 525,
-    "reinscriptosRegulares2mas": 636,
     "presupuesto2017": 49452153.06,
     "presupuesto2019": 191528006.03,
     "presupuesto2023": 2160657706.74,
@@ -6562,9 +6716,8 @@
       "2024": 20789380
     },
     "costoPorGraduado": 33161036,
-    "estudiantesPorDocente": 13.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.5,
+    "estudiantesActivosPorDocente": 6.9,
     "dedicacionDocente": {
       "excl2017": 2,
       "excl2023": 15,
@@ -6581,7 +6734,12 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 2522,
+    "sinMaterias2024": 1169,
+    "unaMateria2024": 311,
+    "estudiantesActivos2024": 1353,
+    "cargosDocentes2024": 195
   },
   "san_juan": {
     "nombre": "Universidad Nacional de San Juan",
@@ -6699,7 +6857,6 @@
     },
     "reinscriptosTotal": 20585,
     "reinscriptos0Materias": 9346,
-    "reinscriptosRegulares2mas": 8258,
     "presupuesto2017": 2393611264.63,
     "presupuesto2019": 4248411699.59,
     "presupuesto2023": 35506619650.41,
@@ -6717,7 +6874,6 @@
       "2024": 100133484
     },
     "costoPorGraduado": 159722419,
-    "estudiantesPorDocente": 9.8,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 894,
@@ -6729,14 +6885,19 @@
       "fte2017": 1921.2,
       "fte2023": 1990.0
     },
-    "estudiantesActivosPorDocente": 2.9,
+    "estudiantesActivosPorDocente": 3.2,
     "extranjeros2024": 154,
     "fuentes": [
       {
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 28315,
+    "sinMaterias2024": 14229,
+    "unaMateria2024": 3680,
+    "estudiantesActivos2024": 14086,
+    "cargosDocentes2024": 4450
   },
   "san_luis": {
     "nombre": "Universidad Nacional de San Luis",
@@ -6851,7 +7012,6 @@
     },
     "reinscriptosTotal": 14567,
     "reinscriptos0Materias": 5701,
-    "reinscriptosRegulares2mas": 6425,
     "presupuesto2017": 1511821232.89,
     "presupuesto2019": 2662397824.52,
     "presupuesto2023": 25263331765.79,
@@ -6869,9 +7029,8 @@
       "2024": 79653421
     },
     "costoPorGraduado": 127054774,
-    "estudiantesPorDocente": 9.6,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.1,
+    "estudiantesActivosPorDocente": 5.1,
     "dedicacionDocente": {
       "excl2017": 956,
       "excl2023": 1179,
@@ -6882,7 +7041,12 @@
       "fte2017": 1339.5,
       "fte2023": 1579.8
     },
-    "extranjeros2024": 233
+    "extranjeros2024": 233,
+    "inscriptos2024": 19602,
+    "sinMaterias2024": 8272,
+    "unaMateria2024": 3083,
+    "estudiantesActivos2024": 11330,
+    "cargosDocentes2024": 2206
   },
   "san_martin": {
     "nombre": "Universidad Nacional de San Martín",
@@ -6897,7 +7061,7 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 24.095 (1992).",
-      "26% de quienes siguen cursando no aprobó ni una sola materia en el último año informado."
+      "36% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año."
     ],
     "serieEstudiantes": {
       "2007": 9210,
@@ -6997,7 +7161,6 @@
     },
     "reinscriptosTotal": 16517,
     "reinscriptos0Materias": 4368,
-    "reinscriptosRegulares2mas": 9634,
     "presupuesto2017": 2328063620.79,
     "presupuesto2019": 3080902677.94,
     "presupuesto2023": 27771010991.87,
@@ -7015,9 +7178,8 @@
       "2024": 31756798
     },
     "costoPorGraduado": 50655109,
-    "estudiantesPorDocente": 9.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.8,
+    "estudiantesActivosPorDocente": 4.9,
     "dedicacionDocente": {
       "excl2017": 122,
       "excl2023": 141,
@@ -7028,7 +7190,12 @@
       "fte2017": 658.2,
       "fte2023": 843.2
     },
-    "extranjeros2024": 917
+    "extranjeros2024": 917,
+    "inscriptos2024": 25340,
+    "sinMaterias2024": 9108,
+    "unaMateria2024": 3058,
+    "estudiantesActivos2024": 16232,
+    "cargosDocentes2024": 3330
   },
   "santiago": {
     "nombre": "Universidad Nacional de Santiago del Estero",
@@ -7043,7 +7210,7 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 20.364 (1973), Plan Taquini.",
-      "42% de quienes siguen cursando no aprobó ni una sola materia en el último año informado."
+      "40% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año."
     ],
     "serieEstudiantes": {
       "2007": 10734,
@@ -7143,7 +7310,6 @@
     },
     "reinscriptosTotal": 15074,
     "reinscriptos0Materias": 6362,
-    "reinscriptosRegulares2mas": 6555,
     "presupuesto2017": 822033754.62,
     "presupuesto2019": 1565355133.58,
     "presupuesto2023": 11890521223.99,
@@ -7161,9 +7327,8 @@
       "2024": 27219159
     },
     "costoPorGraduado": 43417144,
-    "estudiantesPorDocente": 17.7,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 5.5,
+    "estudiantesActivosPorDocente": 7.7,
     "dedicacionDocente": {
       "excl2017": 352,
       "excl2023": 361,
@@ -7174,7 +7339,12 @@
       "fte2017": 646.0,
       "fte2023": 781.0
     },
-    "extranjeros2024": 30
+    "extranjeros2024": 30,
+    "inscriptos2024": 21102,
+    "sinMaterias2024": 8349,
+    "unaMateria2024": 2912,
+    "estudiantesActivos2024": 12753,
+    "cargosDocentes2024": 1656
   },
   "sur": {
     "nombre": "Universidad Nacional del Sur",
@@ -7290,7 +7460,6 @@
     },
     "reinscriptosTotal": 19182,
     "reinscriptos0Materias": 7490,
-    "reinscriptosRegulares2mas": 9117,
     "presupuesto2017": 1643049841.97,
     "presupuesto2019": 2889892733.84,
     "presupuesto2023": 24210333817.23,
@@ -7308,9 +7477,8 @@
       "2024": 54622371
     },
     "costoPorGraduado": 87127870,
-    "estudiantesPorDocente": 9.9,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 3.3,
+    "estudiantesActivosPorDocente": 4.0,
     "dedicacionDocente": {
       "excl2017": 633,
       "excl2023": 605,
@@ -7327,7 +7495,12 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 27426,
+    "sinMaterias2024": 12513,
+    "unaMateria2024": 3230,
+    "estudiantesActivos2024": 14913,
+    "cargosDocentes2024": 3724
   },
   "utn": {
     "nombre": "Universidad Tecnológica Nacional",
@@ -7342,7 +7515,7 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 14.855 (1959), transformando la Universidad Obrera Nacional (1948).",
-      "31% de quienes siguen cursando no aprobó ni una sola materia en el último año informado."
+      "32% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año."
     ],
     "serieEstudiantes": {
       "2007": 67225,
@@ -7427,7 +7600,6 @@
     "tasaCohorte": 28.7,
     "reinscriptosTotal": 83409,
     "reinscriptos0Materias": 25816,
-    "reinscriptosRegulares2mas": 43558,
     "presupuesto2017": 6772232226.55,
     "presupuesto2019": 11739204525.28,
     "presupuesto2023": 104489291326.13,
@@ -7446,7 +7618,13 @@
     },
     "costoPorGraduado": 70947751,
     "tieneDatos": true,
-    "extranjeros2024": 1444
+    "extranjeros2024": 1444,
+    "inscriptos2024": 115196,
+    "sinMaterias2024": 36730,
+    "unaMateria2024": 17191,
+    "estudiantesActivos2024": 78466,
+    "cargosDocentes2024": 20906,
+    "estudiantesActivosPorDocente": 3.8
   },
   "tres_de_febrero": {
     "nombre": "Universidad Nacional de Tres de Febrero",
@@ -7461,7 +7639,7 @@
     "esKirchnerista": false,
     "notas": [
       "Creada por Ley 24.495 (1995).",
-      "28% de quienes siguen cursando no aprobó ni una sola materia en el último año informado.",
+      "31% de sus inscriptos 2024 (reinscriptos + ingresantes) no aprobó ni una sola materia en todo el año.",
       "Ejecución presupuestaria (PIU-AGN): en 2024 ejecutó $110 millones en pasajes y viáticos, 2,2 veces más que en becas estudiantiles ($50,0 millones)."
     ],
     "serieEstudiantes": {
@@ -7562,7 +7740,6 @@
     },
     "reinscriptosTotal": 14323,
     "reinscriptos0Materias": 4031,
-    "reinscriptosRegulares2mas": 8233,
     "presupuesto2017": 1392252401.83,
     "presupuesto2019": 1585000217.13,
     "presupuesto2023": 14080817065.31,
@@ -7580,9 +7757,8 @@
       "2024": 15422850
     },
     "costoPorGraduado": 24600911,
-    "estudiantesPorDocente": 14.3,
     "tieneDatos": true,
-    "estudiantesActivosPorDocente": 6.4,
+    "estudiantesActivosPorDocente": 8.7,
     "dedicacionDocente": {
       "excl2017": 227,
       "excl2023": 284,
@@ -7599,7 +7775,12 @@
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 18411,
+    "sinMaterias2024": 5729,
+    "unaMateria2024": 2458,
+    "estudiantesActivos2024": 12682,
+    "cargosDocentes2024": 1455
   },
   "tucuman": {
     "nombre": "Universidad Nacional de Tucumán",
@@ -7717,7 +7898,6 @@
     },
     "reinscriptosTotal": 62930,
     "reinscriptos0Materias": 28068,
-    "reinscriptosRegulares2mas": 25314,
     "presupuesto2017": 4291844794.7,
     "presupuesto2019": 7008227386.94,
     "presupuesto2023": 57773540627.9,
@@ -7735,7 +7915,6 @@
       "2024": 64408635
     },
     "costoPorGraduado": 102737891,
-    "estudiantesPorDocente": 17.2,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 1385,
@@ -7747,14 +7926,19 @@
       "fte2017": 2944.8,
       "fte2023": 3127.0
     },
-    "estudiantesActivosPorDocente": 5.4,
+    "estudiantesActivosPorDocente": 7.1,
     "extranjeros2024": 231,
     "fuentes": [
       {
         "titulo": "Portal de Información de las Universidades Públicas (AGN) — ejecución del gasto",
         "url": "https://piu.agn.gob.ar/dataset/?q=Erogaciones"
       }
-    ]
+    ],
+    "inscriptos2024": 79953,
+    "sinMaterias2024": 37291,
+    "unaMateria2024": 11409,
+    "estudiantesActivos2024": 42662,
+    "cargosDocentes2024": 5992
   },
   "villa_maria": {
     "nombre": "Universidad Nacional de Villa María",
@@ -7871,7 +8055,6 @@
     },
     "reinscriptosTotal": 6718,
     "reinscriptos0Materias": 1812,
-    "reinscriptosRegulares2mas": 3722,
     "presupuesto2017": 558080404.2,
     "presupuesto2019": 942784321.75,
     "presupuesto2023": 8060429947.52,
@@ -7889,7 +8072,6 @@
       "2024": 35755599
     },
     "costoPorGraduado": 57033578,
-    "estudiantesPorDocente": 10.5,
     "tieneDatos": true,
     "dedicacionDocente": {
       "excl2017": 119,
@@ -7901,8 +8083,13 @@
       "fte2017": 422.2,
       "fte2023": 496.5
     },
-    "estudiantesActivosPorDocente": 4.1,
-    "extranjeros2024": 24
+    "estudiantesActivosPorDocente": 5.2,
+    "extranjeros2024": 24,
+    "inscriptos2024": 9469,
+    "sinMaterias2024": 2872,
+    "unaMateria2024": 1408,
+    "estudiantesActivos2024": 6597,
+    "cargosDocentes2024": 1280
   },
   "madres_plaza_mayo": {
     "nombre": "Universidad Nacional Madres de Plaza de Mayo",
@@ -7928,7 +8115,6 @@
     "egresados2023": 16,
     "reinscriptosTotal": 876,
     "reinscriptos0Materias": 714,
-    "reinscriptosRegulares2mas": 82,
     "tasaCohorte": null,
     "serieEstudiantes": {
       "2015": 691,
@@ -7962,7 +8148,13 @@
       "2022": 1.0,
       "2023": 4.0
     },
-    "extranjeros2024": 77
+    "extranjeros2024": 77,
+    "inscriptos2024": 1791,
+    "sinMaterias2024": 1590,
+    "unaMateria2024": 103,
+    "estudiantesActivos2024": 201,
+    "cargosDocentes2024": null,
+    "estudiantesActivosPorDocente": null
   },
   "rio_tercero": {
     "nombre": "Universidad Nacional de Río Tercero",
@@ -7979,6 +8171,12 @@
       "Creada por Ley 27.730 (2023), a dos meses y medio de terminar el mandato de Alberto Fernández.",
       "El gobierno de Javier Milei frenó administrativamente la puesta en marcha de las cinco universidades sancionadas ese mismo día (Delta, Pilar, Ezeiza, Río Tercero y Madres de Plaza de Mayo); la Justicia declaró inconstitucional el freno en al menos un caso (UNPILAR), pero Río Tercero todavía no informa datos de estudiantes, egresados, docentes ni presupuesto al Anuario de la SPU."
     ],
-    "tieneDatos": false
+    "tieneDatos": false,
+    "inscriptos2024": null,
+    "sinMaterias2024": null,
+    "unaMateria2024": null,
+    "estudiantesActivos2024": null,
+    "cargosDocentes2024": null,
+    "estudiantesActivosPorDocente": null
   }
 }

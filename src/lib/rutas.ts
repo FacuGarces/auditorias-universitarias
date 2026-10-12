@@ -129,4 +129,7 @@ export function rutaDesdeHashViejo(hash: string): string | null {
 export const ENLACES = {
   // Página oficial de la SPU con todos los Anuarios de Estadísticas Universitarias (1999–2024, PDF y CSV).
   anuarios: 'https://www.argentina.gob.ar/educacion/universidades/informacion/publicaciones/anuarios',
+  // Planilla propia sobre el Anuario 2024: estudiantes sin materias y activos por cargo docente, con los
+  // cuadros fuente copiados y las fórmulas a la vista (scripts/importar_activos_docente.py la carga).
+  planillaActivosDocente: `${import.meta.env.BASE_URL}fuentes/estudiantes-activos-por-docente-2024.xlsx`,
 } as const

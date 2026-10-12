@@ -36,13 +36,18 @@ export interface UniversidadDetalle {
   // Estudiantes extranjeros de pregrado y grado (Anuario SPU 2024, cuadro 2.1.25).
   extranjeros2024?: number
   reinscriptosTotal?: number
-  reinscriptosRegulares2mas?: number
   reinscriptos0Materias?: number
   tasaCohorte?: number | null
-  estudiantesPorDocente?: number
-  // Regulares (2+ materias aprobadas) por docente universitario — versión "solo activos" de
-  // estudiantesPorDocente, que en cambio divide por la matrícula total (incluye inactivos).
-  estudiantesActivosPorDocente?: number
+  // Anuario SPU 2024 (cuadros 2.1.10, 2.1.28a y RHUN 4.4), cargados por scripts/importar_activos_docente.py
+  // desde public/fuentes/estudiantes-activos-por-docente-2024.xlsx. Inscriptos = reinscriptos + nuevos
+  // inscriptos; activos = los que aprobaron 1 o más materias en el año.
+  inscriptos2024?: number | null
+  sinMaterias2024?: number | null
+  unaMateria2024?: number | null
+  estudiantesActivos2024?: number | null
+  // Cargos docentes universitarios (no personas), septiembre 2024. Sin cargos preuniversitarios.
+  cargosDocentes2024?: number | null
+  estudiantesActivosPorDocente?: number | null
   // Cargos docentes por dedicación horaria (2017 vs 2023) y su equivalente a tiempo completo (FTE) —
   // solo disponible para universidades cruzadas manualmente contra RHUN por dedicación.
   dedicacionDocente?: {

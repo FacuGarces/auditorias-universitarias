@@ -73,9 +73,9 @@ export function SistemaEnNumeros({ titulo, resumen: r }: { titulo: string; resum
         />
         <Kpi
           alerta
-          label="Reinscriptos sin materias"
+          label="Estudiantes sin materias"
           value={formatNumero(r.ceroMateriasN)}
-          hint={`${formatPorcentaje(r.ceroMateriasPct)} de quienes siguen inscriptos no aprobó ninguna materia en el último año informado.`}
+          hint={`${formatPorcentaje(r.ceroMateriasPct)} de los inscriptos 2024 (reinscriptos + ingresantes) no aprobó ninguna materia en todo el año.`}
         />
         <Kpi
           label="Costo por graduado"

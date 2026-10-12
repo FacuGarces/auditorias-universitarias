@@ -10,9 +10,9 @@ Un proyecto de [Universitarios por la Libertad](https://twitter.com/upl_arg).
 - **Pesos o dólares**: todos los montos en pesos constantes de agosto 2026 o en dólares al tipo de cambio oficial del día (dolarapi.com).
 - **Gasto en estudiantes extranjeros**: presupuesto por estudiante × extranjeros del padrón (Anuario 2024) — el ahorro si se les cobrara arancel.
 - **El sistema en números**: totales agregados (ponderados) de todo el sistema o de una provincia.
-- **Rankings** por tasa de cohorte, estudiantes activos por docente, costo por graduado, reinscriptos sin materias aprobadas y no docentes por docente, filtrables por provincia.
-- **Universidades kirchneristas**: las creadas por ley entre 2003 y 2023, comparadas contra el resto del sistema.
-- **Ficha por universidad** con estudiantes, egresados, docentes, presupuesto, notas relevantes (irregularidades, contexto institucional) y sus fuentes.
+- **Rankings** por tasa de cohorte, estudiantes activos por docente, costo por graduado, estudiantes sin materias aprobadas y no docentes por docente, filtrables por provincia. Siempre arrancan de la peor a la mejor.
+- **Universidades kirchneristas**: las creadas entre 2002 (UNNOBA, por decreto de Duhalde ratificado por ley con Kirchner) y 2023, durante los gobiernos de Néstor, Cristina y Alberto, comparadas contra el resto del sistema.
+- **Ficha por universidad**: un resumen con los cuatro indicadores clave y, desplegables, estudiantes, egresados, docentes, presupuesto, notas relevantes (irregularidades, contexto institucional) y sus fuentes.
 - **Qué proponemos**: las cuatro propuestas de UPL y la propuesta central (Becas AvanzAR), cada una ligada al dato que la justifica.
 - **Modo presentación** (`/presentacion`): diapositivas a pantalla completa con los datos en vivo, para exponer en paneles.
 
@@ -41,6 +41,7 @@ Hay datos completos cargados para 59 de las 62 universidades nacionales. Las tre
 - [Anuarios de Estadísticas Universitarias](https://www.argentina.gob.ar/educacion/universidades/informacion/publicaciones/anuarios) 2017 / 2019 / 2023 / 2024 (SPU).
 - Portal de Información de las Universidades Públicas (PIU, AGN): ejecución del gasto por partida, usada en las notas de cada ficha. `scripts/enriquecer_piu_extranjeros.py` regenera esas notas y los estudiantes extranjeros.
 - Los datos de tasa de cohorte comparan egresados de un año con los nuevos inscriptos 6 años antes.
+- **Estudiantes sin materias** y **estudiantes activos por docente**: [`public/fuentes/estudiantes-activos-por-docente-2024.xlsx`](public/fuentes/estudiantes-activos-por-docente-2024.xlsx), que se publica en la página como fuente. Sale del Anuario 2024: reinscriptos (cuadro 2.1.10) y nuevos inscriptos (cuadro 2.1.28a) por cantidad de materias aprobadas, y cargos docentes universitarios a septiembre de 2024 (RHUN, cuadro 4.4; cargos, no personas, sin preuniversitarios). Activos = los que aprobaron 1 o más materias en el año. `scripts/importar_activos_docente.py` carga la planilla en `universidades-raw.json`.
 - Los promedios de grupos (sistema, provincia, universidades K vs. resto) están ponderados por tamaño: por ejemplo, la tasa de cohorte agregada es la suma de egresados sobre la suma de inscriptos, no el promedio de las tasas de cada universidad.
 - La Universidad de la Defensa Nacional (UNDEF) queda fuera de los indicadores por docente y del costo por graduado: la SPU informa solo 34 docentes propios, porque la mayoría del plantel depende de las Fuerzas Armadas (y sus salarios no están en el presupuesto de la universidad).
 
