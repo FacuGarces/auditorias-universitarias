@@ -19,6 +19,12 @@ import { gastoExtranjeros, gastoPorEstudiante, pctExtranjeros } from '../lib/ext
 // (scripts/enriquecer_piu_extranjeros.py).
 const NOTA_PIU = 'Ejecución presupuestaria (PIU-AGN)'
 
+// Las fuentes propias (fotos, planillas) se guardan como ruta relativa a public/ ("fuentes/x.webp"); con URLs
+// limpias, un href relativo se resolvería contra /universidades/<sigla>/ y daría 404, así que se anclan a la raíz.
+function urlFuente(url: string): string {
+  return /^[a-z]+:\/\//i.test(url) ? url : `${import.meta.env.BASE_URL}${url.replace(/^\//, '')}`
+}
+
 const statGridVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.06 } },
@@ -588,7 +594,7 @@ function FichaUniversidad({ id, sedes, sede }: { id: string; sedes: typeof todas
             <div className="mt-3 rounded-xl bg-upl-principal/30 px-4 py-3">
               <div className="text-xs uppercase tracking-wide text-upl-resaltador font-semibold mb-1.5">Fuentes</div>
               <ul className="flex flex-col gap-1">
-                {u.fuentes.map((f) => (
+                {u.fuentes.map(({ titulo, url }) => ({ titulo, url: urlFuente(url) })).map((f) => (
                   <li key={f.url} className="text-sm">
                     {/\.(webp|jpe?g|png)$/i.test(f.url) && (
                       <a href={f.url} target="_blank" rel="noreferrer" className="block my-2 max-w-sm">
