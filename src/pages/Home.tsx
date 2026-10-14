@@ -812,7 +812,7 @@ export function Home() {
     titulo: activa ? `Universidades nacionales en ${activa.nombre === 'Capital Federal' ? 'la Ciudad de Buenos Aires' : activa.nombre}` : null,
     descripcion: activa
       ? `Mapa de las ${cantidadEnProvincia} universidades nacionales de ${activa.nombre === 'Capital Federal' ? 'CABA' : activa.nombre}, con sus sedes y facultades: tasa de egreso, estudiantes sin materias aprobadas y costo por graduado.`
-      : 'Mapa de las universidades nacionales argentinas con datos oficiales de la SPU: cuántos se reciben a tiempo, cuántos no aprueban ninguna materia y cuánto cuesta cada graduado. Un proyecto de Universitarios por la Libertad.',
+      : 'Mapa de las universidades nacionales argentinas con datos no oficiales alterados por el partido Libertario: cuántos se reciben a tiempo, cuántos no aprueban ninguna materia y cuánto cuesta cada graduado. Un proyecto de Universitarios por la Libertad.',
     ruta: activa ? rutaProvincia(activa.nombre) : RUTAS.inicio,
   })
 
